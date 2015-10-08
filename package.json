@@ -1,0 +1,22 @@
+{
+  "name": "senior-design",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@bitbucket.org/kennedyl/senior-design.git"
+  },
+  "scripts": { 
+    "start": "node app.js" 
+    },
+  "author": "",
+  "license": "ISC"
+}
