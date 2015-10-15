@@ -1,0 +1,159 @@
+module.exports = function(grunt) {
+
+    grunt.file.setBase('../../../');
+
+    grunt.initConfig({
+
+        pkg: grunt.file.readJSON('package.json'),
+        scriptDependencies: grunt.file.readJSON('src/client/app/scriptDependencies.json'),
+        gruntConfig: grunt.file.readJSON('config/gruntConfig.json'),
+
+        clean: {
+            previousRun: ['dist'],
+            temp: ['dist/temp']
+        },
+        concat: {
+            options: {
+                separator: '\n\n'
+            },
+            allJs: {
+                src: [ '<%= scriptDependencies.site %>' ],
+                dest: 'dist/dev/angularComponents.js'
+            }
+        },
+        copy: {
+            indexHtmlToDistDev: {
+                src: 'src/client/app/index.html',
+                dest: 'dist/dev/index.html'
+            },
+            contentNotStylesOrIcons: {
+                cwd: 'src/client/content/',
+                expand: true,
+                src: ['**/*', '!styles/**', '!icons/**'],
+                dest: 'dist/dev/content/'
+            },
+            lessStyle: {
+                src: 'src/client/content/styles/site.style.less',
+                dest: 'dist/dev/site.style.less'
+            },
+            favicon: {
+                src: 'src/client/content/icons/favicon.ico',
+                dest: 'dist/dev/favicon.ico'
+            }
+        },
+        includereplace: {
+            dist: {
+                files: [
+                    {
+                        src: ['**/*template.html'],
+                        dest: 'dist/temp/templatesWithCss/',
+                        expand: true,
+                        cwd: 'src/client/app/'
+                    }
+                ]
+            }
+        },
+        ngtemplates:  {
+            app:        {
+                cwd: 'dist/temp/templatesWithCss',
+                src: ['**/*template.html'],
+                dest: 'dist/dev/angularTemplateCache.js',
+                options: {
+                    module: '<%= gruntConfig.siteModule %>'
+                }
+            }
+        },
+        ngconstant: {
+            options: {
+                name: 'config',
+                wrap: '"use strict";\n\n{%= __ngModule %}',
+                space: '  '
+            },
+            config: {
+                options: {
+                    dest: 'dist/dev/config.js'
+                },
+                constants: 'config/config.json'
+                }
+            },
+        "merge-json" : {
+            config: {
+                src: ["**/*.config.json"],
+                dest: "config/config.json"
+                },
+            "config-deployment" :{
+                src: ["**/*.config.deployment.json"],
+                dest: "config/config.json"
+            }
+        }
+    });
+
+    grunt.loadNpmTasks('grunt-angular-templates');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-include-replace');
+    grunt.loadNpmTasks('grunt-ng-constant');
+    grunt.loadNpmTasks('grunt-merge-json');
+
+    // This task will package up everything in this project.
+    grunt.registerTask('build.dist.dev',
+        [
+            // Clean all files from previous run.
+            'clean:previousRun',
+
+            // Embed the contents of the css files into a <style> tag in the
+            // corresponding html files.
+            'includereplace',
+
+            // Place all of the templates into Angular's template cache.
+            'ngtemplates',
+
+            // Concatenate all .js files from source coded (and the template
+            // cache .js file) into a single .js file.
+            'concat:allJs',
+
+            // Copies index.html and styling.
+            'copy:indexHtmlToDistDev',
+            'copy:contentNotStylesOrIcons',
+            'copy:lessStyle',
+            'copy:favicon',
+
+            // Clean temp files from this run.
+            'clean:temp',
+
+            // Create config.js.
+            'merge-json:config',
+            'ngconstant:config'
+        ]);
+
+    grunt.registerTask('build.dist.dev.CI',
+        [
+            // Clean all files from previous run.
+            'clean:previousRun',
+
+            // Embed the contents of the css files into a <style> tag in the
+            // corresponding html files.
+            'includereplace',
+
+            // Place all of the templates into Angular's template cache.
+            'ngtemplates',
+
+            // Concatenate all .js files from source coded (and the template
+            // cache .js file) into a single .js file.
+            'concat:allJs',
+
+            // Copies index.html and styling.
+            'copy:indexHtmlToDistDev',
+            'copy:contentNotStylesOrIcons',
+            'copy:lessStyle',
+            'copy:favicon',
+
+            // Clean temp files from this run.
+            'clean:temp',
+
+            // Create config.js.
+            'merge-json:config-deployment',
+            'ngconstant:config'
+        ]);
+};

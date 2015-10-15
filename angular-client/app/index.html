@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="orgFinder">
+  <head>
+    <meta charset="utf-8">
+    <title>Organization Finder</title>
+  </head>
+  <body>
+
+    <!--                                 STYLING                                         -->
+    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="content/styles/style.css" type="text/css">
+
+    <!--                                 BOWER PACKAGES                                  -->
+    <script src="components/jquery/dist/jquery.js"></script>
+    <script src="components/angular/angular.js"></script>
+    <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="components/angular-animate/angular-animate.js"></script>
+    <script src="components/angular-cookies/angular-cookies.js"></script>
+    <script src="components/angular-resource/angular-resource.js"></script>
+    <script src="components/angular-route/angular-route.js"></script>
+    <script src="components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="components/angular-touch/angular-touch.js"></script>
+
+    <!--                                  MAIN MODULE                                   -->
+    <script src="app.js"></script>
+    <!--                                  TEST MODULE                                   -->
+    <script src="test/test.module.js"></script>
+    <script src="test/test.routes.js"></script>
+    <script src="test/test.service.js"></script>
+    <script src="test/test.controller.js"></script>
+    <!--                                  ORGANIZATIONS MODULE                                   -->
+    <script src="organizations/organizations.module.js"></script>
+    <script src="organizations/organizations.routes.js"></script>
+    <script src="organizations/organizations.service.js"></script>
+    <script src="organizations/organizations.controller.js"></script>
+    
+    <div id="background-image"></div>
+
+    <!-- Add your site or application content here -->
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+
+            <a class="navbar-brand" href="#/">Angular Client</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/organizations">Organizations</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/test">Test</a></li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div ng-view></div>
+    </div>
+
+  </body>
+</html>

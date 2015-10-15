@@ -1,0 +1,10 @@
+#background-image {
+  position: fixed;
+  z-index: -2;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 125%;
+  background: transparent url("/content/images/background.jpg");
+  background-size: cover;
+}

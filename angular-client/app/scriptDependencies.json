@@ -1,0 +1,14 @@
+{
+  "site": [
+    "app/app.js",
+    "app/organizations/organizations.module.js",
+    "app/organizations/organizations.controller.js",
+    "app/organizations/organizations.routes.js",
+    "app/organizations/organizations.service.js",
+
+    "app/test/test.module.js",
+    "app/test/test.controller.js",
+    "app/test/test.routes.js",
+    "app/test/test.service.js"
+  ]
+}
