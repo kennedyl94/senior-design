@@ -9,8 +9,5 @@
     var vm = this;
 
     vm.data = organizationService.data;
-
-    console.log("TESTING!");
-    console.dir("TESTING!");
   }
 })();

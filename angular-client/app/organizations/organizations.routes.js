@@ -6,7 +6,7 @@
       function($routeProvider) {
         $routeProvider
           .when('/organizations', {
-            templateUrl: 'app/organizations/organizations.template.html',
+            templateUrl: 'organizations/organizations.template.html',
             controller: 'OrganizationsController',
             controllerAs: 'organizationsCtrl'
           });

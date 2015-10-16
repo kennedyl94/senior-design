@@ -3,7 +3,8 @@
 module.exports = function (grunt) {
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
-    ngtemplates: 'grunt-angular-templates'
+    ngtemplates: 'grunt-angular-templates',
+    includereplace: 'grunt-include-replace'
   });
 
   // Configurable paths for the application
@@ -19,6 +20,11 @@ module.exports = function (grunt) {
     scriptDependencies: grunt.file.readJSON('app/scriptDependencies.json'),
     gruntConfig: grunt.file.readJSON('config/gruntConfig.json'),
 
+    clean: {
+      previousRun: ['dist'],
+      temp: ['dist/temp']
+    },
+
     concat: {
       options: {
         separator: '\n\n'
@@ -29,8 +35,45 @@ module.exports = function (grunt) {
       }
     },
 
+    copy: {
+      indexHtmltoDistDev: {
+        src: 'app/index.html',
+        dest: 'dist/dev/index.html'
+      },
+      content: {
+        cwd: 'content',
+        expand: true,
+        src: ['**/*'],
+        dest: 'dist/dev/content/'
+      },
+    },
+
+    includereplace: {
+      dist: {
+        files: [
+          {
+            src: ['**/*template.html'],
+            dest: 'dist/temp/templatesWithCss/',
+            expand: true,
+            cwd: 'app'
+          }
+        ]
+      }
+    },
+
+    ngtemplates:  {
+    app: {
+        cwd: 'dist/temp/templatesWithCss',
+        src: ['**/*template.html'],
+        dest: 'dist/dev/angularTemplateCache.js',
+        options: {
+          module: '<%= gruntConfig.siteModule %>'
+        }
+      }
+    },
+
     // Project settings
-    yeoman: appConfig,
+    orgFinder: appConfig,
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -39,7 +82,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= orgFinder.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -49,10 +92,6 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      styles: {
-        files: ['<%= yeoman.app %>/content/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
-      },
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -61,9 +100,9 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= orgFinder.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/content/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= orgFinder.app %>/content/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -82,8 +121,8 @@ module.exports = function (grunt) {
             return [
               connect.static('.tmp'),
               connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
+                '/components',
+                connect.static('./components')
               ),
               connect().use(
                 '/content/styles',
@@ -101,7 +140,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: '<%= yeoman.dist %>'
+          base: '<%= orgFinder.dist %>'
         }
       }
     },
@@ -115,7 +154,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= orgFinder.app %>/scripts/{,*/}*.js'
         ]
       },
       test: {
@@ -126,51 +165,10 @@ module.exports = function (grunt) {
       }
     },
 
-    // Empties folders to start fresh
-    clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= yeoman.dist %>/{,*/}*',
-            '!<%= yeoman.dist %>/.git{,*/}*'
-          ]
-        }]
-      },
-      server: '.tmp'
-    },
-
-    // Add vendor prefixed styles
-    autoprefixer: {
-      options: {
-        browsers: ['last 1 version']
-      },
-      server: {
-        options: {
-          map: true,
-        },
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/styles/',
-          src: '{,*/}*.css',
-          dest: '.tmp/styles/'
-        }]
-      }
-    },
-
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
-        src: ['<%= yeoman.app %>/index.html'],
+        src: ['<%= orgFinder.app %>/index.html'],
         ignorePath:  /\.\.\//
       },
       test: {
@@ -191,51 +189,16 @@ module.exports = function (grunt) {
       }
     },
 
-    // Copies remaining files to places other tasks can use
-    copy: {
-      dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
-          src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            '*.html',
-            'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
-          ]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
-        }, {
-          expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
-        }]
-      },
-      styles: {
-        expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
-        src: '{,*/}*.css'
-      }
-    },
-
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
+
       ],
       test: [
-        'copy:styles'
+
       ],
       dist: [
-        'copy:styles',
+        'copy:style',
         'imagemin',
         'svgmin'
       ]
@@ -257,47 +220,16 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'clean:server',
+      'clean:previousRun',
+      'includereplace',
+      'ngtemplates',
       'concat:allJs',
+      'copy:indexHtmltoDistDev',
+      'copy:content',
+      'clean:temp',
       'wiredep',
-      'concurrent:server',
-      'autoprefixer:server',
       'connect:livereload',
       'watch'
     ]);
   });
-
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve:' + target]);
-  });
-
-  grunt.registerTask('test', [
-    'clean:server',
-    'wiredep',
-    'concurrent:test',
-    'autoprefixer',
-    'karma'
-  ]);
-
-  grunt.registerTask('build', [
-    'clean:dist',
-    'wiredep',
-    'concurrent:dist',
-    'autoprefixer',
-    'ngtemplates',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    'cssmin',
-    'uglify',
-    'htmlmin',
-    'concat:allJs'
-  ]);
-
-  grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
-    'build'
-  ]);
 };
