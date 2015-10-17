@@ -8,7 +8,7 @@
           .when('/organizations', {
             templateUrl: 'organizations/organizations.template.html',
             controller: 'OrganizationsController',
-            controllerAs: 'organizationsCtrl'
+            controllerAs: 'orgsCtrl'
           });
       }]);
 

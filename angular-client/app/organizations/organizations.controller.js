@@ -7,7 +7,10 @@
   function Controller(organizationService) {
 
     var vm = this;
+    vm.orgs = {};
 
-    vm.data = organizationService.data;
+    organizationService.then(function (service) {
+      vm.orgs = service.orgs;
+    });
   }
 })();
