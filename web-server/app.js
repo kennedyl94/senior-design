@@ -31,23 +31,33 @@ app.get('/test', function (req, res) {
 });
 app.get('/Organizations', function (req, res) {
 	//TODO: get stuff from db
-  var l =[
+	var orgs = [
     { 
       id:0,
       name:"Hullo",
       tags:["hi","list"],
       description:"I enjoy pie",
-      contact:{
+      contact: 
+	  {
           name:"me",
           email:"hullo@email.com",
           phone:"222-222-2222"
-        }
+	  }
+    },
+	{
+	  id:1,
+      name:"Hullo2",
+      tags:["hi2","list2"],
+      description:"I enjoy pie too much",
+      contact: 
+	  {
+          name:"not me",
+          email:"hullo2@email.com",
+          phone:"333-333-3333"
       }
-    
-    
+    }
   ]
-  
-  
+  res.send(orgs);
 });
 
 var server = app.listen(3000, function () {

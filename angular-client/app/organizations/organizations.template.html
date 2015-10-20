@@ -2,18 +2,18 @@
 <div class="container">
   <table class="table table-bordered">
     <tr class="info">
-      <th>HEADER 1</th>
-      <th>HEADER 2</th>
-      <th>HEADER 3</th>
-      <th>HEADER 4</th>
-      <th>HEADER 5</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Contact Name</th>
+      <th>Contact Email</th>
+      <th>Contact Phone</th>
     </tr>
     <tr class="active" ng-repeat="org in orgsCtrl.orgs">
       <td>{{org.name}}</td>
-      <td>{{org.property2}}</td>
-      <td>{{org.property3}}</td>
-      <td>{{org.property4}}</td>
-      <td>{{org.property5}}</td>
+      <td>{{org.description}}</td>
+      <td>{{org.contact.name}}</td>
+      <td>{{org.contact.email}}</td>
+      <td>{{org.contact.phone}}</td>
     </tr>
   </table>
 </div>
