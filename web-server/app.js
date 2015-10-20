@@ -29,6 +29,26 @@ app.post('/', function(req, res)
 app.get('/test', function (req, res) {
 	res.send("test");
 });
+app.get('/Organizations', function (req, res) {
+	//TODO: get stuff from db
+  var l =[
+    { 
+      id:0,
+      name:"Hullo",
+      tags:["hi","list"],
+      description:"I enjoy pie",
+      contact:{
+          name:"me",
+          email:"hullo@email.com",
+          phone:"222-222-2222"
+        }
+      }
+    
+    
+  ]
+  
+  
+});
 
 var server = app.listen(3000, function () {
   var host = server.address().address;
