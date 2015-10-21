@@ -60,6 +60,18 @@ app.get('/Organizations', function (req, res) {
   res.send(orgs);
 });
 
+app.get('/createClub', function (req, res) {
+	var data = {
+		title:"Create a club entry"
+	}
+	res.send(data);
+});
+
+app.post('/createClub', function (req, res) {
+	var data = req.data;
+	res.send(200);
+});
+
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
