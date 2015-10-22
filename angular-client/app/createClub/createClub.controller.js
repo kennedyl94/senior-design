@@ -24,7 +24,7 @@
 		}
 	}
 	
-	function submit () {
+	vm.submit = function () {
 		createClubService.create(vm.club);
 	}
   }
