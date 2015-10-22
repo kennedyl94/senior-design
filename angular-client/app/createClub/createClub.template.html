@@ -1,0 +1,35 @@
+<h1 id="pageTitle"> {{ crClCtrl.title }} </h1>
+
+<div id="clubInfo">
+	<span>Club Name:</span>
+	<br/>
+	<input id="clubName" ng-model="crClCtrl.club.name" />
+	<br/>
+	<span>Description:</span>
+	<br/>
+	<input id="description" ng-model="crClCtrl.club.description" />
+	<br/>
+	<span>Tags:</span>
+	<br/>
+	<input id="tags" ng-model="crClCtrl.club.tags" />
+	<br/>
+	<br/>
+	<span>Club Leader Contact Information:</span>
+	<br/>
+	<div id="contactInfo">
+		<span>Name:</span>
+		<br/>
+		<input id="contactName" ng-model="crClCtrl.club.contact.name" />
+		<br/>
+		<span>Email:</span>
+		<br/>
+		<input id="email" ng-model="crClCtrl.club.contact.email" />
+		<br/>
+		<span>Phone Number:</span>
+		<br/>
+		<input id="phone" ng-model="crClCtrl.club.contact.phone" />
+	</div>
+</div>
+<br/>
+<button id="submit" ng-click="crClCtrl.submit()">Submit</button>
+<button id="cancel" href="/">Cancel</button>

@@ -7,10 +7,10 @@
   function Controller(organizationService) {
 
     var vm = this;
+    vm.orgs = {};
 
-    vm.data = organizationService.data;
-
-    console.log("TESTING!");
-    console.dir("TESTING!");
+    organizationService.then(function (service) {
+      vm.orgs = service.orgs;
+    });
   }
 })();

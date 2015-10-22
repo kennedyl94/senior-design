@@ -1,21 +1,24 @@
 (function() {
   'use strict';
 
-  angular.module('organizations')
-    .factory('organizationsService', ['$q', '$http', GetService]);
+  angular.module('createClub')
+    .factory('createClubService', ['$q', '$http', GetService]);
 
   function GetService($q, $http) {
 
     var deferred  = $q.defer();
+
     var service = this;
 
-    service.orgs = {};
+    service.data = {
+      title: null
+    };
 
     function init() {
       var promises = [];
-      promises.push($http({method: 'GET', url: 'http://localhost:3000/Organizations'}));
+      promises.push($http.get('http://localhost:3000/createClub'));
       $q.all(promises).then(function(data) {
-        service.orgs = data[0].data;
+        service.data.title = data[0].data.title;
         deferred.resolve(service);
       });
     }
