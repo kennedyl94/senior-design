@@ -16,16 +16,12 @@
 
     function init() {
       var promises = [];
-      promises.push($http.get('/createClub'));
+      promises.push($http.get('http://localhost:3000/createClub'));
       $q.all(promises).then(function(data) {
         service.data.title = data[0].data.title;
         deferred.resolve(service);
       });
     }
-	
-	function create(data) {
-		$http.post('/createClub', data: {club: data});
-	}
 
     init();
     return deferred.promise;

@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('createClub')
-    .controller('CreateClubController', ['createClubService', Controller]);
+    .controller('CreateClubController', ['createClubService', '$http', Controller]);
 
-  function Controller(createClubService) {
+  function Controller(createClubService, $http) {
 
     var vm = this;
     vm.title = {};
@@ -23,11 +23,23 @@
 			phone: 0
 		}
 	}
-	
-	vm.submit = function () {
-		createClubService.create(vm.club);
-	}
+
+    vm.submit = function() {
+
+      var req = {
+        method: 'POST',
+        url: 'http://localhost:3000/createClub',
+        headers: {},
+        data: {club: vm.club}
+      }
+
+      $http(req)
+        .success(function (data, status, headers, config) {
+          console.log(vm.club);
+        }).error(function(err, status, headers, config) {
+          console.log('error: ' + err);
+        });
+    }
   }
-  
-  
+
 })();
