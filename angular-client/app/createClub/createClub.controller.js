@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('createClub')
-    .controller('createClubController', ['createClubService', Controller]);
+    .controller('CreateClubController', ['createClubService', Controller]);
 
   function Controller(createClubService) {
 

@@ -1,27 +1,35 @@
 <h1 id="pageTitle"> {{ crClCtrl.title }} </h1>
 
 <div id="clubInfo" ng-controller="createClub.controller as crClCtrl">
-	<p>Club Name:</p>
+	<span>Club Name:</span>
+	<br/>
 	<input id="clubName" ng-model="club.name" />
-	
-	<p>Description:</p>
+	<br/>
+	<span>Description:</span>
+	<br/>
 	<input id="description" ng-model="club.description" />
-	
-	<p>Tags:</p>
+	<br/>
+	<span>Tags:</span>
+	<br/>
 	<input id="tags" ng-model="club.tags" />
-	
-	<p>Club Leader Contact Information:</p>
-	<div id="leaderInfo">
-		<p>Name:</p>
-		<input id="leaderName" ng-model="club.contact.name" />
-		
-		<p>Email:</p>
+	<br/>
+	<span>Club Leader Contact Information:</span>
+	<br/>
+	<br/>
+	<div id="contactInfo">
+		<span>Name:</span>
+		<br/>
+		<input id="contactName" ng-model="club.contact.name" />
+		<br/>
+		<span>Email:</span>
+		<br/>
 		<input id="email" ng-model="club.contact.email" />
-		
-		<p>Phone Number:</p>
+		<br/>
+		<span>Phone Number:</span>
+		<br/>
 		<input id="phone" ng-model="club.contact.number" />
 	</div>
 </div>
-
+<br/>
 <button id="submit" ng-click="submit()">Submit</button>
 <button id="cancel" href="/">Cancel</button>

@@ -7,7 +7,7 @@
         $routeProvider
           .when('/createClub', {
             templateUrl: 'createClub/createClub.template.html',
-            controller: 'createClubController',
+            controller: 'CreateClubController',
             controllerAs: 'crClCtrl'
           });
       }]);
