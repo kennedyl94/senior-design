@@ -2,28 +2,32 @@
   'use strict';
 
   angular.module('createClub')
-    .controller('createClubController', ['createClubService', '$scope', Controller]);
+    .controller('createClubController', ['createClubService', Controller]);
 
-  function Controller(createClubService, $scope) {
+  function Controller(createClubService) {
 
     var vm = this;
-    this.data = {};
+    vm.title = {};
 
     createClubService.then(function (service) {
-      vm.data = service.data;
+      vm.title = service.data.title;
     });
+	
+	vm.club = {
+		name: "",
+		description: "",
+		tags: "",
+		contact: {
+			name: "",
+			email: "",
+			phone: 0
+		}
+	}
+	
+	function submit () {
+		createClubService.create(vm.club);
+	}
   }
   
-  function submit () {
-	var that = this;
-	this.data = {
-		clubName: $("#clubName").val();
-		description: $("#description").val();
-		tags: $("#tags").val();
-		leaderName: $("#leaderName").val();
-		email: $("#email").val();
-		phone: $("#phone").val();
-	}
-	createClubService.create(data);
-  }
+  
 })();
