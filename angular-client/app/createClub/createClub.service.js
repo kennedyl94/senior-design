@@ -22,10 +22,6 @@
         deferred.resolve(service);
       });
     }
-	
-	function create(data) {
-		$http({method: 'POST', url: 'http://localhost:3000/createClub', data: data});
-	}
 
     init();
     return deferred.promise;

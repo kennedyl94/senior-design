@@ -68,9 +68,8 @@ app.get('/createClub', function (req, res) {
 });
 
 app.post('/createClub', function (req, res) {
-	var data = req.data;
-	console.log(data);
-	res.send(200);
+	var data = req.body.club;
+	res.sendStatus(200);
 });
 
 var server = app.listen(3000, function () {
