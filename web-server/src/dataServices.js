@@ -1,35 +1,55 @@
 var mongoose = require('mongoose');
 var dbName = require('../config').mongo;
 
-var db = undefined;
+//set up the model for the student_orgs collection
+var studentOrg = mongoose.model('student_orgs', mongoose.Schema(require('../config').orgSchema));
+
+var connected = false;
 
 /*
- * this sets up the connection to mongo
+ * setup the connection to the database
+ * callback: a function to call upon completion
  */
-function setupDb(){
-	var retval = false;
-	mongoose.connect(dbName, function(err, db){
-		if(err){
-			console.error('Failed to connect to database');
-		}
-		else{
-			retval = true;
-		}
-	return retval;
-	});
-}
+exports.connect = function(callback){
+	if(!connected){
+		mongoose.connect(dbName);
+		var db = mongoose.connection;
+		db.on('error', console.error.bind(console, 'connection error:'));
+		db.once('open', function() {
+			console.log('Connected to database');
+			connected = true;
+			callback();
+		});
+	}
+	else{
+		callback();
+	}
+};
+
+/*
+ * disconnects from the mongo server
+ */
+ exports.disconnect = function(){
+	 if(connected){
+		mongoose.disconnect();
+		connected = false;
+	}
+ }
 
 /*
  * adds one student org to the database
  * org: the student org to add
- * callback: a function that takes an error object
+ *callback: a function that takes an error object
  */
 exports.addStudentOrg = function(org, callback){
-	if(db == undefined ^^ setupDb()){
-		db.collection('student_orgs').insert(org, function (err) {
-            if (err) { callback(err); }
-            else { callback(null); }
-          });
+	if(connected){
+		var newOrg = new studentOrg(org);
+		newOrg.save(function(err){
+			callback(err);
+		});
+	}
+	else{
+		callback(new Error('Not connected to database'));
 	}
 };
 
@@ -38,9 +58,10 @@ exports.addStudentOrg = function(org, callback){
  * callback: a function that takes an error object and an array of student orgs
  */
 exports.getAllOrgs = function(callback){
-	if(db == undefined ^^ setupDb){
-		var sortCriteria = name: 1;
-		
-		db.collection('student_orgs').find().sort(sortCriteria).toArray(callback);
+	if(connected){
+		studentOrg.find({}, callback);
+	}
+	else{
+		callback(new Error('Not connected to database'), null);
 	}
 };

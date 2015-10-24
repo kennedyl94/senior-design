@@ -1,3 +1,15 @@
 {
-	"mongo": "mongodb://localhost/StudentOrgMatcher"
+	"mongo": "mongodb://192.168.56.1/StudentOrgMatcher",
+	"orgSchema": {
+		"name": "String",
+		"description": "String",
+		"tags": [
+			"String"
+		],
+		"contact":{
+			"name": "String",
+			"email": "String",
+			"phone": "String"
+		}
+	}
 }
