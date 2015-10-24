@@ -10,7 +10,7 @@ var connected = false;
  * setup the connection to the database
  * callback: a function to call upon completion
  */
-exports.connect = function(callback){
+exports.connect = function(){
 	if(!connected){
 		mongoose.connect(dbName);
 		var db = mongoose.connection;
@@ -18,11 +18,7 @@ exports.connect = function(callback){
 		db.once('open', function() {
 			console.log('Connected to database');
 			connected = true;
-			callback();
 		});
-	}
-	else{
-		callback();
 	}
 };
 
@@ -57,11 +53,17 @@ exports.addStudentOrg = function(org, callback){
  * gets all of the student orgs from the database
  * callback: a function that takes an error object and an array of student orgs
  */
-exports.getAllOrgs = function(callback){
+exports.getAllOrgs = function(success, error){
 	if(connected){
-		studentOrg.find({}, callback);
+		studentOrg.find({}, function(err, orgs) {
+			var orgsMap = {}; 
+			orgs.forEach(function(org) {
+				orgsMap[org._id] = org;
+			});
+			success(orgsMap);
+		});
 	}
 	else{
-		callback(new Error('Not connected to database'), null);
+		error(new Error('Not connected to database'), null);
 	}
 };
