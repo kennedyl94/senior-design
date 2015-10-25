@@ -26,8 +26,11 @@ var server = app.listen(3000, function () {
   console.log('Org Finder App listening at http://%s:%s', host, port);
 });
 
-app.get('/Organizations', function (req, res) {
-  _dataServices.getAllOrgs(function(orgs) {
+app.get('/Organizations/:sortType', function (req, res) {
+  var sortType = req.params.sortType;
+  console.log(sortType);
+  _dataServices.getAllOrgs(sortType,
+  function(orgs) {
 	  res.send(orgs);
   }, function(err) {
 	 console.log(err);

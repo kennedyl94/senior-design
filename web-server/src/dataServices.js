@@ -53,15 +53,17 @@ exports.addStudentOrg = function(org, callback){
  * gets all of the student orgs from the database
  * callback: a function that takes an error object and an array of student orgs
  */
-exports.getAllOrgs = function(success, error){
+exports.getAllOrgs = function(sortType, success, error){
 	if(connected){
+		var sort_order = {};
+		sort_order[sortType] = 1;
 		studentOrg.find({}, function(err, orgs) {
 			var orgsMap = {}; 
 			orgs.forEach(function(org) {
 				orgsMap[org._id] = org;
 			});
 			success(orgsMap);
-		});
+		}).sort( sort_order );
 	}
 	else{
 		error(new Error('Not connected to database'), null);

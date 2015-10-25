@@ -1,19 +1,29 @@
-<h1 align="center"> LIST OF ALL ORGANIZATIONS </h1>
-<div class="container">
-  <table class="table table-bordered">
-    <tr class="info">
-      <th>Name</th>
-      <th>Description</th>
-      <th>Contact Name</th>
-      <th>Contact Email</th>
-      <th>Contact Phone</th>
-    </tr>
-    <tr class="active" ng-repeat="org in orgsCtrl.orgs">
-      <td>{{org.name}}</td>
-      <td>{{org.description}}</td>
-      <td>{{org.contact.name}}</td>
-      <td>{{org.contact.email}}</td>
-      <td>{{org.contact.phone}}</td>
-    </tr>
-  </table>
+<h1 align="center">Student Organizations</h1>
+<div class="container" id="orgs-div">
+  <div class="row">
+    <div class="col-sm-4" id="org-sort-div-1">
+      <select class="form-control"
+              ng-model="orgsCtrl.selectedOption"
+              ng-options="option.name for option in orgsCtrl.options"
+              ng-change="orgsCtrl.sortOrgs(orgsCtrl.selectedOption)">
+      </select>
+    </div>
+    <div class="col-sm-2" id="org-sort-div-2">
+      <h4>Sort by:</h4>
+    </div>
+  </div>
+  <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs">
+      <h3>{{org.name}}</h3>
+      <p>{{org.description}}</p>
+      <div class="row">
+        <div class="col-sm-3"><u>Leader</u></div>
+        <div class="col-sm-3"><u>Email</u></div>
+        <div class="col-sm-3"><u>Phone</u></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">{{org.contact.name}}</div>
+        <div class="col-sm-3">{{org.contact.email}}</div>
+        <div class="col-sm-3">{{org.contact.phone}}</div>
+      </div>
+  </div>
 </div>
