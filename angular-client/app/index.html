@@ -9,6 +9,8 @@
     <!--                                 STYLING                                         -->
     <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="content/styles/style.css" type="text/css">
+    <!-- DIRECTIVE STYLING -->
+    <link rel="stylesheet" href="directives/modal/style.css" type="text/css"/>
 
     <!--                                 BOWER PACKAGES                                  -->
     <script src="components/jquery/dist/jquery.js"></script>
@@ -20,6 +22,12 @@
     <script src="components/angular-route/angular-route.js"></script>
     <script src="components/angular-sanitize/angular-sanitize.js"></script>
     <script src="components/angular-touch/angular-touch.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+    <!-- BLUE IMP DEPENDENCIES -->
+    <link rel="stylesheet" href="node_modules/blueimp-gallery/css/blueimp-gallery.min.css">
+    <script src="node_modules/blueimp-gallery/js/blueimp-gallery.min.js"></script>
 
     <!--                                  MAIN MODULE                                   -->
     <script src="app.js"></script>
@@ -28,11 +36,15 @@
     <script src="organizations/organizations.routes.js"></script>
     <script src="organizations/organizations.service.js"></script>
     <script src="organizations/organizations.controller.js"></script>
-	<!--								  CREATE CLUB MODULE							-->
-	<script src="createClub/createClub.module.js"></script>
+	  <!--								  CREATE CLUB MODULE							-->
+	  <script src="createClub/createClub.module.js"></script>
     <script src="createClub/createClub.routes.js"></script>
     <script src="createClub/createClub.service.js"></script>
     <script src="createClub/createClub.controller.js"></script>
+    <!-- MODAL -->
+    <script src="directives/modal/modal.module.js"></script>
+    <script src="directives/modal/modal.directive.js"></script>
+    <script src="directives/modal/modal.controller.js"></script>
 
     <div id="background-image"></div>
 

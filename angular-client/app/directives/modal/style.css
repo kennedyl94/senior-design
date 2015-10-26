@@ -1,0 +1,21 @@
+#modal-header {
+  text-align: center;
+}
+
+#modal-back-btn {
+  margin-right: 5%;
+}
+
+.modal-info-header {
+  float: left;
+  padding-left: 2.5%;
+}
+
+.info {
+  text-align: left;
+}
+
+#links > a > img {
+  height: 50px;
+  width: 50px;
+}
