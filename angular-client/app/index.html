@@ -25,6 +25,14 @@
     <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
+    <!-- BLUEIMP BOOTSTRAP IMAGE GALLERY DEPENDENCIES -->
+    <link rel="stylesheet" href="components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
+    <link rel="stylesheet" href="components/blueimp-gallery/css/blueimp-gallery.min.css"/>
+
+
+    <script src="components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
+    <script src="components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+
     <!--                                  MAIN MODULE                                   -->
     <script src="app.js"></script>
     <!--               ORGANIZATIONS MODULE              -->
@@ -49,28 +57,21 @@
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
-
             <a class="navbar-brand" href="#/">Angular Client</a>
           </div>
-
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/organizations">Organizations</a></li>
             </ul>
-
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/createClub">Create Club</a></li>
             </ul>
-
           </div>
         </div>
       </div>
     </div>
-
     <div class="container">
       <div ng-view></div>
     </div>
-
   </body>
 </html>

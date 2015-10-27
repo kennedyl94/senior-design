@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs">
-      <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org)">{{org.name}}</h3>
+      <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org, orgsCtrl.images)">{{org.name}}</h3>
       <p>{{org.description}}</p>
       <div class="row">
         <div class="col-sm-3"><u>Leader</u></div>

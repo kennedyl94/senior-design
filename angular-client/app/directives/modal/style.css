@@ -15,7 +15,19 @@
   text-align: left;
 }
 
-#links > a > img {
-  height: 50px;
-  width: 50px;
+#modal-thumbnail-container {
+  width: 100% !important;
+  padding: 0 !important;
 }
+
+#links > a {
+  display: block;
+  float: left;
+}
+
+#links > a > img {
+  height: 75px;
+  width: 75px;
+}
+
+
