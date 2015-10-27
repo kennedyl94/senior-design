@@ -2,6 +2,8 @@
 var express = require('express')
 	, bodyParser = require('body-parser')
 	, _dataServices = require('./dataServices.js')
+  
+
 	
 /** CORS Middleware (Allows Client to Talk to This) **/
 var allowCrossDomain = function(req, res, next) {
@@ -13,11 +15,31 @@ var allowCrossDomain = function(req, res, next) {
 	
 /** Set Express Settings **/
 var app = express();
+
 app.use(bodyParser());
 app.use(allowCrossDomain);
 
+/**routes! */
+var Orgs  = require('./routes/Orgs.js');
+var createClub = require('./routes/createClub.js');
+var test = require("./routes/test.js");
+
+
+var router = express.Router();
+
 /** Connect the Database Through Data Services **/
 _dataServices.connect();
+
+
+app.use('/Organizations/', Orgs);
+
+
+
+app.use('/createClub', createClub);
+
+app.use('/test/', test);
+
+app.use('/', router);
 
 /** Start the Express Sever **/
 var server = app.listen(3000, function () {
@@ -26,27 +48,7 @@ var server = app.listen(3000, function () {
   console.log('Org Finder App listening at http://%s:%s', host, port);
 });
 
-app.get('/Organizations/:sortType', function (req, res) {
-  var sortType = req.params.sortType;
-  console.log(sortType);
-  _dataServices.getAllOrgs(sortType,
-  function(orgs) {
-	  res.send(orgs);
-  }, function(err) {
-	 console.log(err);
-  });
-});
 
-app.get('/createClub', function (req, res) {
-	var data = { title: "Create a club entry" }
-	res.send(data);
-});
 
-app.post('/createClub', function (req, res) {
-	var org = req.body.club;
-	_dataServices.addStudentOrg(org, function(err) {
-		console.log(err);
-	});
-	res.sendStatus(200);
-});
+
 
