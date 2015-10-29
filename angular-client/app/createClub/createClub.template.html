@@ -1,35 +1,59 @@
-<h1 id="pageTitle"> {{ crClCtrl.title }} </h1>
+<h1 id="createClubPageTitle"> {{ crClCtrl.title }} </h1>
 
-<div id="clubInfo">
-	<span>Club Name:</span>
+<div id="clubInfo" class="container">
+	<div class="row">
+		<h4>Club Name:</h4>
+		<div class="col-sm-6">
+			<input id="clubName" class="form-control" placeholder="Club Name" type="text" autofocus ng-model="crClCtrl.club.name" />
+		</div>
+	</div>
 	<br/>
-	<input id="clubName" type="text" ng-model="crClCtrl.club.name" />
+	<div class="row">
+		<h4>Description:</h4>
+		<div class="col-sm-6">
+			<textarea id="description" class="form-control" rows="5" placeholder="A short description for the club" type="text" ng-model="crClCtrl.club.description" />
+		</div>
+	</div>
 	<br/>
-	<span>Description:</span>
+	<div class="row">
+		<h4>Tags:</h4>
+		<div class="col-sm-6">
+			<input id="tags" class="form-control" placeholder="please separate tags using commas" ng-model="crClCtrl.club.tags" />
+		</div>
+	</div>
 	<br/>
-	<input id="description" type="text" ng-model="crClCtrl.club.description" />
 	<br/>
-	<span>Tags:</span>
-	<br/>
-	<input id="tags" ng-model="crClCtrl.club.tags" />
-	<br/>
-	<br/>
-	<span>Club Leader Contact Information:</span>
+	<h3>Main Contact Information:</h3>
 	<br/>
 	<div id="contactInfo">
-		<span>Name:</span>
+		<div class="row">
+			<div class="col-sm-offset-1">
+				<h4>Name:</h4>
+			</div>
+			<div class="col-sm-6 col-sm-offset-1">
+				<input id="contactName" class="form-control" type="text" placeholder="First and Last Name" ng-model="crClCtrl.club.contact.name" />
+			</div>
+		</div>
 		<br/>
-		<input id="contactName" type="text" ng-model="crClCtrl.club.contact.name" />
+		<div class="row">
+			<div class="col-sm-offset-1">
+				<h4>Email:</h4>
+			</div>
+			<div class="col-sm-6 col-sm-offset-1">
+				<input id="email" class="form-control" type="email" placeholder="example@web.com" ng-model="crClCtrl.club.contact.email" />
+			</div>
+		</div>
 		<br/>
-		<span>Email:</span>
-		<br/>
-		<input id="email" type="email" ng-model="crClCtrl.club.contact.email" />
-		<br/>
-		<span>Phone Number:</span>
-		<br/>
-		<input id="phone" type="tel" ng-model="crClCtrl.club.contact.phone" />
+		<div class="row">
+			<div class="col-sm-offset-1">
+				<h4>Phone Number:</h4>
+			</div>
+			<div class="col-sm-6 col-sm-offset-1">
+				<input id="phone" class="form-control" type="tel" placeholder="place telephone example here" ng-model="crClCtrl.club.contact.phone" />
+			</div>
+		</div>
 	</div>
 </div>
 <br/>
-<button id="submit" ng-click="crClCtrl.submit()">Submit</button>
-<button id="cancel" href="/">Cancel</button>
+<button id="submit" class="btn btn-default" type="button" "ng-click="crClCtrl.submit()">Submit</button>
+<button id="cancel" class="btn btn-default" type="button" href="/">Cancel</button>
