@@ -22,6 +22,9 @@
       /* ui.bootstrap is a rewrite of many of Bootstrap's components in Angular */
       'ui.bootstrap',
 
+      /* allows a JSON object to be converted into an array when using ng-repeat */
+      'angular-toArrayFilter',
+
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
       'organizations',

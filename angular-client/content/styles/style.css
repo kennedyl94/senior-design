@@ -15,14 +15,16 @@
   background-color: rgba(255,255,255,0.8);
 }
 
-#org-sort-div-1 {
-  float: right;
+#org-search-div {
+  padding-top: 25px;
+  padding-left: 25px;
+  float: left;
 }
 
-#org-sort-div-2 {
+#org-sort-div {
+  padding-top: 25px;
+  padding-right: 25px;
   float: right;
-  text-align: right;
-  padding-right: 0;
 }
 
 .orgs-header {

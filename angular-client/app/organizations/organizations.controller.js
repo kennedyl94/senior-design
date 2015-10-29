@@ -9,6 +9,17 @@
     var vm = this;
     vm.orgs = {};
 
+    vm.query = "";
+
+    vm.search = function (org) {
+      var name = org.name.toLowerCase();
+      var description = org.description.toLowerCase();
+      var query = vm.query || '';
+      if(query != '') { query = query.toLowerCase(); }
+      return !!((name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1));
+
+    }
+
     // -- TODO --
     // DUMMY DATA UNTIL IMAGE DATA IS ADDED TO ORGANIZATION SCHEMA
     vm.images = [
@@ -39,8 +50,7 @@
       });
     };
 
-    /** MODAL STUFF **/
-
+    // MODAL CREATIONS
     vm.openModal = function(org, images) {
 
       return $modal.open({
@@ -58,8 +68,10 @@
       });
     };
 
+    // GET THE ORGANIZATIONS FROM SERVICE
     organizationService.then(function (service) {
       vm.orgs = service.orgs;
     });
   }
+
 })();
