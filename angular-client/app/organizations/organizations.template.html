@@ -1,18 +1,20 @@
 <h1 align="center">Student Organizations</h1>
 <div class="container" id="orgs-div">
   <div class="row">
-    <div class="col-sm-4" id="org-sort-div-1">
+    <div class="col-sm-4" id="org-search-div">
+      <input type="text" ng-model="orgsCtrl.query" placeholder="Search" class="form-control" id="orgs-search-box"/>
+      <i class="form-control-feedback" class="glyphicon glyphicon-search"></i>
+    </div>
+    <div class="col-sm-4" id="org-sort-div">
       <select class="form-control"
               ng-model="orgsCtrl.selectedOption"
               ng-options="option.name for option in orgsCtrl.options"
               ng-change="orgsCtrl.sortOrgs(orgsCtrl.selectedOption)">
+        <option value="" disabled selected>Sort by...</option>
       </select>
     </div>
-    <div class="col-sm-2" id="org-sort-div-2">
-      <h4>Sort by:</h4>
-    </div>
   </div>
-  <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs">
+  <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs | toArray | filter:orgsCtrl.search">
       <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org, orgsCtrl.images)">{{org.name}}</h3>
       <p>{{org.description}}</p>
       <div class="row">
