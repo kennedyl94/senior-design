@@ -1,5 +1,5 @@
 {
-	"mongo": "mongodb://192.168.56.1/StudentOrgMatcher",
+	"mongo": "mongodb://localhost:27017/StudentOrgMatcher",
 	"orgSchema": {
 		"name": "String",
 		"description": "String",

@@ -1,13 +1,15 @@
 <h1 id="pageTitle"> {{ crClCtrl.title }} </h1>
 
+<link rel="stylesheet" href="/createClub.style.css" type="text/css"/>
+
 <div id="clubInfo">
 	<span>Club Name:</span>
 	<br/>
-	<input id="clubName" ng-model="crClCtrl.club.name" />
+	<input id="clubName" type="text" ng-model="crClCtrl.club.name" />
 	<br/>
 	<span>Description:</span>
 	<br/>
-	<input id="description" ng-model="crClCtrl.club.description" />
+	<input id="description" type="text" ng-model="crClCtrl.club.description" />
 	<br/>
 	<span>Tags:</span>
 	<br/>
@@ -19,11 +21,11 @@
 	<div id="contactInfo">
 		<span>Name:</span>
 		<br/>
-		<input id="contactName" ng-model="crClCtrl.club.contact.name" />
+		<input id="contactName" type="text" ng-model="crClCtrl.club.contact.name" />
 		<br/>
 		<span>Email:</span>
 		<br/>
-		<input id="email" ng-model="crClCtrl.club.contact.email" />
+		<input id="email" type="email" ng-model="crClCtrl.club.contact.email" />
 		<br/>
 		<span>Phone Number:</span>
 		<br/>
