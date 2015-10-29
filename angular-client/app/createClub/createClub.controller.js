@@ -20,7 +20,7 @@
 		contact: {
 			name: "",
 			email: "",
-			phone: 0
+			phone: ""
 		}
 	}
 
