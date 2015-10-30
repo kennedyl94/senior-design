@@ -20,11 +20,18 @@
     "grunt-merge-json": "^0.9.5",
     "grunt-newer": "^1.1.0",
     "grunt-wiredep": "^2.0.0",
+    "jasmine-core": "^2.3.4",
     "jit-grunt": "^0.9.1",
     "jshint-stylish": "^1.0.0",
+    "karma": "^0.13.14",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
     "time-grunt": "^1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "phantomjs": "^1.9.18"
   }
 }
