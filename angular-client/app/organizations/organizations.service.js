@@ -21,6 +21,7 @@
     }
 
     init();
+
     return deferred.promise;
   }
 })();
