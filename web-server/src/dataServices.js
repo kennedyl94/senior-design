@@ -1,20 +1,25 @@
 var mongoose = require('mongoose');
-var dbName = require('../config').mongo;
+
+var config = require('../config');
+
+var dbName = config.mongo;
 
 //set up the model for the student_orgs collection
-var studentOrg = mongoose.model('student_orgs', mongoose.Schema(require('../config').orgSchema));
+var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
 
 var connected = false;
 
 /*
  * setup the connection to the database
- * callback: a function to call upon completion
  */
 exports.connect = function(){
 	if(!connected){
 		mongoose.connect(dbName);
 		var db = mongoose.connection;
-		db.on('error', console.error.bind(console, 'connection error:'));
+		db.on('error', function(){
+			console.error.bind(console, 'connection error:');
+			mongoose.disconnect();
+		});
 		db.once('open', function() {
 			console.log('Connected to database');
 			connected = true;
@@ -27,31 +32,35 @@ exports.connect = function(){
  */
  exports.disconnect = function(){
 	 if(connected){
-		mongoose.disconnect();
-		connected = false;
+		mongoose.disconnect(function(){
+			connected = false;
+			console.log('Disconnected from database');
+		});
 	}
  }
 
 /*
  * adds one student org to the database
  * org: the student org to add
- *callback: a function that takes an error object
+ * callback: a function that takes an error object and an object representing the saved org document
  */
 exports.addStudentOrg = function(org, callback){
 	if(connected){
 		var newOrg = new studentOrg(org);
-		newOrg.save(function(err){
-			callback(err);
+		newOrg.save(function(err, savedOrg){
+			callback(err, savedOrg._doc);
 		});
 	}
 	else{
-		callback(new Error('Not connected to database'));
+		callback(new Error('Not connected to database'), null);
 	}
 };
 
 /*
  * gets all of the student orgs from the database
- * callback: a function that takes an error object and an array of student orgs
+ * sortType: the attribute to sort by
+ * success: a function to call upon successful completion. it takes an object that contains the student orgs
+ * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllOrgs = function(sortType, success, error){
 	if(connected){
