@@ -1,6 +1,6 @@
 'use strict';
 
-describe('organizationsService', function() {
+describe('OrganizationsService', function() {
 
   var $http;
   var $q;
