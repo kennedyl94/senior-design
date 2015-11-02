@@ -6,9 +6,26 @@
     "app/organizations/organizations.routes.js",
     "app/organizations/organizations.service.js",
 
-    "app/test/test.module.js",
-    "app/test/test.controller.js",
-    "app/test/test.routes.js",
-    "app/test/test.service.js"
+    "app/createClub/createClub.module.js",
+    "app/createClub/createClub.controller.js",
+    "app/createClub/createClub.routes.js",
+    "app/createClub/createClub.service.js",
+
+    "app/directives/modal/modal.module.js",
+    "app/directives/modal/modal.directive.js",
+    "app/directives/modal/modal.controller.js"
+  ],
+
+  "vendorJs": [
+    "app/components/jquery/dist/jquery.js",
+
+    "app/components/angular/angular.js",
+    "app/components/angular-bootstrap/ui-bootstrap.js",
+    "app/components/angular-bootstrap/ui-bootstrap-tpls.js",
+    "app/components/angular-animate/angular-animate.js",
+    "app/components/angular-cookies/angular-cookies.js",
+    "app/components/angular-mocks/angular-mocks.js",
+
+    "app/components/bootstrap/dist/js/bootstrap.js"
   ]
 }

@@ -46,6 +46,13 @@ module.exports = function (grunt) {
         src: ['**/*'],
         dest: 'dist/dev/content/'
       },
+      bowerComponentsJs: {
+        cwd: '',
+        expand: true,
+        src: ['<%= scriptDependencies.vendorJs %>'],
+        dest: 'dist/dev/lib/vendor/js/',
+        flatten: true
+      }
     },
 
     includereplace: {
@@ -191,12 +198,6 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
-      server: [
-
-      ],
-      test: [
-
-      ],
       dist: [
         'copy:style',
         'imagemin',
@@ -207,18 +208,13 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: 'config/karma.conf.js',
         singleRun: true
       }
     }
   });
 
-
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
-
+  grunt.registerTask('build.dist.dev', 'Compile the project. (Do not start)', function(target) {
     grunt.task.run([
       'clean:previousRun',
       'includereplace',
@@ -226,6 +222,20 @@ module.exports = function (grunt) {
       'concat:allJs',
       'copy:indexHtmltoDistDev',
       'copy:content',
+      'copy:bowerComponentsJs',
+      'clean:temp'
+    ]);
+  });
+
+  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+    grunt.task.run([
+      'clean:previousRun',
+      'includereplace',
+      'ngtemplates',
+      'concat:allJs',
+      'copy:indexHtmltoDistDev',
+      'copy:content',
+      'copy:bowerComponentsJs',
       'clean:temp',
       'wiredep',
       'connect:livereload',
