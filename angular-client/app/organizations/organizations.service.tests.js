@@ -2,6 +2,7 @@
 
 describe('OrganizationsService', function() {
 
+  var $routeProvider;
   var $http;
   var $q;
   var orgsService;
@@ -47,7 +48,8 @@ describe('OrganizationsService', function() {
     })
   }));
 
-  beforeEach(inject(function (_$http_, _$q_) {
+  beforeEach(inject(function (_$routeProvider_, _$http_, _$q_) {
+    $routeProvider = _$routeProvider_;
     $http = _$http_;
     $q = _$q_;
   }));
