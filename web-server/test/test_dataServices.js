@@ -1,6 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 var mongoose = require('mongoose');
+var async = require('async');
 
 
 var config = require('../config');
@@ -162,25 +163,42 @@ describe('dataServices', function () {
 		//TODO this test currently works depending on the timing of the various components.
 		it('should find all documents', function(done){
 			var connection = mongoose.connection;
-			var fakeOrgs = [
-				fakeOrg,
-				fakeOrg,
-				fakeOrg
-			];
+
 			connection.once('open', function(){
-				connection.db.dropDatabase();
 				process.nextTick(function(){
-					fakeOrgs.forEach(function(fakeOrg){
-						dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){});
+					connection.db.dropDatabase();
+					process.nextTick(function(){
+						async.parallel([
+							function(callback){
+								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+									console.log(err);
+									callback();
+								});
+							},
+							function(callback){
+								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+									console.log(err);
+									callback();
+								});
+							},
+							function(callback){
+								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+									console.log(err);
+									callback();
+								});
+							}],
+							function(){							
+								dataServices.getAllOrgs('name', function(orgs){
+									var size = 0;
+									for( org in orgs){
+										size++;
+									}
+									assert.equal(size, 3);
+									done();
+								}, function(){});
+							}
+						);
 					});
-					dataServices.getAllOrgs('name', function(orgs){
-						var size = 0;
-						for(org in orgs){
-							size++;
-						};
-						assert.equal(size, 3);
-						done();
-					}, function(){});
 				});
 			});
 			dataServices.connect();
