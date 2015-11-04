@@ -6,6 +6,7 @@ describe('OrganizationsService', function() {
   var $http;
   var $q;
   var orgsService;
+  var deffered;
 
   var fakeOrgs = [
     {
@@ -36,11 +37,14 @@ describe('OrganizationsService', function() {
     }
   ];
 
-  beforeEach(module('organizations'));
+  beforeEach(function() {
+    module('ngRoute');
+    module('organizations');
+  });
 
   beforeEach(module(function ($provide) {
     $provide.value('orgsService', {
-      GetAllOrgs: function() {
+      getAllOrgs: function() {
         var orgs = $q.defer();
         orgs.resolve([]);
         return orgs.promise;
@@ -48,10 +52,11 @@ describe('OrganizationsService', function() {
     })
   }));
 
-  beforeEach(inject(function (_$routeProvider_, _$http_, _$q_) {
-    $routeProvider = _$routeProvider_;
+  beforeEach(inject(function (_$http_, _$q_) {
     $http = _$http_;
     $q = _$q_;
+
+    deffered = _$q_.defer();
   }));
 
   beforeEach(inject(function (_orgsService_) {
@@ -63,10 +68,9 @@ describe('OrganizationsService', function() {
       var deferred = $q.defer();
       deferred.resolve(fakeOrgs);
 
-      spyOn(orgsService, 'GetAllOrgs').and.returnValue(deferred.promise);
-
-      expect(orgsService.GetAllOrgs).toHaveBeenCalled();
-      expect(orgsService.orgs).toEqual(fakeOrgs);
+      spyOn(orgsService, 'getAllOrgs').and.returnValue(fakeOrgs);
+      expect(orgsService.getAllOrgs).toHaveBeenCalled();
+      expect(orgsService.getAllOrgs()).toEqual(fakeOrgs);
     });
   });
 
