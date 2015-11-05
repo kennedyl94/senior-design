@@ -1,5 +1,5 @@
 <h1 align="center">Student Organizations</h1>
-<div class="container" id="orgs-div">
+<div class="col-sm-8 col-sm-offset-2" id="orgs-div">
   <div class="row">
     <div class="col-sm-4" id="org-search-div">
       <input type="text" ng-model="orgsCtrl.query" placeholder="Search" class="form-control" id="orgs-search-box"/>
@@ -16,16 +16,6 @@
   </div>
   <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs | toArray | filter:orgsCtrl.search">
       <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org, orgsCtrl.images)">{{org.name}}</h3>
-      <p>{{org.description}}</p>
-      <div class="row">
-        <div class="col-sm-3"><u>Leader</u></div>
-        <div class="col-sm-3"><u>Email</u></div>
-        <div class="col-sm-3"><u>Phone</u></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">{{org.contact.name}}</div>
-        <div class="col-sm-3">{{org.contact.email}}</div>
-        <div class="col-sm-3">{{org.contact.phone}}</div>
-      </div>
+      <span ng-show="orgsCtrl.search(org) && orgsCtrl.query != ''" ng-bind-html="orgsCtrl.highlight(org.description, orgsCtrl.query)">{{org.description}}</span>
   </div>
 </div>

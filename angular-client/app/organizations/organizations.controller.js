@@ -2,22 +2,31 @@
   'use strict';
 
   angular.module('organizations')
-    .controller('OrganizationsController', ['organizationsService', '$q', '$http', '$modal', Controller]);
+    .controller('OrganizationsController', ['organizationsService', '$q', '$http', '$modal', '$sce', Controller]);
 
-  function Controller(organizationService, $q, $http, $modal) {
+  function Controller(organizationService, $q, $http, $modal, $sce) {
 
     var vm = this;
     vm.orgs = {};
 
     vm.query = "";
 
+    // Filters Orgs -- If name/description contains vm.query
     vm.search = function (org) {
+      vm.queriedOrgs = [];
       var name = org.name.toLowerCase();
       var description = org.description.toLowerCase();
       var query = vm.query || '';
       if(query != '') { query = query.toLowerCase(); }
       return !!((name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1));
+    }
 
+    // Highlights organization description words that match vm.query
+    vm.highlight = function(text, search) {
+      if(!search) {
+        return $sce.trustAsHtml(text);
+      }
+      return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
     }
 
     // -- TODO --
