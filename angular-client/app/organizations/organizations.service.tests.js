@@ -3,6 +3,7 @@
 describe('OrganizationsService', function() {
 
   var $routeProvider;
+  var $rootScope;
   var $http;
   var $q;
   var orgsService;
@@ -44,7 +45,7 @@ describe('OrganizationsService', function() {
 
   beforeEach(module(function ($provide) {
     $provide.value('orgsService', {
-      getAllOrgs: function() {
+      GetAllOrgs: function() {
         var orgs = $q.defer();
         orgs.resolve([]);
         return orgs.promise;
@@ -52,25 +53,31 @@ describe('OrganizationsService', function() {
     })
   }));
 
-  beforeEach(inject(function (_$http_, _$q_) {
+  beforeEach(inject(function (_$rootScope_, _$http_, _$q_) {
+    $rootScope = _$rootScope_;
     $http = _$http_;
     $q = _$q_;
-
-    deffered = _$q_.defer();
   }));
 
   beforeEach(inject(function (_orgsService_) {
     orgsService = _orgsService_;
   }));
 
+  beforeEach(function () {
+    $rootScope.$apply();
+  });
+
   describe('Get Orgs', function() {
     it('should call to get all organizations', function() {
       var deferred = $q.defer();
       deferred.resolve(fakeOrgs);
 
-      spyOn(orgsService, 'getAllOrgs').and.returnValue(fakeOrgs);
-      expect(orgsService.getAllOrgs).toHaveBeenCalled();
-      expect(orgsService.getAllOrgs()).toEqual(fakeOrgs);
+      spyOn(orgsService, 'GetAllOrgs').and.returnValue(fakeOrgs);
+
+      $rootScope.$apply();
+
+      expect(orgsService.GetAllOrgs).toHaveBeenCalled();
+      expect(orgsService.GetAllOrgs).toEqual(fakeOrgs);
     });
   });
 
