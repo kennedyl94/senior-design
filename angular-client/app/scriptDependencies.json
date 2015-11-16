@@ -13,7 +13,13 @@
 
     "app/directives/modal/modal.module.js",
     "app/directives/modal/modal.directive.js",
-    "app/directives/modal/modal.controller.js"
+    "app/directives/modal/modal.controller.js",
+
+    "app/survey/survey.module.js",
+    "app/survey/survey.controller.js",
+    "app/survey/survey.routes.js",
+    "app/survey/survey.service.js"
+
   ],
 
   "vendorJs": [
