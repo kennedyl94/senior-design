@@ -39,6 +39,7 @@
 
     <!--                                  MAIN MODULE                                   -->
     <script src="app.js"></script>
+    <script src="orgFinder.controller.js"></script>
     <!--               ORGANIZATIONS MODULE              -->
     <script src="organizations/organizations.module.js"></script>
     <script src="organizations/organizations.routes.js"></script>
@@ -59,16 +60,18 @@
     <!-- Add your site or application content here -->
     <div class="header">
       <div class="navbar navbar-default" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#/">Angular Client</a>
+            <a class="brand" href="#/">
+              <img id="logo" src="content/images/logo.jpg">
+            </a>
           </div>
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+          <div class="collapse navbar-collapse" id="js-navbar-collapse" ng-controller="OrgFinderController">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/organizations">Organizations</a></li>
+              <li id="first" ng-class="{ active: isActive('/organizations') }"><a href="#/organizations">Organizations</a></li>
             </ul>
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/createClub">Create Club</a></li>
+              <li ng-class="{ active: isActive('/createClub') }"><a href="#/createClub">Create Club</a></li>
             </ul>
           </div>
         </div>
