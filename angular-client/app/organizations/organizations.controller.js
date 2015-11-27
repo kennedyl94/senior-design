@@ -7,7 +7,7 @@
   function Controller(organizationService, $q, $http, $modal, $sce) {
 
     var vm = this;
-    vm.orgs = {};
+    vm.data = organizationService.data;
 
     vm.query = "";
 
@@ -76,11 +76,6 @@
         }
       });
     };
-
-    // GET THE ORGANIZATIONS FROM SERVICE
-    organizationService.then(function (service) {
-      vm.orgs = service.orgs;
-    });
   }
 
 })();

@@ -14,7 +14,7 @@
       </select>
     </div>
   </div>
-  <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs | toArray | filter:orgsCtrl.search">
+  <div class="col-sm-12" ng-repeat="org in orgsCtrl.data.orgs | toArray | filter:orgsCtrl.search">
       <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org, orgsCtrl.images)">{{org.name}}</h3>
       <span ng-show="orgsCtrl.search(org) && orgsCtrl.query != ''" ng-bind-html="orgsCtrl.highlight(org.description, orgsCtrl.query)">{{org.description}}</span>
   </div>
