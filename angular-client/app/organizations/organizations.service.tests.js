@@ -2,12 +2,9 @@
 
 describe('OrganizationsService', function() {
 
-  var $routeProvider;
-  var $rootScope;
-  var $http;
-  var $q;
-  var orgsService;
-  var deffered;
+  var organizationsService;
+  var httpBackend;
+  var GET_ORGS_URL = 'http://localhost:3000/Organizations/';
 
   var fakeOrgs = [
     {
@@ -38,49 +35,72 @@ describe('OrganizationsService', function() {
     }
   ];
 
+  var options = [
+    {id: "name", name: "Name"},
+    {id: "description", name: "Description"},
+    {id: "contact.name", name: "Contact"}
+  ];
+
   beforeEach(function() {
     module('ngRoute');
     module('organizations');
   });
 
-  beforeEach(module(function ($provide) {
-    $provide.value('orgsService', {
-      GetAllOrgs: function() {
-        var orgs = $q.defer();
-        orgs.resolve([]);
-        return orgs.promise;
-      }
-    })
+  beforeEach(inject(function (_$httpBackend_, _organizationsService_) {
+    organizationsService = _organizationsService_;
+    httpBackend = _$httpBackend_;
   }));
 
-  beforeEach(inject(function (_$rootScope_, _$http_, _$q_) {
-    $rootScope = _$rootScope_;
-    $http = _$http_;
-    $q = _$q_;
-  }));
-
-  beforeEach(inject(function (_orgsService_) {
-    orgsService = _orgsService_;
-  }));
-
-  beforeEach(function () {
-    $rootScope.$apply();
+  afterEach(function() {
+    httpBackend.verifyNoOutstandingExpectation();
+    httpBackend.verifyNoOutstandingRequest();
   });
 
-  describe('Get Orgs', function() {
-    it('should call to get all organizations', function() {
-      var deferred = $q.defer();
-      deferred.resolve(fakeOrgs);
-
-      spyOn(orgsService, 'GetAllOrgs').and.returnValue(fakeOrgs);
-
-      $rootScope.$apply();
-
-      expect(orgsService.GetAllOrgs).toHaveBeenCalled();
-      expect(orgsService.GetAllOrgs).toEqual(fakeOrgs);
+  describe('Get Organizations by Name (Default)', function() {
+    it('should call to get all organizations by name', function() {
+      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
+      httpBackend.flush();
     });
   });
 
+  describe('Sort Organizations', function() {
 
+    it('should be defined', function() {
+      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
+      httpBackend.flush();
+      expect(organizationsService).toBeDefined();
+    });
 
+    it('should sort organizations by name', function() {
+      var sortedOrgs = {};
+      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
+      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
+      organizationsService.sortOrgs(options[0]).then(function(result) {
+        sortedOrgs = result;
+      });
+      httpBackend.flush();
+      expect(sortedOrgs).toEqual(fakeOrgs);
+    });
+
+    it('should sort organizations by description', function() {
+      var sortedOrgs = {};
+      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
+      httpBackend.expectGET(GET_ORGS_URL + "description").respond(fakeOrgs);
+      organizationsService.sortOrgs(options[1]).then(function(result) {
+        sortedOrgs = result;
+      });
+      httpBackend.flush();
+      expect(sortedOrgs).toEqual(fakeOrgs);
+    });
+    it('should sort organizations by contact', function() {
+      var sortedOrgs = {};
+      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
+      httpBackend.expectGET(GET_ORGS_URL + "contact.name").respond(fakeOrgs);
+      organizationsService.sortOrgs(options[2]).then(function(result) {
+        sortedOrgs = result;
+      });
+      httpBackend.flush();
+      expect(sortedOrgs).toEqual(fakeOrgs);
+    });
+  });
 });

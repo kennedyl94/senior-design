@@ -12,6 +12,16 @@
       orgs: {}
     };
 
+    service.sortOrgs = function(selectedOption) {
+      var deferred = $q.defer();
+      var promise =
+        $http({method: 'GET', url: 'http://localhost:3000/Organizations/' + selectedOption.id});
+      promise.then(function(data) {
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    }
+
     function init() {
       var promises = [];
       promises.push($http({method: 'GET', url: 'http://localhost:3000/Organizations/name'}));

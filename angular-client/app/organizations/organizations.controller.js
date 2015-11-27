@@ -50,12 +50,8 @@
     vm.selectedOption = vm.options[0];
 
     vm.sortOrgs = function(selectedOption) {
-      var deferred = $q.defer();
-      var promise =
-        $http({method: 'GET', url: 'http://localhost:3000/Organizations/' + selectedOption.id});
-      promise.then(function(data) {
-        vm.orgs = data.data;
-        deferred.resolve();
+      organizationService.sortOrgs(selectedOption).then(function (sortedOrgs) {
+        vm.data.orgs = sortedOrgs;
       });
     };
 
