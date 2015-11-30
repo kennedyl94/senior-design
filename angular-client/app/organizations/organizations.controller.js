@@ -13,7 +13,6 @@
 
     // Filters Orgs -- If name/description contains vm.query
     vm.search = function (org) {
-      vm.queriedOrgs = [];
       var name = org.name.toLowerCase();
       var description = org.description.toLowerCase();
       var query = vm.query || '';
