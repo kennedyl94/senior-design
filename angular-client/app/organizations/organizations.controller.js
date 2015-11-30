@@ -13,10 +13,18 @@
 
     // Filters Orgs -- If name/description contains vm.query
     vm.search = function (org) {
-      var name = org.name.toLowerCase();
-      var description = org.description.toLowerCase();
       var query = vm.query || '';
       if(query != '') { query = query.toLowerCase(); }
+
+      var name = org.name.toLowerCase();
+      var description = org.description.toLowerCase();
+      var tags = org.tags;
+      var i = 0;
+      for(i; i < tags.length; i++) {
+        if(tags[i].toLowerCase().indexOf(query || '') !== -1) {
+          return true;
+        }
+      }
       return !!((name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1));
     }
 
