@@ -39,21 +39,30 @@
 
     <!--                                  MAIN MODULE                                   -->
     <script src="app.js"></script>
+<<<<<<< HEAD
     <script src="orgFinder.controller.js"></script>
     <!--               ORGANIZATIONS MODULE              -->
+=======
+    <!--               ORGANIZATIONS MODULE               -->
+>>>>>>> survey_prototype_angular
     <script src="organizations/organizations.module.js"></script>
     <script src="organizations/organizations.routes.js"></script>
     <script src="organizations/organizations.service.js"></script>
     <script src="organizations/organizations.controller.js"></script>
-	<!--								  CREATE CLUB MODULE							-->
-	<script src="createClub/createClub.module.js"></script>
+	  <!--								  CREATE CLUB MODULE							-->
+	  <script src="createClub/createClub.module.js"></script>
     <script src="createClub/createClub.routes.js"></script>
     <script src="createClub/createClub.service.js"></script>
     <script src="createClub/createClub.controller.js"></script>
-    <!-- MODAL -->
+    <!--                         MODAL                    -->
     <script src="directives/modal/modal.module.js"></script>
     <script src="directives/modal/modal.directive.js"></script>
     <script src="directives/modal/modal.controller.js"></script>
+    <!--                         SURVEY                    -->
+    <script src="survey/survey.module.js"></script>
+    <script src="survey/survey.routes.js"></script>
+    <script src="survey/survey.service.js"></script>
+    <script src="survey/survey.controller.js"></script>
 
     <div id="background-image"></div>
 
@@ -68,10 +77,22 @@
           </div>
           <div class="collapse navbar-collapse" id="js-navbar-collapse" ng-controller="OrgFinderController">
             <ul class="nav navbar-nav">
-              <li id="first" ng-class="{ active: isActive('/organizations') }"><a href="#/organizations">Organizations</a></li>
+              <li class="active"><a href="#/organizations">Organizations</a></li>
+              <li id="first" ng-class="{ active: isActive('/organizations') }">
+                <a href="#/organizations">Organizations</a>
+              </li>
             </ul>
             <ul class="nav navbar-nav">
-              <li ng-class="{ active: isActive('/createClub') }"><a href="#/createClub">Create Club</a></li>
+              <li class="active"><a href="#/createClub">Create Club</a></li>
+              <li ng-class="{ active: isActive('/createClub') }">
+                <a href="#/createClub">Create Club</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/survey">Survey</a></li>
+              <li ng-class="{ active: isActive('/survey') }">
+                <a href="#/survey">Survey</a>
+              </li>
             </ul>
           </div>
         </div>

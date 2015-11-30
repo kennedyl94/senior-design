@@ -29,7 +29,8 @@
       // LOCAL DEPENDENCIES
       'organizations',
 	    'createClub',
-      'modal'
+      'modal',
+      'survey'
 
     ]);
 })();
