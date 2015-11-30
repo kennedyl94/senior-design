@@ -2,26 +2,27 @@
   'use strict';
 
   angular.module('survey')
-    .factory('surveyService', ['$q', '$http', GetService]);
+    .factory('surveyService', ['$q', GetService]);
 
-  function GetService($q,$http) {
+  function GetService($q) {
 
-    var deferred = $q.defer();
     var service = this;
 
-    service.questions = {};
+    service.data = {
+      questions: {}
+    };
 
     function init() {
       //TODO -- Make initial call to get survey questions
       /*var promises = [];
       promises.push($http({method: 'GET', url: ''}));
       $q.all(promises).then(function(data) {
-        deferred.resolve(service);
+        service.data.questions = data[0].data;
       });*/
     }
 
     init();
 
-    return deferred.promise;
+    return service;
   }
 })();

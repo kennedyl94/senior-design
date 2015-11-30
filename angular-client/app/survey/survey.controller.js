@@ -7,11 +7,8 @@
   function Controller(surveyService) {
 
     var vm = this;
-    vm.questions = {};
+    vm.data = surveyService.data;
 
-    surveyService.then(function (service) {
-      vm.questions = service.questions;
-    });
   }
 
 })();
