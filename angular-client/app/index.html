@@ -59,6 +59,14 @@
     <script src="survey/survey.routes.js"></script>
     <script src="survey/survey.service.js"></script>
     <script src="survey/survey.controller.js"></script>
+    <!--                                       FILE_UPLOAD                              -->
+    <script src="directives/fileUpload/fileUpload.module.js"></script>
+    <script src="directives/fileUpload/fileUpload.directive.js"></script>
+    <script src="directives/fileUpload/fileUpload.service.js"></script>
+    <!--                                       MASS_UPLOAD                              -->
+    <script src="massUpload/massUpload.module.js"></script>
+    <script src="massUpload/massUpload.routes.js"></script>
+
 
     <div id="background-image"></div>
 
@@ -85,6 +93,11 @@
             <ul class="nav navbar-nav">
               <li ng-class="{ active: isActive('/survey') }">
                 <a href="#/survey">Survey</a>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav">
+              <li ng-class=" { active: isActive('/massUpload') }">
+                <a href="#/massUpload">Mass Upload</a>
               </li>
             </ul>
           </div>

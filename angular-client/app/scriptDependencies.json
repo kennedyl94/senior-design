@@ -15,6 +15,13 @@
     "app/directives/modal/modal.directive.js",
     "app/directives/modal/modal.controller.js",
 
+    "app/directives/fileUpload/fileUpload.module.js",
+    "app/directives/fileUpload/fileUpload.service.js",
+    "app/directives/fileUpload/fileUpload.directive.js",
+
+    "app/massUpload/massUpload.module.js",
+    "app/massUpload/massUpload.routes.js",
+
     "app/survey/survey.module.js",
     "app/survey/survey.controller.js",
     "app/survey/survey.routes.js",

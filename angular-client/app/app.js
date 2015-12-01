@@ -30,7 +30,9 @@
       'organizations',
 	    'createClub',
       'modal',
-      'survey'
+      'survey',
+      'massUpload',
+      'fileUpload'
 
     ]);
 })();
