@@ -14,11 +14,11 @@
 
     function init() {
       //TODO -- Make initial call to get survey questions
-      /*var promises = [];
-      promises.push($http({method: 'GET', url: ''}));
+      var promises = [];
+      promises.push($http({method: 'GET', url: 'localhost:3000/survey'}));
       $q.all(promises).then(function(data) {
         service.data.questions = data[0].data;
-      });*/
+      });
     }
 
     init();
