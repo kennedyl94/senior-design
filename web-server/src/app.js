@@ -22,6 +22,8 @@ app.use(allowCrossDomain);
 /**routes! */
 var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
+var survey = require("./routes/survey.js");
+
 var test = require("./routes/test.js");
 
 
@@ -36,6 +38,8 @@ app.use('/Organizations/', Orgs);
 
 
 app.use('/createClub', createClub);
+
+app.use('/survey', survey);
 
 app.use('/test/', test);
 
