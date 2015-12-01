@@ -12,7 +12,7 @@
     createClubService.then(function (service) {
       vm.title = service.data.title;
     });
-	
+
 	vm.club = {
 		name: "",
 		description: "",
@@ -23,6 +23,10 @@
 			phone: ""
 		}
 	}
+
+	angular.element('#phone').formatter({
+		'pattern': '({{999}}) {{999}}-{{9999}}'
+	});
 
     vm.submit = function() {
 
