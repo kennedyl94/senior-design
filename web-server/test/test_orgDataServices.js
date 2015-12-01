@@ -9,7 +9,7 @@ var realDbName = config.mongo;
 var fakeDbName = 'mongodb://localhost/test';
 config.mongo = fakeDbName;
 
-var dataServices = require('../src/dataServices');
+var orgDataServices = require('../src/orgDataServices');
 
 var fakeOrg = {
 	name: 'name',
@@ -27,7 +27,7 @@ var fakeOrg = {
 };
 
 
-describe('dataServices', function () {
+describe('orgDataServices', function () {
 	
 	describe('#connect', function () {
 		
@@ -37,7 +37,7 @@ describe('dataServices', function () {
 		
 		afterEach(function() {
 			mongoose.connect.restore();
-			dataServices.disconnect();
+			orgDataServices.disconnect();
 		});
 		
 		it('should call mongoose.connect()', function (done) {
@@ -46,19 +46,19 @@ describe('dataServices', function () {
 				assert(mongoose.connect.calledOnce);
 				done();
 			}); 
-			dataServices.connect();
+			orgDataServices.connect();
 		});
 		
 		it('should not call mongoose.connect() if connection already open', function (done) {
 			var connection = mongoose.connection;
 			connection.once('open', function(){
 				process.nextTick(function(){
-					dataServices.connect();
+					orgDataServices.connect();
 					assert(mongoose.connect.calledOnce);
 					done();
 				});
 			});
-			dataServices.connect();
+			orgDataServices.connect();
 		});
 	});
 	
@@ -76,18 +76,18 @@ describe('dataServices', function () {
 			var connection = mongoose.connection;
 			connection.once('open', function(){
 				process.nextTick(function(){
-					dataServices.disconnect();
+					orgDataServices.disconnect();
 				});
 			});
 			connection.once('disconnected', function(){
 				assert(mongoose.disconnect.calledOnce);
 				done();
 			});
-			dataServices.connect();
+			orgDataServices.connect();
 		});
 		
 		it('should not call mongoose.disconnect() if connection not open', function(done) {
-			dataServices.disconnect();
+			orgDataServices.disconnect();
 			process.nextTick(function(){
 				assert.equal(mongoose.disconnect.callCount, 0);
 				done();
@@ -98,13 +98,13 @@ describe('dataServices', function () {
 	describe('#addStudentOrg', function() {
 		
 		afterEach(function(){
-			dataServices.disconnect();
+			orgDataServices.disconnect();
 		});
 		
 		it('should send error to callback if not connected', function(done) {
-			dataServices.disconnect();
+			orgDataServices.disconnect();
 			assert.throws(function(){
-				dataServices.addStudentOrg(fakeOrg, function(err){
+				orgDataServices.addStudentOrg(fakeOrg, function(err){
 					assert.ifError(err);
 				});
 			});
@@ -115,20 +115,20 @@ describe('dataServices', function () {
 			var connection = mongoose.connection;
 			connection.once('open', function(){
 				process.nextTick(function(){
-					dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+					orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
 						assert.equal(err, null);
 						done();
 					});
 				});
 			});
-			dataServices.connect();
+			orgDataServices.connect();
 		});
 		
 		it('should save new org', function(done) {
 			var connection = mongoose.connection;
 			connection.once('open', function(){
 				process.nextTick(function(){
-					dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+					orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
 						// I don't know why tags.toObject is needed just to test for deepEquals, but it is. I do know that other values not needed for the org are returned in the savedOrg object though. Mongoose is weird.
 						assert.deepEqual({
 							name: savedOrg.name,
@@ -140,20 +140,20 @@ describe('dataServices', function () {
 					});
 				});
 			});
-			dataServices.connect();
+			orgDataServices.connect();
 		});
 	});
 	
 	describe('#getAllOrgs', function() {
 		
 		after(function(){
-			dataServices.disconnect();
+			orgDataServices.disconnect();
 		});
 		
 		it('should throw error if not connected', function(done){
-			dataServices.disconnect();
+			orgDataServices.disconnect();
 			assert.throws(function(){
-				dataServices.getAllOrgs(function(){}, function(err){
+				orgDataServices.getAllOrgs(function(){}, function(err){
 					assert.ifError(err);
 				});
 			});
@@ -170,25 +170,25 @@ describe('dataServices', function () {
 					process.nextTick(function(){
 						async.parallel([
 							function(callback){
-								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+								orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
 									console.log(err);
 									callback();
 								});
 							},
 							function(callback){
-								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+								orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
 									console.log(err);
 									callback();
 								});
 							},
 							function(callback){
-								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
+								orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
 									console.log(err);
 									callback();
 								});
 							}],
 							function(){							
-								dataServices.getAllOrgs('name', function(orgs){
+								orgDataServices.getAllOrgs('name', function(orgs){
 									var size = 0;
 									for( org in orgs){
 										size++;
@@ -201,7 +201,7 @@ describe('dataServices', function () {
 					});
 				});
 			});
-			dataServices.connect();
+			orgDataServices.connect();
 		});
 	});
 });
