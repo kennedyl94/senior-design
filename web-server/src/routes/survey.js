@@ -24,7 +24,8 @@ var orgs;
   }
 router.get('/', function (req, res) {
 
-	res.send("<html><body>		<form method = post>			<input type=\"checkbox\" name=\"_0\" value=\"true\"> do you like pie<br>			<button type = submit> submit</button> 		</form>	</body></html>")
+	// res.send("<html><body>		<form method = post>			<input type=\"checkbox\" name=\"_0\" value=\"true\"> do you like pie<br>			<button type = submit> submit</button> 		</form>	</body></html>")
+	res.send(questions);
 	console.log("test");
 	
 });
