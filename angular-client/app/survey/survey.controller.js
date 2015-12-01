@@ -8,6 +8,7 @@
 
     var vm = this;
     vm.data = surveyService.data;
+    alert(vm.data.questions);
 
   }
 

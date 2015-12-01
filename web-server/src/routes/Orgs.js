@@ -1,6 +1,6 @@
 var express = require('express')
   , router = express.Router()
-var  _dataServices = require('../dataServices.js');
+var  _dataServices = require('../orgDataServices.js');
 
 router.get('/:sortType', function (req, res) {
   var sortType = req.params.sortType;
