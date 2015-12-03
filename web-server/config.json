@@ -11,5 +11,12 @@
 			"email": "String",
 			"phone": "String"
 		}
+	},
+	"surveyQuestionSchema": {
+		"question" : "String",
+		"tags": [
+			"String"
+		],
+		"category": "String"
 	}
 }

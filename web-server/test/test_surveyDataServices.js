@@ -18,7 +18,7 @@ var fakeQuestion = {
 		"outdoors",
 		"team"
 	],
-	category"athletics"
+	category: "athletics"
 };
 
 describe('surveyDataServices', function () {
@@ -97,10 +97,8 @@ describe('surveyDataServices', function () {
 		
 		it('should send error to callback if not connected', function(done) {
 			surveyDataServices.disconnect();
-			assert.throws(function(){
-				surveyDataServices.addQuestion(fakeQuestion, function(err){
-					assert.notEqual(null, err);
-				});
+			surveyDataServices.addQuestion(fakeQuestion, function(err){
+				assert.notEqual(null, err);
 			});
 			done();
 		});
@@ -109,7 +107,7 @@ describe('surveyDataServices', function () {
 			var connection = mongoose.connection;
 			connection.once('open', function(){
 				process.nextTick(function(){
-					surveyDataServices.addQuestion(fakeQuestion function(err, savedQuestion){
+					surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
 						assert.equal(err, null);
 						done();
 					});
@@ -124,9 +122,9 @@ describe('surveyDataServices', function () {
 				process.nextTick(function(){
 					surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
 						assert.deepEqual({
-							question: SavedQuestion.question,
+							question: savedQuestion.question,
 							tags: savedQuestion.tags.toObject(),
-							category: savedQuestion.Category
+							category: savedQuestion.category
 						}, fakeQuestion);
 						done();
 					});
@@ -142,12 +140,10 @@ describe('surveyDataServices', function () {
 			surveyDataServices.disconnect();
 		});
 		
-		it('should throw error if not connected', function(done){
+		it('should send error to callback if not connected', function(done){
 			surveyDataServices.disconnect();
-			assert.throws(function(){
-				surveyDataServices.getAllQuestions(function(){}, function(err){
-					assert.notEqual(null, err);
-				});
+			surveyDataServices.getAllQuestions("category", function(){}, function(err){
+				assert.notEqual(null, err);
 			});
 			done();
 		});
@@ -179,7 +175,7 @@ describe('surveyDataServices', function () {
 								});
 							}],
 							function(){							
-								surveyDataServices.getAllQuestions('name', function(questions){
+								surveyDataServices.getAllQuestions('category', function(questions){
 									var size = 0;
 									for( question in questions){
 										size++;

@@ -103,10 +103,8 @@ describe('orgDataServices', function () {
 		
 		it('should send error to callback if not connected', function(done) {
 			orgDataServices.disconnect();
-			assert.throws(function(){
-				orgDataServices.addStudentOrg(fakeOrg, function(err){
-					assert.ifError(err);
-				});
+			orgDataServices.addStudentOrg(fakeOrg, function(err){
+				assert.notEqual(null, err);
 			});
 			done();
 		});
@@ -149,16 +147,14 @@ describe('orgDataServices', function () {
 			orgDataServices.disconnect();
 		});
 		
-		it('should throw error if not connected', function(done){
+		it('should send error to callback if not connected', function(done){
 			orgDataServices.disconnect();
-			assert.throws(function(){
-				orgDataServices.getAllOrgs(function(){}, function(err){
-					assert.ifError(err);
-				});
+			orgDataServices.getAllOrgs("name", function(){}, function(err){
+				assert.notEqual(null, err);
 			});
 			done();
 		});
-
+		
 		it('should find all documents', function(done){
 			var connection = mongoose.connection;
 
