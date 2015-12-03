@@ -52,7 +52,7 @@ exports.addStudentOrg = function(org, callback){
 		});
 	}
 	else{
-		callback(new Error('Not connected to database'), null);
+		callback('ERR: Not connected to database'), null);
 	}
 };
 
@@ -75,6 +75,6 @@ exports.getAllOrgs = function(sortType, success, error){
 		}).sort( sort_order );
 	}
 	else{
-		//error(new Error('Not connected to database'), null);
+		error('ERR: Not connected to database'), null);
 	}
 };

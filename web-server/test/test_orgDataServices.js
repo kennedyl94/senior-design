@@ -129,7 +129,6 @@ describe('orgDataServices', function () {
 			connection.once('open', function(){
 				process.nextTick(function(){
 					orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-						// I don't know why tags.toObject is needed just to test for deepEquals, but it is. I do know that other values not needed for the org are returned in the savedOrg object though. Mongoose is weird.
 						assert.deepEqual({
 							name: savedOrg.name,
 							description: savedOrg.description,
@@ -159,8 +158,7 @@ describe('orgDataServices', function () {
 			});
 			done();
 		});
-		
-		//TODO this test currently works depending on the timing of the various components.
+
 		it('should find all documents', function(done){
 			var connection = mongoose.connection;
 
