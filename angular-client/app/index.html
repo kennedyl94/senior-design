@@ -6,6 +6,10 @@
   </head>
   <body>
 
+    <div id="background-image"></div>
+
+    <ng-root-page></ng-root-page>
+
     <!--                                 STYLING                                         -->
     <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="content/styles/style.css" type="text/css"/>
@@ -28,18 +32,16 @@
     <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="components/angular-toArrayFilter/toArrayFilter.js"></script>
+    <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
 
     <!-- BLUEIMP BOOTSTRAP IMAGE GALLERY DEPENDENCIES -->
     <link rel="stylesheet" href="components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
     <link rel="stylesheet" href="components/blueimp-gallery/css/blueimp-gallery.min.css"/>
-
-
     <script src="components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
     <script src="components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
 
     <!--                                  MAIN MODULE                                   -->
     <script src="app.js"></script>
-    <script src="orgFinder.controller.js"></script>
     <!--                              ORGANIZATIONS MODULE                              -->
     <script src="organizations/organizations.module.js"></script>
     <script src="organizations/organizations.routes.js"></script>
@@ -66,46 +68,13 @@
     <!--                                       MASS_UPLOAD                              -->
     <script src="massUpload/massUpload.module.js"></script>
     <script src="massUpload/massUpload.routes.js"></script>
+    <!-- ROOT -->
+    <script src="root/root.module.js"></script>
+    <script src="root/root.directive.js"></script>
+    <script src="root/root.routes.js"></script>
+    <!-- NAVBAR -->
+    <script src="navBar/navBar.module.js"></script>
+    <script src="navBar/navBar.controller.js"></script>
 
-
-    <div id="background-image"></div>
-
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="brand" href="#/">
-              <img id="logo" src="content/images/logo.jpg">
-            </a>
-          </div>
-          <div class="collapse navbar-collapse" id="js-navbar-collapse" ng-controller="OrgFinderController">
-            <ul class="nav navbar-nav">
-              <li id="first" ng-class="{ active: isActive('/organizations') }">
-                <a href="#/organizations">Organizations</a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li ng-class="{ active: isActive('/createClub') }">
-                <a href="#/createClub">Create Club</a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li ng-class="{ active: isActive('/survey') }">
-                <a href="#/survey">Survey</a>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav">
-              <li ng-class=" { active: isActive('/massUpload') }">
-                <a href="#/massUpload">Mass Upload</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div ng-view></div>
-    </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 (function() {
   'use strict';
 
-  angular.module('massUpload', []);
+  angular.module('massUpload', ['ui.router']);
 })();

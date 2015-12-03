@@ -10,8 +10,12 @@
       //////////////////////////////////////////////////////////////////////////////////////////
       // 3rd PARTY DEPENDENCIES
 
-      /* ngRoute is Angular's routing library. */
-      'ngRoute',
+      /*The 'ui-router' is provided by the 'angular-ui-router' package. It manages all of
+      the routing in the application and allows for advanced features such as multiple
+      views on a page and nested views.
+      (This functionality should be implemented in Angular 2.0!)
+      See: http://angularjs.blogspot.com/2015/09/angular-2-survey-results.html */
+      'ui.router',
 
       /* ngAnimate is Angular's own animation library. */
       'ngAnimate',
@@ -27,6 +31,8 @@
 
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
+      'root',
+      'navBar',
       'organizations',
 	    'createClub',
       'modal',

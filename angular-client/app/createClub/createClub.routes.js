@@ -2,13 +2,18 @@
   'use strict';
 
   angular.module('createClub')
-    .config(['$routeProvider',
-      function($routeProvider) {
-        $routeProvider
-          .when('/createClub', {
-            templateUrl: 'createClub/createClub.template.html',
-            controller: 'CreateClubController',
-            controllerAs: 'crClCtrl'
+    .config(['$stateProvider',
+      function($stateProvider) {
+        $stateProvider
+          .state('root.createClub', {
+            url: 'createClub',
+            views: {
+              'content@': {
+                templateUrl: 'createClub/createClub.template.html',
+                controller: 'CreateClubController',
+                controllerAs: 'crClCtrl'
+              }
+            }
           });
       }]);
 

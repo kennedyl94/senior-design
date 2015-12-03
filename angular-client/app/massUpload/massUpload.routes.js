@@ -2,12 +2,16 @@
   'use strict';
 
   angular.module('massUpload')
-    .config(['$routeProvider',
-      function($routeProvider) {
-        $routeProvider
-          .when('/massUpload', {
-            templateUrl: 'massUpload/massUpload.template.html',
+    .config(['$stateProvider',
+      function($stateProvider) {
+        $stateProvider
+          .state('root.massUpload', {
+            url: 'massUpload',
+            views: {
+              'content@': {
+                templateUrl: 'massUpload/massUpload.template.html',
+              }
+            }
           });
       }]);
-
 })();
