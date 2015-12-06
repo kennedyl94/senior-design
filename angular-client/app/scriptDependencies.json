@@ -25,7 +25,14 @@
     "app/survey/survey.module.js",
     "app/survey/survey.controller.js",
     "app/survey/survey.routes.js",
-    "app/survey/survey.service.js"
+    "app/survey/survey.service.js",
+
+    "app/root/root.module.js",
+    "app/root/root.directive.js",
+    "app/root/root.routes.js",
+
+    "app/navBar/navBar.module.js",
+    "app/navBar/navBar.controller.js"
 
   ],
 
