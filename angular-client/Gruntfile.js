@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app: require('./bower.json').appPath || 'dist.dev',
     dist: 'dist'
   };
 
@@ -45,6 +45,11 @@ module.exports = function (grunt) {
         expand: true,
         src: ['**/*'],
         dest: 'dist/dev/content/'
+      },
+      style: {
+        cwd: '',
+        src: ['<%= scriptDependencies.style %>'],
+        dest: 'dist/dev/lib/vendor/css/'
       },
       bowerComponentsJs: {
         cwd: '',
@@ -222,6 +227,7 @@ module.exports = function (grunt) {
       'concat:allJs',
       'copy:indexHtmltoDistDev',
       'copy:content',
+      'copy:style',
       'copy:bowerComponentsJs',
       'clean:temp'
     ]);
@@ -235,6 +241,7 @@ module.exports = function (grunt) {
       'concat:allJs',
       'copy:indexHtmltoDistDev',
       'copy:content',
+      'copy:style',
       'copy:bowerComponentsJs',
       'clean:temp',
       'wiredep',

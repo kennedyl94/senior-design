@@ -1,80 +1,48 @@
 <!doctype html>
 <html ng-app="orgFinder">
-  <head>
-    <meta charset="utf-8">
-    <title>Organization Finder</title>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Organization Finder</title>
+  <base href='/'>
+</head>
+<body>
 
-    <div id="background-image"></div>
+<div id="background-image"></div>
 
-    <ng-root-page></ng-root-page>
+<ng-root-page></ng-root-page>
 
-    <!--                                 STYLING                                         -->
-    <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="content/styles/style.css" type="text/css"/>
-    <!-- DIRECTIVE STYLING -->
-    <link rel="stylesheet" href="directives/modal/style.css" type="text/css"/>
-	<!-- CLUB CREATION STYLING -->
-	<link rel="stylesheet" href="createClub/style.css" type="text/css"/>
+<!-- STYLING -->
+<link rel="stylesheet" href="lib/vendor/css/app/components/bootstrap/dist/css/bootstrap.css" type="text/css"/>
+<link rel="stylesheet" href="lib/vendor/css/app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css" type="text/css"/>
+<link rel="stylesheet" href="lib/vendor/css/app/components/blueimp-gallery/css/blueimp-gallery.min.css" type="text/css"/>
 
-    <!--                                 BOWER PACKAGES                                  -->
-    <script src="components/jquery/dist/jquery.js"></script>
-    <script src="components/angular/angular.js"></script>
-    <script src="components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="components/angular-animate/angular-animate.js"></script>
-    <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-mocks/angular-mocks.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <script src="components/angular-route/angular-route.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="components/angular-touch/angular-touch.js"></script>
-    <script src="components/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="components/angular-toArrayFilter/toArrayFilter.js"></script>
-    <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
+<link rel="stylesheet" href="content/styles/style.css" type="text/css"/>
+<link rel="stylesheet" href="lib/vendor/css/app/directives/modal/style.css" type="text/css"/>
+<link rel="stylesheet" href="lib/vendor/css/app/createClub/style.css" type="text/css"/>
 
-    <!-- BLUEIMP BOOTSTRAP IMAGE GALLERY DEPENDENCIES -->
-    <link rel="stylesheet" href="components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css"/>
-    <link rel="stylesheet" href="components/blueimp-gallery/css/blueimp-gallery.min.css"/>
-    <script src="components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js"></script>
-    <script src="components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+<!--                                 BOWER PACKAGES                                  -->
+<script src="lib/vendor/js/jquery.js"></script>
+<script src="lib/vendor/js/angular.js"></script>
+<script src="lib/vendor/js/bootstrap.js"></script>
+<script src="lib/vendor/js/angular-animate.js"></script>
+<script src="lib/vendor/js/angular-cookies.js"></script>
+<script src="lib/vendor/js/angular-mocks.js"></script>
+<script src="lib/vendor/js/angular-resource.js"></script>
+<script src="lib/vendor/js/angular-route.js"></script>
+<script src="lib/vendor/js/angular-sanitize.js"></script>
+<script src="lib/vendor/js/ui-bootstrap.js"></script>
+<script src="lib/vendor/js/ui-bootstrap-tpls.js"></script>
+<script src="lib/vendor/js/toArrayFilter.js"></script>
+<script src="lib/vendor/js/angular-ui-router.js"></script>
+<!-- BLUEIMP BOOTSTRAP IMAGE GALLERY DEPENDENCIES -->
+<script src="lib/vendor/js/bootstrap-image-gallery.min.js"></script>
+<script src="lib/vendor/js/jquery.blueimp-gallery.min.js"></script>
 
-    <!--                                  MAIN MODULE                                   -->
-    <script src="app.js"></script>
-    <!--                              ORGANIZATIONS MODULE                              -->
-    <script src="organizations/organizations.module.js"></script>
-    <script src="organizations/organizations.routes.js"></script>
-    <script src="organizations/organizations.service.js"></script>
-    <script src="organizations/organizations.controller.js"></script>
-	  <!--								                CREATE CLUB MODULE							                -->
-	  <script src="createClub/createClub.module.js"></script>
-    <script src="createClub/createClub.routes.js"></script>
-    <script src="createClub/createClub.service.js"></script>
-    <script src="createClub/createClub.controller.js"></script>
-    <!--                                       MODAL                                    -->
-    <script src="directives/modal/modal.module.js"></script>
-    <script src="directives/modal/modal.directive.js"></script>
-    <script src="directives/modal/modal.controller.js"></script>
-    <!--                                       SURVEY                                   -->
-    <script src="survey/survey.module.js"></script>
-    <script src="survey/survey.routes.js"></script>
-    <script src="survey/survey.service.js"></script>
-    <script src="survey/survey.controller.js"></script>
-    <!--                                       FILE_UPLOAD                              -->
-    <script src="directives/fileUpload/fileUpload.module.js"></script>
-    <script src="directives/fileUpload/fileUpload.directive.js"></script>
-    <script src="directives/fileUpload/fileUpload.service.js"></script>
-    <!--                                       MASS_UPLOAD                              -->
-    <script src="massUpload/massUpload.module.js"></script>
-    <script src="massUpload/massUpload.routes.js"></script>
-    <!-- ROOT -->
-    <script src="root/root.module.js"></script>
-    <script src="root/root.directive.js"></script>
-    <script src="root/root.routes.js"></script>
-    <!-- NAVBAR -->
-    <script src="navBar/navBar.module.js"></script>
-    <script src="navBar/navBar.controller.js"></script>
+<!--- ANGULAR PACKAGS --->
+<script src="angularComponents.js"></script>
+<script src="angularTemplateCache.js"></script>
 
-  </body>
+
+
+</body>
 </html>

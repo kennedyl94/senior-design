@@ -19,7 +19,7 @@
     "angular-ui-router": "~0.2.15"
   },
   "devDependencies": {},
-  "appPath": "app",
+  "appPath": "dist/dev",
   "moduleName": "orgFinder",
   "overrides": {
     "bootstrap": {
