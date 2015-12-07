@@ -13,7 +13,7 @@
         element.bind('change', function () {
           var formData = new FormData();
           formData.append('file', element[0].files[0]);
-          fileUploadService.uploadFile('http://localhost:3000/UploadFile', formData, function (callback) {
+          fileUploadService.uploadFile('http://orgmatcher.msoe.edu/api/UploadFile', formData, function (callback) {
             console.log("TEST: " + callback);
           });
         });

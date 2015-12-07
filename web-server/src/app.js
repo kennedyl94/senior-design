@@ -33,17 +33,17 @@ var router = express.Router();
 _dataServices.connect();
 
 
-app.use('/Organizations/', Orgs);
+app.use('/api/Organizations/', Orgs);
 
 
 
-app.use('/createClub', createClub);
+app.use('/api/createClub', createClub);
 
-app.use('/survey', survey);
+app.use('/api/survey', survey);
 
-app.use('/test/', test);
+app.use('/api/test/', test);
 
-app.use('/', router);
+app.use('/api/', router);
 
 /** Start the Express Sever **/
 var server = app.listen(3000, function () {
