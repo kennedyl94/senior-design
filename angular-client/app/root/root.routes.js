@@ -2,7 +2,9 @@
   'use strict';
 
   angular.module('root')
-    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+      $urlRouterProvider.otherwise('/');
 
       $stateProvider.state('root', {
         //abstract: true,
@@ -23,5 +25,7 @@
           }
         }
       });
+
+      $locationProvider.html5Mode(true);
     }]);
 })();
