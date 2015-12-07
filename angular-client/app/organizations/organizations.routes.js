@@ -2,8 +2,9 @@
   'use strict';
 
   angular.module('organizations')
-    .config(['$stateProvider',
+    .config(['$stateProvider', '$urlRouterProvider','$locationProvider',
       function($stateProvider) {
+
         $stateProvider
           .state('root.organizations', {
             url: 'organizations',
