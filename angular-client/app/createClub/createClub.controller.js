@@ -13,22 +13,33 @@
       vm.title = service.data.title;
     });
 
-	vm.club = {
-		name: "",
-		description: "",
-		tags: "",
-		contact: {
-			name: "",
-			email: "",
-			phone: ""
-		}
-	}
+    vm.club = {
+      name: "",
+      description: "",
+      tags: "",
+      contact: {
+        name: "",
+        email: "",
+        phone: ""
+      }
+    }
 
-	angular.element('#phone').formatter({
-		'pattern': '({{999}}) {{999}}-{{9999}}'
-	});
+    angular.element('#phone').formatter({
+      'pattern': '({{999}}) {{999}}-{{9999}}'
+    });
 
-    vm.submit = function() {
+    vm.submitted = false;
+    vm.failed = false;
+
+    vm.submit = function(form) {
+      vm.submitted = false;
+      vm.failed = false;
+
+      if (vm.club.tags.indexOf(',') != -1) {
+        vm.club.tags = vm.club.tags.split(',');
+      } else {
+        vm.club.tags = [vm.club.tags];
+      }
 
       var req = {
         method: 'POST',
@@ -40,8 +51,22 @@
       $http(req)
         .success(function (data, status, headers, config) {
           console.log(vm.club);
+          vm.club = {
+            name: "",
+            description: "",
+            tags: "",
+            contact: {
+              name: "",
+              email: "",
+              phone: ""
+            }
+          }
+          form.$setPristine();
+          form.$setUntouched();
+          vm.submitted = true;
         }).error(function(err, status, headers, config) {
           console.log('error: ' + err);
+          vm.failed = true;
         });
     }
   }

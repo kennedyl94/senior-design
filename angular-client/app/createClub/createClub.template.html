@@ -1,59 +1,77 @@
 <h1 id="createClubPageTitle"> {{ crClCtrl.title }} </h1>
 
-<div id="clubInfo" class="container">
-	<div class="row">
-		<h4>Club Name:</h4>
-		<div class="col-sm-6">
-			<input id="clubName" class="form-control" placeholder="Club Name" type="text" autofocus ng-model="crClCtrl.club.name" />
-		</div>
-	</div>
-	<br/>
-	<div class="row">
-		<h4>Description:</h4>
-		<div class="col-sm-6">
-			<textarea id="description" class="form-control" rows="5" placeholder="A short description for the club" type="text" ng-model="crClCtrl.club.description" />
-		</div>
-	</div>
-	<br/>
-	<div class="row">
-		<h4>Tags:</h4>
-		<div class="col-sm-6">
-			<input id="tags" class="form-control" placeholder="please separate tags using commas" ng-model="crClCtrl.club.tags" />
-		</div>
-	</div>
-	<br/>
-	<br/>
-	<h3>Main Contact Information:</h3>
-	<br/>
-	<div id="contactInfo">
-		<div class="row">
-			<div class="col-sm-offset-1">
-				<h4>Name:</h4>
-			</div>
-			<div class="col-sm-6 col-sm-offset-1">
-				<input id="contactName" class="form-control" type="text" placeholder="First and Last Name" ng-model="crClCtrl.club.contact.name" />
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-sm-offset-1">
-				<h4>Email:</h4>
-			</div>
-			<div class="col-sm-6 col-sm-offset-1">
-				<input id="email" class="form-control" type="email" placeholder="example@web.com" ng-model="crClCtrl.club.contact.email" />
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-sm-offset-1">
-				<h4>Phone Number:</h4>
-			</div>
-			<div class="col-sm-6 col-sm-offset-1">
-				<input id="phone" class="form-control" type="tel" placeholder="5551234567" ng-model="crClCtrl.club.contact.phone" />
-			</div>
-		</div>
-	</div>
+<div ng-controller="CreateClubController">
+  <form name="clubForm">
+    <div id="clubInfo" class="container">
+      <div class="row">
+        <h4>Club Name:</h4>
+        <div class="col-sm-6 form-group" ng-class="{ 'has-error' : clubForm.clubName.$invalid && clubForm.clubName.$touched }">
+          <input id="clubName" name="clubName" class="form-control" placeholder="Club Name" type="text" autofocus ng-model="crClCtrl.club.name" required/>
+        </div>
+        <div class="col-sm-6 has-error" ng-show="clubForm.clubName.$invalid && clubForm.clubName.$touched">
+          <span class="help-block">This is a required field.</span>
+        </div>
+      </div>
+      <div class="row">
+        <h4>Description:</h4>
+        <div class="col-sm-6 form-group" ng-class="{ 'has-error' : clubForm.description.$invalid && clubForm.description.$touched }">
+          <textarea id="description" name="description" class="form-control" rows="5" placeholder="A short description for the club" type="text" ng-model="crClCtrl.club.description" required/>
+        </div>
+        <div class="col-sm-6 has-error" ng-show="clubForm.description.$invalid && clubForm.description.$touched">
+          <span class="help-block">This is a required field.</span>
+        </div>
+      </div>
+      <div class="row">
+        <h4>Tags:</h4>
+        <div class="col-sm-6 form-group" ng-class="{ 'has-error' : clubForm.tags.$invalid && clubForm.tags.$touched }">
+          <input id="tags" name="tags" class="form-control" placeholder="please separate tags using commas" ng-model="crClCtrl.club.tags" required/>
+        </div>
+        <div class="col-sm-6 has-error" ng-show="clubForm.tags.$invalid && clubForm.tags.$touched">
+          <span class="help-block">This is a required field.</span>
+        </div>
+      </div>
+      <h3>Main Contact Information:</h3>
+      <br/>
+      <div id="contactInfo">
+        <div class="row">
+          <h4>Name:</h4>
+          <div class="col-sm-5 col-sm-offset-1 form-group" ng-class="{ 'has-error' : clubForm.contactName.$invalid && clubForm.contactName.$touched }">
+            <input id="contactName" name="contactName" class="form-control" type="text" placeholder="First and Last Name" ng-model="crClCtrl.club.contact.name" required/>
+          </div>
+          <div class="col-sm-6 has-error" ng-show="clubForm.contactName.$invalid && clubForm.contactName.$touched">
+            <span class="help-block">This is a required field.</span>
+          </div>
+        </div>
+        <div class="row">
+          <h4>Email:</h4>
+          <div class="col-sm-5 col-sm-offset-1 form-group" ng-class="{ 'has-error' : clubForm.email.$invalid && clubForm.email.$touched }">
+            <input id="email" name="email" class="form-control" type="email" placeholder="example@web.com" ng-model="crClCtrl.club.contact.email" required/>
+          </div>
+          <div class="col-sm-6 has-error" ng-show="clubForm.email.$invalid && clubForm.email.$touched">
+            <span class="help-block">This is a required field.</span>
+          </div>
+        </div>
+        <div class="row">
+          <h4>Phone Number:</h4>
+          <div class="col-sm-5 col-sm-offset-1 form-group" ng-class="{ 'has-error' : clubForm.phone.$invalid && clubForm.phone.$touched }">
+            <input id="phone" name="phone" class="form-control" type="tel" placeholder="5551234567" ng-model="crClCtrl.club.contact.phone"/>
+          </div>
+          <div class="col-sm-6 has-error" ng-show="clubForm.phone.$invalid && clubForm.phone.$touched">
+            <span class="help-block">This is a required field.</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12" ng-show="crClCtrl.submitted">
+          <span>The club creation was successful.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 has-error" ng-show="crClCtrl.failed">
+          <span>The club creation failed. Please try again.</span>
+        </div>
+      </div>
+    </div>
+    <button id="submit" class="btn btn-default" type="button" ng-disabled="clubForm.$invalid" ng-click="crClCtrl.submit(clubForm)">Submit</button>
+  </form>
 </div>
-<br/>
-<button id="submit" class="btn btn-default" type="button" ng-click="crClCtrl.submit()">Submit</button>
-<button id="cancel" class="btn btn-default" type="button" href="/">Cancel</button>
