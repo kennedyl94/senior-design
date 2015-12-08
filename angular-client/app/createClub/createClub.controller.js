@@ -12,8 +12,7 @@
     createClubService.then(function (service) {
       vm.title = service.data.title;
     });
-
-<<<<<<< HEAD
+    
     vm.club = {
       name: "",
       description: "",
@@ -41,24 +40,6 @@
       } else {
         vm.club.tags = [vm.club.tags];
       }
-=======
-	vm.club = {
-		name: "",
-		description: "",
-		tags: "",
-		contact: {
-			name: "",
-			email: "",
-			phone: ""
-		}
-	}
-
-	angular.element('#phone').formatter({
-		'pattern': '({{999}}) {{999}}-{{9999}}'
-	});
-
-    vm.submit = function() {
->>>>>>> bb5ac3b7e3ca417b9b6946237b89935fe4e21923
 
       var req = {
         method: 'POST',

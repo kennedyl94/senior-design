@@ -1,6 +1,5 @@
 <h1 id="createClubPageTitle"> {{ crClCtrl.title }} </h1>
 
-<<<<<<< HEAD
 <div ng-controller="CreateClubController">
   <form name="clubForm">
     <div id="clubInfo" class="container">
@@ -76,62 +75,3 @@
     <button id="submit" class="btn btn-default" type="button" ng-disabled="clubForm.$invalid" ng-click="crClCtrl.submit(clubForm)">Submit</button>
   </form>
 </div>
-=======
-<div id="clubInfo" class="container">
-	<div class="row">
-		<h4>Club Name:</h4>
-		<div class="col-sm-6">
-			<input id="clubName" class="form-control" placeholder="Club Name" type="text" autofocus ng-model="crClCtrl.club.name" />
-		</div>
-	</div>
-	<br/>
-	<div class="row">
-		<h4>Description:</h4>
-		<div class="col-sm-6">
-			<textarea id="description" class="form-control" rows="5" placeholder="A short description for the club" type="text" ng-model="crClCtrl.club.description" />
-		</div>
-	</div>
-	<br/>
-	<div class="row">
-		<h4>Tags:</h4>
-		<div class="col-sm-6">
-			<input id="tags" class="form-control" placeholder="please separate tags using commas" ng-model="crClCtrl.club.tags" />
-		</div>
-	</div>
-	<br/>
-	<br/>
-	<h3>Main Contact Information:</h3>
-	<br/>
-	<div id="contactInfo">
-		<div class="row">
-			<div class="col-sm-offset-1">
-				<h4>Name:</h4>
-			</div>
-			<div class="col-sm-6 col-sm-offset-1">
-				<input id="contactName" class="form-control" type="text" placeholder="First and Last Name" ng-model="crClCtrl.club.contact.name" />
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-sm-offset-1">
-				<h4>Email:</h4>
-			</div>
-			<div class="col-sm-6 col-sm-offset-1">
-				<input id="email" class="form-control" type="email" placeholder="example@web.com" ng-model="crClCtrl.club.contact.email" />
-			</div>
-		</div>
-		<br/>
-		<div class="row">
-			<div class="col-sm-offset-1">
-				<h4>Phone Number:</h4>
-			</div>
-			<div class="col-sm-6 col-sm-offset-1">
-				<input id="phone" class="form-control" type="tel" placeholder="5551234567" ng-model="crClCtrl.club.contact.phone" />
-			</div>
-		</div>
-	</div>
-</div>
-<br/>
-<button id="submit" class="btn btn-default" type="button" ng-click="crClCtrl.submit()">Submit</button>
-<button id="cancel" class="btn btn-default" type="button" href="/">Cancel</button>
->>>>>>> bb5ac3b7e3ca417b9b6946237b89935fe4e21923
