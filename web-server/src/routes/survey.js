@@ -5,10 +5,10 @@ var  _dataServices = require('../orgDataServices.js');
  
 //mock data until database is done 
 var questions = [
-	{question: "do you like pie?",
+	{text: "do you like pie?",
 	tags:["pie","cool","american"],
 	id:0},
-	{question: "do you like unicycling?",
+	{text: "do you like unicycling?",
 	tags:["cool", "outdoors"],
 	id:1}
 ];
@@ -17,11 +17,11 @@ var orgs;
 
   _dataServices.getAllOrgs(null, function(orgsMap){
 	  orgs =orgsMap;
-  }),
+  },
   function(e)
   {
 	  console.log(e);
-  }
+  });
 router.get('/', function (req, res) {
 
 	// res.send("<html><body>		<form method = post>			<input type=\"checkbox\" name=\"_0\" value=\"true\"> do you like pie<br>			<button type = submit> submit</button> 		</form>	</body></html>")

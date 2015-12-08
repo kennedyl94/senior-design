@@ -1,4 +1,11 @@
 <h1 align="center">Survey</h1>
 <div class="col-sm-12" id="survey-div">
+<div class="col-sm-12" ng-repeat="question in surveyCtrl.data.questions | toArray">
+	<div class="row">
+		<div class="col-sm-4">
+			{{question.text}}
+		</div>
+	</div>
+</div>
 
 </div>
