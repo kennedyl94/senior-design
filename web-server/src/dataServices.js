@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var config = require('../config');
 
 var dbName = config.mongo;
@@ -78,3 +77,29 @@ exports.getAllOrgs = function(sortType, success, error){
 		//error(new Error('Not connected to database'), null);
 	}
 };
+//
+//exports.userExists = function(user, success, error){
+//	if(connected){
+//		admin.find({}, function(err, orgs) {
+//			var orgsMap = {};
+//			orgs.forEach(function(org) {
+//				orgsMap[org._id] = org;
+//			});
+//			success(orgsMap);
+//		}).sort( sort_order );
+//	}
+//	else{
+//		error(new Error('Not connected to database'), null);
+//	}
+//};
+//
+//exports.addUser = function(user, success, error) {
+//	if(connected) {
+//		var newUser = new admin(user)
+//		newUser.save((function(err, savedUser){
+//			callback(err, savedUser._doc);
+//		}));
+//	} else {
+//		error(new Error('Not connected to database', null));
+//	}
+//}}
