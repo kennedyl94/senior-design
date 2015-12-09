@@ -7,13 +7,13 @@ module.exports = function (config) {
     // Files to include
     files: [
       // Jquery & Angular Dependencies
-      'dist/dev/lib/vendor/js/jquery.js',
-      'dist/dev/lib/vendor/js/angular.js',
+      'dist/dev/lib/vendor/js/jquery.min.js',
+      'dist/dev/lib/vendor/js/angular.min.js',
       'dist/dev/lib/vendor/js/angular-mocks.js',
-      'dist/dev/lib/vendor/js/angular-ui-router.js',
-      'dist/dev/lib/vendor/js/bootstrap.js',
-      'dist/dev/lib/vendor/js/ui-bootstrap.js',
-      'dist/dev/lib/vendor/js/ui-bootstrap-tpls.js',
+      'dist/dev/lib/vendor/js/angular-ui-router.min.js',
+      'dist/dev/lib/vendor/js/bootstrap.min.js',
+      'dist/dev/lib/vendor/js/ui-bootstrap.min.js',
+      'dist/dev/lib/vendor/js/ui-bootstrap-tpls.min.js',
 
       // All angular module components & templates
       'dist/dev/angularComponents.js',

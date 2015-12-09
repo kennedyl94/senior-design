@@ -35,6 +35,13 @@ module.exports = function (grunt) {
       }
     },
 
+    uglify: {
+      js: {
+        src: ['dist/dev/angularComponents.js'],
+        dest: 'dist/dev/angularComponents.js'
+      }
+    },
+
     copy: {
       indexHtmltoDistDev: {
         src: 'app/index.html',
@@ -225,6 +232,7 @@ module.exports = function (grunt) {
       'includereplace',
       'ngtemplates',
       'concat:allJs',
+      'uglify:js',
       'copy:indexHtmltoDistDev',
       'copy:content',
       'copy:style',
@@ -239,6 +247,7 @@ module.exports = function (grunt) {
       'includereplace',
       'ngtemplates',
       'concat:allJs',
+      'uglify:js',
       'copy:indexHtmltoDistDev',
       'copy:content',
       'copy:style',
