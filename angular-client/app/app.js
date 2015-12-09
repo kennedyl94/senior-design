@@ -17,12 +17,6 @@
       See: http://angularjs.blogspot.com/2015/09/angular-2-survey-results.html */
       'ui.router',
 
-      /* ngAnimate is Angular's own animation library. */
-      'ngAnimate',
-
-      /* ngCookies is Angular's library for manipulating cookies. */
-      'ngCookies',
-
       /* ui.bootstrap is a rewrite of many of Bootstrap's components in Angular */
       'ui.bootstrap',
 
