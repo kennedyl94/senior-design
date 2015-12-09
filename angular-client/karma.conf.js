@@ -23,6 +23,8 @@ module.exports = function (config) {
       'app/**/*.tests.js'
     ],
 
+    reporters: ['teamcity'],
+
     // We can later use grunt to watch this
     autoWatch: false,
 
@@ -35,7 +37,8 @@ module.exports = function (config) {
     // Karma plugins
     plugins: [
       'karma-jasmine',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-teamcity-reporter'
     ]
   })
 };
