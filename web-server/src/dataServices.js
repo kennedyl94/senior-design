@@ -6,6 +6,7 @@ var dbName = config.mongo;
 
 //set up the model for the student_orgs collection
 var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
+var orgTag = mongoose.model('org_tags', mongoose.Schema(config.tagSchema));
 
 var connected = false;
 
@@ -47,6 +48,14 @@ exports.connect = function(){
 exports.addStudentOrg = function(org, callback){
 	if(connected){
 		var newOrg = new studentOrg(org);
+		org.tags.forEach(function(tag) {
+			if (!orgTag.contains(tag)) {
+				var newTag = new orgTag(tag);
+				newTag.save(function(err, savedTag) {
+					callback(err, savedTag._doc);
+				});
+			}
+		});
 		newOrg.save(function(err, savedOrg){
 			callback(err, savedOrg._doc);
 		});
@@ -78,3 +87,17 @@ exports.getAllOrgs = function(sortType, success, error){
 		//error(new Error('Not connected to database'), null);
 	}
 };
+
+exports.getAllTags = function(success, error) {
+	if (connected) {
+		orgTag.find({}, function(err, tags) {
+			var tagMap = {};
+			tags.forEach(function(tag) {
+				tagMap[tag._id] = tag;
+			});
+			success(tagMap);
+		});
+	} else {
+		callback(new Error('Not connected to database'), null);
+	}
+}

@@ -11,5 +11,8 @@
 			"email": "String",
 			"phone": "String"
 		}
+	},
+	"tagSchema": {
+		"text": "String"
 	}
 }
