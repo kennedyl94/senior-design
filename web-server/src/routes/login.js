@@ -13,8 +13,6 @@ passport.use(new LocalStrategy(
     function(username, password, done) {
         console.log("in LocalStrategy");
         admin.findOne({Username:username, Password:password}, function(err,user) {
-            console.log(username);
-            console.log(password);
             if (err) { return done(err); }
             if (!user) { return done(null, false, {message: 'Incorrect Username or Password'}); }
             return done(null, user);
@@ -33,8 +31,8 @@ passport.deserializeUser(function(id, done) {
 router.post('/', function (req, res, next) {
     console.log("trying to do stuff");
     passport.authenticate('local', {
-        successRedirect: 'login/loginSuccess/',
-        failureRedirect: 'login/loginFailure/'
+        successRedirect: '/api/login/loginSuccess/',
+        failureRedirect: '/api/login/loginFailure/'
     })(req, res, next);
 });
 
