@@ -34,8 +34,8 @@
     "app/navBar/navBar.module.js",
     "app/navBar/navBar.controller.js",
 
-    "app/login/login.controller.js",
     "app/login/login.module.js",
+    "app/login/login.controller.js",
     "app/login/login.routes.js"
 
   ],

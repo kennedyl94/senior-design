@@ -2,14 +2,18 @@
   'use strict';
 
   angular.module('login')
-    .config(['$routeProvider',
-      function($routeProvider) {
-        $routeProvider
-          .when('/login', {
-            templateUrl: 'login/login.template.html',
-            controller: 'LoginController',
-            controllerAs: 'loginCtrl'
+    .config(['$stateProvider',
+      function($stateProvider) {
+        $stateProvider
+          .state('root.login', {
+            url:'login',
+            views: {
+              'content@': {
+                templateUrl: 'login/login.template.html',
+                controller: 'LoginController',
+                controllerAs: 'loginCtrl'
+              }
+            }
           });
       }]);
-
 })();

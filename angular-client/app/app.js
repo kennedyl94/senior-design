@@ -32,7 +32,7 @@
       'modal',
       'survey',
       'massUpload',
-      'fileUpload'
-
+      'fileUpload',
+      'login'
     ]);
 })();
