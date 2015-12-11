@@ -226,6 +226,21 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('test', 'Runs the Karma/Jasmine unit tests', function() {
+    grunt.task.run([
+      'clean:previousRun',
+      'includereplace',
+      'ngtemplates',
+      'concat:allJs',
+      'copy:indexHtmltoDistDev',
+      'copy:content',
+      'copy:style',
+      'copy:bowerComponentsJs',
+      'clean:temp',
+      'karma:unit'
+    ]);
+  });
+
   grunt.registerTask('build.dist.dev', 'Compile the project. (Do not start)', function(target) {
     grunt.task.run([
       'clean:previousRun',
