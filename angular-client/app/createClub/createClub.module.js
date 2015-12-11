@@ -1,5 +1,5 @@
 (function() {
   'use strict';
 
-  angular.module('createClub', []);
+  angular.module('createClub', ['ui.router']);
 })();

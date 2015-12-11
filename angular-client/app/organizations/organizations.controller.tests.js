@@ -59,7 +59,6 @@ describe("OrganizationsController", function() {
   };
 
   beforeEach(function() {
-    module('ngRoute');
     module('organizations');
   });
 

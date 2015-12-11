@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app: require('./bower.json').appPath || 'dist.dev',
     dist: 'dist'
   };
 
@@ -35,6 +35,13 @@ module.exports = function (grunt) {
       }
     },
 
+    uglify: {
+      js: {
+        src: ['dist/dev/angularComponents.js'],
+        dest: 'dist/dev/angularComponents.js'
+      }
+    },
+
     copy: {
       indexHtmltoDistDev: {
         src: 'app/index.html',
@@ -45,6 +52,11 @@ module.exports = function (grunt) {
         expand: true,
         src: ['**/*'],
         dest: 'dist/dev/content/'
+      },
+      style: {
+        cwd: '',
+        src: ['<%= scriptDependencies.style %>'],
+        dest: 'dist/dev/lib/vendor/css/'
       },
       bowerComponentsJs: {
         cwd: '',
@@ -208,7 +220,7 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'config/karma.conf.js',
+        configFile: 'karma.conf.js',
         singleRun: true
       }
     }
@@ -220,8 +232,10 @@ module.exports = function (grunt) {
       'includereplace',
       'ngtemplates',
       'concat:allJs',
+      'uglify:js',
       'copy:indexHtmltoDistDev',
       'copy:content',
+      'copy:style',
       'copy:bowerComponentsJs',
       'clean:temp'
     ]);
@@ -233,8 +247,10 @@ module.exports = function (grunt) {
       'includereplace',
       'ngtemplates',
       'concat:allJs',
+      'uglify:js',
       'copy:indexHtmltoDistDev',
       'copy:content',
+      'copy:style',
       'copy:bowerComponentsJs',
       'clean:temp',
       'wiredep',

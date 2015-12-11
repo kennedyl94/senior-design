@@ -1,5 +1,5 @@
 (function() {
   'use strict';
 
-  angular.module('survey', []);
+  angular.module('survey', ['ui.router']);
 })();

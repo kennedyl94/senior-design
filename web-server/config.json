@@ -11,5 +11,11 @@
 			"email": "String",
 			"phone": "String"
 		}
+	},
+	"userSchema" : {
+	  	"Username": "String",
+	  	"Password": "String",
+	  	"Type": "String",
+	  	"Orgs": ["String"]
 	}
 }

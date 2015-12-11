@@ -4,7 +4,7 @@ describe('OrganizationsService', function() {
 
   var organizationsService;
   var httpBackend;
-  var GET_ORGS_URL = 'http://localhost:3000/Organizations/';
+  var GET_ORGS_URL = 'http://orgmatcher.msoe.edu/api/Organizations/';
 
   var fakeOrgs = [
     {
@@ -42,7 +42,6 @@ describe('OrganizationsService', function() {
   ];
 
   beforeEach(function() {
-    module('ngRoute');
     module('organizations');
   });
 

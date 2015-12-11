@@ -10,14 +10,12 @@
       //////////////////////////////////////////////////////////////////////////////////////////
       // 3rd PARTY DEPENDENCIES
 
-      /* ngRoute is Angular's routing library. */
-      'ngRoute',
-
-      /* ngAnimate is Angular's own animation library. */
-      'ngAnimate',
-
-      /* ngCookies is Angular's library for manipulating cookies. */
-      'ngCookies',
+      /*The 'ui-router' is provided by the 'angular-ui-router' package. It manages all of
+      the routing in the application and allows for advanced features such as multiple
+      views on a page and nested views.
+      (This functionality should be implemented in Angular 2.0!)
+      See: http://angularjs.blogspot.com/2015/09/angular-2-survey-results.html */
+      'ui.router',
 
       /* ui.bootstrap is a rewrite of many of Bootstrap's components in Angular */
       'ui.bootstrap',
@@ -27,10 +25,14 @@
 
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
+      'root',
+      'navBar',
       'organizations',
 	    'createClub',
       'modal',
-      'survey'
-
+      'survey',
+      'massUpload',
+      'fileUpload',
+      'login'
     ]);
 })();

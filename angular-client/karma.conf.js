@@ -7,15 +7,13 @@ module.exports = function (config) {
     // Files to include
     files: [
       // Jquery & Angular Dependencies
-      'dist/dev/lib/vendor/js/jquery.js',
-      'dist/dev/lib/vendor/js/angular.js',
-      'dist/dev/lib/vendor/js/angular-animate.js',
-      'dist/dev/lib/vendor/js/angular-cookies.js',
+      'dist/dev/lib/vendor/js/jquery.min.js',
+      'dist/dev/lib/vendor/js/angular.min.js',
       'dist/dev/lib/vendor/js/angular-mocks.js',
-      'dist/dev/lib/vendor/js/angular-route.js',
-      'dist/dev/lib/vendor/js/bootstrap.js',
-      'dist/dev/lib/vendor/js/ui-bootstrap.js',
-      'dist/dev/lib/vendor/js/ui-bootstrap-tpls.js',
+      'dist/dev/lib/vendor/js/angular-ui-router.min.js',
+      'dist/dev/lib/vendor/js/bootstrap.min.js',
+      'dist/dev/lib/vendor/js/ui-bootstrap.min.js',
+      'dist/dev/lib/vendor/js/ui-bootstrap-tpls.min.js',
 
       // All angular module components & templates
       'dist/dev/angularComponents.js',
@@ -24,6 +22,25 @@ module.exports = function (config) {
       // All tests
       'app/**/*.tests.js'
     ],
+
+    singleRun: true,
+
+    // The code we want coverage of
+    preprocessors: {
+      'dist/dev/angularComponents.js': ['coverage']
+    },
+
+    // What Karma will report to
+    reporters: [
+      'teamcity',
+      'coverage'
+    ],
+
+    // The type of coverage report and directory
+    coverageReporter: {
+      type: 'text',
+      dir: 'coverage/'
+    },
 
     // We can later use grunt to watch this
     autoWatch: false,
@@ -37,7 +54,9 @@ module.exports = function (config) {
     // Karma plugins
     plugins: [
       'karma-jasmine',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-teamcity-reporter',
+      'karma-coverage'
     ]
   })
 };

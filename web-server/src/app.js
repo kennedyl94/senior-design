@@ -2,6 +2,8 @@
 var express = require('express')
 	, bodyParser = require('body-parser')
 	, _dataServices = require('./dataServices.js')
+	, passport = require('passport');
+
   
 
 	
@@ -22,24 +24,29 @@ app.use(allowCrossDomain);
 /**routes! */
 var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
-var test = require("./routes/test.js");
+var survey = require("./routes/survey.js");
 
+var test = require("./routes/test.js");
+var login = require("./routes/login.js");
 
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
 _dataServices.connect();
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use('/api/login/', login);
 
-app.use('/Organizations/', Orgs);
+app.use('/api/Organizations/', Orgs);
 
+app.use('/api/createClub', createClub);
 
+app.use('/api/survey', survey);
 
-app.use('/createClub', createClub);
+app.use('/api/test/', test);
 
-app.use('/test/', test);
-
-app.use('/', router);
+app.use('/api/', router);
 
 /** Start the Express Sever **/
 var server = app.listen(3000, function () {

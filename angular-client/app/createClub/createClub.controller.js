@@ -43,7 +43,7 @@
 
       var req = {
         method: 'POST',
-        url: 'http://localhost:3000/createClub',
+        url: 'http://orgmatcher.msoe.edu/api/createClub',
         headers: {},
         data: {club: vm.club}
       }
