@@ -48,17 +48,10 @@ exports.connect = function(){
 exports.addStudentOrg = function(org, callback){
 	if(connected){
 		var newOrg = new studentOrg(org);
-		org.tags.forEach(function(tag) {
-			if (!orgTag.contains(tag)) {
-				var newTag = new orgTag(tag);
-				newTag.save(function(err, savedTag) {
-					callback(err, savedTag._doc);
-				});
-			}
-		});
 		newOrg.save(function(err, savedOrg){
 			callback(err, savedOrg._doc);
 		});
+		exports.updateTags(callback);
 	}
 	else{
 		callback(new Error('Not connected to database'), null);
@@ -88,6 +81,11 @@ exports.getAllOrgs = function(sortType, success, error){
 	}
 };
 
+/*
+ * Gets all tags currently being used by active clubs.
+ * success: a function to call upon successful completion. Takes an object that contains all tags.
+ * error: a function to call if there is an error.
+ */
 exports.getAllTags = function(success, error) {
 	if (connected) {
 		orgTag.find({}, function(err, tags) {
@@ -97,7 +95,48 @@ exports.getAllTags = function(success, error) {
 			});
 			success(tagMap);
 		});
-	} else {
-		callback(new Error('Not connected to database'), null);
+	}
+}
+
+/*
+ * Whenever a club is added or modified, this method is called in order to update the tags list.
+ * This function is only called internally. It adds all unique tags being used by active clubs 
+ * and removes all tags not being used by active clubs.
+ * callback: function from the parameter of a function that will update the clubs information.
+ */
+exports.updateTags = function(callback) {
+	if (connected) {
+		var tempTags[] = {};
+		exports.getAllOrgs('name', function(orgs) {
+			orgs.forEach(function(org) {
+				if (!org.tags.contains('inactive')) {
+					org.tags.forEach(function(tag) {
+						if (!tempTags.contains(tag)) {
+							tempTags.push(tag);
+						}
+					});
+				} else if (!tempTags.contains('inactive')) {
+					tempTags.push('inactive');
+				}
+			});
+			tempTags.forEach(function(tag) {
+				var newTag = new orgTag(tag);
+				newTag.save(function(err, savedTag) {
+					callback(err, savedTag._doc);
+				});
+			});
+		}, function(err) {
+			//do nothing yet
+		});
+		
+		exports.getAllTags(function(tags) {
+			tags.forEach(function(tag) {
+				if (!tempTags.contains(tag)) {
+					orgTag.remove(tag);
+				}
+			});
+		}, function(err) {
+			//do nothing yet
+		});
 	}
 }
