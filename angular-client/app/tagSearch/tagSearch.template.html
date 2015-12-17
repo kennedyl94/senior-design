@@ -1,5 +1,10 @@
 <h1 id="tagSearchPageTitle">Search clubs by tags</h1>
 
 <div ng-controller="tagSearchController">
-
+  <form name="tagList">
+    <div ng-repeat="tag in tsCtrl.tags">
+      <input type="checkbox" name="tagCheck" value={{tag}}> {{tag}}</input>
+    </div>
+    <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
+  </form>
 </div>

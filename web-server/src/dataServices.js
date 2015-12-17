@@ -94,7 +94,7 @@ exports.getAllTags = function(success, error) {
 				tagMap[tag._id] = tag;
 			});
 			success(tagMap);
-		});
+		}).sort();
 	}
 }
 
@@ -105,38 +105,36 @@ exports.getAllTags = function(success, error) {
  * callback: function from the parameter of a function that will update the clubs information.
  */
 exports.updateTags = function(callback) {
-	if (connected) {
-		var tempTags[] = {};
-		exports.getAllOrgs('name', function(orgs) {
-			orgs.forEach(function(org) {
-				if (!org.tags.contains('inactive')) {
-					org.tags.forEach(function(tag) {
-						if (!tempTags.contains(tag)) {
-							tempTags.push(tag);
-						}
-					});
-				} else if (!tempTags.contains('inactive')) {
-					tempTags.push('inactive');
-				}
-			});
-			tempTags.forEach(function(tag) {
-				var newTag = new orgTag(tag);
-				newTag.save(function(err, savedTag) {
-					callback(err, savedTag._doc);
+	var tempTags[] = {};
+	exports.getAllOrgs('name', function(orgs) {
+		orgs.forEach(function(org) {
+			if (!org.tags.contains('inactive')) {
+				org.tags.forEach(function(tag) {
+					if (!tempTags.contains(tag)) {
+						tempTags.push(tag);
+					}
 				});
-			});
-		}, function(err) {
-			//do nothing yet
+			} else if (!tempTags.contains('inactive')) {
+				tempTags.push('inactive');
+			}
 		});
-		
-		exports.getAllTags(function(tags) {
-			tags.forEach(function(tag) {
-				if (!tempTags.contains(tag)) {
-					orgTag.remove(tag);
-				}
+		tempTags.forEach(function(tag) {
+			var newTag = new orgTag(tag);
+			newTag.save(function(err, savedTag) {
+				callback(err, savedTag._doc);
 			});
-		}, function(err) {
-			//do nothing yet
 		});
-	}
+	}, function(err) {
+		//do nothing yet
+	});
+	
+	exports.getAllTags(function(tags) {
+		tags.forEach(function(tag) {
+			if (!tempTags.contains(tag)) {
+				orgTag.remove(tag);
+			}
+		});
+	}, function(err) {
+		//do nothing yet
+	});
 }

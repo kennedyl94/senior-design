@@ -11,14 +11,14 @@
     var service = this;
 
     service.data = {
-      title: null
+      tags: {}
     };
 
     function init() {
       var promises = [];
-      promises.push($http.get('http://localhost:3000/tagSearch'));
+      promises.push($http.get('http://orgmatcher.msoe.edu/api/tagSearch/'));
       $q.all(promises).then(function(data) {
-        service.data.title = data[0].data.title;
+        service.data.tags = data[0].data.tags;
         deferred.resolve(service);
       });
     }

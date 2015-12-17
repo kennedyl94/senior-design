@@ -32,7 +32,8 @@
       'modal',
       'survey',
       'massUpload',
-      'fileUpload'
+      'fileUpload',
+      'tagSearch'
 
     ]);
 })();

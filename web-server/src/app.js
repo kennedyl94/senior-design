@@ -23,6 +23,7 @@ app.use(allowCrossDomain);
 var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
 var survey = require("./routes/survey.js");
+var tags = require('./routes/tagSearch.js');
 
 var test = require("./routes/test.js");
 
@@ -35,7 +36,7 @@ _dataServices.connect();
 
 app.use('/api/Organizations/', Orgs);
 
-
+app.use('/api/tagSearch/', tags)
 
 app.use('/api/createClub', createClub);
 
