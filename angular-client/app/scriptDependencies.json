@@ -36,7 +36,8 @@
 
     "app/login/login.module.js",
     "app/login/login.controller.js",
-    "app/login/login.routes.js"
+    "app/login/login.routes.js",
+    "app/login/login.service.js"
 
   ],
 

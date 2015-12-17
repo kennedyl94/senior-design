@@ -36,7 +36,7 @@ _dataServices.connect();
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/login/', login);
+app.use('/api/login', login);
 
 app.use('/api/Organizations/', Orgs);
 

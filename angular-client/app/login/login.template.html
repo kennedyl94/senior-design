@@ -1,18 +1,18 @@
 <html>
 <body>
-<!--<form action="http://localhost:3000/api/login" method="post"> -->
-<form action="http://orgmatcher.msoe.edu/api/login" method="post">
+<form>
+<!--<form action="http://orgmatcher.msoe.edu/api/login" method="post">-->
   <div>
     <label>Username:</label>
-    <input type="text" name="username" />
+    <input type="text" name="username" ng-model='loginCtrl.username'/>
     <br/>
   </div>
   <div>
     <label>Password:</label>
-    <input type="password" name="password" />
+    <input type="password" name="password" ng-model='loginCtrl.password'/>
   </div>
   <div>
-    <input type="submit" value="Submit" />
+    <input type="button" ng-click="loginCtrl.login()" value="Submit" />
   </div>
 </form>
 </body>

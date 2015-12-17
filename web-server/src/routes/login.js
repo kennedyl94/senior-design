@@ -26,26 +26,29 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     done(null, user.id);
-})
+});
 
-router.post('/', function (req, res, next) {
+router.post('/', function (request, response) {
     console.log("trying to do stuff");
-    passport.authenticate('local', {
-        successRedirect: '/api/login/loginSuccess/',
-        failureRedirect: '/api/login/loginFailure/'
-    })(req, res, next);
+    passport.authenticate('local', function(req, res) {
+        console.log("in authenticate. Res: " + res);
+        if(res == false) {
+            response.sendStatus(401);
+        } else {
+            response.sendStatus(200);
+        }
+    })(request, response);
 });
 
-router.get('/loginFailure/', function(req, res, next) {
-    console.log("in failure");
-    res.send('Failed to authenticate');
-});
-
-router.get('/loginSuccess/', function(req, res, next) {
-    console.log("in success");
-    res.send('Successfully authenticated');
-    //return res.redirect('/')
-});
+//router.get('/loginFailure/', function(req, res, next) {
+//    console.log("in failure");
+//    //res.sendStatus('Failed to authenticate');
+//});
+//
+//router.get('/loginSuccess/', function(req, res, next) {
+//    console.log("in success");
+//    res.sendStatus(200);
+//});
 
 exports.addUser = function(user, success, error) {
     if(connected) {
