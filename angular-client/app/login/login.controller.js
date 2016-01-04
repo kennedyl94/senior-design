@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('login')
-    .controller('LoginController', ['loginService', Controller]);
+    .controller('LoginController', ['loginService', '$window', Controller]);
 
-  function Controller(loginService) {
+  function Controller(loginService, $window) {
     var vm = this;
     vm.username = "";
     vm.password = "";
@@ -14,8 +14,10 @@
       loginService.login(vm.username, vm.password).then(function(response) {
         console.log("Response: " + response);
         console.log("Username: " + vm.username);
-        //todo carry on from here after authenticating!!!!
+
+        $window.location.href = '/#/organizations'
       });
     }
   }
+
 })();

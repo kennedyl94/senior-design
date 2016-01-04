@@ -35,15 +35,16 @@ router.post('/', function (request, response) {
         if(res != false) {
             switch(res.Type) {
                 case 'SL':
-                    //todo allow access to create club pages, mass upload page, org specific pages
                     console.log("SL Admin");
+                    //todo allow access to create club pages, mass upload page, org specific pages
                     break;
                 case 'Org':
-                    //todo allow access to org specific pages
+                    //todo only allow access specific pages
                     console.log("Org Admin");
                     break;
             }
             response.sendStatus(200);
+            //todo show logout tab instead of login tab
         } else {
             response.sendStatus(401);
         }
