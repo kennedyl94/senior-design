@@ -13,6 +13,7 @@
       console.log("something in controller");
       loginService.login(vm.username, vm.password).then(function(response) {
         console.log("Response: " + response);
+        console.log("Username: " + vm.username);
         //todo carry on from here after authenticating!!!!
       });
     }

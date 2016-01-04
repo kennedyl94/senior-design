@@ -32,10 +32,20 @@ router.post('/', function (request, response) {
     console.log("trying to do stuff");
     passport.authenticate('local', function(req, res) {
         console.log("in authenticate. Res: " + res);
-        if(res == false) {
-            response.sendStatus(401);
-        } else {
+        if(res != false) {
+            switch(res.Type) {
+                case 'SL':
+                    //todo allow access to create club pages, mass upload page, org specific pages
+                    console.log("SL Admin");
+                    break;
+                case 'Org':
+                    //todo allow access to org specific pages
+                    console.log("Org Admin");
+                    break;
+            }
             response.sendStatus(200);
+        } else {
+            response.sendStatus(401);
         }
     })(request, response);
 });
