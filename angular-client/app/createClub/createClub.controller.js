@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('createClub')
-    .controller('CreateClubController', ['createClubService', '$http', Controller]);
+    .controller('CreateClubController', ['createClubService', '$http', 'config', Controller]);
 
-  function Controller(createClubService, $http) {
+  function Controller(createClubService, $http, config) {
 
     var vm = this;
     vm.title = {};
@@ -12,7 +12,7 @@
     createClubService.then(function (service) {
       vm.title = service.data.title;
     });
-    
+
     vm.club = {
       name: "",
       description: "",
@@ -43,7 +43,7 @@
 
       var req = {
         method: 'POST',
-        url: 'http://orgmatcher.msoe.edu/api/createClub',
+        url: config.domain + 'createClub',
         headers: {},
         data: {club: vm.club}
       }
