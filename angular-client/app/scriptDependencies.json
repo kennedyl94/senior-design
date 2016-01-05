@@ -34,6 +34,13 @@
     "app/navBar/navBar.module.js",
     "app/navBar/navBar.controller.js",
 
+    "app/login/login.module.js",
+    "app/login/login.controller.js",
+    "app/login/login.routes.js",
+    "app/login/login.service.js",
+
+    "app/config/config.module.js"
+
     "app/tagSearch/tagSearch.module.js",
     "app/tagSearch/tagSearch.controller.js",
     "app/tagSearch/tagSearch.routes.js",
@@ -54,7 +61,9 @@
     "app/components/angular-toArrayFilter/toArrayFilter.js",
     "app/components/bootstrap/dist/js/bootstrap.min.js",
     "app/components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js",
-    "app/components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"
+    "app/components/blueimp-gallery/js/jquery.blueimp-gallery.min.js",
+    "app/components/formatter.js/dist/formatter.min.js",
+    "app/components/formatter.js/dist/jquery.formatter.min.js"
   ],
 
   "style": [

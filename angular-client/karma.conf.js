@@ -23,7 +23,24 @@ module.exports = function (config) {
       'app/**/*.tests.js'
     ],
 
-    reporters: ['teamcity'],
+    singleRun: true,
+
+    // The code we want coverage of
+    preprocessors: {
+      'dist/dev/angularComponents.js': ['coverage']
+    },
+
+    // What Karma will report to
+    reporters: [
+      'teamcity',
+      'coverage'
+    ],
+
+    // The type of coverage report and directory
+    coverageReporter: {
+      type: 'text',
+      dir: 'coverage/'
+    },
 
     // We can later use grunt to watch this
     autoWatch: false,
@@ -38,7 +55,8 @@ module.exports = function (config) {
     plugins: [
       'karma-jasmine',
       'karma-phantomjs-launcher',
-      'karma-teamcity-reporter'
+      'karma-teamcity-reporter',
+      'karma-coverage'
     ]
   })
 };

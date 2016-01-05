@@ -59,6 +59,7 @@ describe("OrganizationsController", function() {
   };
 
   beforeEach(function() {
+    module('config');
     module('organizations');
   });
 

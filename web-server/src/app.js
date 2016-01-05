@@ -2,6 +2,8 @@
 var express = require('express')
 	, bodyParser = require('body-parser')
 	, _dataServices = require('./dataServices.js')
+	, passport = require('passport');
+
   
 
 	
@@ -26,13 +28,16 @@ var survey = require("./routes/survey.js");
 var tags = require('./routes/tagSearch.js');
 
 var test = require("./routes/test.js");
-
+var login = require("./routes/login.js");
 
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
 _dataServices.connect();
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use('/api/login', login);
 
 app.use('/api/Organizations/', Orgs);
 

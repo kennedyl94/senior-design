@@ -4,7 +4,7 @@ describe('OrganizationsService', function() {
 
   var organizationsService;
   var httpBackend;
-  var GET_ORGS_URL = 'http://orgmatcher.msoe.edu/api/Organizations/';
+  var GET_ORGS_URL;
 
   var fakeOrgs = [
     {
@@ -42,12 +42,14 @@ describe('OrganizationsService', function() {
   ];
 
   beforeEach(function() {
+    module('config');
     module('organizations');
   });
 
-  beforeEach(inject(function (_$httpBackend_, _organizationsService_) {
+  beforeEach(inject(function (_$httpBackend_, _organizationsService_, _config_) {
     organizationsService = _organizationsService_;
     httpBackend = _$httpBackend_;
+    GET_ORGS_URL = _config_.domain + "Organizations/";
   }));
 
   afterEach(function() {

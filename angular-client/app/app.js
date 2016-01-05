@@ -26,6 +26,7 @@
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
       'root',
+      'config',
       'navBar',
       'organizations',
 	    'createClub',
@@ -33,7 +34,7 @@
       'survey',
       'massUpload',
       'fileUpload',
-      'tagSearch'
-
+      'login',
+	  'tagSearch'
     ]);
 })();

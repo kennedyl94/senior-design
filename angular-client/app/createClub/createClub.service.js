@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('createClub')
-    .factory('createClubService', ['$q', '$http', GetService]);
+    .factory('createClubService', ['$q', '$http', 'config', GetService]);
 
-  function GetService($q, $http) {
+  function GetService($q, $http, config) {
 
     var deferred  = $q.defer();
 
@@ -16,7 +16,7 @@
 
     function init() {
       var promises = [];
-      promises.push($http.get('http://localhost:3000/createClub'));
+      promises.push($http.get(config.domain + 'createClub'));
       $q.all(promises).then(function(data) {
         service.data.title = data[0].data.title;
         deferred.resolve(service);
