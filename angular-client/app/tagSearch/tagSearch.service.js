@@ -11,7 +11,8 @@
     var service = this;
 
     service.data = {
-      tags: {}
+      tags: {},
+      orgs: {}
     };
 
     function init() {
@@ -19,6 +20,7 @@
       promises.push($http.get('http://orgmatcher.msoe.edu/api/tagSearch/'));
       $q.all(promises).then(function(data) {
         service.data.tags = data[0].data.tags;
+        service.data.orgs = data[0].data.orgs;
         deferred.resolve(service);
       });
     }

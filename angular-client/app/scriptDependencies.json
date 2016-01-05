@@ -32,7 +32,12 @@
     "app/root/root.routes.js",
 
     "app/navBar/navBar.module.js",
-    "app/navBar/navBar.controller.js"
+    "app/navBar/navBar.controller.js",
+
+    "app/tagSearch/tagSearch.module.js",
+    "app/tagSearch/tagSearch.controller.js",
+    "app/tagSearch/tagSearch.routes.js",
+    "app/tagSearch/tagSearch.service.js"
 
   ],
 

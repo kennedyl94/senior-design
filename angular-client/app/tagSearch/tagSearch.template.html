@@ -7,4 +7,15 @@
     </div>
     <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
   </form>
+  <div id="results" ng-show="tCtrl.showOrgs" ng-repeat="org in tsCtrl.orgList">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 class="orgs-header" ng-click="tsCtrl.openModal(org, tsCtrl.images)">{{org.name}}</h3>
+        <span id="tags-span" class="col-sm-offset-1">{{org.tags.toString()}}</span>
+      </div>
+    </div>
+    <div class="row" id="description-row">
+      <span>{{org.description}}</span>
+    </div>
+  </div>
 </div>

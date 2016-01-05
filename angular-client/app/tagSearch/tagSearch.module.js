@@ -1,5 +1,5 @@
 (function() {
   'use strict';
 
-  angular.module('tagSearch', []);
+  angular.module('tagSearch', ['ui.router']);
 })();

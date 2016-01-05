@@ -105,7 +105,10 @@ exports.getAllTags = function(success, error) {
  * callback: function from the parameter of a function that will update the clubs information.
  */
 exports.updateTags = function(callback) {
-	var tempTags[] = {};
+	orgTag.remove({}, function(err) {
+		//Do nothing
+	});
+	var tempTags = {};
 	exports.getAllOrgs('name', function(orgs) {
 		orgs.forEach(function(org) {
 			if (!org.tags.contains('inactive')) {
@@ -118,6 +121,7 @@ exports.updateTags = function(callback) {
 				tempTags.push('inactive');
 			}
 		});
+		
 		tempTags.forEach(function(tag) {
 			var newTag = new orgTag(tag);
 			newTag.save(function(err, savedTag) {
@@ -131,7 +135,9 @@ exports.updateTags = function(callback) {
 	exports.getAllTags(function(tags) {
 		tags.forEach(function(tag) {
 			if (!tempTags.contains(tag)) {
-				orgTag.remove(tag);
+				orgTag.remove(tag, function(err) {
+					//do nothing
+				});
 			}
 		});
 	}, function(err) {
