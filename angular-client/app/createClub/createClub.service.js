@@ -16,7 +16,7 @@
 
     function init() {
       var promises = [];
-      promises.push($http.get('http://localhost:3000/createClub'));
+      promises.push($http.get('http://localhost:3000/api/createClub'));
       $q.all(promises).then(function(data) {
         service.data.title = data[0].data.title;
         deferred.resolve(service);

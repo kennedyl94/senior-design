@@ -56,7 +56,9 @@
     "app/components/angular-toArrayFilter/toArrayFilter.js",
     "app/components/bootstrap/dist/js/bootstrap.min.js",
     "app/components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js",
-    "app/components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"
+    "app/components/blueimp-gallery/js/jquery.blueimp-gallery.min.js",
+    "app/components/formatter.js/dist/formatter.min.js",
+    "app/components/formatter.js/dist/jquery.formatter.min.js"
   ],
 
   "style": [
