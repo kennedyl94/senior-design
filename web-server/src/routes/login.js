@@ -51,6 +51,12 @@ router.post('/', function (request, response) {
     })(request, response);
 });
 
+router.get('/', function(request, response) {
+    console.log("back end log out");
+    request.logout();
+    response.sendStatus(200);
+});
+
 //router.get('/loginFailure/', function(req, res, next) {
 //    console.log("in failure");
 //    //res.sendStatus('Failed to authenticate');

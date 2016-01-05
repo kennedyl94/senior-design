@@ -13,8 +13,4 @@ router.get('/:sortType', function (req, res) {
   });
 });
 
-router.get('/', function(req, res) {
-  console.log("in orgs");
-});
-
 module.exports = router;
