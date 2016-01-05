@@ -26,6 +26,7 @@
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
       'root',
+      'config',
       'navBar',
       'organizations',
 	    'createClub',
