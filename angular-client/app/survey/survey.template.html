@@ -1,11 +1,19 @@
 <h1 align="center">Survey</h1>
 <div class="col-sm-12" id="survey-div">
-<div class="col-sm-12" ng-repeat="question in surveyCtrl.data.questions | toArray">
-	<div class="row">
-		<div class="col-sm-4">
-			{{question.text}}
+	
+	
+	<div class="col-sm-12" ng-repeat="question in surveyCtrl.data.questions | toArray">
+		<div class="row">
+			<div class="col-sm-4">
+				<input type="checkbox" ng-model="surveyCtrl.ans[question.id]" name={{"_"+question.id}} id={{question.id}} ng-false-value=false ng-true-value=true value=false> {{question.text}}<br>
+				
+			</div>
 		</div>
 	</div>
-</div>
+	<button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
+
+	
+	
+
 
 </div>
