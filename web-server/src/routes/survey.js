@@ -5,10 +5,10 @@ var  _dataServices = require('../orgDataServices.js');
  
 //mock data until database is done 
 var questions = [
-	{question: "do you like pie?",
+	{text: "do you like pie?",
 	tags:["pie","cool","american"],
 	id:0},
-	{question: "do you like unicycling?",
+	{text: "do you like unicycling?",
 	tags:["cool", "outdoors"],
 	id:1}
 ];

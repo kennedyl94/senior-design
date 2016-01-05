@@ -8,7 +8,8 @@
 
     var vm = this;
     vm.data = surveyService.data;
-    alert(vm.data.questions);
+    
+    console.log("TESTING: " + vm.data);
 
   }
 
