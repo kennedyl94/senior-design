@@ -1,7 +1,7 @@
 var express = require('express')
   , router = express.Router()
   
-var  _dataServices = require('../dataServices.js');
+var  _dataServices = require('../orgDataServices.js');
  
 //mock data until database is done 
 var questions = [
@@ -17,11 +17,12 @@ var orgs;
 
   _dataServices.getAllOrgs(null, function(orgsMap){
 	  orgs =orgsMap;
-  }),
+  },
   function(e)
   {
 	  console.log(e);
-  }
+  });
+  
 router.get('/', function (req, res) {
 
 	// res.send("<html><body>		<form method = post>			<input type=\"checkbox\" name=\"_0\" value=\"true\"> do you like pie<br>			<button type = submit> submit</button> 		</form>	</body></html>")

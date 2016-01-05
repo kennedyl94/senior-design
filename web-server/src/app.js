@@ -1,7 +1,7 @@
 /** Module Dependencies **/
 var express = require('express')
 	, bodyParser = require('body-parser')
-	, _dataServices = require('./dataServices.js')
+	, _dataServices = require('./orgDataServices.js')
 	, passport = require('passport');
 
   
@@ -25,6 +25,7 @@ app.use(allowCrossDomain);
 var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
 var survey = require("./routes/survey.js");
+var upload = require("./routes/upload.js");
 
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
@@ -43,6 +44,8 @@ app.use('/api/Organizations/', Orgs);
 app.use('/api/createClub', createClub);
 
 app.use('/api/survey', survey);
+
+app.use('/api/UploadFile', upload);
 
 app.use('/api/test/', test);
 
