@@ -32,12 +32,29 @@ router.post('/', function (request, response) {
     console.log("trying to do stuff");
     passport.authenticate('local', function(req, res) {
         console.log("in authenticate. Res: " + res);
-        if(res == false) {
-            response.sendStatus(401);
-        } else {
+        if(res != false) {
+            switch(res.Type) {
+                case 'SL':
+                    console.log("SL Admin");
+                    //todo allow access to create club pages, mass upload page, org specific pages
+                    break;
+                case 'Org':
+                    //todo only allow access specific pages
+                    console.log("Org Admin");
+                    break;
+            }
             response.sendStatus(200);
+            //todo show logout tab instead of login tab
+        } else {
+            response.sendStatus(401);
         }
     })(request, response);
+});
+
+router.get('/', function(request, response) {
+    console.log("back end log out");
+    request.logout();
+    response.sendStatus(200);
 });
 
 //router.get('/loginFailure/', function(req, res, next) {

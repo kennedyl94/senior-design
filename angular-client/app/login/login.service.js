@@ -19,6 +19,17 @@
       return deferred.promise;
     };
 
+    service.logout = function() {
+      var deferred = $q.defer();
+      //var promise = $http({method: 'GET', url: 'http://localhost:3000/api/login'});
+      var promise = $http({method: 'GET', url: 'http://orgmatcher.msoe.edu/api/login'});
+      promise.then(function(data) {
+        console.log("in service: " + data.data);
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    };
+
     return service;
   }
 })();
