@@ -2,16 +2,15 @@
   'use strict';
 
   angular.module('login')
-    .factory('loginService', ['$q', '$http', GetService]);
+    .factory('loginService', ['$q', '$http', 'config', GetService]);
 
-  function GetService($q, $http) {
+  function GetService($q, $http, config) {
 
     var service = this;
 
     service.login = function(username, password) {
       var deferred = $q.defer();
-      //var promise = $http({method: 'POST', url: 'http://localhost:3000/api/login', data: {username: username, password:password}});
-      var promise = $http({method: 'POST', url: 'http://orgmatcher.msoe.edu/api/login', data: {username: username, password:password}});
+      var promise = $http({method: 'POST', url: config.domain + 'login', data: {username: username, password:password}});
       promise.then(function(data) {
         console.log("in service: " + data.data);
         deferred.resolve(data.data);
@@ -21,8 +20,7 @@
 
     service.logout = function() {
       var deferred = $q.defer();
-      //var promise = $http({method: 'GET', url: 'http://localhost:3000/api/login'});
-      var promise = $http({method: 'GET', url: 'http://orgmatcher.msoe.edu/api/login'});
+      var promise = $http({method: 'GET', url: config.domain + 'login'});
       promise.then(function(data) {
         console.log("in service: " + data.data);
         deferred.resolve(data.data);
