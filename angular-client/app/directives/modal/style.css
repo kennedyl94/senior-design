@@ -30,4 +30,12 @@
   width: 75px;
 }
 
+#modal-back-btn {
+  margin-right: 5%;
+}
+
+#admin-delete-btn {
+  background-color: red;
+}
+
 

@@ -77,6 +77,20 @@ exports.getAllOrgs = function(sortType, success, error){
 		//error(new Error('Not connected to database'), null);
 	}
 };
+
+exports.deleteOrg = function(orgId, success, error) {
+	if(connected) {
+		studentOrg.find({ _id: orgId}).remove().exec(function(err) {
+			if(err) {
+				error(new Error('Unable to delete item with id: ' + orgId));
+			}
+			success();
+		});
+	}
+	else {
+		//error(new Error('Not connected to database'), null);
+	}
+};
 //
 //exports.userExists = function(user, success, error){
 //	if(connected){
