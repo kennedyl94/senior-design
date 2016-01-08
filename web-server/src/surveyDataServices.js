@@ -18,7 +18,6 @@ exports.connect = function(){
 			mongoose.disconnect();
 		});
 		db.once('open', function() {
-			console.log('Connected to database');
 			connected = true;
 		});
 	}
@@ -31,7 +30,6 @@ exports.connect = function(){
 	 if(connected){
 		mongoose.disconnect(function(){
 			connected = false;
-			console.log('Disconnected from database');
 		});
 	}
  };
@@ -52,6 +50,20 @@ exports.addQuestion = function(question, callback){
 		callback('ERR: Not connected to database', null);
 	}
 };
+
+/*
+ * retreives a question from the database based on its _id
+ * questionID the id of the question to return
+ * callback a function that takes an error object and the question matching the id given
+ */ 
+exports.getQuestionById = function(questionId, callback){
+	if(connected){
+		surveyQuestion.findById(questionId, callback); 
+	}
+	else{
+		callback('ERR: Not connected to database', null);
+	}
+}
 
 /*
  * gets all of the survey questionsfrom the database
