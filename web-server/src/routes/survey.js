@@ -71,7 +71,34 @@ router.post("/", function (req, res) {
 	// var x = getOrgsFromAns(req.body)
 	var data = req.body;
 	console.log(data)
-	var yes = getIDFromPost(data);
+	var yes = getIDFromPost(data)
+    var questions =[];
+    var i =0;
+    for (i; i< yes.length; i++) {
+        
+        var q;
+        _surveyData.getQuestionById(yes[i], function(questionMap){
+            q = questionMap;
+        }, function(e){
+            console.log(e);
+        });
+        questions.push(q);
+    }
+    var tags =[];
+    i =0;
+    for(i; i<questions.length; i++) {
+        var j= 0;
+        for (j; j<questions[i].tags.length; j++) {
+            var k=0;
+            for(k; k< tags.length; k++) {
+                if(tags[k] == questions[i].tags[j]) {
+                    tags.splice(tags[k],1);
+                }
+            }
+            tags.push(questions[i].tags[j]);
+        }
+    }
+    console.log(tags);
     
 	// console.log(yes);
 // 	data.forEach(function (item) {
