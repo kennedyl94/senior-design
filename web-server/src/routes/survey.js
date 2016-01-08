@@ -16,9 +16,6 @@ var questions = [
 	id:6}
 ];
 
-_surveyData.connect();
-
-
 router.get('/', function (req, res) {
 
     // adding questions if there arnt any

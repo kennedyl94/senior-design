@@ -2,6 +2,8 @@
 var express = require('express')
 	, bodyParser = require('body-parser')
 	, _dataServices = require('./orgDataServices.js')
+    , _surveyData = require('./surveyDataServices.js');
+ 
   
 
 	
@@ -32,6 +34,7 @@ var router = express.Router();
 
 /** Connect the Database Through Data Services **/
 // _dataServices.connect();
+_surveyData.connect();
 
 
 app.use('/Organizations/', Orgs);
