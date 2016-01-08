@@ -23,7 +23,7 @@ app.use(allowCrossDomain);
 var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
 var survey = require("./routes/survey.js");
-var upload = require("./routes/upload.js");
+// var upload = require("./routes/upload.js");
 
 var test = require("./routes/test.js");
 
@@ -31,7 +31,7 @@ var test = require("./routes/test.js");
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
-_dataServices.connect();
+// _dataServices.connect();
 
 
 app.use('/Organizations/', Orgs);
@@ -42,7 +42,7 @@ app.use('/createClub', createClub);
 
 app.use('/survey', survey);
 
-app.use('/UploadFile', upload);
+// app.use('/UploadFile', upload);
 
 app.use('/test/', test);
 
