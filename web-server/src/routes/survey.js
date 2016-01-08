@@ -1,50 +1,99 @@
 var express = require('express')
-  , router = express.Router()
-  
-var  _dataServices = require('../orgDataServices.js');
+  , router = express.Router();
+  var  _dataServices = require('../orgDataServices.js');
+  var _surveyData = require('../surveyDataServices.js');
  
 //mock data until database is done 
 var questions = [
-	{text: "do you like pie?",
+	{question: "do you like pie?",
 	tags:["pie","cool","american"],
 	id:0},
-	{text: "do you like unicycling?",
+	{question: "do you like unicycling?",
 	tags:["cool", "outdoors"],
-	id:5}
+	id:5},
+	{question: "do you like dogs?",
+	tags:["cool", "dogs"],
+	id:6}
 ];
-var tags = ["cool", "outdoors", "pie", "american"];
-var orgs;
 
-  _dataServices.getAllOrgs(null, function(orgsMap){
-	  orgs =orgsMap;
-  },
-  function(e)
-  {
-	  console.log(e);
-  });
+_surveyData.connect();
+
+
 router.get('/', function (req, res) {
 
-	// res.send("<html><body>		<form method = post>			<input type=\"checkbox\" name=\"_0\" value=\"true\"> do you like pie<br>			<button type = submit> submit</button> 		</form>	</body></html>")
-	res.send(questions);
-	// console.log("test");
+    // adding questions if there arnt any
+    // this should be removed later
+     var q;
+        _surveyData.getAllQuestions("", function(questionMap){
+            q = questionMap;
+            console.log(questionMap);
+        }, function(e){
+            console.log(e);
+        });
+        
+        
+    if(q== null || q.length < 1){
+        // console.log(q);
+            
+        _surveyData.addQuestion(
+            {question: "do you like pie",
+            tags: ["pie","cool"],
+            category: "String"},function(e){
+            console.log(e);
+        });
+        
+            
+        _surveyData.addQuestion(
+            {question: "do you like unicycles",
+            tags: [
+                "unicycle","cool","outdoors"],
+            category: "String"}
+            , function(e){
+            console.log(e);
+        });
+    
+    }
+    var q;
+        _surveyData.getAllQuestions("", function(questionMap){
+            q = questionMap;
+        }, function(e){
+            console.log(e);
+        });
+    // console.log(q);
+    res.send(q);
+    // console.log("test");
 	
 });
+
 router.post("/", function (req, res) {
 
 	// console.log("wubalubadubdub ");
 	// var x = getOrgsFromAns(req.body)
 	var data = req.body;
-	console.log(req.body)
+	console.log(data)
+	var yes = getIDFromPost(data);
+    
+	// console.log(yes);
 // 	data.forEach(function (item) {
 //        console.log(item.id);
 //        console.log(item.Name);
 //    });
 	
 	
-
 });
+function getIDFromPost(arr){
+	var yes =[];
+	var i =0;
+	for(i; i<arr.length; i++){
+		if(arr[i]!=null && arr[i]==true){
+			yes.push(i)
+		}
+	}
+	return yes;
+	
+}
 
-function getOrgsFromAns(body)
+function getOrgsFromAns(ans)
 {
 	
 	
