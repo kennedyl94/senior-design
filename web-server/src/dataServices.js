@@ -72,6 +72,7 @@ exports.getAllOrgs = function(sortType, success, error){
 			orgs.forEach(function(org) {
 				orgsMap[org._id] = org;
 			});
+			//console.log(orgsMap);
 			success(orgsMap);
 		}).sort( sort_order );
 	}
@@ -118,6 +119,7 @@ exports.getAllTags = function(success, error) {
 			tags.forEach(function(tag) {
 				tagMap[tag._id] = tag;
 			});
+			//console.log(tagMap);
 			success(tagMap);
 		}).sort();
 	}
@@ -131,40 +133,43 @@ exports.getAllTags = function(success, error) {
  */
 exports.updateTags = function(callback) {
 	orgTag.remove({}, function(err) {
+		//console.log(err);
 		//Do nothing
 	});
 	var tempTags = {};
 	exports.getAllOrgs('name', function(orgs) {
-		orgs.forEach(function(org) {
-			if (!org.tags.contains('inactive')) {
-				org.tags.forEach(function(tag) {
+		console.log(Object.keys(orgs).length);
+		for (var i = 0; i < Object.keys(orgs).length; i++) {
+			console.log(orgs[i]);
+			if (!orgs[i].tags.contains('inactive')) {
+				for (tag in orgs[i].tags) {
 					if (!tempTags.contains(tag)) {
 						tempTags.push(tag);
 					}
-				});
+				};
 			} else if (!tempTags.contains('inactive')) {
 				tempTags.push('inactive');
 			}
-		});
-		
-		tempTags.forEach(function(tag) {
+		}
+		//console.log(tempTags);
+		for (tag in tempTags) {
 			var newTag = new orgTag(tag);
 			newTag.save(function(err, savedTag) {
 				callback(err, savedTag._doc);
 			});
-		});
+		}
 	}, function(err) {
 		//do nothing yet
 	});
 	
 	exports.getAllTags(function(tags) {
-		tags.forEach(function(tag) {
+		for (tag in tags) {
 			if (!tempTags.contains(tag)) {
 				orgTag.remove(tag, function(err) {
 					//do nothing
 				});
 			}
-		});
+		};
 	}, function(err) {
 		//do nothing yet
 	});

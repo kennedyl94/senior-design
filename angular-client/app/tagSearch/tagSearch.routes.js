@@ -2,13 +2,18 @@
   'use strict';
 
   angular.module('tagSearch')
-    .config(['$routeProvider',
-      function($routeProvider) {
-        $routeProvider
-          .when('/tagSearch', {
-            templateUrl: 'tagSearch/tagSearch.template.html',
-            controller: 'TagSearchController',
-            controllerAs: 'tsCtrl'
+    .config(['$stateProvider', '$urlRouterProvider','$locationProvider',
+      function($stateProvider) {
+        $stateProvider
+          .state('root.tagSearch', {
+            url: 'tagSearch',
+            views: {
+              'content@': {
+                templateUrl: 'tagSearch/tagSearch.template.html',
+                controller: 'TagSearchController',
+                controllerAs: 'tsCtrl'
+              }
+            }
           });
       }]);
 

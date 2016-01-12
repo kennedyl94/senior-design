@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('tagSearch')
-    .factory('tagSearchService', ['$q', '$http', GetService]);
+    .factory('tagSearchService', ['$q', '$http', 'config', GetService]);
 
-  function GetService($q, $http) {
+  function GetService($q, $http, config) {
 
     var deferred  = $q.defer();
 
@@ -17,8 +17,9 @@
 
     function init() {
       var promises = [];
-      promises.push($http.get('http://orgmatcher.msoe.edu/api/tagSearch/'));
+      promises.push($http.get(config.domain + 'tagSearch'));
       $q.all(promises).then(function(data) {
+        //console.log(data[0].data);
         service.data.tags = data[0].data.tags;
         service.data.orgs = data[0].data.orgs;
         deferred.resolve(service);

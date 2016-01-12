@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('tagSearch')
-    .controller('TagSearchController', ['tagSearchService', '$http', Controller]);
+    .controller('TagSearchController', ['tagSearchService', '$http', '$modal', Controller]);
 
-  function Controller(tagSearchService, $http) {
+  function Controller(tagSearchService, $http, $modal) {
 
     var vm = this;
     vm.tags = {};

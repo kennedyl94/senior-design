@@ -39,12 +39,12 @@
     "app/login/login.routes.js",
     "app/login/login.service.js",
 
-    "app/config/config.module.js"
-
     "app/tagSearch/tagSearch.module.js",
     "app/tagSearch/tagSearch.controller.js",
     "app/tagSearch/tagSearch.routes.js",
-    "app/tagSearch/tagSearch.service.js"
+    "app/tagSearch/tagSearch.service.js",
+
+    "app/config/config.module.js"
 
   ],
 

@@ -35,6 +35,6 @@
       'massUpload',
       'fileUpload',
       'login',
-	  'tagSearch'
+	    'tagSearch'
     ]);
 })();
