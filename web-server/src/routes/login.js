@@ -57,16 +57,6 @@ router.get('/', function(request, response) {
     response.sendStatus(200);
 });
 
-//router.get('/loginFailure/', function(req, res, next) {
-//    console.log("in failure");
-//    //res.sendStatus('Failed to authenticate');
-//});
-//
-//router.get('/loginSuccess/', function(req, res, next) {
-//    console.log("in success");
-//    res.sendStatus(200);
-//});
-
 exports.addUser = function(user, success, error) {
     if(connected) {
         var newUser = new admin(user)
