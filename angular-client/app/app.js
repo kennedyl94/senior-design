@@ -37,10 +37,41 @@
       'login'
     ]);
 
-  myApp.run(['$rootScope', '$location', function ($rootScope, $location, loginService) {
+  myApp.config(['$stateProvider', function($stateProvider) {
+    $stateProvider
+      .state('root.createClub', {
+        url: 'createClub',
+        views: {
+        'content@': {
+          templateUrl: 'createClub/createClub.template.html',
+          controller: 'CreateClubController',
+          controllerAs: 'crClCtrl'
+          }
+        },
+        data: {
+          restricted: true
+        }
+      })
+      .state('root.login', {
+        url:'login',
+        views: {
+          'content@': {
+            templateUrl: 'login/login.template.html',
+            controller: 'LoginController',
+            controllerAs: 'loginCtrl'
+          }
+        },
+        data: {
+          restricted: false
+        }
+      })
+  }])
 
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-      if (next.access.restricted && !loginService.isLoggedIn()) {
+  myApp.run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      console.log("here!");
+      if (next.data && next.data.restricted && loginService.isLoggedIn()===false) {
+        console.log("in run");
         $location.path('/login');
       }
     });

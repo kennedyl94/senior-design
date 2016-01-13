@@ -7,7 +7,7 @@
   function GetService($q, $http, config) {
 
     var service = this;
-    var user = null;
+    var user = false;
 
     service.login = function(username, password) {
       var deferred = $q.defer();
