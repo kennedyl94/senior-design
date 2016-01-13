@@ -11,10 +11,10 @@
               'content@': {
                 templateUrl: 'createClub/createClub.template.html',
                 controller: 'CreateClubController',
-                controllerAs: 'crClCtrl'
+                controllerAs: 'crClCtrl',
+                access: {restricted: true}
               }
             }
           });
       }]);
-
 })();

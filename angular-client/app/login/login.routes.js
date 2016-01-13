@@ -11,7 +11,8 @@
               'content@': {
                 templateUrl: 'login/login.template.html',
                 controller: 'LoginController',
-                controllerAs: 'loginCtrl'
+                controllerAs: 'loginCtrl',
+                access: {restricted: false}
               }
             }
           });

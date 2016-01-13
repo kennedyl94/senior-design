@@ -15,15 +15,16 @@
         if(response == "OK") {
           //console.log("Response: " + response);
           console.log("Logged In - Username: " + vm.username);
+          console.log("User status: " + loginService.getUserStatus());
           alert("You have been successfully logged in!");
-          $state.go('root.organizations', { redirect : true });
-          $window.location.reload();
+          //$state.go('root.organizations', { redirect : true });
+          //$window.location.reload();
         } else {
           alert("Incorrect Log In Credentials")
-          $window.location.href("#/login");
+          //$window.location.href("#/login");
         }
       });
-    }
+    };
 
     vm.logout = function() {
       loginService.logout().then(function(response) {

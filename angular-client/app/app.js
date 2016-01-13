@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('orgFinder',
+  var myApp = angular.module('orgFinder',
     [
       /*
        Below are all of the dependencies to the application.
@@ -36,4 +36,13 @@
       'fileUpload',
       'login'
     ]);
+
+  myApp.run(['$rootScope', '$location', function ($rootScope, $location, loginService) {
+
+    $rootScope.$on('$routeChangeStart', function (event, next) {
+      if (next.access.restricted && !loginService.isLoggedIn()) {
+        $location.path('/login');
+      }
+    });
+  }]);
 })();
