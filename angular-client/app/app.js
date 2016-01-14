@@ -34,6 +34,7 @@
       'survey',
       'massUpload',
       'fileUpload',
-      'login'
+      'login',
+      'modifyClub'
     ]);
 })();

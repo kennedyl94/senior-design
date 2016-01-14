@@ -21,7 +21,7 @@
       var tags = org.tags;
       var i = 0;
       for(i; i < tags.length; i++) {
-        if(tags[i].toLowerCase().indexOf(query || '') !== -1) {
+        if(tags[i].toString().toLowerCase().indexOf(query || '') !== -1) {
           return true;
         }
       }

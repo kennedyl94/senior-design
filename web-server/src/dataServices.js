@@ -78,11 +78,39 @@ exports.getAllOrgs = function(sortType, success, error){
 	}
 };
 
+exports.getOrg = function(orgId, success, error) {
+	if(connected){
+		studentOrg.find({ _id: orgId }, function(err, org) {
+			if(err) {
+				error(new Error('Unable to get item with id: ' + orgId));
+			}
+			success(org);
+		});
+	}
+	else{
+		//error(new Error('Not connected to database'), null);
+	}
+};
+
 exports.deleteOrg = function(orgId, success, error) {
 	if(connected) {
 		studentOrg.find({ _id: orgId}).remove().exec(function(err) {
 			if(err) {
 				error(new Error('Unable to delete item with id: ' + orgId));
+			}
+			success();
+		});
+	}
+	else {
+		//error(new Error('Not connected to database'), null);
+	}
+};
+
+exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
+	if(connected) {
+		studentOrg.findOneAndUpdate( {_id: orgId}, orgToUpdate, function(err) {
+			if(err) {
+				error(new Error('Unable to modify item with id:' + orgId));
 			}
 			success();
 		});

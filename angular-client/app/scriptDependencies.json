@@ -40,7 +40,12 @@
     "app/login/login.routes.js",
     "app/login/login.service.js",
 
-    "app/config/config.module.js"
+    "app/config/config.module.js",
+
+    "app/modifyClub/modifyClub.module.js",
+    "app/modifyClub/modifyClub.controller.js",
+    "app/modifyClub/modifyClub.routes.js",
+    "app/modifyClub/modifyClub.service.js"
 
   ],
 
@@ -66,6 +71,7 @@
     "app/components/bootstrap/dist/css/bootstrap.min.css",
     "app/directives/modal/style.css",
     "app/createClub/style.css",
+    "app/modifyClub/style.css",
     "app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css",
     "app/components/blueimp-gallery/css/blueimp-gallery.min.css"
   ]
