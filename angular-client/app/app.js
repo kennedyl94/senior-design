@@ -52,6 +52,43 @@
           restricted: true
         }
       })
+      .state('root.massUpload', {
+        url: 'massUpload',
+        views: {
+          'content@': {
+            templateUrl: 'massUpload/massUpload.template.html',
+          }
+        },
+        data: {
+          restricted: true
+        }
+      })
+      .state('root.organizations', {
+        url: 'organizations',
+        views: {
+          'content@': {
+            templateUrl: 'organizations/organizations.template.html',
+            controller: 'OrganizationsController',
+            controllerAs: 'orgsCtrl'
+          }
+        },
+        data: {
+          restricted: false
+        }
+      })
+      .state('root.survey', {
+        url: 'survey',
+        views: {
+          'content@': {
+            templateUrl: 'survey/survey.template.html',
+            controller: 'SurveyController',
+            controllerAs: 'surveyCtrl'
+          }
+        },
+        data: {
+          restricted: false
+        }
+      })
       .state('root.login', {
         url:'login',
         views: {
