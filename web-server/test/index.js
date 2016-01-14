@@ -1,1 +1,2 @@
-require('./test_dataServices');
+require('./test_orgDataServices');
+require('./test_surveyDataServices');

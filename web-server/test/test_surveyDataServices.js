@@ -22,7 +22,7 @@ var fakeQuestion = {
 };
 
 describe('surveyDataServices', function () {
-    
+ /*   
     describe('#connect', function () {
         
         beforeEach(function() {
@@ -88,9 +88,9 @@ describe('surveyDataServices', function () {
             });
         });
     });
-    
+    */
     describe('#addQuestion', function() {
-    
+    /*
         afterEach(function(){
             surveyDataServices.disconnect();
         });
@@ -102,40 +102,30 @@ describe('surveyDataServices', function () {
             });
             done();
         });
-        
+        */
         it('should not send error to callback if successful.', function(done){
             var connection = mongoose.connection;
-            connection.once('open', function(){
-                process.nextTick(function(){
-                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                        assert.equal(err, null);
-                        done();
-                    });
-                });
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                assert.equal(err, null);
+                done();
             });
-            surveyDataServices.connect();
         });
         
         it('should save new question', function(done) {
             var connection = mongoose.connection;
-            connection.once('open', function(){
-                process.nextTick(function(){
-                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                        assert.deepEqual({
-                            question: savedQuestion.question,
-                            tags: savedQuestion.tags.toObject(),
-                            category: savedQuestion.category
-                        }, fakeQuestion);
-                        done();
-                    });
-                });
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                assert.deepEqual({
+                    question: savedQuestion.question,
+                    tags: savedQuestion.tags.toObject(),
+                    category: savedQuestion.category
+                }, fakeQuestion);
+                done();
             });
-            surveyDataServices.connect();
         });
     });
     
     describe('#getQuestionById', function(){
-        
+       /* 
         afterEach(function(){
             surveyDataServices.disconnect();
         });
@@ -147,46 +137,36 @@ describe('surveyDataServices', function () {
             });
             done();
         });
-        
+        */
         it('should send null question if id does not exist', function(done){
             var connection = mongoose.connection;
-            connection.once('open', function(){
-                process.nextTick(function(){
-                    connection.db.dropDatabase();
-                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                        surveyDataServices.getQuestionById('', function(err, question){
-                            assert.equal(question, null);                           
-                            done();
-                        });
-                    });
+            connection.db.dropDatabase();
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                surveyDataServices.getQuestionById('', function(err, question){
+                    assert.equal(question, null);                           
+                    done();
                 });
             });
-            surveyDataServices.connect();
         });
         
         it('should send question if id does exist', function(done){
             var connection = mongoose.connection;
-            connection.once('open', function(){
-                process.nextTick(function(){
-                    connection.db.dropDatabase();
-                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                        surveyDataServices.getQuestionById(savedQuestion._id, function(err, question){
-                            assert.deepEqual({
-                                question: savedQuestion.question,
-                                tags: savedQuestion.tags.toObject(),
-                                category: savedQuestion.category
-                            }, fakeQuestion);                           
-                            done();
-                        });
-                    });
+            connection.db.dropDatabase();
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                surveyDataServices.getQuestionById(savedQuestion._id, function(err, question){
+                    assert.deepEqual({
+                        question: savedQuestion.question,
+                        tags: savedQuestion.tags.toObject(),
+                        category: savedQuestion.category
+                    }, fakeQuestion);                           
+                    done();
                 });
             });
-            surveyDataServices.connect();
         });
     });
     
     describe('#getAllQuestions', function() {
-        
+        /*
         after(function(){
             surveyDataServices.disconnect();
         });
@@ -198,43 +178,37 @@ describe('surveyDataServices', function () {
             });
             done();
         });
-
+        */
         it('should find all documents', function(done){
             var connection = mongoose.connection;
-
-            connection.once('open', function(){
-                process.nextTick(function(){
-                    connection.db.dropDatabase();
-                    async.parallel([
-                        function(callback){
-                            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                                callback();
-                            });
-                        },
-                        function(callback){
-                            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                                callback();
-                            });
-                        },
-                        function(callback){
-                            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-                                callback();
-                            });
-                        }],
-                        function(){                         
-                            surveyDataServices.getAllQuestions('category', function(questions){
-                                var size = 0;
-                                for( question in questions){
-                                    size++;
-                                }
-                                assert.equal(size, 3);
-                                done();
-                            }, function(){});
+            connection.db.dropDatabase();
+            async.parallel([
+                function(callback){
+                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                        callback();
+                    });
+                },
+                function(callback){
+                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                        callback();
+                    });
+                },
+                function(callback){
+                    surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                        callback();
+                    });
+                }],
+                function(){                         
+                    surveyDataServices.getAllQuestions('category', function(questions){
+                        var size = 0;
+                        for( question in questions){
+                            size++;
                         }
-                    );
-                });
-            });
-            surveyDataServices.connect();
+                        assert.equal(size, 3);
+                        done();
+                    }, function(){});
+                }
+            );
         });
     });
 });
