@@ -17,11 +17,12 @@
           console.log("Logged In - Username: " + vm.username);
           console.log("User status: " + loginService.getUserStatus());
           alert("You have been successfully logged in!");
-          //$state.go('root.organizations', { redirect : true });
-          //$window.location.reload();
+          $state.go('root.organizations', { redirect : true });
+          $window.location.reload();
         } else {
           alert("Incorrect Log In Credentials")
-          //$window.location.href("#/login");
+          $state.go('root.login', {redirect: true});
+          $window.location.reload();
         }
       });
     };

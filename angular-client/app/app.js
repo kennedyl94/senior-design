@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var myApp = angular.module('orgFinder',
+  angular.module('orgFinder',
     [
       /*
        Below are all of the dependencies to the application.
@@ -35,76 +35,9 @@
       'massUpload',
       'fileUpload',
       'login'
-    ]);
-
-  myApp.config(['$stateProvider', function($stateProvider) {
-    $stateProvider
-      .state('root.createClub', {
-        url: 'createClub',
-        views: {
-        'content@': {
-          templateUrl: 'createClub/createClub.template.html',
-          controller: 'CreateClubController',
-          controllerAs: 'crClCtrl'
-          }
-        },
-        data: {
-          restricted: true
-        }
-      })
-      .state('root.massUpload', {
-        url: 'massUpload',
-        views: {
-          'content@': {
-            templateUrl: 'massUpload/massUpload.template.html',
-          }
-        },
-        data: {
-          restricted: true
-        }
-      })
-      .state('root.organizations', {
-        url: 'organizations',
-        views: {
-          'content@': {
-            templateUrl: 'organizations/organizations.template.html',
-            controller: 'OrganizationsController',
-            controllerAs: 'orgsCtrl'
-          }
-        },
-        data: {
-          restricted: false
-        }
-      })
-      .state('root.survey', {
-        url: 'survey',
-        views: {
-          'content@': {
-            templateUrl: 'survey/survey.template.html',
-            controller: 'SurveyController',
-            controllerAs: 'surveyCtrl'
-          }
-        },
-        data: {
-          restricted: false
-        }
-      })
-      .state('root.login', {
-        url:'login',
-        views: {
-          'content@': {
-            templateUrl: 'login/login.template.html',
-            controller: 'LoginController',
-            controllerAs: 'loginCtrl'
-          }
-        },
-        data: {
-          restricted: false
-        }
-      })
-  }])
-
-  myApp.run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
+    ])
+    
+    .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       console.log("here!");
       if (next.data && next.data.restricted && loginService.isLoggedIn()===false) {
