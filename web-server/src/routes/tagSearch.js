@@ -1,16 +1,20 @@
 var express = require('express')
-  , router = express.Router()
+  , router = express.Router();
 var  _dataServices = require('../dataServices.js');
   
-router.get('/', function (req, res) {
-	var data = {};
-	_dataServices.getAllTags(function(tags){
-		data.tags = tags;
-	},
+router.get('/', function(req, res) {
+	_dataServices.getAllTags(function(tags){res.send(tags);},
 		function(err){console.log(err);});
-	_dataServices.getAllOrgs(function(orgs){data.orgs = orgs;},
-		function(err){console.log(err);});
-	res.send(data);
 });
+
+router.post('/', function(req, res) {
+	_dataServices.searchByTags(req.body.tags,
+		function(orgs) {
+			res.send(orgs);
+		},
+		function(err) {
+			console.log(err);
+		});
+})
 
 module.exports = router;

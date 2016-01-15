@@ -2,50 +2,53 @@
   'use strict';
 
   angular.module('tagSearch')
-    .controller('TagSearchController', ['tagSearchService', '$http', '$modal', Controller]);
+    .controller('TagSearchController', ['tagSearchService', '$http', '$modal', 'config', Controller]);
 
-  function Controller(tagSearchService, $http, $modal) {
+  function Controller(tagSearchService, $http, $modal, config) {
 
     var vm = this;
-    vm.tags = {};
-    vm.orgs = {};
-    vm.orgList = {};
+    vm.tags = [];
+    vm.orgList = [];
     vm.showOrgs = false;
 
     tagSearchService.then(function(service) {
-      vm.tags = service.data.tags;
-      vm.tags.remove('inactive');
-      vm.orgs = service.data.orgs;
+      var tempTags = service.data.tags;
+      var index = tempTags.indexOf('inactive');
+      if (index != -1) {
+        tempTags.splice(index, 1);
+      }
+
+      tempTags.forEach(function(tag) {
+        vm.tags.push({text: tag, checked: false});
+      });
     });
 
     vm.search = function(form) {
-      var tagList = {};
-      form.tagCheck.forEach(function(tag) {
+      var tagList = [];
+      vm.orgList = [];
+      vm.tags.forEach(function(tag) {
         if (tag.checked) {
-          tagList.push(tag.value);
+          tagList.push(tag.text);
         }
       });
 
-      var tempOrgList = {};
-      vm.orgs.forEach(function(org) {
-        if (!org.contains('invalid')) {
-          var rating = 0;
-          vm.tags.forEach(function(tag) {
-            if (org.tags.contains(tag)) {
-              rating++;
-            }
+      var req = {
+        method: 'POST',
+        url: config.domain + 'tagSearch',
+        headers: {},
+        data: {tags: tagList}
+      }
+
+      var tempOrgList = [];
+      $http(req)
+        .then(function(res) {
+          tempOrgList = res.data;
+          tempOrgList.forEach(function(tempOrg) {
+            vm.orgList.push(tempOrg.organization);
           });
+          console.log(tempOrgList);
+        }, function(err) {console.log(err)});
 
-          if (rating > 0) {
-            tempOrgList.push({organization: org, priority: rating});
-          }
-        }
-      });
-
-      tempOrgList.sort(function(a,b){return -(a.priority- b.priority);});
-      tempOrgList.forEach(function(tempOrg) {
-        vm.orgList.push(tempOrgList.org);
-      });
       vm.showOrgs = true;
     }
 

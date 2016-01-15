@@ -71,6 +71,7 @@
     "app/components/bootstrap/dist/css/bootstrap.min.css",
     "app/directives/modal/style.css",
     "app/createClub/style.css",
+    "app/tagSearch/style.css",
     "app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css",
     "app/components/blueimp-gallery/css/blueimp-gallery.min.css"
   ]

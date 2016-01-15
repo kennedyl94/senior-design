@@ -5,7 +5,6 @@ var dbName = config.mongo;
 
 //set up the model for the student_orgs collection
 var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
-var orgTag = mongoose.model('org_tags', mongoose.Schema(config.tagSchema));
 
 var connected = false;
 
@@ -50,7 +49,6 @@ exports.addStudentOrg = function(org, callback){
 		newOrg.save(function(err, savedOrg){
 			callback(err, savedOrg._doc);
 		});
-		exports.updateTags(callback);
 	}
 	else{
 		callback(new Error('Not connected to database'), null);
@@ -72,7 +70,6 @@ exports.getAllOrgs = function(sortType, success, error){
 			orgs.forEach(function(org) {
 				orgsMap[org._id] = org;
 			});
-			//console.log(orgsMap);
 			success(orgsMap);
 		}).sort( sort_order );
 	}
@@ -123,68 +120,59 @@ exports.deleteOrg = function(orgId, success, error) {
 
 /*
  * Gets all tags currently being used by active clubs.
- * success: a function to call upon successful completion. Takes an object that contains all tags.
- * error: a function to call if there is an error.
+ * success: A function to call upon successful completion. Takes an object that contains all tags.
+ * error: A function to call if there is an error.
  */
 exports.getAllTags = function(success, error) {
 	if (connected) {
-		orgTag.find({}, function(err, tags) {
-			var tagMap = {};
-			tags.forEach(function(tag) {
-				tagMap[tag._id] = tag;
+		studentOrg.find({}, function(err, orgs) {
+			var tagMap = [];
+			orgs.forEach(function(org) {
+				if (org.tags.indexOf('inactive') == -1) {
+					org.tags.forEach(function(tag) {
+						if (tagMap.indexOf(tag) == -1 && tag != '') {
+							tagMap.push(tag);
+						}
+					});
+				} else if (tagMap.indexOf('inactive') == -1) {
+					tagMap.push('inactive');
+				}
 			});
-			//console.log(tagMap);
+
+			tagMap.sort();
 			success(tagMap);
-		}).sort();
+		});
 	}
 }
 
 /*
- * Whenever a club is added or modified, this method is called in order to update the tags list.
- * This function is only called internally. It adds all unique tags being used by active clubs 
- * and removes all tags not being used by active clubs.
- * callback: function from the parameter of a function that will update the clubs information.
+ * Searches The list of orgs by tags and returns the orgs found in the order of most tags to least.
+ * success: A function to call upon successful completion.
+ * 			Takes an object that contains the found orgs and their priority ranking.
+ * error: A function to call if there is an error.
  */
-exports.updateTags = function(callback) {
-	orgTag.remove({}, function(err) {
-		//console.log(err);
-		//Do nothing
-	});
-	var tempTags = {};
-	exports.getAllOrgs('name', function(orgs) {
-		console.log(Object.keys(orgs).length);
-		for (var i = 0; i < Object.keys(orgs).length; i++) {
-			console.log(orgs[i]);
-			if (!orgs[i].tags.contains('inactive')) {
-				for (tag in orgs[i].tags) {
-					if (!tempTags.contains(tag)) {
-						tempTags.push(tag);
+exports.searchByTags = function(tagList, success, error) {
+	studentOrg.find({}, function(err, orgs) {
+		var orgList = [];
+		orgs.forEach(function(org) {
+			if (org.tags.indexOf('invalid') == -1) {
+				var rating = 0;
+				tagList.forEach(function(tag) {
+					if (org.tags.indexOf(tag) != -1) {
+						rating++;
 					}
-				};
-			} else if (!tempTags.contains('inactive')) {
-				tempTags.push('inactive');
-			}
-		}
-		//console.log(tempTags);
-		for (tag in tempTags) {
-			var newTag = new orgTag(tag);
-			newTag.save(function(err, savedTag) {
-				callback(err, savedTag._doc);
-			});
-		}
-	}, function(err) {
-		//do nothing yet
-	});
-	
-	exports.getAllTags(function(tags) {
-		for (tag in tags) {
-			if (!tempTags.contains(tag)) {
-				orgTag.remove(tag, function(err) {
-					//do nothing
 				});
+
+				if (rating > 0) {
+					orgList.push({organization: org, priority: rating});
+				}
 			}
-		};
-	}, function(err) {
-		//do nothing yet
+		});
+
+		orgList.sort(function (a, b) {
+			return -(a.priority - b.priority);
+		});
+
+		success(orgList);
 	});
 }

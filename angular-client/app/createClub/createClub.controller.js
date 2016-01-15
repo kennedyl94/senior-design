@@ -35,12 +35,6 @@
       vm.submitted = false;
       vm.failed = false;
 
-      if (vm.club.tags.indexOf(',') != -1) {
-        vm.club.tags = vm.club.tags.split(',');
-      } else {
-        vm.club.tags = [vm.club.tags];
-      }
-
       var req = {
         method: 'POST',
         url: config.domain + 'createClub',
@@ -50,7 +44,6 @@
 
       $http(req)
         .success(function (data, status, headers, config) {
-          console.log(vm.club);
           vm.club = {
             name: "",
             description: "",
@@ -60,7 +53,7 @@
               email: "",
               phone: ""
             }
-          }
+          };
           form.$setPristine();
           form.$setUntouched();
           vm.submitted = true;

@@ -12,9 +12,6 @@
 			"phone": "String"
 		}
 	},
-	"tagSchema": {
-		"text": "String"
-	},
 	"userSchema" : {
 	  	"Username": "String",
 	  	"Password": "String",

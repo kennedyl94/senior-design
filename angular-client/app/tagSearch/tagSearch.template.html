@@ -3,11 +3,13 @@
 <div ng-controller="TagSearchController">
   <form name="tagList">
     <div ng-repeat="tag in tsCtrl.tags">
-      <input type="checkbox" name="tagCheck" value={{tag}}> {{tag}}</input>
+      <label class="checkbox-inline">
+        <input type="checkbox" name="tagCheck" ng-model="tag.checked"> {{tag.text}}</input>
+      </label>
     </div>
     <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
   </form>
-  <div id="results" ng-show="tCtrl.showOrgs" ng-repeat="org in tsCtrl.orgList">
+  <div id="results" class="container" ng-show="tsCtrl.showOrgs" ng-repeat="org in tsCtrl.orgList">
     <div class="row">
       <div class="col-sm-12">
         <h3 class="orgs-header" ng-click="tsCtrl.openModal(org, tsCtrl.images)">{{org.name}}</h3>

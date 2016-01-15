@@ -11,17 +11,14 @@
     var service = this;
 
     service.data = {
-      tags: {},
-      orgs: {}
+      tags: {}
     };
 
     function init() {
       var promises = [];
       promises.push($http.get(config.domain + 'tagSearch'));
       $q.all(promises).then(function(data) {
-        //console.log(data[0].data);
-        service.data.tags = data[0].data.tags;
-        service.data.orgs = data[0].data.orgs;
+        service.data.tags = data[0].data;
         deferred.resolve(service);
       });
     }
