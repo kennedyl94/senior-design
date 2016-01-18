@@ -33,7 +33,7 @@ var test = require("./routes/test.js");
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
-// _dataServices.connect();
+_dataServices.connect();
 _surveyData.connect();
 
 

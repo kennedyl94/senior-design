@@ -17,47 +17,38 @@ var questions = [
 ];
 
 router.get('/', function (req, res) {
-
     // adding questions if there arnt any
     // this should be removed later
-     var q;
-        _surveyData.getAllQuestions("", function(questionMap){
-            q = questionMap;
-            console.log(questionMap);
-        }, function(e){
-            console.log(e);
-        });
+    console.log("test");
+    _surveyData.addQuestion(
+        {question: "do you like pie",
+        tags: ["pie","cool"],
+        category: "String"},function(e){
+        console.log("add 1"+e);
+    });
+
         
+    _surveyData.addQuestion(
+        {question: "do you like unicycles",
+        tags: [
+            "unicycle","cool","outdoors"],
+        category: "String"}
+        , function(e){
+        console.log("add 2"+e);
+    });
         
-    if(q== null || q.length < 1){
-        // console.log(q);
-            
-        _surveyData.addQuestion(
-            {question: "do you like pie",
-            tags: ["pie","cool"],
-            category: "String"},function(e){
-            console.log(e);
-        });
+     
         
-            
-        _surveyData.addQuestion(
-            {question: "do you like unicycles",
-            tags: [
-                "unicycle","cool","outdoors"],
-            category: "String"}
-            , function(e){
-            console.log(e);
-        });
-    
-    }
     var q;
-        _surveyData.getAllQuestions("", function(questionMap){
-            q = questionMap;
-        }, function(e){
-            console.log(e);
-        });
-    // console.log(q);
+    _surveyData.getAllQuestions("", function(questionMap){
+        q = questionMap;
+        
+    }, function(e){
+        console.log("get in get"+e);
+    });
     res.send(q);
+    console.log(q);
+   
     // console.log("test");
 	
 });
@@ -76,10 +67,11 @@ router.post("/", function (req, res) {
         var q;
         _surveyData.getQuestionById(yes[i], function(questionMap){
             q = questionMap;
+            questions.push(q);
         }, function(e){
             console.log(e);
         });
-        questions.push(q);
+       
     }
     var tags =[];
     i =0;
