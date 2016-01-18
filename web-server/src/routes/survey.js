@@ -20,34 +20,29 @@ router.get('/', function (req, res) {
     // adding questions if there arnt any
     // this should be removed later
     console.log("test");
-    _surveyData.addQuestion(
-        {question: "do you like pie",
-        tags: ["pie","cool"],
-        category: "String"},function(e){
-        console.log("add 1"+e);
-    });
-
-        
-    _surveyData.addQuestion(
-        {question: "do you like unicycles",
-        tags: [
-            "unicycle","cool","outdoors"],
-        category: "String"}
-        , function(e){
-        console.log("add 2"+e);
-    });
+    
         
      
         
     var q;
-    _surveyData.getAllQuestions("", function(questionMap){
-        q = questionMap;
+    _surveyData.getAllQuestions(null, function(questionMap){
+        // q = questionMap;
+        
+        res.send(questionMap);
+        console.log(questionMap);
+        console.log(questionMap.length);
+        
+        if(!Object.keys(questionMap).length || questionMap.legnth <= 0)
+        {
+            console.log("should be adding");
+            addMockData();
+        }
         
     }, function(e){
         console.log("get in get"+e);
     });
-    res.send(q);
-    console.log(q);
+    
+    
    
     // console.log("test");
 	
@@ -114,5 +109,26 @@ function getOrgsFromAns(ans)
 	
 	
 }
+function addMockData()
+{
+    _surveyData.addQuestion(
+        {question: "do you like pie",
+        tags: ["pie","cool"],
+        category: "String"},function(e){
+        console.log("add 1"+e);
+    });
+
+        
+    _surveyData.addQuestion(
+        {question: "do you like unicycles",
+        tags: [
+            "unicycle","cool","outdoors"],
+        category: "String"}
+        , function(e){
+        console.log("add 2"+e);
+    });
+    
+}
+
 
 module.exports = router;
