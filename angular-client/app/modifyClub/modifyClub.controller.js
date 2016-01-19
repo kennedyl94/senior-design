@@ -23,7 +23,7 @@
       }
 
       modifyClubService.saveModifiedOrg(vm.org).then(function () {
-        $state.go('root.organizations', { redirect : true });
+        //$state.go('root.organizations', { redirect : true });
       });
     }
   }
