@@ -155,7 +155,7 @@ exports.searchByTags = function(tagList, success, error) {
 	studentOrg.find({}, function(err, orgs) {
 		var orgList = [];
 		orgs.forEach(function(org) {
-			if (org.tags.indexOf('invalid') == -1) {
+			if (org.tags.indexOf('inactive') == -1) {
 				var rating = 0;
 				tagList.forEach(function(tag) {
 					if (org.tags.indexOf(tag) != -1) {
