@@ -1,4 +1,4 @@
-<h1 id="createClubPageTitle"> {{ crClCtrl.title }} </h1>
+<h1 id="createClubPageTitle">Create a club entry</h1>
 
 <div ng-controller="CreateClubController">
   <form name="clubForm">
@@ -54,7 +54,7 @@
         <div class="row">
           <h4>Phone Number:</h4>
           <div class="col-sm-5 col-sm-offset-1 form-group" ng-class="{ 'has-error' : clubForm.phone.$invalid && clubForm.phone.$touched }">
-            <input id="phone" name="phone" class="form-control" type="tel" placeholder="5551234567" ng-model="crClCtrl.club.contact.phone"/>
+            <input id="phone" name="phone" class="form-control" type="tel" placeholder="(123) 456-7890" ng-model="crClCtrl.club.contact.phone" required/>
           </div>
           <div class="col-sm-6 has-error" ng-show="clubForm.phone.$invalid && clubForm.phone.$touched">
             <span class="help-block">This is a required field.</span>

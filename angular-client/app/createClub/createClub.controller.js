@@ -2,17 +2,14 @@
   'use strict';
 
   angular.module('createClub')
-    .controller('CreateClubController', ['createClubService', '$http', 'config', Controller]);
+    .controller('CreateClubController', ['createClubService', Controller]);
 
-  function Controller(createClubService, $http, config) {
+  function Controller(createClubService) {
 
     var vm = this;
-    vm.title = {};
 
-    createClubService.then(function (service) {
-      vm.title = service.data.title;
-    });
-
+    vm.submitted = false;
+    vm.failed = false;
     vm.club = {
       name: "",
       description: "",
@@ -22,34 +19,13 @@
         email: "",
         phone: ""
       }
-    }
-
-    angular.element('#phone').formatter({
-      'pattern': '({{999}}) {{999}}-{{9999}}'
-    });
-
-    vm.submitted = false;
-    vm.failed = false;
+    };
 
     vm.submit = function(form) {
       vm.submitted = false;
       vm.failed = false;
 
-      if (vm.club.tags.indexOf(',') != -1) {
-        vm.club.tags = vm.club.tags.split(',');
-      } else {
-        vm.club.tags = [vm.club.tags];
-      }
-
-      var req = {
-        method: 'POST',
-        url: config.domain + 'createClub',
-        headers: {},
-        data: {club: vm.club}
-      }
-
-      $http(req)
-        .success(function (data, status, headers, config) {
+      createClubService.submitClub(vm.club, function() {
           console.log(vm.club);
           vm.club = {
             name: "",
@@ -64,7 +40,7 @@
           form.$setPristine();
           form.$setUntouched();
           vm.submitted = true;
-        }).error(function(err, status, headers, config) {
+        }, function(err) {
           console.log('error: ' + err);
           vm.failed = true;
         });
