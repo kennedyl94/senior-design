@@ -61,19 +61,16 @@ describe('orgDataServices', function () {
 			async.parallel([
 				function(callback){
 					orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-						console.log(err);
 						callback();
 					});
 				},
 				function(callback){
 					orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-						console.log(err);
 						callback();
 					});
 				},
 				function(callback){
 					orgDataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-						console.log(err);
 						callback();
 					});
 				}],
