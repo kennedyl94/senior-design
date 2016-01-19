@@ -2,12 +2,9 @@
   'use strict';
 
   angular.module('createClub')
-    .factory('createClubService', ['$q', '$http', 'config', GetService]);
+    .factory('createClubService', ['$http', 'config', GetService]);
 
-  function GetService($q, $http, config) {
-
-    var deferred  = $q.defer();
-
+  function GetService($http, config) {
     var service = this;
 
     service.submitClub = function(org, success, error) {
@@ -17,25 +14,23 @@
         headers: {},
         data: {club: org}
       };
+
       $http(req).success(function(data, status, headers, config) {
         success();
       }).error(function(err, status, headers, config) {
         error(err);
       });
     }
-
+    /*
     function init() {
-      /*
       var promises = [];
       promises.push($http.get(config.domain + 'createClub'));
       $q.all(promises).then(function(data) {
         service.data.title = data[0].data.title;
-        deferred.resolve(service);
       });
-      */
     }
 
-    init();
+    init();*/
     return service;
   }
 })();
