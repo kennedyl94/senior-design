@@ -12,7 +12,7 @@
     vm.showOrgs = false;
 
     tagSearchService.then(function(service) {
-      var tempTags = service.data.tags;
+      var tempTags = service.data;
       var index = tempTags.indexOf('inactive');
       if (index != -1) {
         tempTags.splice(index, 1);
@@ -23,7 +23,7 @@
       });
     });
 
-    vm.search = function(form) {
+    vm.search = function() {
       var tagList = [];
       vm.orgList = [];
       vm.tags.forEach(function(tag) {
@@ -46,7 +46,6 @@
           tempOrgList.forEach(function(tempOrg) {
             vm.orgList.push(tempOrg.organization);
           });
-          console.log(tempOrgList);
         }, function(err) {console.log(err)});
 
       vm.showOrgs = true;

@@ -10,15 +10,13 @@
 
     var service = this;
 
-    service.data = {
-      tags: {}
-    };
+    service.data = {};
 
     function init() {
       var promises = [];
       promises.push($http.get(config.domain + 'tagSearch'));
       $q.all(promises).then(function(data) {
-        service.data.tags = data[0].data;
+        service.data = data[0].data;
         deferred.resolve(service);
       });
     }
