@@ -8,7 +8,14 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-	_dataServices.searchByTags(req.body.tags,
+	var tags = req.body.tags;
+	var tagList = [];
+	tags.forEach(function(tag) {
+		if (tag.checked) {
+			tagList.push(tag.text);
+		}
+	});
+	_dataServices.searchByTags(tagList,
 		function(orgs) {
 			res.send(orgs);
 		},

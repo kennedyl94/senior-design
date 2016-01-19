@@ -2,53 +2,25 @@
   'use strict';
 
   angular.module('tagSearch')
-    .controller('TagSearchController', ['tagSearchService', '$http', '$modal', 'config', Controller]);
+    .controller('TagSearchController', ['tagSearchService', '$modal', Controller]);
 
-  function Controller(tagSearchService, $http, $modal, config) {
+  function Controller(tagSearchService, $modal) {
 
     var vm = this;
-    vm.tags = [];
+    vm.tags = tagSearchService.data.tags;
     vm.orgList = [];
     vm.showOrgs = false;
 
-    tagSearchService.then(function(service) {
-      var tempTags = service.data;
-      var index = tempTags.indexOf('inactive');
-      if (index != -1) {
-        tempTags.splice(index, 1);
-      }
-
-      tempTags.forEach(function(tag) {
-        vm.tags.push({text: tag, checked: false});
-      });
-    });
-
     vm.search = function() {
-      var tagList = [];
+      vm.showOrgs = false;
       vm.orgList = [];
-      vm.tags.forEach(function(tag) {
-        if (tag.checked) {
-          tagList.push(tag.text);
-        }
+
+      tagSearchService.searchTags(vm.tags, function(tempOrgList) {
+        tempOrgList.forEach(function(tempOrg) {
+          vm.orgList.push(tempOrg.organization);
+        });
+        vm.showOrgs = true;
       });
-
-      var req = {
-        method: 'POST',
-        url: config.domain + 'tagSearch',
-        headers: {},
-        data: {tags: tagList}
-      }
-
-      var tempOrgList = [];
-      $http(req)
-        .then(function(res) {
-          tempOrgList = res.data;
-          tempOrgList.forEach(function(tempOrg) {
-            vm.orgList.push(tempOrg.organization);
-          });
-        }, function(err) {console.log(err)});
-
-      vm.showOrgs = true;
     }
 
     // -- TODO --
