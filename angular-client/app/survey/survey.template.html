@@ -5,7 +5,7 @@
 	<div class="col-sm-12" ng-repeat="question in surveyCtrl.data.questions | toArray">
 		<div class="row">
 			<div class="col-sm-4">
-				<input type="checkbox" ng-model="surveyCtrl.ans[question.id]" name={{"_"+question.id}} id={{question.id}} ng-false-value=false ng-true-value=true value=false> {{question.question}}<br>
+				<input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}} ng-false-value=false ng-true-value=true value=false> {{question.question}}<br>
 				
 			</div>
 		</div>

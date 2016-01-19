@@ -34,7 +34,7 @@ var router = express.Router();
 
 /** Connect the Database Through Data Services **/
 // _dataServices.connect();
-_surveyData.connect();
+// _surveyData.connect();
 
 
 app.use('/Organizations/', Orgs);
