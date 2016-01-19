@@ -36,7 +36,7 @@
       'fileUpload',
       'login'
     ])
-    
+
     .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       console.log("here!");

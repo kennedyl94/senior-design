@@ -7,15 +7,17 @@
   function GetService($q, $http, config) {
 
     var service = this;
-    var user = false;
+    var isLoggedIn = false;
+    var isStudentLifeAdmin = false;
+    var isStudentOrgAdmin = false;
 
     service.login = function(username, password) {
       var deferred = $q.defer();
       var promise = $http({method: 'POST', url: config.domain + 'login', data: {username: username, password:password}});
       promise.then(function(data) {
-          console.log("in service: " + data.data);
-          deferred.resolve(data.data);
-          user = true;
+        console.log("in service: " + data.data.type);
+        deferred.resolve(data.data);
+        isLoggedIn = true;
       });
       return deferred.promise;
     };
@@ -31,15 +33,7 @@
     };
 
     service.isLoggedIn = function() {
-      if(user) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-
-    service.getUserStatus = function() {
-      return user;
+      return isLoggedIn;
     };
 
     return service;

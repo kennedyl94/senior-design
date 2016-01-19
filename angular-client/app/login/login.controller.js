@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('login')
-    .controller('LoginController', ['loginService', '$window', '$state', Controller]);
+    .controller('LoginController', ['loginService', '$window', '$state', '$scope', '$location', Controller]);
 
   function Controller(loginService, $window, $state) {
     var vm = this;
@@ -12,17 +12,17 @@
     vm.login = function() {
       console.log("something in controller");
       loginService.login(vm.username, vm.password).then(function(response) {
-        if(response == "OK") {
-          //console.log("Response: " + response);
+        console.log("code: " + response.code);
+        console.log("type: " + response.type);
+        if(response.code == 200) {
+          console.log("Response: " + response);
           console.log("Logged In - Username: " + vm.username);
-          console.log("User status: " + loginService.getUserStatus());
-          alert("You have been successfully logged in!");
+          console.log("User status: " + loginService.isLoggedIn());
+          //alert("You have been successfully logged in!");
           $state.go('root.organizations', { redirect : true });
-          $window.location.reload();
         } else {
-          alert("Incorrect Log In Credentials")
+          alert("Incorrect Log In Credentials");
           $state.go('root.login', {redirect: true});
-          $window.location.reload();
         }
       });
     };
@@ -35,6 +35,11 @@
         $state.go('root.organizations', { redirect : true });
         $window.location.reload();
       });
-    }
+    };
+
+    //vm.isActive = function () {
+    //  console.log(loginService.user);
+    //  return loginService.user;
+    //}
   }
 })();
