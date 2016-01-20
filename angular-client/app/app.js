@@ -28,6 +28,8 @@
       'root',
       'config',
       'navBar',
+      'ngNavSidebar',
+      'navSidebar',
       'organizations',
 	    'createClub',
       'modal',

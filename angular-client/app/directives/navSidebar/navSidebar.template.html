@@ -1,0 +1,26 @@
+<div id="fg-nav-sidebar-wrapper" ng-class="{ 'nav-bar-expanded' : expanded }">
+  <ul id="fg-nav-sidebar-buttons">
+    <li id="fg-nav-sidebar-toggle">
+      <a href="" ng-click="navBarCtrl.toggle()">
+        <div class="menu"
+             ng-include="hamburgerUrl"></div>
+      </a>
+    </li>
+    <span class="fg-nav-sidebar-hideMobile">
+        <li ng-repeat="button in buttons.navButtons"
+            ng-class="{'fg-nav-sidebar-active': navBarCtrl.currentStateIsInHierarchy(button)}">
+          <a href="" ng-class="{'fg-nav-sidebar-active': (navBarCtrl.state.indexOf(button.link) === 0)}"
+             ng-click="navBarCtrl.navigate(button)">
+            <div class="logo"
+                 ng-class="{SVGActive:navBarCtrl.state === button.link, SVGInactive:navBarCtrl.state !== button.link}"
+                 ng-include="button.imgUrl"></div>
+            <div class="fg-nav-sidebar-label">
+              <span>{{button.text}}</span>
+            </div>
+          </a>
+        </li>
+    </span>
+  </ul>
+</div>
+
+<div id="fg-nav-sidebar-close-bib" ng-show="expanded" ng-click="navBarCtrl.toggle()"></div>

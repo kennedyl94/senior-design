@@ -18,6 +18,11 @@
             controller: 'NavBarController',
             controllerAs: 'navCtrl'
           },
+          'navSideBar': {
+            templateUrl: 'navSidebar/navSidebar.template.html',
+            controller: 'NavSidebarController',
+            controllerAs: 'navSideBarCtrl'
+          },
           'content': {
             /*template: '<div style="strong">WARNING: If you are seeing this then you need to ' +
             'create a route to override the content view on your page!</div>'*/

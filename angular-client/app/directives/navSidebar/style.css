@@ -1,0 +1,147 @@
+#fg-nav-sidebar-wrapper {
+  max-width: 150px;
+  background: #D30025;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.2s ease 0s;
+}
+
+#fg-nav-sidebar-buttons {
+  padding:0;
+  margin:0;
+  overflow:hidden;
+  background: #D30025;
+}
+
+#fg-nav-sidebar-buttons li.fg-nav-sidebar-active {
+  background-color: rgba(0,0,0,0.2);
+}
+
+#fg-nav-sidebar-buttons #fg-nav-sidebar-toggle {
+  /*display:none;*/
+  height:60px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index:100;
+}
+
+#fg-nav-sidebar-buttons #fg-nav-sidebar-toggle a {
+  position:fixed;
+}
+
+#fg-nav-sidebar-buttons #fg-nav-sidebar-toggle a svg {
+  margin-left: 0;
+  height: 100%;
+  padding: 18px 10px;
+  width: 60px;
+  background: #c0392b;
+}
+
+#fg-nav-sidebar-buttons li {
+  height: 35px;
+  list-style: none;
+}
+
+#fg-nav-sidebar-buttons li a.fg-nav-sidebar-active {
+  height: 35px;
+  list-style: none;
+}
+
+#fg-nav-sidebar-buttons li a.fg-nav-sidebar-active .logo::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: inherit;
+  content: ' ';
+  width: 4px;
+  background-color: #c0392b;
+}
+
+#fg-nav-sidebar-buttons li a.fg-nav-sidebar-active .logo,.menu svg * {
+  fill:#fff !important;
+}
+
+#fg-nav-sidebar-buttons li a.fg-nav-sidebar-active .fg-nav-sidebar-label span {
+  color: #ffbbbc;
+}
+
+#fg-nav-sidebar-buttons li a {
+  height: inherit;
+}
+
+#fg-nav-sidebar-buttons li a .logo,.menu {
+  height: inherit;
+  position:absolute;
+}
+
+#fg-nav-sidebar-buttons li a .logo,.menu svg {
+  height: inherit;
+  margin-left:5px;
+  width:35px;
+}
+
+#fg-nav-sidebar-buttons li a .logo,.menu svg * {
+  transition: fill 0.2s ease;
+  fill:#fff;
+}
+
+#fg-nav-sidebar-buttons li .fg-nav-sidebar-label {
+  max-width:150px;
+  height:inherit;
+  display:block;
+}
+
+#fg-nav-sidebar-buttons li .fg-nav-sidebar-label span {
+  width:150px;
+  display:block;
+  padding-left:40px;
+  line-height:35px;
+  color:darkgray;
+  font-size:12px;
+  float:right;
+}
+
+.nav-bar-expanded {
+  border-right: 1px solid gray;
+}
+
+.nav-bar-expanded #fg-nav-sidebar-buttons li .fg-nav-sidebar-label {
+  max-width: 150px;
+}
+
+.nav-bar-expanded #fg-nav-sidebar-buttons li .logo,.menu svg * {
+  fill:darkgray;
+}
+
+.SVGInactive svg * {
+  fill:darkgray;
+}
+
+.SVGActive {
+  background-color: #c0392b;
+}
+
+.SVGActive svg * {
+  fill: #fff;
+}
+
+.fg-nav-sidebar-hideMobile > li:first-child {
+  margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
