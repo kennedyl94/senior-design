@@ -24,10 +24,6 @@
       }
     }
 
-    angular.element('#phone').formatter({
-      'pattern': '({{999}}) {{999}}-{{9999}}'
-    });
-
     vm.submitted = false;
     vm.failed = false;
 
