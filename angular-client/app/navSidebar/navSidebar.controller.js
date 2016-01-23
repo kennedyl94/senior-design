@@ -1,5 +1,5 @@
 (function(){
-  'use strict'
+  'use strict';
 
   angular.module('navSidebar')
     .controller('NavSidebarController', [Controller]);
@@ -9,26 +9,44 @@
     var vm = this;
 
     vm.buttons = {
-      toggleButton: {
-        resourceKey: "FigloSuite_btnClose",
-        closeImgUrl: "content/images/svg/sidebar-expand-collapse-left.svg",
-        openImgUrl: "content/images/svg/sidebar-expand-collapse-right.svg"
+      toggleButton:
+      {
+        text: "Toggle",
+        imgUrl: "content/images/svg/sidebar-expand-collapse-left.svg",
+        imgUrlCollapsed: "content/images/svg/sidebar-expand-collapse-right.svg",
+        imgUrlExpanded: "content/images/svg/sidebar-expand-collapse-left.svg"
       },
-      hamburgerButton : {
-        hamburgerImgUrl: "content/images/svg/menu-hamburger.svg"
-      },
-      navButtons: [
+      navButtons:
+      [
         {
-          text: "Home",
-          imgUrl: "/content/images/svg/menu-home.svg",
-          link: "root",
-          sortOrder: 0
+          text: "Approvals",
+          imgUrl: "content/images/svg/approval.svg",
+          link: "root.approvals"
         },
         {
-          text: "Organizations",
-          imgUrl: "content/images/svg/menu-client-list.svg",
-          link: "root.organizations",
-          sortOrder: 1
+          text: "Create Organization",
+          imgUrl: "/content/images/svg/create.svg",
+          link: "root.createClub"
+        },
+        {
+          text: "Mass Upload",
+          imgUrl: "content/images/svg/upload.svg",
+          link: "root.massUpload"
+        },
+        {
+          text: "Organization Settings",
+          imgUrl: "content/images/svg/orgSettings.svg",
+          link: "root.orgSettings"
+        },
+        {
+          text: "User Settings",
+          imgUrl: "content/images/svg/userSettings.svg",
+          link: "root.userSettings"
+        },
+        {
+          text: "Survey Settings",
+          imgUrl: "content/images/svg/survey.svg",
+          link: "root.surveySettings"
         }
       ]
     };

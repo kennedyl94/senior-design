@@ -6,21 +6,17 @@
     var vm = this;
 
     vm.state = $state.current.name;
+    $scope.collapsed = false;
 
     vm.toggle = function () {
-      $scope.expanded = !$scope.expanded;
-      $scope.onToggle({expanded: $scope.expanded});
-      //$("#background-image").removeClass("noTransition");
-      //$scope.expanded ? $("#background-image").addClass("fg-nav-sidebar-offset") : $("#background-image").removeClass("fg-nav-sidebar-offset");
+      $scope.collapsed = !$scope.collapsed;
     };
 
-    $scope.hamburgerUrl = $scope.buttons.hamburgerButton.hamburgerImgUrl;
-
     vm.navigate = function (button) {
-      $state.go(button.link);
-      if (!$scope.expanded) {
-        vm.toggle();
-      }
+        $state.go(button.link);
+        if (!$scope.collapsed) {
+          vm.toggle();
+        }
     };
 
     vm.currentStateIsInHierarchy = function (button) {

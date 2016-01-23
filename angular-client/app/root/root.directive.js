@@ -8,8 +8,6 @@
     return {
       restrict: 'E',
       templateUrl: 'root/root.template.html',
-      controller: 'RootController',
-      controllerAs: 'rootCtrl',
       scope: {
 
       }
