@@ -10,6 +10,11 @@
 
     vm.toggle = function () {
       $scope.collapsed = !$scope.collapsed;
+      if($scope.collapsed) {
+        $('#background-image').css({'margin-left':'-125px'});
+      } else {
+        $('#background-image').css({'margin-left':'125px'});
+      }
     };
 
     vm.navigate = function (button) {
