@@ -28,6 +28,7 @@ var survey = require("./routes/survey.js");
 
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
+var logout = require("./routes/logout.js");
 
 var router = express.Router();
 
@@ -37,6 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/login', login);
+app.use('/api/logout', logout);
 
 app.use('/api/Organizations/', Orgs);
 

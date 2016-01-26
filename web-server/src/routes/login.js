@@ -37,18 +37,12 @@ router.post('/', function (request, response) {
     console.log("trying to do stuff");
     passport.authenticate('local', { session : true}, function(req, res) {
         console.log("in authenticate. Res: " + res);
-        if(res.status != false) {
+        if(res != false) {
             response.send({type: res.Type, code: 200});
         } else {
             response.sendStatus(401);
         }
     })(request, response);
-});
-
-router.get('/', function(request, response) {
-    console.log("back end log out");
-    request.logout();
-    response.sendStatus(200);
 });
 
 exports.addUser = function(user, success, error) {

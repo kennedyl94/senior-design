@@ -18,21 +18,13 @@
         console.log("in service: " + data.data.type);
         deferred.resolve(data.data);
         isLoggedIn = true;
-      });
-      return deferred.promise;
-    };
-
-    service.logout = function() {
-      var deferred = $q.defer();
-      var promise = $http({method: 'GET', url: config.domain + 'login'});
-      promise.then(function(data) {
-        console.log("in service: " + data.data);
-        deferred.resolve(data.data);
+        //$rootScope.$apply();
       });
       return deferred.promise;
     };
 
     service.isLoggedIn = function() {
+      console.log("isLoggedIn: " + isLoggedIn);
       return isLoggedIn;
     };
 

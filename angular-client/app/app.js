@@ -34,7 +34,8 @@
       'survey',
       'massUpload',
       'fileUpload',
-      'login'
+      'login',
+      'logout'
     ])
 
     .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {

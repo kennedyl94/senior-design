@@ -35,6 +35,11 @@
     "app/navBar/navBar.module.js",
     "app/navBar/navBar.controller.js",
 
+    "app/logout/logout.module.js",
+    "app/logout/logout.controller.js",
+    "app/logout/logout.routes.js",
+    "app/logout/logout.service.js",
+
     "app/login/login.module.js",
     "app/login/login.controller.js",
     "app/login/login.routes.js",
