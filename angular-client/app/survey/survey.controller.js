@@ -14,7 +14,29 @@
     vm.ans=[];
     
     vm.submit = function() {
-      // alert(ans);
+        
+        
+        // var dict = [];//... fill dictionary with original values...
+        // for (var key in dict.Keys)
+        // {
+        //     if (!form.Keys.Contains( "MyType." + key.Name ))
+        //     {
+        //        vm. ans[key] = false;
+        //     }
+        // }
+
+        // for (var key in form.Keys.Where( k => k.StartsWith("MyType.")))
+        // {
+        //     var value = form[key].Contains("on"); // just to be safe
+        //     // create or retrieve the MyType object that goes with the key
+        //     var myType = vm.ans.Keys.Where( k => k.Name == key ).Single();
+
+        //     vm.ans[myType] = value;
+        // }
+        // // vm.ans = dict;
+        
+        
+    //    alert(vm.ans);
       console.log(vm.ans);
       
       var req = {
@@ -22,7 +44,9 @@
         url: 'http://localhost:3000/survey',
         headers: {},
         data: vm.ans
+      
       }
+      
       $http(req)
         .success(function (data, status, headers, config) {
           console.log(data);

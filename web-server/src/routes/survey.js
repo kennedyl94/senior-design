@@ -21,10 +21,10 @@ router.get('/', function (req, res) {
     // this should be removed later
     // console.log("test");
     
-    var q;
+    
     _surveyData.getAllQuestions(null, function(questionMap){
         // q = questionMap;
-        
+        // questionMap = hexToInt(questionMap);
         res.send(questionMap);
         // console.log(questionMap);
         // console.log(questionMap.length);
@@ -49,26 +49,27 @@ router.post("/", function (req, res) {
 
 	// console.log("wubalubadubdub ");
 	// var x = getOrgsFromAns(req.body)
-	var data = req.body;
-	console.log("posted: "+data);
-	var yes = getIDFromPost(data);
-    var questions =[];
-    var i =0;
-    for (i; i< yes.length; i++) {
+	// var data = req.body;
+	console.log("posted: "+ req.body);
+    
+	// var yes = getIDFromPost(data);
+    // var questions =[];
+    // var i =0;
+    // for (i; i< yes.length; i++) {
         
         
-        _surveyData.getQuestionById(yes[i], function(questionMap){
+    //     _surveyData.getQuestionById(yes[i], function(questionMap){
            
-            questions.push(questionMap);
-            if(i == yes.length) {
-                questions = questions.sort();
-            }
-        }, function(e){
-            console.log(e);
-        });
+    //         questions.push(questionMap);
+    //         if(i == yes.length) {
+    //             questions = questions.sort();
+    //         }
+    //     }, function(e){
+    //         console.log(e);
+    //     });
        
-    }
-    console.log("questions: "+questions);
+    // }
+    // console.log("questions: "+questions);
     // var tags =[];
     // i =0;
     // for(i; i<questions.length; i++) {
@@ -110,6 +111,27 @@ function getOrgsFromAns(ans)
 	
 	
 }
+function hexToInt(arr){
+    var i =0;
+    console.log("hti length:"+Object.keys(arr).length);
+    for(i; i < Object.keys(arr).length; i++){
+        console.log(Object.keys(arr)[i]);
+        Object.keys(arr)[i]._id = parseInt(Object.keys(arr)[i]._id, 16);
+        
+    }
+    // console.log(arr);
+    return arr;
+}
+function intToHex(arr){
+    var i =0;
+    console.log("hti length:"+arr.length);
+    for(i; i < arr.length; i++){
+        // hexString = yourNumber.toString(16)
+        arr[i]._id = arr[i]._id.toString(16);
+    }
+    return arr;
+}
+
 function addMockData()
 {
     _surveyData.addQuestion(

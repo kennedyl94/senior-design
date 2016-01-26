@@ -13,8 +13,8 @@ var connection = mongoose.connection;
 connection.on('open', function(){
 	console.log('connected to database at ' + dbName);
 });
-process.on('SIGINT', function(){
-	mongoose.disconnect();
-});
+// process.on('SIGINT', function(){
+// 	mongoose.disconnect();
+// });
 
 mongoose.connect(dbName);
