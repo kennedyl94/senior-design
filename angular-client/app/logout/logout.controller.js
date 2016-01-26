@@ -9,7 +9,6 @@
 
     vm.logout = function() {
       logoutService.logout().then(function(response) {
-        console.log("Log out controller response: " + response);
         $("#showLoggedIn").html("<a href='#/login'>Log In</a>");
         $state.go('root.organizations', { redirect : true });
       });

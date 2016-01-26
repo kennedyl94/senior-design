@@ -8,7 +8,6 @@ var user = require('../models/model.user.js');
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        console.log("in LocalStrategy");
         user.findOne({Username:username, Password:password}, function(err,user) {
             if (err) {
                 return done(err);
@@ -16,10 +15,6 @@ passport.use(new LocalStrategy(
             if (!user) {
                 return done(null, false, {message: 'No User Found'});
             }
-            //if(!user.validatePassword(password)) {
-            //    return done(null, false, {message: 'Incorrect Password'});
-            //}
-
             return done(null, user);
         })
     }
@@ -34,9 +29,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 router.post('/', function (request, response) {
-    console.log("trying to do stuff");
     passport.authenticate('local', { session : true}, function(req, res) {
-        console.log("in authenticate. Res: " + res);
         if(res != false) {
             response.send({type: res.Type, code: 200});
         } else {

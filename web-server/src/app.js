@@ -4,9 +4,7 @@ var express = require('express')
 	, _dataServices = require('./dataServices.js')
 	, passport = require('passport');
 
-  
 
-	
 /** CORS Middleware (Allows Client to Talk to This) **/
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -38,6 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/login', login);
+
 app.use('/api/logout', logout);
 
 app.use('/api/Organizations/', Orgs);
@@ -56,8 +55,3 @@ var server = app.listen(3000, function () {
   var port = server.address().port;
   console.log('Org Finder App listening at http://%s:%s', host, port);
 });
-
-
-
-
-
