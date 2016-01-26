@@ -1,17 +1,17 @@
 (function(){
   'use strict';
 
-  angular.module('survey')
+  angular.module('logout')
     .config(['$stateProvider',
       function($stateProvider) {
         $stateProvider
-          .state('root.survey', {
-            url: 'survey',
+          .state('root.logout', {
+            url:'logout',
             views: {
               'content@': {
-                templateUrl: 'survey/survey.template.html',
-                controller: 'SurveyController',
-                controllerAs: 'surveyCtrl'
+                templateUrl: 'logout/logout.template.html',
+                controller: 'LogoutController',
+                controllerAs: 'logoutCtrl'
               }
             },
             data: {

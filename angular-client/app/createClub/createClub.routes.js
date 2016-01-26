@@ -13,8 +13,10 @@
                 controller: 'CreateClubController',
                 controllerAs: 'crClCtrl'
               }
+            },
+            data: {
+              restricted: true
             }
           });
       }]);
-
 })();

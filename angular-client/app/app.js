@@ -34,6 +34,15 @@
       'survey',
       'massUpload',
       'fileUpload',
-      'login'
-    ]);
+      'login',
+      'logout'
+    ])
+
+    .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      if (next.data && next.data.restricted && loginService.isLoggedIn()===false) {
+        $location.path('/login');
+      }
+    });
+  }]);
 })();

@@ -14,6 +14,9 @@
                 controller: 'OrganizationsController',
                 controllerAs: 'orgsCtrl'
               }
+            },
+            data: {
+              restricted: false
             }
           });
       }]);

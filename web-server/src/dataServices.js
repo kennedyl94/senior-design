@@ -94,7 +94,7 @@ exports.deleteOrg = function(orgId, success, error) {
 //
 //exports.userExists = function(user, success, error){
 //	if(connected){
-//		admin.find({}, function(err, orgs) {
+//		user.find({}, function(err, orgs) {
 //			var orgsMap = {};
 //			orgs.forEach(function(org) {
 //				orgsMap[org._id] = org;
@@ -109,7 +109,7 @@ exports.deleteOrg = function(orgId, success, error) {
 //
 //exports.addUser = function(user, success, error) {
 //	if(connected) {
-//		var newUser = new admin(user)
+//		var newUser = new user(user)
 //		newUser.save((function(err, savedUser){
 //			callback(err, savedUser._doc);
 //		}));
