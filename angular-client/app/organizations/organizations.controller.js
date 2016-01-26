@@ -8,23 +8,29 @@
 
     var vm = this;
     vm.data = organizationService.data;
+    vm.inactive = [];
 
     vm.query = "";
 
     // Filters Orgs -- If name/description contains vm.query
-    vm.search = function (org) {
+    vm.search = function(org) {
       var query = vm.query || '';
       if(query != '') { query = query.toLowerCase(); }
 
       var name = org.name.toLowerCase();
       var description = org.description.toLowerCase();
       var tags = org.tags;
-      var i = 0;
-      for(i; i < tags.length; i++) {
-        if(tags[i].toLowerCase().indexOf(query || '') !== -1) {
-          return true;
+
+      if (query != 'inactive' && tags.indexOf('inactive') == -1) {
+        for (var i = 0; i < tags.length; i++) {
+          if (tags[i].toLowerCase().indexOf(query || '') !== -1) {
+            return true;
+          }
         }
+      } else if (query == 'inactive' && tags.indexOf('inactive') != -1) {
+        return true;
       }
+
       return !!((name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1));
     }
 
@@ -57,7 +63,7 @@
     vm.selectedOption = vm.options[0];
 
     vm.sortOrgs = function(selectedOption) {
-      organizationService.sortOrgs(selectedOption).then(function (sortedOrgs) {
+      organizationService.sortOrgs(selectedOption).then(function(sortedOrgs) {
         vm.data.orgs = sortedOrgs;
       });
   };
@@ -70,7 +76,7 @@
         templateUrl: 'directives/modal/modal.template.html',
         controller: 'ModalController as modalCtrl',
         resolve: {
-          contents: function () {
+          contents: function() {
             return {
               org: org,
               images: images
