@@ -46,7 +46,7 @@
 
     .run(['$rootScope', '$location', 'loginService', function ($rootScope, $location, loginService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      if (next.data && next.data.restricted && loginService.isLoggedIn()===false) {
+      if (next.data && next.data.restricted && loginService.getLoginStatus()===false) {
         $location.path('/login');
       }
     });
