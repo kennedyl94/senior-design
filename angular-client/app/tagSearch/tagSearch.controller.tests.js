@@ -59,15 +59,8 @@ describe("TagSearchController", function() {
     }
   };
 
-  var ctrl;
-
   beforeEach(function() {
     module('tagSearch');
-    ctrl = createController();
-    ctrl.tags = [];
-    testTagTexts.forEach(function(tagText) {
-      ctrl.tags.push({text: tagText, checked: false});
-    });
   });
 
   beforeEach(module(function($provide) {
@@ -93,6 +86,7 @@ describe("TagSearchController", function() {
 
   describe("Single Organization", function() {
     it("should open a modal when an organization is selected", function() {
+      var ctrl = createController();
       spyOn($modal, 'open').and.callThrough();
       ctrl.openModal(testOrgs[0], testImages);
       expect($modal.open).toHaveBeenCalled();
@@ -101,6 +95,11 @@ describe("TagSearchController", function() {
 /* Can't make test until able to test control vs service
   describe("Search", function() {
     it("should return Org1", function() {
+      var ctrl = createController();
+      ctrl.tags = [];
+      testTagTexts.forEach(function(tagText) {
+        ctrl.tags.push({text: tagText, checked: false});
+      });
       ctrl.tags[1].checked = true;
       var res = {};
       res.data.organization = [];
@@ -110,6 +109,11 @@ describe("TagSearchController", function() {
       expect(ctrl.orgList[0].name).toBe("Org1");
     });
     it("should return Org2", function() {
+      var ctrl = createController();
+      ctrl.tags = [];
+      testTagTexts.forEach(function(tagText) {
+        ctrl.tags.push({text: tagText, checked: false});
+      });
       ctrl.tags[3].checked = true;
       var res = {};
       res.data.organization = [];
@@ -119,6 +123,11 @@ describe("TagSearchController", function() {
       expect(ctrl.orgList[0].name).toBe("Org2");
     });
     it("should return both orgs", function() {
+      var ctrl = createController();
+      ctrl.tags = [];
+      testTagTexts.forEach(function(tagText) {
+        ctrl.tags.push({text: tagText, checked: false});
+      });
       ctrl.tags[0].checked = true;
       var res = {};
       res.data.organization = [];
@@ -130,6 +139,11 @@ describe("TagSearchController", function() {
       expect(ctrl.orgList[1].name).toBe("Org2");
     });
     it("should return nothing", function() {
+      var ctrl = createController();
+      ctrl.tags = [];
+      testTagTexts.forEach(function(tagText) {
+        ctrl.tags.push({text: tagText, checked: false});
+      });
       var res = {};
       res.data.organization = [];
       $http.expectPOST(URL).respond(res);

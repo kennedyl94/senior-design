@@ -6,7 +6,6 @@ describe('tagSearchService', function() {
   var URL;
 
   var testTagTexts = ["tag1", "tag2", "tag3", "tag4", "tag5"];
-  var testTags = [];
   var testOrgs = [
     {
       _id: "1",
@@ -35,24 +34,10 @@ describe('tagSearchService', function() {
       }
     }
   ];
-  var res = {data: {organization: []}};
-  var tempOrgs;
-
-  var success = function(resList) {
-    resList.forEach(function(tempOrg) {
-      tempOrgs.push(tempOrg.organization);
-    });
-  };
 
   beforeEach(function() {
     module('config');
     module('tagSearch');
-    testTags = [];
-    testTagTexts.forEach(function(tagText) {
-      testTags.push({text: tagText, checked: false});
-    });
-    res.data.organization = [];
-    tempOrgs = [];
   });
 
   beforeEach(inject(function (_$httpBackend_, _tagSearchService_, _config_) {
@@ -75,35 +60,88 @@ describe('tagSearchService', function() {
 
   describe("Search", function() {
     it("should return Org1", function() {
+      var res = {data: {organization: []}};
       res.data.organization.push(testOrgs[0]);
+
+      var testTags = [];
+      testTagTexts.forEach(function(tagText) {
+        testTags.push({text: tagText, checked: false});
+      });
       testTags[1].checked = true;
       $http.expectPOST(URL).respond(res);
-      tagSearchService.searchTags(testTags, success);
+
+      var tempOrgs = [];
+      tagSearchService.searchTags(testTags, function(resList) {
+        console.log(resList.data.organization[0]);
+        resList.data.organization.forEach(function(result) {
+          tempOrgs.push(result);
+        });
+      });
+
       expect(tempOrgs[0].name).toEqual("Org1");
       expect(tempOrgs[0]).toEqual(testOrgs[0]);
     });
     it("should return Org2", function() {
+      var res = {data: {organization: []}};
       res.data.organization.push(testOrgs[1]);
+
+      var testTags = [];
+      testTagTexts.forEach(function(tagText) {
+        testTags.push({text: tagText, checked: false});
+      });
       testTags[3].checked = true;
       $http.expectPOST(URL).respond(res);
-      tagSearchService.searchTags(testTags, success);
+
+      var tempOrgs = [];
+      tagSearchService.searchTags(testTags, function(resList) {
+        resList.forEach(function(result) {
+          tempOrgs.push(result.organization);
+        });
+      });
+
       expect(tempOrgs[0].name).toEqual("Org2");
       expect(tempOrgs[0]).toEqual(testOrgs[1]);
     });
     it("should return both orgs", function() {
+      var res = {data: {organization: []}};
       res.data.organization.push(testOrgs[0]);
       res.data.organization.push(testOrgs[1]);
+
+      var testTags = [];
+      testTagTexts.forEach(function(tagText) {
+        testTags.push({text: tagText, checked: false});
+      });
       testTags[0].checked = true;
       $http.expectPOST(URL).respond(res);
-      tagSearchService.searchTags(testTags, success);
+
+      var tempOrgs = [];
+      tagSearchService.searchTags(testTags, function(resList) {
+        resList.forEach(function(result) {
+          tempOrgs.push(result.organization);
+        });
+      });
+
       expect(tempOrgs[0].name).toEqual("Org1");
       expect(tempOrgs[1].name).toEqual("Org2");
       expect(tempOrgs[0]).toEqual(testOrgs[0]);
       expect(tempOrgs[1]).toEqual(testOrgs[1]);
     });
     it("should return nothing", function() {
+      var res = {data: {organization: []}};
+
+      var testTags = [];
+      testTagTexts.forEach(function(tagText) {
+        testTags.push({text: tagText, checked: false});
+      });
       $http.expectPOST(URL).respond(res);
-      tagSearchService.searchTags(testTags, success);
+
+      var tempOrgs = [];
+      tagSearchService.searchTags(testTags, function(resList) {
+        resList.forEach(function(result) {
+          tempOrgs.push(result.organization);
+        });
+      });
+
       expect(tempOrgs).toEqual([]);
     });
   });

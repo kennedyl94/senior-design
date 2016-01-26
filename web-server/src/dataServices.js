@@ -153,7 +153,8 @@ exports.getAllTags = function(success, error) {
  */
 exports.searchByTags = function(tagList, success, error) {
 	studentOrg.find({}, function(err, orgs) {
-		var orgList = [];
+		var tempOrgList = [];
+		var orgList = []
 		orgs.forEach(function(org) {
 			if (org.tags.indexOf('inactive') == -1) {
 				var rating = 0;
@@ -164,13 +165,17 @@ exports.searchByTags = function(tagList, success, error) {
 				});
 
 				if (rating > 0) {
-					orgList.push({organization: org, priority: rating});
+					tempOrgList.push({organization: org, priority: rating});
 				}
 			}
 		});
 
-		orgList.sort(function (a, b) {
+		tempOrgList.sort(function(a, b) {
 			return -(a.priority - b.priority);
+		});
+
+		tempOrgList.forEach(function(org){
+			
 		});
 
 		success(orgList);
