@@ -6,6 +6,7 @@
 
   function GetService($q, $http, config) {
 
+    var vm = this;
     var service = this;
     var isLoggedIn = false;
 
@@ -14,12 +15,16 @@
       var promise = $http({method: 'POST', url: config.domain + 'login', data: {username: username, password:password}});
       promise.then(function(data) {
         deferred.resolve(data.data);
-        isLoggedIn = true;
+        vm.setLoginStatus(true);
       });
       return deferred.promise;
     };
 
-    service.isLoggedIn = function() {
+    service.setLoginStatus = function(loggedIn) {
+      isLoggedIn = loggedIn;
+    }
+
+    service.getLoginStatus = function() {
       return isLoggedIn;
     };
 
