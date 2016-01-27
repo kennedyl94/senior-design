@@ -11,7 +11,7 @@
     
     console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
     
-    vm.ans=[];
+    vm.ans={};
     
     vm.submit = function() {
         
@@ -37,7 +37,10 @@
         
         
     //    alert(vm.ans);
-      console.log(vm.ans);
+      
+    //   var x={};
+    //   x.ans = vm.ans;
+      console.log(JSON.stringify(vm.ans));
       
       var req = {
         method: 'POST',

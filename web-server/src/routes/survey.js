@@ -50,7 +50,10 @@ router.post("/", function (req, res) {
 	// console.log("wubalubadubdub ");
 	// var x = getOrgsFromAns(req.body)
 	// var data = req.body;
-	console.log("posted: "+ req.body);
+	console.log("posted: "+ JSON.stringify(req.body));
+    for (var i =0; i< Object.keys(req.body).length; i++) {
+        console.log(Object.keys(req.body)[i]);
+    }
     
 	// var yes = getIDFromPost(data);
     // var questions =[];
