@@ -33,6 +33,7 @@
     "app/survey/survey.service.js",
 
     "app/root/root.module.js",
+    "app/root/root.controller.js",
     "app/root/root.directive.js",
     "app/root/root.routes.js",
 
@@ -50,7 +51,7 @@
     "app/logout/logout.controller.js",
     "app/logout/logout.routes.js",
     "app/logout/logout.service.js",
-    
+
     "app/orgSettings/orgSettings.module.js",
     "app/orgSettings/orgSettings.controller.js",
     "app/orgSettings/orgSettings.routes.js",
@@ -80,6 +81,7 @@
     "app/components/angular-bootstrap/ui-bootstrap.min.js",
     "app/components/angular-bootstrap/ui-bootstrap-tpls.min.js",
     "app/components/angular-resource/angular-resource.min.js",
+    "app/components/angular-cookies/angular-cookies.min.js",
     "app/components/angular-sanitize/angular-sanitize.min.js",
     "app/components/angular-toArrayFilter/toArrayFilter.js",
     "app/components/bootstrap/dist/js/bootstrap.min.js",

@@ -2,31 +2,44 @@
   'use strict';
 
   angular.module('login')
-    .factory('loginService', ['$q', '$http', 'config', GetService]);
+    .factory('loginService', ['$q', '$http','config', '$cookies', GetService]);
 
-  function GetService($q, $http, config) {
+  function GetService($q, $http, config, $cookies) {
 
-    var vm = this;
     var service = this;
     var isLoggedIn = false;
+    service.isStudentLifeAdmin = false;
+    service.isOrgLeaderAdmin = false;
 
     service.login = function(username, password) {
       var deferred = $q.defer();
       var promise = $http({method: 'POST', url: config.domain + 'login', data: {username: username, password:password}});
       promise.then(function(data) {
+        if(data.data.code == 200) {
+          if(data.data.type == "SL") {
+            $cookies.put('om_slAdmin', 'true');
+            service.isStudentLifeAdmin = true;
+          } else if(data.data.type == "Org") {
+            service.isOrgLeaderAdmin = true;
+          }
+          isLoggedIn = true;
+        }
         deferred.resolve(data.data);
-        vm.setLoginStatus(true);
       });
       return deferred.promise;
     };
 
-    service.setLoginStatus = function(loggedIn) {
+    /*service.setLoginStatus = function(loggedIn) {
       isLoggedIn = loggedIn;
-    }
+      if(!loggedIn) {
+        service.isStudentLifeAdmin = false;
+        service.isOrgLeaderAdmin = false;
+      }
+    }*/
 
-    service.getLoginStatus = function() {
+    /*service.getLoginStatus = function() {
       return isLoggedIn;
-    };
+    };*/
 
     return service;
   }
