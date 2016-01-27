@@ -50,89 +50,44 @@ router.post("/", function (req, res) {
 	// console.log("wubalubadubdub ");
 	// var x = getOrgsFromAns(req.body)
 	// var data = req.body;
-	console.log("posted: "+ JSON.stringify(req.body));
+	// console.log("posted: "+ JSON.stringify(req.body));
+    
+    //x will contain all ids of questions checked true
+    var x =[];
     for (var i =0; i< Object.keys(req.body).length; i++) {
-        console.log(Object.keys(req.body)[i]);
+        if (req.body[Object.keys(req.body)[i]]){
+            x.push(Object.keys(req.body)[i])
+        }
     }
-    
-	// var yes = getIDFromPost(data);
-    // var questions =[];
-    // var i =0;
-    // for (i; i< yes.length; i++) {
-        
-        
-    //     _surveyData.getQuestionById(yes[i], function(questionMap){
-           
-    //         questions.push(questionMap);
-    //         if(i == yes.length) {
-    //             questions = questions.sort();
-    //         }
-    //     }, function(e){
-    //         console.log(e);
-    //     });
-       
-    // }
-    // console.log("questions: "+questions);
-    // var tags =[];
-    // i =0;
-    // for(i; i<questions.length; i++) {
-    //     var j= 0;
-    //     for (j; j<questions[i].tags.length; j++) {
-    //         var k=0;
-    //         for(k; k< tags.length; k++) {
-    //             if(tags[k] == questions[i].tags[j]) {
-    //                 tags.splice(tags[k],1);
-    //             }
-    //         }
-    //         tags.push(questions[i].tags[j]);
-    //     }
-    // }
-    // console.log(tags);
-    
-	// console.log(yes);
-// 	data.forEach(function (item) {
-//        console.log(item.id);
-//        console.log(item.Name);
-//    });
+    console.log(x);
+    getOrgsFromAns(x);
 	
 	
 });
-function getIDFromPost(arr){
-	var yes =[];
-	var i =0;
-	for(i; i<arr.length; i++){
-		if(arr[i]!=null && arr[i]==true){
-			yes.push(i)
-		}
-	}
-	return yes;
-	
-}
-
-function getOrgsFromAns(ans)
-{
-	
-	
-}
-function hexToInt(arr){
-    var i =0;
-    console.log("hti length:"+Object.keys(arr).length);
-    for(i; i < Object.keys(arr).length; i++){
-        console.log(Object.keys(arr)[i]);
-        Object.keys(arr)[i]._id = parseInt(Object.keys(arr)[i]._id, 16);
+function getQuestionsFromIDs(ids) {
+    console.log(Object.keys(ids).length);
+    // var flag = false;
+    var qs = [];
+    for (var i = 0; i < Object.keys(ids).length; i++) {
+        console.log(i+" : "+ids[Object.keys(ids)[i]]);
+        _surveyData.getQuestionById(ids[Object.keys(ids)[i]].toString(), function(qmap, e) {
+            console.log("get qs:"+ qmap);
+            qs.push(qmap);
+            
+            // if(i == ids.length) {
+            //     flag = true;
+            // }
+        });
         
     }
-    // console.log(arr);
-    return arr;
+    // while(!flag);
+    console.log(qs);
+    return qs;
 }
-function intToHex(arr){
-    var i =0;
-    console.log("hti length:"+arr.length);
-    for(i; i < arr.length; i++){
-        // hexString = yourNumber.toString(16)
-        arr[i]._id = arr[i]._id.toString(16);
-    }
-    return arr;
+function getOrgsFromAns(ans) {
+	var qs = getQuestionsFromIDs(ans);
+    console.log(qs);
+	
 }
 
 function addMockData()
