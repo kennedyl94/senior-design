@@ -12,7 +12,6 @@
     vm.login = function() {
       loginService.login(vm.username, vm.password).then(function(response) {
         if(response.code == 200) {
-          $("#showLoggedIn").html("<a href='#/logout'>Log Out</a>");
           $state.go('root.organizations', { redirect : true });
         } else {
           $state.go('root.login', {redirect: true});

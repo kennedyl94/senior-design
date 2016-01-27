@@ -18,6 +18,7 @@
         if(data.data.code == 200) {
           if(data.data.type == "SL") {
             $cookies.put('om_slAdmin', 'true');
+            $cookies.put('om_loggedIn', 'true');
             service.isStudentLifeAdmin = true;
           } else if(data.data.type == "Org") {
             service.isOrgLeaderAdmin = true;

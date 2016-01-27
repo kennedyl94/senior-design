@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('root')
-    .controller('RootController', ['loginService', '$scope', '$cookies', Controller]);
+    .controller('RootController', ['$scope', '$cookies', Controller]);
 
-  function Controller(loginService, $scope, $cookies) {
+  function Controller($scope, $cookies) {
 
     var vm = this;
 
