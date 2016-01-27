@@ -52,8 +52,13 @@ exports.addQuestion = function(question, callback){
  * callback a function that takes an error object and the question matching the id given
  */ 
 exports.getQuestionById = function(questionId, callback){
-    surveyQuestion.findById(questionId, callback); 
+    surveyQuestion.findById(questionId, function(err, question) {
+        callback(question, err);
+    });
 };
+// exports.getQuestionById = function(questionId, callback){
+//     surveyQuestion.findById(questionId, callback); 
+// };
 
 /*
  * gets all of the survey questions from the database
