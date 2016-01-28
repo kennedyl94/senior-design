@@ -2,7 +2,7 @@
 
 describe('CreateClubService', function() {
   var createClubService;
-  var $http;
+  var httpBackend;
   var config;
   var URL;
 
@@ -24,20 +24,21 @@ describe('CreateClubService', function() {
 
   beforeEach(inject(function (_$httpBackend_, _config_, _createClubService_) {
     createClubService = _createClubService_;
-    $http = _$httpBackend_;
+    httpBackend = _$httpBackend_;
     config = _config_;
     URL = config.domain + "createClub";
   }));
 
   afterEach(function() {
-    $http.verifyNoOutstandingExpectation();
-    $http.verifyNoOutstandingRequest();
+    httpBackend.verifyNoOutstandingExpectation();
+    httpBackend.verifyNoOutstandingRequest();
   });
 
   describe('Post new org', function() {
     it('should call to post fake org', function() {
-      $http.expectPOST(URL);
+      httpBackend.expectPOST(URL).respond(200);
       createClubService.submitClub(fakeClub, null, null);
+      httpBackend.flush();
     });
   });
 });

@@ -40,9 +40,6 @@
           form.$setPristine();
           form.$setUntouched();
           vm.submitted = true;
-        }, function(err) {
-          console.log('error: ' + err);
-          vm.failed = true;
         });
     }
   }

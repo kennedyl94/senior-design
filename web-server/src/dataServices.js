@@ -51,7 +51,7 @@ exports.addStudentOrg = function(org, callback){
 		});
 	}
 	else{
-		callback(new Error('Not connected to database'), null);
+		//callback(new Error('Not connected to database'), null);
 	}
 };
 
