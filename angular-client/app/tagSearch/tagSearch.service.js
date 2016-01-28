@@ -5,6 +5,7 @@
     .factory('tagSearchService', ['$q', '$http', 'config', GetService]);
 
   function GetService($q, $http, config) {
+
     var service = this;
 
     service.data = {
@@ -12,17 +13,10 @@
     };
 
     service.searchTags = function(tagList, success) {
-      var req = {
-        method: 'POST',
-        url: config.domain + 'tagSearch',
-        headers: {},
-        data: {tags: tagList}
-      };
-
-      $http(req)
-        .then(function(res) {
-          success(res.data);
-        }, function(err) {console.log(err)});
+      $http({method: 'POST', url: config.domain + 'tagSearch', data: {tags: tagList}})
+        .then(function(data) {
+          success(data.data);
+        });
     };
 
     function init() {

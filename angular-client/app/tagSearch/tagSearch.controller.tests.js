@@ -60,6 +60,7 @@ describe("TagSearchController", function() {
   };
 
   beforeEach(function() {
+    module('config');
     module('tagSearch');
   });
 
