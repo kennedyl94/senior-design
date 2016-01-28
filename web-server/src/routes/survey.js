@@ -114,15 +114,22 @@ function syncOrgs(tags) {
     
     _dataServices.getAllOrgs(null, function(orgmap){
         console.log(Object.keys(orgmap).length);
+        
         var matchOrgs =[];
         for(var i = 0; i <tags.length; i++)
         {
+            // console.log("num orgs: "+ Object.keys(orgmap).length);
             for(var j = 0; j < Object.keys(orgmap).length; j++){
-                if(orgmap[Object.keys(orgmap)[j]].keys[j].indexOf(tags[i])){
-                    matchOrgs.push(orgmap[Object.keys(orgmap)[j]].keys[j])
+                // console.log("object at j: "+ orgmap[Object.keys(orgmap)[j]]);
+                if(orgmap[ Object.keys(orgmap)[j] ].tags.indexOf(tags[i])>0){
+                    // console.log("matches: "+tags[i]);
+                    if(matchOrgs.indexOf( orgmap[ Object.keys(orgmap)[j]] ) < 0) {
+                            matchOrgs.push( orgmap[ Object.keys(orgmap)[j] ]);
+                    }
                 }
             }
         }
+        
         console.log("num orgs: "+Object.keys(matchOrgs).length);
         
         data = matchOrgs;
