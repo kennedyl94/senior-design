@@ -1,3 +1,13 @@
+<style>
+  .topRight {
+    z-index: 10;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
+  }
+
+</style>
 <div class="header">
   <div class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
@@ -32,11 +42,9 @@
             <a href="#/massUpload">Mass Upload</a>
           </li>
         </ul>
-        <ul class="nav navbar-nav">
-          <li ng-class=" { active: isActive('/login') }">
-            <a href="#/login">Log In</a>
-          </li>
-        </ul>
+        <div id="showLoggedIn" class="topRight nav navbar-nav">
+          <a href="#/login">Log In</a>
+        </div>
       </div>
     </div>
   </div>

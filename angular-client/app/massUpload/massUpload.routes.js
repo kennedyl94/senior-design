@@ -11,6 +11,9 @@
               'content@': {
                 templateUrl: 'massUpload/massUpload.template.html',
               }
+            },
+            data: {
+              restricted: true
             }
           });
       }]);

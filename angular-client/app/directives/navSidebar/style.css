@@ -1,0 +1,109 @@
+#ng-nav-sidebar-wrapper {
+  max-width: 200px;
+  background: #D30025;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.2s ease 0s;
+}
+
+#ng-nav-sidebar-buttons {
+  padding:0;
+  margin:0;
+  overflow:hidden;
+  background: #D30025;
+  height: 100%;
+  vertical-align: bottom;
+}
+
+#ng-nav-sidebar-buttons li {
+  height: 50px;
+  list-style: none;
+  positon: relative;
+}
+
+#ng-nav-sidebar-buttons li a {
+  height: inherit;
+}
+
+#ng-nav-sidebar-buttons li a .logo {
+  height: inherit;
+  position:absolute;
+}
+
+#ng-nav-sidebar-buttons li a .logo svg {
+  height: inherit;
+  width:50px;
+}
+
+#ng-nav-sidebar-buttons li a .logo svg * {
+  transition: fill 0.2s ease;
+  fill:#fff;
+}
+
+#ng-nav-sidebar-buttons li .ng-nav-sidebar-label {
+  max-width:200px;
+  height:inherit;
+  display:block;
+}
+
+#ng-nav-sidebar-buttons li .ng-nav-sidebar-label span {
+  width:200px;
+  display:block;
+  padding-left:60px;
+  line-height:50px;
+  color:#ffffff;
+  font-size:12px;
+  float:right;
+}
+
+.nav-bar-collapsed {
+  border-right: 1px solid gray;
+  height: 100%;
+}
+
+.nav-bar-collapsed #ng-nav-sidebar-buttons li .ng-nav-sidebar-label {
+  width: 1px;
+}
+
+.nav-bar-collapsed #ng-nav-sidebar-buttons li {
+  height: 75px;
+}
+
+.nav-bar-collapsed #ng-nav-sidebar-buttons li .logo svg {
+  width: 75px;
+  height: 75px;
+}
+
+.nav-bar-collapsed #ng-nav-sidebar-buttons li .logo {
+  width: 75px;
+  height: 75px;
+}
+
+.nav-bar-collapsed #ng-nav-sidebar-buttons li:nth-last-child(2) .logo {
+  padding-bottom: 1500px;
+}
+
+.nav-bar-collapsed #ng-nav-sidebar-buttons li:last-child a {
+  position: absolute;
+  bottom: 0;
+}
+
+.SVGInactive {
+  background-color: #D30025;
+}
+
+.SVGActive {
+  background-color: #AF0023;
+}
+
+#ng-nav-sidebar-buttons li:first-child {
+  margin-top: 50px;
+}
+
+#ng-nav-sidebar-buttons li:last-child a {
+  position: absolute;
+  bottom: 0;
+}

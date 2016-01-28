@@ -18,6 +18,7 @@
 .navbar-default {
   background-color: #D30025;
   border-color: #c0392b;
+  z-index: 101;
 }
 .navbar-default .navbar-brand {
   color: #ecf0f1;
