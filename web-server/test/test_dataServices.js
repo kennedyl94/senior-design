@@ -9,7 +9,7 @@ var realDbName = config.mongo;
 var fakeDbName = 'mongodb://localhost/test';
 config.mongo = fakeDbName;
 
-var dataServices = require('../src/dataServices');
+var dataServices = require('../src/orgDataServices');
 
 var fakeOrg = {
 	name: 'name',
@@ -26,6 +26,32 @@ var fakeOrg = {
 	}
 };
 
+var invalidOrg = {
+	name: 'name',
+	description: undefined,
+	tags: [
+		'tag1',
+		'tag2',
+		'tag3'
+	],
+	contact: {
+		name: 'name',
+		email: 'name@email.com',
+		phone: '(123)456-7890'
+	}
+};
+
+var fakeOrgs = [
+	fakeOrg,
+	fakeOrg,
+	fakeOrg
+];
+
+var invalidOrgs = [
+	fakeOrg,
+	invalidOrg,
+	fakeOrg
+];
 
 describe('dataServices', function () {
 	
@@ -171,19 +197,16 @@ describe('dataServices', function () {
 						async.parallel([
 							function(callback){
 								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-									console.log(err);
 									callback();
 								});
 							},
 							function(callback){
 								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-									console.log(err);
 									callback();
 								});
 							},
 							function(callback){
 								dataServices.addStudentOrg(fakeOrg, function(err, savedOrg){
-									console.log(err);
 									callback();
 								});
 							}],
@@ -202,6 +225,35 @@ describe('dataServices', function () {
 				});
 			});
 			dataServices.connect();
+		});
+	});
+	
+	describe('#saveAllOrgs', function(){
+		
+		it('should return error if entries are malformed', function(done){
+			var connection = mongoose.connection;
+			connection.on('open', function(){
+				dataServices.saveAllOrgs(invalidOrgs, function(err, orgs){
+					if(err){
+						done();
+					}
+				});
+				process.nextTick(function(){
+					assert.fail();
+				});
+			});
+			dataServices.connect();
+		});
+		
+		it('should return all orgs if they were successfuly saved', function(done){
+			dataServices.saveAllOrgs(fakeOrgs, function(err, orgs){
+				if(orgs.length == fakeOrgs.length){
+					done();
+				}
+				else{
+					assert.fail();
+				}
+			});
 		});
 	});
 });
