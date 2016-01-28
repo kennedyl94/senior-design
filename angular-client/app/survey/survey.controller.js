@@ -8,6 +8,7 @@
 
     var vm = this;
     vm.data = surveyService.data;
+    vm.orgs = surveyService.orgs;
     
     
     // console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
@@ -28,6 +29,7 @@
       $http(req)
         .success(function (data, status, headers, config) {
           console.log(data);
+          vm.orgs = data;
         }).error(function(err, status, headers, config) {
           console.log('error: ' + err);
         });

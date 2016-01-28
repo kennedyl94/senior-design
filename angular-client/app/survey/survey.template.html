@@ -11,8 +11,11 @@
 		</div>
 	</div>
 	<button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
-
-	
+    
+	<div class="col-sm-12" ng-repeat="org in surveyCtrl.orgs | toArray">
+        
+		{{org.name}}
+	</div>
 	
 
 

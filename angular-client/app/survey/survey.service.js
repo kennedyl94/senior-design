@@ -11,6 +11,7 @@
     service.data = {
       questions: {}
     };
+    service.orgs ={};
 
     function init() {
       //TODO -- Make initial call to get survey questions
