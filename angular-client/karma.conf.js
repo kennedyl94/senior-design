@@ -8,7 +8,7 @@ module.exports = function (config) {
     files: [
       // Jquery & Angular Dependencies
       'dist/dev/lib/vendor/js/jquery.min.js',
-      'dist/dev/lib/vendor/js/angular.js',
+      'dist/dev/lib/vendor/js/angular.min.js',
       'dist/dev/lib/vendor/js/angular-mocks.js',
       'dist/dev/lib/vendor/js/angular-ui-router.min.js',
       'dist/dev/lib/vendor/js/bootstrap.min.js',

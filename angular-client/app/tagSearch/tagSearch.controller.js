@@ -17,7 +17,7 @@
 
       tagSearchService.searchTags(vm.tags, function(tempOrgList) {
         tempOrgList.forEach(function(tempOrg) {
-          vm.orgList.push(tempOrg.organization);
+          vm.orgList.push(tempOrg);
         });
         vm.showOrgs = true;
       });
