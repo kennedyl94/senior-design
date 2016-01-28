@@ -60,7 +60,9 @@ router.post("/", function (req, res) {
         }
     }
     // console.log(x);
-    getOrgsFromAns(x);
+    var orgs = getOrgsFromAns(x);
+    console.log(orgs);
+    res.send(orgs);
 	
 	
 });
@@ -71,7 +73,7 @@ function getQuestionsFromIDs(ids) {
     var i =0;
     for (i; i < Object.keys(ids).length; i++) {
         // console.log(i+" : "+ids[Object.keys(ids)[i]]);
-        qs.push(sync(ids[Object.keys(ids)[i]]));
+        qs.push(syncQuestions(ids[Object.keys(ids)[i]]));
         
     }
     
@@ -98,7 +100,17 @@ function getOrgsFromAns(ans) {
             // }
         }
     }
-    console.log(tags);
+    // console.log(tags);
+    var matchOrgs =syncOrgs(tags);
+    // matchOrgs.push({"hullo":"hullo"});
+    return matchOrgs;
+    
+    
+	
+}
+function syncOrgs(tags) {
+    var sync = true;
+    var data =null;
     
     _dataServices.getAllOrgs(null, function(orgmap){
         console.log(Object.keys(orgmap).length);
@@ -112,15 +124,19 @@ function getOrgsFromAns(ans) {
             }
         }
         console.log("num orgs: "+Object.keys(matchOrgs).length);
-       
+        
+        data = matchOrgs;
+        sync = false;
         
     }, function(e){
         console.log(e);
     });
-	
+    while(sync) {require('deasync').sleep(100);}
+    return data;
+    
 }
 //used as wrapper for get by id
-function sync (id) {
+function syncQuestions (id) {
     var sync = true;
     var data =null;
     _surveyData.getQuestionById(id, function(qmap, e){

@@ -9,7 +9,7 @@
     var vm = this;
     vm.data = surveyService.data;
     
-    console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
+    // console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
     
     vm.ans={};
     
@@ -40,7 +40,7 @@
       
     //   var x={};
     //   x.ans = vm.ans;
-      console.log(JSON.stringify(vm.ans));
+    //   console.log(JSON.stringify(vm.ans));
       
       var req = {
         method: 'POST',
