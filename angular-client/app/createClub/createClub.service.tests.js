@@ -37,7 +37,7 @@ describe('CreateClubService', function() {
   describe('Post new org', function() {
     it('should call to post fake org', function() {
       httpBackend.expectPOST(URL).respond(200);
-      createClubService.submitClub(fakeClub, null, null);
+      createClubService.submitClub(fakeClub, null);
       httpBackend.flush();
     });
   });
