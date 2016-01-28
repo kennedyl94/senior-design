@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('organizations')
-    .controller('OrganizationsController', ['organizationsService', '$q', '$http', '$modal', '$sce', Controller]);
+    .controller('OrganizationsController', ['organizationsService', '$modal', '$sce', Controller]);
 
-  function Controller(organizationService, $q, $http, $modal, $sce) {
+  function Controller(organizationService,$modal, $sce) {
 
     var vm = this;
     vm.data = organizationService.data;
@@ -22,7 +22,8 @@
       var tags = org.tags;
 
       if (query != 'inactive' && tags.indexOf('inactive') == -1) {
-        for (var i = 0; i < tags.length; i++) {
+        var i = 0;
+        for (i; i < tags.length; i++) {
           if (tags[i].toLowerCase().indexOf(query || '') !== -1) {
             return true;
           }
@@ -31,7 +32,8 @@
         return true;
       }
 
-      return !!((name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1));
+      return !!((tags.indexOf('inactive') == -1 &&
+        (name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1)));
     }
 
     // Highlights organization description words that match vm.query
