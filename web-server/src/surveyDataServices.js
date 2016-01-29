@@ -33,6 +33,16 @@ exports.connect = function(){
     }
  };
  */
+
+exports.getQuestionsByIds = function(ids, callback) {
+    surveyQuestion.find({
+        '_id': { $in: ids }
+        }, function(err, docs){
+            if(!err) {
+                callback(docs);
+            }
+    });
+}
  
 /*
  * adds one survey question to the database

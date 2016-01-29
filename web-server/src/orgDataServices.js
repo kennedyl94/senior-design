@@ -51,6 +51,16 @@ exports.addStudentOrg = function(org, callback){
 	});
 };
 
+exports.getOrgsMatchingTags = function(tags, callback) {
+    studentOrg.find({
+        'tags': { $in: tags }
+        }, function(err, docs){
+        if(!err) {
+            callback(docs);
+        }
+    });
+};
+
 /*
  * gets all of the student orgs from the database
  * sortType: the attribute to sort by
