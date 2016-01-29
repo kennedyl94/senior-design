@@ -89,9 +89,9 @@ function syncOrgs(tags) {
             // console.log("num orgs: "+ Object.keys(orgmap).length);
             for(var j = 0; j < Object.keys(orgmap).length; j++){
                 // console.log("object at j: "+ orgmap[Object.keys(orgmap)[j]]);
-                if(orgmap[ Object.keys(orgmap)[j] ].tags.indexOf(tags[i])>0){
+                if(orgmap[ Object.keys(orgmap)[j] ].tags.indexOf(tags[i])>=0){
                     // console.log("matches: "+tags[i]);
-                    if(matchOrgs.indexOf( orgmap[ Object.keys(orgmap)[j]] ) < 0) {
+                    if(matchOrgs.indexOf( orgmap[ Object.keys(orgmap)[j]] ) <= 0) {
                             matchOrgs.push( orgmap[ Object.keys(orgmap)[j] ]);
                     }
                 }
