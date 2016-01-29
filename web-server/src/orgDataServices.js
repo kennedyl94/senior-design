@@ -52,14 +52,17 @@ exports.addStudentOrg = function(org, callback){
 };
 
 exports.getOrgsMatchingTags = function(tags, callback) {
-    studentOrg.find({
-        'tags': { $in: tags }
-        }, function(err, docs){
-        if(!err) {
-            callback(docs);
-        }
-    });
+  console.log(tags);
+  studentOrg.find({
+     'tags': { $in: tags }
+  }, function(err, docs){
+     if(!err) {
+        console.log(docs);
+        callback(docs);
+     }
+  });
 };
+
 
 /*
  * gets all of the student orgs from the database

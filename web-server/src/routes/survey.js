@@ -25,31 +25,38 @@ router.get('/', function (req, res) {
 });
 
 router.post("/", function (req, res) {
-
-    //x will contain all ids of questions checked true
-    var x =[];
-    for (var i =0; i< Object.keys(req.body).length; i++) {
-        if (req.body[Object.keys(req.body)[i]]){
-            x.push(Object.keys(req.body)[i])
-        }
-    }
-    // console.log(x);
-    getOrgsFromAns(x, function(orgs){res.send(orgs);console.log(orgs);});
-
-	
+   var x =[];
+   for (var i =0; i< Object.keys(req.body).length; i++) {
+       if (req.body[Object.keys(req.body)[i]]){
+           x.push(Object.keys(req.body)[i])
+       }
+   }
+   var orgs = matchOrgs(x, function(orgs) {
+       res.send(orgs);
+   });
 });
-function getQuestionsFromIDs(ids) {
-    
-    var qs = [];
-    var i =0;
-    for (i; i < Object.keys(ids).length; i++) {
-        // console.log(i+" : "+ids[Object.keys(ids)[i]]);
-        qs.push(syncQuestions(ids[Object.keys(ids)[i]]));
-        
-    }
-    
-    return qs;
+
+function matchOrgs(ids, callback) {
+   getQuestionsTagsByIds(ids, function (tags) {
+       //console.log(tags);
+       getOrgsMatchingTags(tags, function(orgs) {
+           callback(orgs);
+       });
+   });
 }
+
+function getQuestionsTagsByIds(ids, callback) {
+   _surveyData.getQuestionsTagsByIds(ids, function(tags){
+       callback(tags);
+   });
+}
+
+function getOrgsMatchingTags(tags, callback) {
+   _dataServices.getOrgsMatchingTags(tags, function(orgs) {
+       callback(orgs);
+   });
+}
+
 
 
 function getOrgsFromAns(ans, success) {

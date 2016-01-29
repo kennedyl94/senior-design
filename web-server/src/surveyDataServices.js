@@ -34,16 +34,24 @@ exports.connect = function(){
  };
  */
 
-exports.getQuestionsByIds = function(ids, callback) {
-    surveyQuestion.find({
-        '_id': { $in: ids }
-        }, function(err, docs){
-            if(!err) {
-                callback(docs);
-            }
-    });
+exports.getQuestionsTagsByIds = function(ids, callback) {
+   surveyQuestion.find({
+       '_id': { $in: ids }
+   }, function(err, questions){
+       if(!err) {
+           var tags = [];
+           var i = 0;
+           for(i; i < questions.length; i++) {
+               var j = 0;
+               for(j; j < questions[i].tags.length; j++){
+                   tags.push(questions[i].tags[j]);
+               }
+           }
+           callback(tags);
+       }
+   });
 }
- 
+
 /*
  * adds one survey question to the database
  * question: the question to add
