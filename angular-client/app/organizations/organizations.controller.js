@@ -68,7 +68,7 @@
       organizationService.sortOrgs(selectedOption).then(function(sortedOrgs) {
         vm.data.orgs = sortedOrgs;
       });
-  };
+    };
 
     // MODAL CREATIONS
     vm.openModal = function(org, images) {
