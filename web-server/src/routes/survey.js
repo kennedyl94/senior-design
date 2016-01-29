@@ -3,54 +3,30 @@ var express = require('express')
   var  _dataServices = require('../orgDataServices.js');
   var _surveyData = require('../surveyDataServices.js');
  
-//mock data until database is done 
-// var questions = [
-// 	{question: "do you like pie?",
-// 	tags:["pie","cool","american"],
-// 	id:0},
-// 	{question: "do you like unicycling?",
-// 	tags:["cool", "outdoors"],
-// 	id:5},
-// 	{question: "do you like dogs?",
-// 	tags:["cool", "dogs"],
-// 	id:6}
-// ];
 
 router.get('/', function (req, res) {
     // adding questions if there arnt any
     // this should be removed later
-    // console.log("test");
-    
     
     _surveyData.getAllQuestions(null, function(questionMap){
-        // q = questionMap;
-        // questionMap = hexToInt(questionMap);
+       
         res.send(questionMap);
-        // console.log(questionMap);
-        // console.log(questionMap.length);
         
         if(!Object.keys(questionMap).length || questionMap.legnth <= 0)
         {
-            console.log("should be adding");
+            // console.log("should be adding");
             addMockData();
         }
         
     }, function(e){
-        console.log("get in get"+e);
+        console.log("error in get: "+e);
     });
     
-    
-   
-    // console.log("test");
-	
 });
 
 router.post("/", function (req, res) {
 
-	// console.log("wubalubadubdub ");
-	// var x = getOrgsFromAns(req.body)
-	// var data = req.body;
-	// console.log("posted: "+ JSON.stringify(req.body));
+	
     
     //x will contain all ids of questions checked true
     var x =[];
@@ -61,14 +37,14 @@ router.post("/", function (req, res) {
     }
     // console.log(x);
     var orgs = getOrgsFromAns(x);
-    console.log(orgs);
+    // console.log(orgs);
     res.send(orgs);
 	
 	
 });
 function getQuestionsFromIDs(ids) {
     // console.log(Object.keys(ids).length);
-    // var flag = false;
+    
     var qs = [];
     var i =0;
     for (i; i < Object.keys(ids).length; i++) {
@@ -77,9 +53,6 @@ function getQuestionsFromIDs(ids) {
         
     }
     
-    // while(i-1>qs.length);
-    // console.log("\n\nhullo");
-    // console.log("\n\nget qs: "+qs[0]);
     return qs;
 }
 
@@ -93,16 +66,11 @@ function getOrgsFromAns(ans) {
             // if(Object.keys(tags).indexOf(qs[i].tags[j])<0) {
            
             tags.push(qs[i].tags[j]);
-                // tags[tags.indexOf(qs[i].tags[j])].value = 1;
-            // } else {
-            //     tags[tags.indexOf(qs[i].tags[j])].value += 1;
-                
-            // }
+            
         }
     }
     // console.log(tags);
     var matchOrgs =syncOrgs(tags);
-    // matchOrgs.push({"hullo":"hullo"});
     return matchOrgs;
     
     
@@ -113,7 +81,7 @@ function syncOrgs(tags) {
     var data =null;
     
     _dataServices.getAllOrgs(null, function(orgmap){
-        console.log(Object.keys(orgmap).length);
+        // console.log(Object.keys(orgmap).length);
         
         var matchOrgs =[];
         for(var i = 0; i <tags.length; i++)
@@ -130,7 +98,7 @@ function syncOrgs(tags) {
             }
         }
         
-        console.log("num orgs: "+Object.keys(matchOrgs).length);
+        // console.log("num orgs: "+Object.keys(matchOrgs).length);
         
         data = matchOrgs;
         sync = false;
@@ -153,11 +121,7 @@ function syncQuestions (id) {
     
     while(sync) {require('deasync').sleep(100);}
     return data;
-    
-
-    // if(i == ids.length) {
-    //     flag = true;
-    // }
+ 
 }
 
 function addMockData()
