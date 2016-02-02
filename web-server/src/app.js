@@ -1,7 +1,6 @@
 /** Module Dependencies **/
 var express = require('express')
 	, bodyParser = require('body-parser')
-	, _dataServices = require('./dataServices.js')
 	, passport = require('passport');
 
 
@@ -32,7 +31,8 @@ var logout = require("./routes/logout.js");
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
-_dataServices.connect();
+// _dataServices.connect();
+// _surveyData.connect();
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -42,11 +42,13 @@ app.use('/api/logout', logout);
 
 app.use('/api/Organizations/', Orgs);
 
-app.use('/api/tagSearch/', tags)
+app.use('/api/tagSearch/', tags);
 
 app.use('/api/createClub', createClub);
 
 app.use('/api/survey', survey);
+
+// app.use('/api//UploadFile', upload);
 
 app.use('/api/test/', test);
 

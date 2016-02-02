@@ -6,13 +6,12 @@ var dbName = config.mongo;
 //set up the model for the student_orgs collection
 var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
 
-var connected = false;
-
+/*
 /*
  * setup the connection to the database
- */
+ * /
 exports.connect = function(){
-	if(!connected){
+	if(!connected
 		mongoose.connect(dbName);
 		var db = mongoose.connection;
 		db.on('error', function(){
@@ -28,7 +27,7 @@ exports.connect = function(){
 
 /*
  * disconnects from the mongo server
- */
+ * /
  exports.disconnect = function(){
 	 if(connected){
 		mongoose.disconnect(function(){
@@ -36,7 +35,8 @@ exports.connect = function(){
 			console.log('Disconnected from database');
 		});
 	}
- }
+ };
+*/
 
 /*
  * adds one student org to the database
@@ -44,16 +44,22 @@ exports.connect = function(){
  * callback: a function that takes an error object and an object representing the saved org document
  */
 exports.addStudentOrg = function(org, callback){
-	if(connected){
-		var newOrg = new studentOrg(org);
-		newOrg.save(function(err, savedOrg){
-			callback(err, savedOrg._doc);
-		});
-	}
-	else{
-		callback(new Error('Not connected to database'), null);
-	}
+	var newOrg = new studentOrg(org);
+	newOrg.save(function(err, savedOrg){
+		callback(err, savedOrg._doc);
+	});
 };
+
+exports.getOrgsMatchingTags = function(tags, callback) {
+  studentOrg.find({
+     'tags': { $in: tags }
+  }, function(err, docs){
+     if(!err) {
+        callback(docs);
+     }
+  });
+};
+
 
 /*
  * gets all of the student orgs from the database
@@ -62,34 +68,24 @@ exports.addStudentOrg = function(org, callback){
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllOrgs = function(sortType, success, error){
-	if(connected){
-		var sort_order = {};
-		sort_order[sortType] = 1;
-		studentOrg.find({}, function(err, orgs) {
-			var orgsMap = {}; 
-			orgs.forEach(function(org) {
-				orgsMap[org._id] = org;
-			});
-			success(orgsMap);
-		}).sort( sort_order );
-	}
-	else{
-		//error(new Error('Not connected to database'), null);
-	}
+	var sort_order = {};
+	sort_order[sortType] = 1;
+	studentOrg.find({}, function(err, orgs) {
+		var orgsMap = {}; 
+		orgs.forEach(function(org) {
+			orgsMap[org._id] = org;
+		});
+		success(orgsMap);
+	}).sort( sort_order );
 };
 
 exports.deleteOrg = function(orgId, success, error) {
-	if(connected) {
-		studentOrg.find({ _id: orgId}).remove().exec(function(err) {
-			if(err) {
-				error(new Error('Unable to delete item with id: ' + orgId));
-			}
-			success();
-		});
-	}
-	else {
-		//error(new Error('Not connected to database'), null);
-	}
+	studentOrg.find({ _id: orgId}).remove().exec(function(err) {
+		if(err) {
+			error(new Error('Unable to delete item with id: ' + orgId));
+		}
+		success();
+	});
 };
 //
 //exports.userExists = function(user, success, error){
@@ -124,25 +120,23 @@ exports.deleteOrg = function(orgId, success, error) {
  * error: A function to call if there is an error.
  */
 exports.getAllTags = function(success, error) {
-	if (connected) {
-		studentOrg.find({}, function(err, orgs) {
-			var tagMap = [];
-			orgs.forEach(function(org) {
-				if (org.tags.indexOf('inactive') == -1) {
-					org.tags.forEach(function(tag) {
-						if (tagMap.indexOf(tag) == -1 && tag != '') {
-							tagMap.push(tag);
-						}
-					});
-				} else if (tagMap.indexOf('inactive') == -1) {
-					tagMap.push('inactive');
-				}
-			});
-
-			tagMap.sort();
-			success(tagMap);
+	studentOrg.find({}, function (err, orgs) {
+		var tagMap = [];
+		orgs.forEach(function (org) {
+			if (org.tags.indexOf('inactive') == -1) {
+				org.tags.forEach(function (tag) {
+					if (tagMap.indexOf(tag) == -1 && tag != '') {
+						tagMap.push(tag);
+					}
+				});
+			} else if (tagMap.indexOf('inactive') == -1) {
+				tagMap.push('inactive');
+			}
 		});
-	}
+
+		tagMap.sort();
+		success(tagMap);
+	});
 }
 
 /*
