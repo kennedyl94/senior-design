@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('survey')
-    .controller('SurveyController', ['surveyService', '$http', Controller]);
+    .controller('SurveyController', ['surveyService', '$http','config', Controller]);
 
-  function Controller(surveyService, $http) {
+  function Controller(surveyService, $http, config) {
 
     var vm = this;
     vm.data = surveyService.data;
@@ -20,7 +20,7 @@
       
       var req = {
         method: 'POST',
-        url: 'http://localhost:3000/survey',
+        url: config.domain+'survey',
         headers: {},
         data: vm.ans
       
