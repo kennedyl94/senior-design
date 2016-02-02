@@ -9,7 +9,6 @@
     var vm = this;
 
     vm.submitted = false;
-    vm.failed = false;
     vm.club = {
       name: "",
       description: "",
@@ -23,10 +22,8 @@
 
     vm.submit = function(form) {
       vm.submitted = false;
-      vm.failed = false;
 
       createClubService.submitClub(vm.club, function() {
-          console.log(vm.club);
           vm.club = {
             name: "",
             description: "",
@@ -36,7 +33,7 @@
               email: "",
               phone: ""
             }
-          }
+          };
           form.$setPristine();
           form.$setUntouched();
           vm.submitted = true;
