@@ -1,6 +1,6 @@
 var express = require('express')
   , router = express.Router();
-var  _dataServices = require('../dataServices.js');
+var  _dataServices = require('../orgDataServices.js');
 
 router.post("/", function (req, res) {
 	var org = req.body.club;
