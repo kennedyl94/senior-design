@@ -32,6 +32,7 @@
       'root',
       'navBar',
       'ngNavSidebar',
+      'ngOrganizations',
       'navSidebar',
       'approvals',
       'userSettings',

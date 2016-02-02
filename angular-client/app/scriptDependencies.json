@@ -24,6 +24,10 @@
     "app/directives/navSidebar/navSidebar.directive.js",
     "app/directives/navSidebar/navSidebar.controller.js",
 
+    "app/directives/organizations/organizations.module.js",
+    "app/directives/organizations/organizations.directive.js",
+    "app/directives/organizations/organizations.controller.js",
+
     "app/massUpload/massUpload.module.js",
     "app/massUpload/massUpload.routes.js",
 
@@ -55,6 +59,7 @@
     "app/orgSettings/orgSettings.module.js",
     "app/orgSettings/orgSettings.controller.js",
     "app/orgSettings/orgSettings.routes.js",
+    "app/orgSettings/orgSettings.service.js",
 
     "app/userSettings/userSettings.module.js",
     "app/userSettings/userSettings.controller.js",
