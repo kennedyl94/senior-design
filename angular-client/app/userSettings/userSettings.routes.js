@@ -13,6 +13,9 @@
                 controller: 'UserSettingsController',
                 controllerAs: 'userSettingsCtrl'
               }
+            },
+            data: {
+              restricted: true
             }
           });
       }]);

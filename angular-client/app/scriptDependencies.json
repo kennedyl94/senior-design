@@ -58,6 +58,7 @@
 
     "app/userSettings/userSettings.module.js",
     "app/userSettings/userSettings.controller.js",
+    "app/userSettings/userSettings.service.js",
     "app/userSettings/userSettings.routes.js",
 
     "app/surveySettings/surveySettings.module.js",

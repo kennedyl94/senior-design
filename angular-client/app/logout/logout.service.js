@@ -13,6 +13,7 @@
       var promise = $http({method: 'GET', url: config.domain + 'logout'});
       promise.then(function(data) {
         $cookies.put('om_slAdmin', 'false');
+        $cookies.put('om_orgAdmin', 'false');
         $cookies.put('om_loggedIn', 'false');
         deferred.resolve(data.data);
       });

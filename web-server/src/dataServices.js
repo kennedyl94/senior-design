@@ -5,6 +5,7 @@ var dbName = config.mongo;
 
 //set up the model for the student_orgs collection
 var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
+var admins = mongoose.model('users', config.userSchema);
 
 var connected = false;
 
@@ -72,6 +73,21 @@ exports.getAllOrgs = function(sortType, success, error){
 			});
 			success(orgsMap);
 		}).sort( sort_order );
+	}
+	else{
+		//error(new Error('Not connected to database'), null);
+	}
+};
+
+exports.getAllUsers = function(success, error){
+	if(connected){
+		admins.find({}, function(err, users) {
+			var userMap = {};
+			users.forEach(function(user) {
+				userMap[user._id] = user;
+			});
+			success(userMap);
+		});
 	}
 	else{
 		//error(new Error('Not connected to database'), null);

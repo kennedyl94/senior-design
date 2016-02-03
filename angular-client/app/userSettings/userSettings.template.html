@@ -1,1 +1,32 @@
-<h1 align="center"> User Settings </h1>
+<style>
+  .translucent {
+    background-color: rgba(255,255,255,0.8);
+    padding: 3.5% !important;
+  }
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<body>
+<div class="container">
+  <h1 align="center">User Settings</h1>
+  <table class="table table-hover translucent">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Admin Role</th>
+      <th>Organizations</th>
+      <th>Edit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in userSettingsCtrl.data.users | toArray">
+      <td>{{user.Username}}</td>
+      <td>{{user.Type}}</td>
+      <td>{{user.Orgs}}</td>
+      <td><input type="button" value="edit" ng-click="userSettingsCtrl.editUser(user.Username, user.Type, user.Orgs)"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
