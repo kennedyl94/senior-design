@@ -6,7 +6,8 @@
     var vm = this;
 
     // Manages the pagination:
-    // We have to use $scope $watchers in order to deal with 'toArray' and splicing.
+    vm.hasOriginal = false;
+    $scope.original = [];
     $scope.totalItems = 0;
     $scope.currentPage = 1;
     $scope.itemsPerPage = 3;
@@ -22,16 +23,33 @@
       // We have to use the toArray filter first in order to get the length
       var temp = $filter('toArray')(orgs);
       $scope.totalItems = temp.length;
+      if(!vm.hasOriginal && $scope.totalItems > 0) {
+        vm.hasOriginal = true;
+        $scope.original = temp;
+      }
     });
 
     $scope.query = '';
+    $scope.$watch('query', function(query) {
+      if(query == '') {
+        $scope.orgs = $scope.original;
+      }
+      //var temp = $filter('toArray')($scope.orgs);
+      var filtered = [];
+      var i = 0;
+      for(i; i < $scope.original.length; i++) {
+        if(vm.search($scope.original[i])) {
+          filtered.push($scope.original[i]);
+        }
+      }
+      $scope.orgs = filtered;
+    });
 
     vm.inactive = [];
-    vm.query = '';
 
     // Filters Orgs -- If name/description contains vm.query
     vm.search = function(org) {
-      var query = vm.query || '';
+      var query = $scope.query || '';
       if(query != '') { query = query.toLowerCase(); }
 
       var name = org.name.toLowerCase();
@@ -109,8 +127,8 @@
   // Used for slicing the orgs to be paginated.
   angular.module('ngOrganizations').filter('slice', function($filter) {
     return function(arr, start, end) {
-      var temp = $filter('toArray')(arr);
-      return temp.slice(start, end);
+      //var temp = $filter('toArray')(arr);
+      return arr.slice(start, end);
     };
   });
 
