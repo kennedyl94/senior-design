@@ -2,42 +2,41 @@
   'use strict';
 
   angular.module('createClub')
-    .controller('CreateClubController', ['createClubService', '$http', Controller]);
+    .controller('CreateClubController', ['createClubService', Controller]);
 
-  function Controller(createClubService, $http) {
+  function Controller(createClubService) {
 
     var vm = this;
-    vm.title = {};
 
-    createClubService.then(function (service) {
-      vm.title = service.data.title;
-    });
-
-	vm.club = {
-		name: "",
-		description: "",
-		tags: "",
-		contact: {
-			name: "",
-			email: "",
-			phone: ""
-		}
-	}
-
-    vm.submit = function() {
-
-      var req = {
-        method: 'POST',
-        url: 'http://orgmatcher.msoe.edu/api/createClub',
-        headers: {},
-        data: {club: vm.club}
+    vm.submitted = false;
+    vm.club = {
+      name: "",
+      description: "",
+      tags: "",
+      contact: {
+        name: "",
+        email: "",
+        phone: ""
       }
+    };
 
-      $http(req)
-        .success(function (data, status, headers, config) {
-          console.log(vm.club);
-        }).error(function(err, status, headers, config) {
-          console.log('error: ' + err);
+    vm.submit = function(form) {
+      vm.submitted = false;
+
+      createClubService.submitClub(vm.club, function() {
+          vm.club = {
+            name: "",
+            description: "",
+            tags: "",
+            contact: {
+              name: "",
+              email: "",
+              phone: ""
+            }
+          };
+          form.$setPristine();
+          form.$setUntouched();
+          vm.submitted = true;
         });
     }
   }

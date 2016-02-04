@@ -1,5 +1,5 @@
 {
-	"mongo": "mongodb://localhost:27017/test",
+	"mongo": "mongodb://localhost:27017/StudentOrgMatcher",
 	"orgSchema": {
 		"name": "String",
 		"description": "String",
@@ -17,5 +17,12 @@
 	  	"Password": "String",
 	  	"Type": "String",
 	  	"Orgs": ["String"]
+	},
+	"surveyQuestionSchema": {
+		"question" : "String",
+		"tags": [
+			"String"
+		],
+		"category": "String"
 	}
 }

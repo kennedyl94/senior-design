@@ -13,6 +13,9 @@
                 controller: 'LoginController',
                 controllerAs: 'loginCtrl'
               }
+            },
+            data: {
+                restricted: false
             }
           });
       }]);
