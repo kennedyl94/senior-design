@@ -31,6 +31,7 @@
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-teamcity-reporter": "^0.2.1",
+    "mandrill": "^0.1.0",
     "time-grunt": "^1.0.0"
   },
   "engines": {
