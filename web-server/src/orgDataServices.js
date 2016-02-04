@@ -153,30 +153,3 @@ exports.searchByTags = function(tagList, success, error) {
 		success(orgList);
 	});
 }
-
-//
-//exports.userExists = function(user, success, error){
-//	if(connected){
-//		user.find({}, function(err, orgs) {
-//			var orgsMap = {};
-//			orgs.forEach(function(org) {
-//				orgsMap[org._id] = org;
-//			});
-//			success(orgsMap);
-//		}).sort( sort_order );
-//	}
-//	else{
-//		error(new Error('Not connected to database'), null);
-//	}
-//};
-//
-//exports.addUser = function(user, success, error) {
-//	if(connected) {
-//		var newUser = new user(user)
-//		newUser.save((function(err, savedUser){
-//			callback(err, savedUser._doc);
-//		}));
-//	} else {
-//		error(new Error('Not connected to database', null));
-//	}
-//}}

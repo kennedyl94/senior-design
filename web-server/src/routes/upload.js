@@ -62,7 +62,7 @@ router.post('/', uploader.single('file'), function(req, res){
             }
         }
         if(success){
-            _dataServices.addAllOrgs(orgs, function(err, savedOrgs){
+            _dataServices.saveAllOrgs(orgs, function(err, savedOrgs){
                 if(err){
                     res.send(422);
                 }
