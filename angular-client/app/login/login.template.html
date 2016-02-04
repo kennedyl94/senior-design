@@ -1,0 +1,15 @@
+<html>
+<body>
+<form>
+<!--<form action="http://orgmatcher.msoe.edu/api/login" method="post">-->
+  <div ng-hide="divEnabled">
+    <label>Username:</label>
+    <input type="text" name="username" ng-model='loginCtrl.username'/>
+    <br/>
+    <label>Password:</label>
+    <input type="password" name="password" ng-model='loginCtrl.password'/>
+    <input type="button" ng-click="loginCtrl.login()" value="Log In" />
+  </div>
+</form>
+</body>
+</html>

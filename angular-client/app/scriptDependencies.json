@@ -13,23 +13,94 @@
 
     "app/directives/modal/modal.module.js",
     "app/directives/modal/modal.directive.js",
-    "app/directives/modal/modal.controller.js"
+    "app/directives/modal/modal.controller.js",
+    "app/directives/modal/modal.service.js",
+
+    "app/directives/fileUpload/fileUpload.module.js",
+    "app/directives/fileUpload/fileUpload.service.js",
+    "app/directives/fileUpload/fileUpload.directive.js",
+
+    "app/directives/navSidebar/navSidebar.module.js",
+    "app/directives/navSidebar/navSidebar.directive.js",
+    "app/directives/navSidebar/navSidebar.controller.js",
+
+    "app/massUpload/massUpload.module.js",
+    "app/massUpload/massUpload.routes.js",
+
+    "app/survey/survey.module.js",
+    "app/survey/survey.controller.js",
+    "app/survey/survey.routes.js",
+    "app/survey/survey.service.js",
+
+    "app/root/root.module.js",
+    "app/root/root.controller.js",
+    "app/root/root.directive.js",
+    "app/root/root.routes.js",
+
+    "app/navBar/navBar.module.js",
+    "app/navBar/navBar.controller.js",
+
+    "app/navSidebar/navSidebar.module.js",
+    "app/navSidebar/navSidebar.controller.js",
+
+    "app/approvals/approvals.module.js",
+    "app/approvals/approvals.controller.js",
+    "app/approvals/approvals.routes.js",
+
+    "app/logout/logout.module.js",
+    "app/logout/logout.controller.js",
+    "app/logout/logout.routes.js",
+    "app/logout/logout.service.js",
+
+    "app/orgSettings/orgSettings.module.js",
+    "app/orgSettings/orgSettings.controller.js",
+    "app/orgSettings/orgSettings.routes.js",
+
+    "app/userSettings/userSettings.module.js",
+    "app/userSettings/userSettings.controller.js",
+    "app/userSettings/userSettings.routes.js",
+
+    "app/surveySettings/surveySettings.module.js",
+    "app/surveySettings/surveySettings.controller.js",
+    "app/surveySettings/surveySettings.routes.js",
+
+    "app/login/login.module.js",
+    "app/login/login.controller.js",
+    "app/login/login.routes.js",
+    "app/login/login.service.js",
+
+    "app/tagSearch/tagSearch.module.js",
+    "app/tagSearch/tagSearch.controller.js",
+    "app/tagSearch/tagSearch.routes.js",
+    "app/tagSearch/tagSearch.service.js",
+
+    "app/config/config.module.js"
   ],
 
   "vendorJs": [
-    "app/components/jquery/dist/jquery.js",
+    "app/components/jquery/dist/jquery.min.js",
 
-    "app/components/angular/angular.js",
-    "app/components/angular-bootstrap/ui-bootstrap.js",
-    "app/components/angular-bootstrap/ui-bootstrap-tpls.js",
-    "app/components/angular-animate/angular-animate.js",
-    "app/components/angular-cookies/angular-cookies.js",
+    "app/components/angular/angular.min.js",
     "app/components/angular-mocks/angular-mocks.js",
-    "app/components/angular-resource/angular-resource.js",
-    "app/components/angular-route/angular-route.js",
-    "app/components/angular-sanitize/angular-sanitize.js",
+    "app/components/angular-ui-router/release/angular-ui-router.min.js",
+    "app/components/angular-bootstrap/ui-bootstrap.min.js",
+    "app/components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+    "app/components/angular-resource/angular-resource.min.js",
+    "app/components/angular-cookies/angular-cookies.min.js",
+    "app/components/angular-sanitize/angular-sanitize.min.js",
     "app/components/angular-toArrayFilter/toArrayFilter.js",
+    "app/components/bootstrap/dist/js/bootstrap.min.js",
+    "app/components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js",
+    "app/components/blueimp-gallery/js/jquery.blueimp-gallery.min.js"
+  ],
 
-    "app/components/bootstrap/dist/js/bootstrap.js"
+  "style": [
+    "app/components/bootstrap/dist/css/bootstrap.min.css",
+    "app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css",
+    "app/components/blueimp-gallery/css/blueimp-gallery.min.css",
+    "app/directives/modal/style.css",
+    "app/directives/navSidebar/style.css",
+    "app/createClub/style.css",
+    "app/tagSearch/style.css"
   ]
 }

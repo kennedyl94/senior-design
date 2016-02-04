@@ -1,0 +1,51 @@
+<style>
+  .topRight {
+    z-index: 10;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-weight: bold;
+  }
+
+</style>
+<div class="header">
+  <div class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="brand" href="#/">
+          <img id="logo" src="content/images/logo.jpg">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="js-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li id="first" ng-class="{ active: isActive('/organizations') }">
+            <a href="#/organizations">Organizations</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li ng-class="{ active: isActive('/tagSearch') }">
+            <a href="#/tagSearch">Tag Search</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li ng-class="{ active: isActive('/createClub') }">
+            <a href="#/createClub">Create Club</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li ng-class="{ active: isActive('/survey') }">
+            <a href="#/survey">Survey</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav">
+          <li ng-class=" { active: isActive('/massUpload') }">
+            <a href="#/massUpload">Mass Upload</a>
+          </li>
+        </ul>
+        <div id="showLoggedIn" class="topRight nav navbar-nav">
+          <a href="#/login">Log In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

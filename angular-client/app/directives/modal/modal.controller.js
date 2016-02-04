@@ -1,8 +1,8 @@
 
 angular.module('modal')
-  .controller('ModalController', ['$modalInstance', 'contents', Controller]);
+  .controller('ModalController', ['$modalInstance', '$window', 'modalService', 'contents', Controller]);
 
-function Controller($modalInstance, contents) {
+function Controller($modalInstance, $window, modalService, contents) {
   var vm = this;
 
   vm.org = contents.org;
@@ -11,4 +11,12 @@ function Controller($modalInstance, contents) {
   vm.back = function() {
     $modalInstance.close('ok');
   };
+
+  vm.deleteOrg = function() {
+    //DIALOG -- ARE YOU SURE YOU WANT TO DELETE THIS ORG?
+    modalService.deleteOrg(vm.org).then(function () {
+      $window.location.reload();
+      $modalInstance.close('ok');
+    });
+  }
 }

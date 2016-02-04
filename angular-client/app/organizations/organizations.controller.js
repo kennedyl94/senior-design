@@ -2,23 +2,38 @@
   'use strict';
 
   angular.module('organizations')
-    .controller('OrganizationsController', ['organizationsService', '$q', '$http', '$modal', '$sce', Controller]);
+    .controller('OrganizationsController', ['organizationsService', '$modal', '$sce', Controller]);
 
-  function Controller(organizationService, $q, $http, $modal, $sce) {
+  function Controller(organizationService,$modal, $sce) {
 
     var vm = this;
-    vm.orgs = {};
+    vm.data = organizationService.data;
+    vm.inactive = [];
 
     vm.query = "";
 
     // Filters Orgs -- If name/description contains vm.query
-    vm.search = function (org) {
-      vm.queriedOrgs = [];
-      var name = org.name.toLowerCase();
-      var description = org.description.toLowerCase();
+    vm.search = function(org) {
       var query = vm.query || '';
       if(query != '') { query = query.toLowerCase(); }
-      return !!((name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1));
+
+      var name = org.name.toLowerCase();
+      var description = org.description.toLowerCase();
+      var tags = org.tags;
+
+      if (query != 'inactive' && tags.indexOf('inactive') == -1) {
+        var i = 0;
+        for (i; i < tags.length; i++) {
+          if (tags[i].toLowerCase().indexOf(query || '') !== -1) {
+            return true;
+          }
+        }
+      } else if (query == 'inactive' && tags.indexOf('inactive') != -1) {
+        return true;
+      }
+
+      return !!((tags.indexOf('inactive') == -1 &&
+        (name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1)));
     }
 
     // Highlights organization description words that match vm.query
@@ -50,12 +65,8 @@
     vm.selectedOption = vm.options[0];
 
     vm.sortOrgs = function(selectedOption) {
-      var deferred = $q.defer();
-      var promise =
-        $http({method: 'GET', url: 'http://localhost:3000/Organizations/' + selectedOption.id});
-      promise.then(function(data) {
-        vm.orgs = data.data;
-        deferred.resolve();
+      organizationService.sortOrgs(selectedOption).then(function(sortedOrgs) {
+        vm.data.orgs = sortedOrgs;
       });
     };
 
@@ -67,7 +78,7 @@
         templateUrl: 'directives/modal/modal.template.html',
         controller: 'ModalController as modalCtrl',
         resolve: {
-          contents: function () {
+          contents: function() {
             return {
               org: org,
               images: images
@@ -76,11 +87,6 @@
         }
       });
     };
-
-    // GET THE ORGANIZATIONS FROM SERVICE
-    organizationService.then(function (service) {
-      vm.orgs = service.orgs;
-    });
   }
 
 })();

@@ -10,26 +10,49 @@
       //////////////////////////////////////////////////////////////////////////////////////////
       // 3rd PARTY DEPENDENCIES
 
-      /* ngRoute is Angular's routing library. */
-      'ngRoute',
+      /*The 'ui-router' is provided by the 'angular-ui-router' package. It manages all of
+      the routing in the application and allows for advanced features such as multiple
+      views on a page, nested views, and most importantly state.
+      (This functionality should be implemented in Angular 2.0!)
+      See: http://angularjs.blogspot.com/2015/09/angular-2-survey-results.html */
+      'ui.router',
 
-      /* ngAnimate is Angular's own animation library. */
-      'ngAnimate',
-
-      /* ngCookies is Angular's library for manipulating cookies. */
-      'ngCookies',
-
-      /* ui.bootstrap is a rewrite of many of Bootstrap's components in Angular */
+      /* Bootstrap's components in Angular */
       'ui.bootstrap',
 
       /* allows a JSON object to be converted into an array when using ng-repeat */
       'angular-toArrayFilter',
 
+      /* used for $cookieStore to maintain session variables */
+      'ngCookies',
+
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
+      'config',
+      'root',
+      'navBar',
+      'ngNavSidebar',
+      'navSidebar',
+      'approvals',
+      'userSettings',
+      'orgSettings',
+      'surveySettings',
       'organizations',
 	    'createClub',
-      'modal'
+      'modal',
+      'survey',
+      'massUpload',
+      'fileUpload',
+      'login',
+      'logout',
+      'tagSearch'
+    ])
 
-    ]);
+    .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false')) {
+        $location.path('/login');
+      }
+    });
+  }]);
 })();

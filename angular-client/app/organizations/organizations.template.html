@@ -1,6 +1,6 @@
 <h1 align="center">Student Organizations</h1>
-<div class="col-sm-8 col-sm-offset-2" id="orgs-div">
-  <div class="row">
+<div class="col-sm-10 col-sm-offset-1" id="orgs-div">
+  <div class="row" id="orgs-header-row">
     <div class="col-sm-4" id="org-search-div">
       <input type="text" ng-model="orgsCtrl.query" placeholder="Search" class="form-control" id="orgs-search-box"/>
       <i class="form-control-feedback" class="glyphicon glyphicon-search"></i>
@@ -14,8 +14,15 @@
       </select>
     </div>
   </div>
-  <div class="col-sm-12" ng-repeat="org in orgsCtrl.orgs | toArray | filter:orgsCtrl.search">
-      <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org, orgsCtrl.images)">{{org.name}}</h3>
-      <span ng-show="orgsCtrl.search(org) && orgsCtrl.query != ''" ng-bind-html="orgsCtrl.highlight(org.description, orgsCtrl.query)">{{org.description}}</span>
+  <div class="col-sm-12" ng-repeat="org in orgsCtrl.data.orgs | toArray | filter:orgsCtrl.search">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="orgs-header" ng-click="orgsCtrl.openModal(org, orgsCtrl.images)">{{org.name}}</h3>
+          <span id="tags-span" class="col-sm-offset-1" ng-bind-html="orgsCtrl.highlight(org.tags.toString(), orgsCtrl.query)">{{org.tags.toString()}}</span>
+        </div>
+      </div>
+      <div class="row" id="description-row">
+        <span ng-show="orgsCtrl.search(org) && orgsCtrl.query != ''" ng-bind-html="orgsCtrl.highlight(org.description, orgsCtrl.query)">{{org.description}}</span>
+      </div>
   </div>
 </div>
