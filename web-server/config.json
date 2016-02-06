@@ -17,5 +17,12 @@
 	  	"Password": "String",
 	  	"Type": "String",
 	  	"Orgs": ["String"]
+	},
+	"surveyQuestionSchema": {
+		"question" : "String",
+		"tags": [
+			"String"
+		],
+		"category": "String"
 	}
 }

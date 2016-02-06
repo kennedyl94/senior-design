@@ -45,7 +45,8 @@
       'massUpload',
       'fileUpload',
       'login',
-      'logout'
+      'logout',
+      'tagSearch'
     ])
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {

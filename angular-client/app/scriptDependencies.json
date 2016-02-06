@@ -74,6 +74,11 @@
     "app/login/login.routes.js",
     "app/login/login.service.js",
 
+    "app/tagSearch/tagSearch.module.js",
+    "app/tagSearch/tagSearch.controller.js",
+    "app/tagSearch/tagSearch.routes.js",
+    "app/tagSearch/tagSearch.service.js",
+
     "app/config/config.module.js"
   ],
 
@@ -100,6 +105,7 @@
     "app/components/blueimp-gallery/css/blueimp-gallery.min.css",
     "app/directives/modal/style.css",
     "app/directives/navSidebar/style.css",
-    "app/createClub/style.css"
+    "app/createClub/style.css",
+    "app/tagSearch/style.css"
   ]
 }
