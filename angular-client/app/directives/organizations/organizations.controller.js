@@ -5,71 +5,19 @@
   function Controller($modal, $sce, $scope, $filter) {
     var vm = this;
 
-    // Manages the pagination:
-    vm.hasOriginal = false;
-    $scope.original = [];
+    /* PAGINATION MANAGEMENT */
     $scope.totalItems = 0;
     $scope.currentPage = 1;
-    $scope.itemsPerPage = 3;
-    $scope.start = (($scope.currentPage-1)*$scope.itemsPerPage);
-    $scope.end = (($scope.currentPage)*$scope.itemsPerPage);
-
-    vm.pageChanged = function() {
-      $scope.start = (($scope.currentPage-1)*$scope.itemsPerPage);
-      $scope.end = (($scope.currentPage)*$scope.itemsPerPage);
-    };
-
-    $scope.$watch('orgs', function(orgs) {
-      // We have to use the toArray filter first in order to get the length
-      var temp = $filter('toArray')(orgs);
-      $scope.totalItems = temp.length;
-      if(!vm.hasOriginal && $scope.totalItems > 0) {
-        vm.hasOriginal = true;
-        $scope.original = temp;
-      }
-    });
-
     $scope.query = '';
+
+    // We have to use this to initially get the totalItems
+    $scope.$watch('orgs', function(orgs) {$scope.totalItems = orgs.length;});
+
     $scope.$watch('query', function(query) {
-      if(query == '') {
-        $scope.orgs = $scope.original;
-      }
-      //var temp = $filter('toArray')($scope.orgs);
-      var filtered = [];
-      var i = 0;
-      for(i; i < $scope.original.length; i++) {
-        if(vm.search($scope.original[i])) {
-          filtered.push($scope.original[i]);
-        }
-      }
-      $scope.orgs = filtered;
+      $scope.filtered = $filter('search')($scope.orgs, query);
+      $scope.totalItems = $scope.filtered.length;
+      $scope.currentPage = 1;
     });
-
-    vm.inactive = [];
-
-    // Filters Orgs -- If name/description contains vm.query
-    vm.search = function(org) {
-      var query = $scope.query || '';
-      if(query != '') { query = query.toLowerCase(); }
-
-      var name = org.name.toLowerCase();
-      var description = org.description.toLowerCase();
-      var tags = org.tags;
-
-      if (query != 'inactive' && tags.indexOf('inactive') == -1) {
-        var i = 0;
-        for (i; i < tags.length; i++) {
-          if (tags[i].toLowerCase().indexOf(query || '') !== -1) {
-            return true;
-          }
-        }
-      } else if (query == 'inactive' && tags.indexOf('inactive') != -1) {
-        return true;
-      }
-
-      return !!((tags.indexOf('inactive') == -1 &&
-      (name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1)));
-    }
 
     // Highlights organization description words that match vm.query
     vm.highlight = function(text, search) {
@@ -124,36 +72,54 @@
     };
   }
 
-  // Used for slicing the orgs to be paginated.
-  angular.module('ngOrganizations').filter('slice', function($filter) {
-    return function(arr, start, end) {
-      //var temp = $filter('toArray')(arr);
-      return arr.slice(start, end);
+  angular.module('ngOrganizations').filter('startFrom', function () {
+    return function (input, start) {
+      if (input) {
+        start = +start;
+        return input.slice(start);
+      }
+      return [];
     };
   });
 
-  /*angular.module('ngOrganizations').filter('search', function () {
-    return function (org) {
-      var query = vm.query || '';
+  angular.module('ngOrganizations').filter('search', function() {
+    return function(arr, query) {
+      var filtered = [];
+      query = query || '';
       if(query != '') { query = query.toLowerCase(); }
 
-      var name = org.name.toLowerCase();
-      var description = org.description.toLowerCase();
-      var tags = org.tags;
+      var contains = false;
+      var i = 0;
+      for(i; i < arr.length; i++) {
 
-      if (query != 'inactive' && tags.indexOf('inactive') == -1) {
-        var i = 0;
-        for (i; i < tags.length; i++) {
-          if (tags[i].toLowerCase().indexOf(query || '') !== -1) {
-            return true;
+        var found = false;
+        var org = arr[i];
+        var name = org.name.toLowerCase();
+        var description = org.description.toLowerCase();
+        var tags = org.tags;
+
+        if (query != 'inactive' && tags.indexOf('inactive') == -1) {
+          var j = 0;
+          for (j; j < tags.length; j++) {
+            if (tags[j].toLowerCase().indexOf(query || '') !== -1) {
+              found = true;
+              filtered.push(org);
+              break;
+            }
           }
+        } else if (query == 'inactive' && tags.indexOf('inactive') != -1) {
+          found = true;
+          filtered.push(org);
+          continue;
         }
-      } else if (query == 'inactive' && tags.indexOf('inactive') != -1) {
-        return true;
-      }
 
-      return !!((tags.indexOf('inactive') == -1 &&
-      (name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1)));
-    };
-  });*/
+        var contains =  !!((tags.indexOf('inactive') == -1 &&
+        (name.indexOf(query || '') !== -1 || description.indexOf(query || '') !== -1)));
+        if(contains && !found) {
+          filtered.push(org);
+        }
+      }
+      return filtered;
+    }
+  });
 })();

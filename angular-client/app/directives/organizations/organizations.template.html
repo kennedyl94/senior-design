@@ -13,7 +13,7 @@
       </select>
     </div>
   </div>
-  <div class="col-sm-12" ng-repeat="org in orgs | slice:start:end | filter:ngOrgsCtrl.search">
+  <div class="col-sm-12" ng-repeat="org in filtered = orgs | search:query | startFrom:(currentPage-1)*itemsPerPage | limitTo:itemsPerPage">
     <div class="row">
       <div class="col-sm-12">
         <h3 class="orgs-header" ng-click="ngOrgsCtrl.openModal(org, ngOrgsCtrl.images)">{{org.name}}</h3>
@@ -26,12 +26,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12 col-sm-offset-3">
-      <pagination class="orgs_pagination" total-items="totalItems" ng-model="currentPage" ng-change="ngOrgsCtrl.pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
-      <!--<dir-pagination-controls
-        max-size="5"
-        direction-links="true"
-        boundary-links="true">
-      </dir-pagination-controls>-->
+      <pagination total-items="totalItems" ng-model="currentPage" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
     </div>
   </div>
 </div>
