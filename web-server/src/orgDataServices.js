@@ -70,13 +70,9 @@ exports.getOrgsMatchingTags = function(tags, callback) {
 exports.getAllOrgs = function(sortType, success, error){
 	var sort_order = {};
 	sort_order[sortType] = 1;
-	studentOrg.find({}, function(err, orgs) {
-		var orgsMap = {}; 
-		orgs.forEach(function(org) {
-			orgsMap[org._id] = org;
-		});
-		success(orgsMap);
-	}).sort( sort_order );
+	studentOrg.find({}).sort(sort_order).lean().exec(function(err, orgs) {
+		success(orgs);
+	});
 };
 
 exports.deleteOrg = function(orgId, success, error) {
@@ -171,6 +167,8 @@ exports.searchByTags = function(tagList, success, error) {
 		tempOrgList.forEach(function(org){
 			orgList.push(org.organization);
 		});
+
+
 
 		success(orgList);
 	});

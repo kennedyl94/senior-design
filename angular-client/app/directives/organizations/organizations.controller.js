@@ -6,7 +6,6 @@
     var vm = this;
 
     /* PAGINATION MANAGEMENT */
-    $scope.totalItems = 0;
     $scope.currentPage = 1;
     $scope.query = '';
 
@@ -47,15 +46,8 @@
 
     vm.selectedOption = vm.options[0];
 
-    /*vm.sortOrgs = function(selectedOption) {
-      organizationService.sortOrgs(selectedOption).then(function(sortedOrgs) {
-        vm.data.orgs = sortedOrgs;
-      });
-    };*/
-
     // MODAL CREATIONS
     vm.openModal = function(org, images) {
-
       return $modal.open({
         animation: true,
         templateUrl: 'directives/modal/modal.template.html',

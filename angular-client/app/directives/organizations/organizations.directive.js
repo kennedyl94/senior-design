@@ -10,6 +10,7 @@
       controllerAs: 'ngOrgsCtrl',
       scope: {
         orgs: "=",
+        totalItems: "@",
         itemsPerPage: "="
       }
     };
