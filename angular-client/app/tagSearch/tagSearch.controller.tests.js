@@ -85,14 +85,14 @@ describe("TagSearchController", function() {
     });
   }
 
-  describe("Single Organization", function() {
+  /*describe("Single Organization", function() {
     it("should open a modal when an organization is selected", function() {
       var ctrl = createController();
       spyOn($modal, 'open').and.callThrough();
       ctrl.openModal(testOrgs[0], testImages);
       expect($modal.open).toHaveBeenCalled();
     });
-  });
+  });*/
 /* Can't make test until able to test control vs service
   describe("Search", function() {
     it("should return Org1", function() {
