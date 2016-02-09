@@ -61,6 +61,12 @@
     "app/userSettings/userSettings.service.js",
     "app/userSettings/userSettings.routes.js",
 
+
+    "app/directives/editUserModal/editUserModal.module.js",
+    "app/directives/editUserModal/editUserModal.directive.js",
+    "app/directives/editUserModal/editUserModal.controller.js",
+    "app/directives/editUserModal/editUserModal.service.js",
+
     "app/surveySettings/surveySettings.module.js",
     "app/surveySettings/surveySettings.controller.js",
     "app/surveySettings/surveySettings.routes.js",
@@ -95,6 +101,7 @@
     "app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css",
     "app/components/blueimp-gallery/css/blueimp-gallery.min.css",
     "app/directives/modal/style.css",
+    "app/directives/editUserModal/style.css",
     "app/directives/navSidebar/style.css",
     "app/createClub/style.css"
   ]

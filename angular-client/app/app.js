@@ -35,6 +35,7 @@
       'navSidebar',
       'approvals',
       'userSettings',
+      'editUserModal',
       'orgSettings',
       'surveySettings',
       'organizations',

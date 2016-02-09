@@ -1,0 +1,23 @@
+<div>
+  <div class="modal-header" id="modal-header">
+    <h2 class="modal-title">{{editUserModalCtrl.username}}</h2>
+  </div>
+  <div class="modal-body">
+    <div class="row"><div class="modal-info-header">
+      <h4>Admin Role</h4>
+      <input type="text" name="type" ng-model='editUserModalCtrl.type' value="editUserModalCtrl.Type"/>
+    </div></div>
+    <div class="row"><div class="modal-info-header">
+      <h4>Organizations</h4>
+      <input type="text" name="orgs" ng-model='editUserModalCtrl.orgs' value="editUserModalCtrl.Orgs"/>
+    </div></div>
+  </div>
+  <div class="modal-footer">
+    <div class="modal-contact-info">
+      <div class="row">
+        <button class="btn btn-primary" id="admin-back-btn" ng-click="editUserModalCtrl.back()">Back</button>
+        <button class="btn btn-primary" id="admin-save-btn" ng-click="editUserModalCtrl.save()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
