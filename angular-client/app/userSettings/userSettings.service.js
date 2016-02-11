@@ -11,34 +11,6 @@
       users: {}
     };
 
-    //service.saveNewUser = function(user) {
-    //  var deferred = $q.defer();
-    //  var promise = $http({method: 'PUT', url: config.domain + 'userSettings/addNew', data: {user: user}});
-    //  promise.then(function(data) {
-    //    deferred.resolve(data.data);
-    //  });
-    //  return deferred.promise;
-    //};
-
-    service.saveChanges = function(user) {
-      var deferred = $q.defer();
-      var promise = $http({method: 'PUT', url: config.domain + 'userSettings/editExisting/' + user._id, data: {user: user}});
-      promise.then(function(data) {
-        deferred.resolve(data.data);
-      });
-      return deferred.promise;
-    };
-
-    service.deleteUser = function(username) {
-      var deferred = $q.defer();
-      var promise =
-        $http({method: 'DELETE', url: config.domain + 'userSettings/delete/'+username});
-      promise.then(function(data) {
-        deferred.resolve();
-      });
-      return deferred.promise;
-    };
-
     function init() {
       var promises = [];
       promises.push($http({method: 'GET', url: config.domain + 'userSettings'}));

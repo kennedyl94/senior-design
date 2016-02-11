@@ -1,5 +1,6 @@
 <div>
   <div class="modal-header" id="modal-header-Edit">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="editUserModalCtrl.back()">×</button>
     <h2 class="modal-title">{{editUserModalCtrl.username}}</h2>
   </div>
   <div class="modal-body">
@@ -15,8 +16,8 @@
   <div class="modal-footer">
     <div class="modal-contact-info">
       <div class="row">
-        <button class="btn btn-primary" id="admin-back-btn" ng-click="editUserModalCtrl.exitEditUserModal()">Back</button>
-        <button class="btn btn-primary" id="admin-save-btn" ng-click="editUserModalCtrl.save()">Save</button>
+        <button class="btn btn-primary" id="admin-delete-btn" ng-click="editUserModalCtrl.deleteUser()">Delete</button>
+        <button class="btn btn-primary" id="admin-save-btn" ng-click="editUserModalCtrl.saveChanges()">Save</button>
       </div>
     </div>
   </div>

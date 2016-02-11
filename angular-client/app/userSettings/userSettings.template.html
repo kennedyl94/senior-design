@@ -20,7 +20,6 @@
       <th>Admin Role</th>
       <th>Organizations</th>
       <th></th>
-      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -29,7 +28,6 @@
       <td>{{user.Type}}</td>
       <td>{{user.Orgs.toString()}}</td>
       <td><input type="button" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
-      <td><input type="button" value="Delete" ng-click="userSettingsCtrl.deleteUser(user.Username)"></td>
     </tr>
     </tbody>
   </table>

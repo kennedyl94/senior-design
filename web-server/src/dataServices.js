@@ -37,7 +37,7 @@ exports.connect = function(){
 			console.log('Disconnected from database');
 		});
 	}
- }
+ };
 
 /*
  * adds one student org to the database
@@ -65,7 +65,7 @@ exports.addUser = function(user, callback) {
 	} else {
 		//callback (new Error('Not connected to database'), null);
 	}
-}
+};
 
 /*
  * gets all of the student orgs from the database
@@ -95,7 +95,6 @@ exports.getAllUsers = function(success, error){
 		admins.find({}, function(err, users) {
 			var userMap = {};
 			users.forEach(function(user) {
-				console.log(user._id + ": " + user);
 				userMap[user._id] = user;
 			});
 			success(userMap);
@@ -120,10 +119,9 @@ exports.deleteOrg = function(orgId, success, error) {
 	}
 };
 
-exports.deleteUser = function(username, success, error) {
-	console.log("server delete user: " + username);
+exports.deleteUser = function(id, success, error) {
 	if(connected) {
-		admins.find({username: username}).remove().exec(function(err) {
+		admins.find({_id: id}).remove().exec(function(err) {
 			if(err) {
 				error(new Error('Unable to delete user with username: ' + username));
 			}

@@ -17,6 +17,16 @@
       return deferred.promise;
     };
 
+    service.deleteUser = function(user) {
+      var deferred = $q.defer();
+      var promise =
+        $http({method: 'DELETE', url: config.domain + 'userSettings/delete/' + user._id});
+      promise.then(function(data) {
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
+
     return service;
   }
 })();

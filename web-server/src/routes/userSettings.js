@@ -12,12 +12,11 @@ router.get('/', function(request, response) {
         });
 });
 
-router.delete('/delete/:username', function(req, res) {
-    var username = req.params.username;
-    console.log("username to be deleted: " + username);
-    _dataServices.deleteUser(username,
+router.delete('/delete/:id', function(request, response) {
+    var id = request.params.id;
+    _dataServices.deleteUser(id,
         function() {
-            res.sendStatus(200);
+            response.sendStatus(200);
         }, function(error) {
            console.log(error);
         });
