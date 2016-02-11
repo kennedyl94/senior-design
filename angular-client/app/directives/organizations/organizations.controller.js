@@ -6,16 +6,16 @@
     var vm = this;
 
     /* PAGINATION MANAGEMENT */
-    $scope.currentPage = 1;
-    $scope.query = '';
+    vm.currentPage = 1;
+    vm.query = '';
 
     // We have to use this to initially get the totalItems
-    $scope.$watch('orgs', function(orgs) {$scope.totalItems = orgs.length;});
+    $scope.$watch('ngOrgsCtrl.orgs', function(orgs) {if(orgs){vm.totalItems = orgs.length;}});
 
-    $scope.$watch('query', function(query) {
-      $scope.filtered = $filter('search')($scope.orgs, query);
-      $scope.totalItems = $scope.filtered.length;
-      $scope.currentPage = 1;
+    $scope.$watch('ngOrgsCtrl.query', function(query) {
+      vm.filtered = $filter('search')(vm.orgs, query);
+      vm.totalItems = vm.filtered.length;
+      vm.currentPage = 1;
     });
 
     // Highlights organization description words that match vm.query
@@ -77,6 +77,7 @@
   angular.module('ngOrganizations').filter('search', function() {
     return function(arr, query) {
       var filtered = [];
+      if(!arr) { return filtered; }
       query = query || '';
       if(query != '') { query = query.toLowerCase(); }
 

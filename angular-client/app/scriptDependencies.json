@@ -1,6 +1,9 @@
 {
   "site": [
     "app/app.js",
+
+    "app/templates/templates.module.js",
+
     "app/organizations/organizations.module.js",
     "app/organizations/organizations.controller.js",
     "app/organizations/organizations.routes.js",

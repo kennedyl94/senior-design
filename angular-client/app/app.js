@@ -29,6 +29,7 @@
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
       'config',
+      'templates',
       'root',
       'navBar',
       'ngNavSidebar',
