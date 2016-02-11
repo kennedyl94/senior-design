@@ -1,5 +1,5 @@
 <div>
-  <div class="modal-header" id="modal-header">
+  <div class="modal-header" id="modal-header-Edit">
     <h2 class="modal-title">{{editUserModalCtrl.username}}</h2>
   </div>
   <div class="modal-body">
@@ -15,7 +15,7 @@
   <div class="modal-footer">
     <div class="modal-contact-info">
       <div class="row">
-        <button class="btn btn-primary" id="admin-back-btn" ng-click="editUserModalCtrl.back()">Back</button>
+        <button class="btn btn-primary" id="admin-back-btn" ng-click="editUserModalCtrl.exitEditUserModal()">Back</button>
         <button class="btn btn-primary" id="admin-save-btn" ng-click="editUserModalCtrl.save()">Save</button>
       </div>
     </div>

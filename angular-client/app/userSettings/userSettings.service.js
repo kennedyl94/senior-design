@@ -11,13 +11,20 @@
       users: {}
     };
 
-    service.addNewUser = function() {
-      console.log("add user");
+    //service.saveNewUser = function(user) {
+    //  var deferred = $q.defer();
+    //  var promise = $http({method: 'PUT', url: config.domain + 'userSettings/addNew', data: {user: user}});
+    //  promise.then(function(data) {
+    //    deferred.resolve(data.data);
+    //  });
+    //  return deferred.promise;
+    //};
+
+    service.saveChanges = function(user) {
       var deferred = $q.defer();
-      var promise = $http({method: 'POST', url: config.domain + 'userSettings/addNew', data: {username: username, type: type, orgs: orgs}});
+      var promise = $http({method: 'PUT', url: config.domain + 'userSettings/editExisting/' + user._id, data: {user: user}});
       promise.then(function(data) {
-        console.log("in defer promise: service");
-        deferred.resolve();
+        deferred.resolve(data.data);
       });
       return deferred.promise;
     };

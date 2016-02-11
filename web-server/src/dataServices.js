@@ -55,17 +55,17 @@ exports.addStudentOrg = function(org, callback){
 		//callback(new Error('Not connected to database'), null);
 	}
 };
-//
-//exports.addUser = function(user, callback) {
-//	if(connected) {
-//		var newUser = new admins(user);
-//		newUser.save(function(err, savedUser) {
-//			callback(err, savedUser._doc);
-//		});
-//	} else {
-//		//callback (new Error('Not connected to database'), null);
-//	}
-//}
+
+exports.addUser = function(user, callback) {
+	if(connected) {
+		var newUser = new admins(user);
+		newUser.save(function(err, savedUser) {
+			callback(err, savedUser._doc);
+		});
+	} else {
+		//callback (new Error('Not connected to database'), null);
+	}
+}
 
 /*
  * gets all of the student orgs from the database
@@ -121,6 +121,7 @@ exports.deleteOrg = function(orgId, success, error) {
 };
 
 exports.deleteUser = function(username, success, error) {
+	console.log("server delete user: " + username);
 	if(connected) {
 		admins.find({username: username}).remove().exec(function(err) {
 			if(err) {
@@ -134,14 +135,26 @@ exports.deleteUser = function(username, success, error) {
 	}
 };
 
+
+exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
+	if(connected) {
+		studentOrg.findOneAndUpdate( {_id: orgId}, orgToUpdate, function(err) {
+			if(err) {
+				error(new Error('Unable to modify item with id:' + orgId));
+			}
+			success();
+		});
+	}
+	else {
+		//error(new Error('Not connected to database'), null);
+	}
+};
+
 exports.editUser = function(user, id, success, error) {
 	if(connected) {
-		var query = {"_id" : id};
-		var update = {type: user.type, orgs: user.orgs};
-		var options = {new: true};
-		admins.findOneAndUpdate(query, update, options, function(err) {
+		admins.findOneAndUpdate({_id : id}, user, function(err) {
 			if(err) {
-				error(new Error('Unable to save user with username: ' + user.Username));
+				error(new Error('Unable to modify item with id:' + id));
 			}
 			success();
 		});

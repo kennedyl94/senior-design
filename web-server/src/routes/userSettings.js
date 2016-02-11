@@ -14,6 +14,7 @@ router.get('/', function(request, response) {
 
 router.delete('/delete/:username', function(req, res) {
     var username = req.params.username;
+    console.log("username to be deleted: " + username);
     _dataServices.deleteUser(username,
         function() {
             res.sendStatus(200);
@@ -22,16 +23,19 @@ router.delete('/delete/:username', function(req, res) {
         });
 })
 
-router.post('/addNew', function (request, response) {
-    response.sendStatus(200);
+router.put('/addNew', function (request, response) {
+    var user = request.body.user;
+    _dataServices.addUser(user,
+        function() {
+            response.sendStatus(200);
+        }, function(error) {
+            console.log(error);
+        });
 });
 
 router.put('/editExisting/:id', function (request, response) {
-    console.log("in edit Existing");
     var user = request.body.user;
     var id = request.params.id;
-    console.log("username: " + user.Username);
-    console.log("id: " + id);
     _dataServices.editUser(user, id,
         function() {
             response.sendStatus(200);

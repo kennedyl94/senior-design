@@ -36,6 +36,7 @@
       'approvals',
       'userSettings',
       'editUserModal',
+      'addUserModal',
       'orgSettings',
       'surveySettings',
       'organizations',

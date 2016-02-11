@@ -8,7 +8,7 @@
 
     var service = this;
 
-    service.save = function(user) {
+    service.saveChanges = function(user) {
       var deferred = $q.defer();
       var promise = $http({method: 'PUT', url: config.domain + 'userSettings/editExisting/' + user._id, data: {user: user}});
       promise.then(function(data) {

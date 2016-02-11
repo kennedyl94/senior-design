@@ -30,7 +30,11 @@
   width: 75px;
 }
 
-#admin-cancel-btn {
+#admin-back-btn {
+  margin-right: 5%;
+}
+
+#admin-delete-btn {
   background-color: red;
 }
 
