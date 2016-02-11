@@ -87,4 +87,71 @@ describe('orgDataServices', function () {
 			);
 		});
 	});
+
+	describe('#getOrgsMatchingTags', function() {
+		
+		it('should send null if error', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should return empty array if no orgs match', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should return all matching orgs', function(done){
+			//TODO
+			assert.fail();
+		});
+	});
+	
+	describe('#deleteOrg', function() {
+		
+		it('should call error function if org does not exist', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should call success if removal successful', function(done){
+			//TODO
+			assert.fail();
+		});
+	});
+	
+	describe('#getAllTags', function() {
+		
+		it('should return all tags from active clubs', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should not return tags only used by inactive clubs', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should call error function if there is an error', function(done){
+			//TODO
+			assert.fail();
+		});
+	});
+	
+	describe('#searchByTags', function() {
+		
+		it('should return all orgs matching tag list', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should return orgs in order of most matched tags', function(done){
+			//TODO
+			assert.fail();
+		});
+		
+		it('should call error function if there is an error', function(done){
+			//TODO
+			assert.fail();
+		});
+	});
 });

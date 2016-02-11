@@ -5,35 +5,10 @@ var dbName = require('../config').mongo;
 var surveyQuestion = database.createModel('survey_questions', require('../config').surveyQuestionSchema);
 
 /*
-/*
- * setup the connection to the database
- * /
-exports.connect = function(){
-    if(!connected){
-        mongoose.connect(dbName);
-        var db = mongoose.connection;
-        db.on('error', function(){
-            console.error.bind(console, 'connection error:');
-            mongoose.disconnect();
-        });
-        db.once('open', function() {
-            connected = true;
-        });
-    }
-};
-
-/*
- * disconnects from the mongo server
- * /
- exports.disconnect = function(){
-     if(connected){
-        mongoose.disconnect(function(){
-            connected = false;
-        });
-    }
- };
+ * retreives the tags associated with questions with given ids
+ * ids: an array of the question ids
+ * callback: a function that takes an array of tags
  */
-
 exports.getQuestionsTagsByIds = function(ids, callback) {
    surveyQuestion.find({
        '_id': { $in: ids }
@@ -48,6 +23,9 @@ exports.getQuestionsTagsByIds = function(ids, callback) {
                }
            }
            callback(tags);
+       }
+       else{
+           callback([]);    // this is a temporary solution to the possibilty the callback isn't reached
        }
    });
 }
@@ -66,17 +44,14 @@ exports.addQuestion = function(question, callback){
 
 /*
  * retreives a question from the database based on its _id
- * questionID the id of the question to return
- * callback a function that takes an error object and the question matching the id given
+ * questionID: the id of the question to return
+ * callback: a function that takes an error object and the question matching the id given
  */ 
 exports.getQuestionById = function(questionId, callback){
     surveyQuestion.findById(questionId, function(err, question) {
-        callback(question, err);
+        callback(err, question);
     });
 };
-// exports.getQuestionById = function(questionId, callback){
-//     surveyQuestion.findById(questionId, callback); 
-// };
 
 /*
  * gets all of the survey questions from the database
