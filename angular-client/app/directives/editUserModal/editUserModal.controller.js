@@ -1,14 +1,25 @@
 (function(){
   angular.module('editUserModal')
-    .controller('EditUserModalController', ['$modalInstance', 'editUserModalService', 'contents', '$window', Controller]);
+    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', '$window', Controller]);
 
-  function Controller($modalInstance, editUserModalService, contents, $window) {
+  function Controller($scope, $modalInstance, editUserModalService, contents, $window) {
     var vm = this;
 
     vm.user = contents.user;
-    vm.username = contents.user.Username;
-    vm.type = contents.user.Type;
-    vm.orgs = contents.user.Orgs;
+    vm.username = vm.user.Username;
+    vm.orgs = vm.user.Orgs;
+
+    $scope.list_categories = {
+      data: [{
+        id: 'SL',
+        name: 'SL'
+      }, {
+        id: 'Org',
+        name: 'Org'
+      }]
+    };
+
+    $scope.list_category = vm.user.Type;
 
     vm.back = function () {
       $modalInstance.close('ok');
@@ -16,7 +27,7 @@
 
     vm.saveChanges = function() {
       vm.user.Username = vm.username;
-      vm.user.Type = vm.type;
+      vm.user.Type = $scope.list_category;
       vm.user.Orgs = vm.orgs;
       editUserModalService.saveChanges(vm.user).then(function(response) {
       });
