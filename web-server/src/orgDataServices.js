@@ -7,38 +7,6 @@ var dbName = config.mongo;
 var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
 
 /*
-/*
- * setup the connection to the database
- * /
-exports.connect = function(){
-	if(!connected
-		mongoose.connect(dbName);
-		var db = mongoose.connection;
-		db.on('error', function(){
-			console.error.bind(console, 'connection error:');
-			mongoose.disconnect();
-		});
-		db.once('open', function() {
-			console.log('Connected to database');
-			connected = true;
-		});
-	}
-};
-
-/*
- * disconnects from the mongo server
- * /
- exports.disconnect = function(){
-	 if(connected){
-		mongoose.disconnect(function(){
-			connected = false;
-			console.log('Disconnected from database');
-		});
-	}
- };
-*/
-
-/*
  * adds one student org to the database
  * org: the student org to add
  * callback: a function that takes an error object and an object representing the saved org document
@@ -87,32 +55,6 @@ exports.deleteOrg = function(orgId, success, error) {
 		success();
 	});
 };
-//
-//exports.userExists = function(user, success, error){
-//	if(connected){
-//		user.find({}, function(err, orgs) {
-//			var orgsMap = {};
-//			orgs.forEach(function(org) {
-//				orgsMap[org._id] = org;
-//			});
-//			success(orgsMap);
-//		}).sort( sort_order );
-//	}
-//	else{
-//		error(new Error('Not connected to database'), null);
-//	}
-//};
-//
-//exports.addUser = function(user, success, error) {
-//	if(connected) {
-//		var newUser = new user(user)
-//		newUser.save((function(err, savedUser){
-//			callback(err, savedUser._doc);
-//		}));
-//	} else {
-//		error(new Error('Not connected to database', null));
-//	}
-//}}
 
 /*
  * Gets all tags currently being used by active clubs.
