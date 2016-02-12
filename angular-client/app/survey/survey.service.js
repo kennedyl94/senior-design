@@ -13,19 +13,10 @@
     };
 
     service.submit = function(ans, success) {
-      var req = {
-        method: 'POST',
-        url: config.domain+'survey',
-        headers: {},
-        data: ans
-      };
-
-      $http(req)
-        .success(function (data, status, headers, config) {
-          success(data);
-        }).error(function(err, status, headers, config) {
-        console.log('error: ' + err);
-      });
+      $http({method: 'POST', url: config.domain + 'survey', data: ans})
+        .then(function(data) {
+          success(data.data);
+        });
     };
 
     service.sendResults = function(address, orgs) {

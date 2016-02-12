@@ -12,7 +12,7 @@
 
     // console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
 
-    vm.ans={};
+    vm.ans = {};
     vm.address = '';
 
     vm.submitted = false;
