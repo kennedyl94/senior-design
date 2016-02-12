@@ -1,13 +1,23 @@
 (function(){
   angular.module('addUserModal')
-    .controller('AddUserModalController', ['$modalInstance', 'addUserModalService', Controller]);
+    .controller('AddUserModalController', ['$scope','$modalInstance', 'addUserModalService', Controller]);
 
-  function Controller($modalInstance, addUserModalService) {
+  function Controller($scope, $modalInstance, addUserModalService) {
     var vm = this;
+
+    $scope.list_categories = {
+      data: [{
+        id: 'SL',
+        name: 'SL'
+      }, {
+        id: 'Org',
+        name: 'Org'
+      }]
+    };
+    $scope.list_category = 'SL';
 
     vm.name = "";
     vm.password = "";
-    vm.type = "";
     vm.orgs = [].toString();
 
     vm.back = function () {
@@ -18,7 +28,7 @@
       var user = {
         Username: vm.name,
         Password: vm.password,
-        Type: vm.type,
+        Type: $scope.list_category,
         Orgs: vm.orgs
       }
       addUserModalService.saveNewUser(user).then(function() {
