@@ -13,7 +13,7 @@
       </select>
     </div>
   </div>
-  <div class="col-sm-12 org-display-div" ng-repeat="org in ngOrgsCtrl.filtered = ngOrgsCtrl.orgs | search:ngOrgsCtrl.query | orderBy:ngOrgsCtrl.selectedOption.id | startFrom:(ngOrgsCtrl.currentPage-1)*ngOrgsCtrl.itemsPerPage | limitTo:ngOrgsCtrl.itemsPerPage">
+  <div class="col-sm-12" ng-repeat="org in ngOrgsCtrl.filtered = ngOrgsCtrl.orgs | search:ngOrgsCtrl.query | orderBy:ngOrgsCtrl.selectedOption.id | startFrom:(ngOrgsCtrl.currentPage-1)*ngOrgsCtrl.itemsPerPage | limitTo:ngOrgsCtrl.itemsPerPage">
     <div class="row">
       <div class="col-sm-12">
         <h3 class="orgs-header" ng-click="ngOrgsCtrl.openModal(org, ngOrgsCtrl.images)">{{org.name}}</h3>

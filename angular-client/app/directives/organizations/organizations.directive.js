@@ -18,7 +18,7 @@
         totalItems: "@",
         itemsPerPage: "="
       },
-      scope: true
+      scope: {}
     };
   }
 })();

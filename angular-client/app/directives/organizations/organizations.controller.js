@@ -15,7 +15,7 @@
     $scope.$watch('ngOrgsCtrl.query', function(query) {
       vm.filtered = $filter('search')(vm.orgs, query);
       vm.totalItems = vm.filtered.length;
-      vm.currentPage = 1;
+      if(vm.query != '') { vm.currentPage = 1; };
     });
 
     // Highlights organization description words that match vm.query
@@ -78,8 +78,7 @@
     return function(arr, query) {
       var filtered = [];
       if(!arr) { return filtered; }
-      query = query || '';
-      if(query != '') { query = query.toLowerCase(); }
+      query = query.toLowerCase() || '';
 
       var contains = false;
       var i = 0;
