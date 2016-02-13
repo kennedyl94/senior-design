@@ -41,8 +41,12 @@ describe('surveyDataServices', function () {
  
     describe('#addQuestion', function() {
     
-        it('should not send error to callback if successful.', function(done){
+        afterEach(function(){
             var connection = mongoose.connection;
+            connection.db.dropDatabase();
+        });
+    
+        it('should not send error to callback if successful.', function(done){
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 assert.equal(err, null);
                 done();
@@ -50,7 +54,6 @@ describe('surveyDataServices', function () {
         });
         
         it('should save new question', function(done) {
-            var connection = mongoose.connection;
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 assert.deepEqual({
                     question: savedQuestion.question,
@@ -64,9 +67,13 @@ describe('surveyDataServices', function () {
     
     describe('#getQuestionById', function(){
        
-        it('should send null question if id does not exist', function(done){
+       
+        afterEach(function(){
             var connection = mongoose.connection;
             connection.db.dropDatabase();
+        });
+        
+        it('should send null question if id does not exist', function(done){
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 surveyDataServices.getQuestionById('', function(err, question){
                     assert.equal(question, null);                           
@@ -76,8 +83,6 @@ describe('surveyDataServices', function () {
         });
         
         it('should send question if id does exist', function(done){
-            var connection = mongoose.connection;
-            connection.db.dropDatabase();
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 surveyDataServices.getQuestionById(savedQuestion._id, function(err, question){
                     assert.deepEqual({
@@ -93,9 +98,12 @@ describe('surveyDataServices', function () {
     
     describe('#getAllQuestions', function() {
 
-        it('should find all documents', function(done){
+        afterEach(function(){
             var connection = mongoose.connection;
             connection.db.dropDatabase();
+        });
+
+        it('should find all documents', function(done){
             async.parallel([
                 function(callback){
                     surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
@@ -128,9 +136,12 @@ describe('surveyDataServices', function () {
     
     describe('#getQuestionsTagsByIds', function(){
         
-        it('should send an empty array if no questions exist', function(done){
+        afterEach(function(){
             var connection = mongoose.connection;
             connection.db.dropDatabase();
+        });
+        
+        it('should send an empty array if no questions exist', function(done){
             surveyDataServices.getQuestionsTagsByIds(fakeIds, function(tags){
                 assert.deepEqual(tags, []);
                 done();
@@ -143,8 +154,6 @@ describe('surveyDataServices', function () {
         });
         
         it('should send all tags associated with the question ids', function(done){
-            var connection = mongoose.connection;
-            connection.db.dropDatabase();
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 surveyDataServices.addQuestion(fakeQuestion2, function(err, savedQuestion2){
                     surveyDataServices.getQuestionsTagsByIds(

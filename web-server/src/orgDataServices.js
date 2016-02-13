@@ -25,11 +25,11 @@ exports.addStudentOrg = function(org, callback){
  */
 exports.getOrgsMatchingTags = function(tags, callback) {
   studentOrg.find({
-     'tags': { $in: tags }
-  }, function(err, docs){
+     'tags': { $in: tags },
+  }).lean().exec(function(err, docs){
      if(!err) {
         callback(docs);
-     }
+     };
   });
 };
 
