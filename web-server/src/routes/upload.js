@@ -50,17 +50,24 @@ router.post('/', uploader.single('file'), function(req, res){
                         phone: row[phoneIndex]
                     }
                 }
-                success = success && 
-               newOrg.name != undefined && newOrg.name.trim() != '' &&
-               newOrg.description != undefined && newOrg.description.trim() != '' &&
-               newOrg.contact.name != undefined && newOrg.contact.name.trim() != '' &&
-               newOrg.contact.email != undefined && newOrg.contact.email.trim() != '' &&
-               newOrg.contact.phone != undefined && newOrg.contact.phone.trim() != '';
-                if(success){
-                    orgs.push(newOrg);
-                }
-            }
-        }
+					if(newOrg.name.trim() != '' &&
+					newOrg.description.trim() != '' /*&&
+					newOrg.contact.name.trim() != '' &&
+					newOrg.contact.email.trim() != '' &&
+					newOrg.contact.phone.trim() != ''*/
+					){
+					success = success && 
+				   newOrg.name != undefined &&
+				   newOrg.description != undefined &&
+				   newOrg.contact.name != undefined &&
+				   newOrg.contact.email != undefined &&
+				   newOrg.contact.phone != undefined;
+					if(success){
+						orgs.push(newOrg);
+					}
+				}
+			}
+		}
         if(success){
             _dataServices.saveAllOrgs(orgs, function(err, savedOrgs){
                 if(err){
