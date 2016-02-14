@@ -5,15 +5,23 @@
   <div class="modal-body">
     <div class="row"><div class="modal-info-header"><h4>Organization Info</h4></div></div>
     <!-- EDIT ORG INFO -->
-    <div class="row"><div class="modal-info-header"><h4>Contact Info</h4></div></div>
     <div class="row">
       <div class="col-sm-3">Name:</div>
-    </div>
-    <div class="row">
+      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.org.name"></div>
       <div class="col-sm-3">Description:</div>
-    </div>
-    <div class="row">
+      <div class="col-sm-9"><textarea style="resize:none" type="text" rows="5" ng-model="editOrgModalCtrl.org.description"></textarea></div>
       <div class="col-sm-3">Tags:</div>
+      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.org.tags"></div>
+    </div>
+    <div class="row"><div class="modal-info-header"><h4>Contact Info</h4></div></div>
+    <!-- EDIT CONTACT INFO -->
+    <div class="row">
+      <div class="col-sm-3">Name:</div>
+      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.org.contact.name"></div>
+      <div class="col-sm-3">Email:</div>
+      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.org.contact.email"></div>
+      <div class="col-sm-3">Phone Number:</div>
+      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.org.contact.phone"></div>
     </div>
   </div>
   <div class="modal-footer">
