@@ -17,7 +17,6 @@
     "app/directives/modal/modal.module.js",
     "app/directives/modal/modal.directive.js",
     "app/directives/modal/modal.controller.js",
-    "app/directives/modal/modal.service.js",
 
     "app/directives/fileUpload/fileUpload.module.js",
     "app/directives/fileUpload/fileUpload.service.js",

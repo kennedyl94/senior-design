@@ -13,13 +13,33 @@ router.get('/:sortType', function (req, res) {
 });
 
 router.delete('/delete/:orgId', function(req, res) {
-  var orgId = req.params.orgId;
-  _dataServices.deleteOrg(orgId,
+    var orgId = req.params.orgId;
+    _dataServices.deleteOrg(orgId,
     function() {
         res.sendStatus(200);
     }, function(error) {
-        console.log(error);
-    });
+        //console.log(error);
   });
+});
+
+router.put('/modify/:orgId', function(req, res) {
+    var orgId = req.params.orgId;
+    var orgToUpdate = req.body;
+    _dataServices.modifyOrg(orgId, orgToUpdate,
+    function() {
+        res.sendStatus(200);
+    }, function(error) {
+        //console.log(error);
+    });
+});
+
+router.put('/inactivity/:orgId', function(req, res) {
+    var orgId = req.params.orgId;
+    _dataServices.inactivity(orgId, function() {
+        res.sendStatus(200);
+    }, function(error) {
+        //console.log(error);
+    });
+});
 
 module.exports = router;

@@ -9,17 +9,24 @@
     var vm = this;
     vm.data = orgSettingsService.data;
 
-    vm.modifyOrg = function() {
-      console.log('modifyOrg?');
+    vm.modifyOrg = function(org) {
+      orgSettingsService.saveModifiedOrg(org).then(function () {
+        console.log('modified org: ' + org.name);
+      });
     };
 
     vm.deleteOrg = function(org) {
-      console.log('deleteOrg?');
-
+      //DIALOG -- ARE YOU SURE YOU WANT TO DELETE THIS ORG?
+      orgSettingsService.deleteOrg(org).then(function () {
+        console.log('deleted org: ' + org.name);
+      });
     };
 
     vm.inactiveOrg = function(org) {
-      console.log('inactiveOrg?');
+      //DIALOG -- ARE YOU SURE YOU WANT TO MARK THIS ORG ACTIVE/INACTIVE?
+      orgSettingsService.inactivity(org).then(function () {
+        console.log('inactivity org: ' + org.name);
+      });
     };
 
     vm.settingsBtns = {

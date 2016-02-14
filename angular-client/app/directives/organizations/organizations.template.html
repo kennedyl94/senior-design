@@ -21,13 +21,13 @@
       </div>
       <div ng-if="ngOrgsCtrl.settings == 'true'" id="settings-div">
         <div class="col-sm-2">
-          <input type="button" value="{{ngOrgsCtrl.buttons.editBtn.text}}" ng-click="ngOrgsCtrl.buttons.editBtn.function()">
+          <input type="button" value="{{ngOrgsCtrl.buttons.editBtn.text}}" ng-click="ngOrgsCtrl.buttons.editBtn.function(org)">
         </div>
         <div class="col-sm-2">
-          <input type="button" value="{{ngOrgsCtrl.buttons.deleteBtn.text}}" ng-click="ngOrgsCtrl.buttons.deleteBtn.function()">
+          <input type="button" value="{{ngOrgsCtrl.buttons.deleteBtn.text}}" ng-click="ngOrgsCtrl.buttons.deleteBtn.function(org)">
         </div>
         <div class="col-sm-2">
-          <input type="button" value="{{ngOrgsCtrl.buttons.inactiveBtn.text}}" ng-click="ngOrgsCtrl.buttons.inactiveBtn.function()">
+          <input type="button" value="{{ngOrgsCtrl.buttons.inactiveBtn.text}}" ng-click="ngOrgsCtrl.buttons.inactiveBtn.function(org)">
         </div>
       </div>
     </div>

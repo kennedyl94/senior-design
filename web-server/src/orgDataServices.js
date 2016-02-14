@@ -83,6 +83,27 @@ exports.deleteOrg = function(orgId, success, error) {
 		success();
 	});
 };
+
+exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
+	studentOrg.findOneAndUpdate({_id: orgId}, orgToUpdate, function(err) {
+		if(err) {
+			error(new Error('Unable to modify item with id:' + orgId));
+		}
+		success();
+	});
+};
+
+exports.inactivity = function(orgId, success, error) {
+	studentOrg.find({_id: orgId}, function(err, org) {
+		if(err) {
+			error(new Error('Unable to modify item with id:' + orgId));
+		} else {
+			var isActive = org.tags.indexOf('inactive') !== -1;
+			console.log(isActive);
+			// USE $push & $pop to modify 'inactive' tag
+		}
+	});
+};
 //
 //exports.userExists = function(user, success, error){
 //	if(connected){
