@@ -42,6 +42,7 @@
       'organizations',
 	    'createClub',
       'modal',
+      'editOrgModal',
       'survey',
       'massUpload',
       'fileUpload',

@@ -30,6 +30,10 @@
     "app/directives/organizations/organizations.directive.js",
     "app/directives/organizations/organizations.controller.js",
 
+    "app/directives/editOrgModal/editOrgModal.module.js",
+    "app/directives/editOrgModal/editOrgModal.directive.js",
+    "app/directives/editOrgModal/editOrgModal.controller.js",
+
     "app/massUpload/massUpload.module.js",
     "app/massUpload/massUpload.routes.js",
 

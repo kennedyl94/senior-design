@@ -2,16 +2,27 @@
   'use strict';
 
   angular.module('orgSettings')
-    .controller('OrgSettingsController', ['orgSettingsService', Controller]);
+    .controller('OrgSettingsController', ['orgSettingsService', '$modal', Controller]);
 
-  function Controller(orgSettingsService) {
+  function Controller(orgSettingsService, $modal) {
 
     var vm = this;
     vm.data = orgSettingsService.data;
 
     vm.modifyOrg = function(org) {
       orgSettingsService.saveModifiedOrg(org).then(function () {
-        console.log('modified org: ' + org.name);
+        return $modal.open({
+          animation: true,
+          templateUrl: 'directives/editOrgModal/editOrgModal.template.html',
+          controller: 'EditOrgModalController as editOrgModalCtrl',
+          resolve: {
+            contents: function() {
+              return {
+                org: org
+              };
+            }
+          }
+        });
       });
     };
 
