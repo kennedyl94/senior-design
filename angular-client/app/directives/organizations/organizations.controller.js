@@ -18,6 +18,10 @@
       if(vm.query != '') { vm.currentPage = 1; };
     });
 
+    vm.modifyOrg = function() {
+      console.log('eeyyyyyy');
+    };
+
     // Highlights organization description words that match vm.query
     vm.highlight = function(text, search) {
       if(!search) {

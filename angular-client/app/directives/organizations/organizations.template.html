@@ -15,9 +15,20 @@
   </div>
   <div class="col-sm-12" ng-repeat="org in ngOrgsCtrl.filtered = ngOrgsCtrl.orgs | search:ngOrgsCtrl.query | orderBy:ngOrgsCtrl.selectedOption.id | startFrom:(ngOrgsCtrl.currentPage-1)*ngOrgsCtrl.itemsPerPage | limitTo:ngOrgsCtrl.itemsPerPage">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <h3 class="orgs-header" ng-click="ngOrgsCtrl.openModal(org, ngOrgsCtrl.images)">{{org.name}}</h3>
-        <span id="tags-span" class="col-sm-offset-1" ng-bind-html="ngOrgsCtrl.highlight(org.tags.toString(), query)">{{org.tags.toString()}}</span>
+        <span ng-if="ngOrgsCtrl.tags == 'true'" id="tags-span" class="col-sm-offset-1" ng-bind-html="ngOrgsCtrl.highlight(org.tags.toString(), query)">{{org.tags.toString()}}</span>
+      </div>
+      <div ng-if="ngOrgsCtrl.settings == 'true'" id="settings-div">
+        <div class="col-sm-2">
+          <input type="button" value="{{ngOrgsCtrl.buttons.editBtn.text}}" ng-click="ngOrgsCtrl.buttons.editBtn.function()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="{{ngOrgsCtrl.buttons.deleteBtn.text}}" ng-click="ngOrgsCtrl.buttons.deleteBtn.function()">
+        </div>
+        <div class="col-sm-2">
+          <input type="button" value="{{ngOrgsCtrl.buttons.inactiveBtn.text}}" ng-click="ngOrgsCtrl.buttons.inactiveBtn.function()">
+        </div>
       </div>
     </div>
     <div class="row" id="description-row">
