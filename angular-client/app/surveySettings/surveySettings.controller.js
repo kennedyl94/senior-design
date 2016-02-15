@@ -8,6 +8,11 @@
 
     var vm = this;
     vm.data = surveySettingsService.data
+    vm.question = {
+        question:"",
+        tags:"",
+        category:""
+    }
     
     vm.del = function(_id){
         
@@ -16,13 +21,32 @@
       var req = {
         method: 'delete',
         url: config.domain+'surveySet',
-        headers: {},
-        data: {'id':_id}
+        headers: {'Content-Type': 'application/json'},
+        data: _id
       }
       
        $http(req)
         .success(function (data, status, headers, config) {
           console.log(data);
+          location.reload();
+        }).error(function(err, status, headers, config) {
+          console.log('error: ' + err);
+        });
+    }
+    vm.add = function(){
+        console.log(vm.question);
+        
+        var req = {
+        method: 'post',
+        url: config.domain+'surveySet/add',
+        headers: {},
+        data: vm.question
+      }
+      
+       $http(req)
+        .success(function (data, status, headers, config) {
+          console.log(data);
+          location.reload();
         }).error(function(err, status, headers, config) {
           console.log('error: ' + err);
         });

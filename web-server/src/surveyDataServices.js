@@ -101,3 +101,13 @@ exports.getAllQuestions = function(sortType, success, error){
     }).sort( sort_order );
 };
 
+
+exports.deletequestion = function(questionId, success, error) {
+	surveyQuestion.find({ _id: questionId}).remove().exec(function(err) {
+		if(err) {
+			error(new Error('Unable to delete item with id: ' + questionId));
+		}
+		success();
+	});
+};
+

@@ -6,8 +6,8 @@ Number of questions <input id = numQuestions type = number>
     
 
 <br>
-<!--add delete questions
-    need to make call to the back end and use a promis to get the data-->
+<!--delete questions
+    need to make call to the back end and use a promise to get the data-->
 
 	<div class="col-sm-12" ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
         
@@ -16,6 +16,16 @@ Number of questions <input id = numQuestions type = number>
         <br>
 
 	</div>
+    <!--add questions
+    -->
+    <h1>Add question</h1>
+    Question
+    <input type = 'text' id="question" ng-model="surveySettingsCtrl.question.question"> <br>
+    Tags(comma seperated)
+    <input type = 'text' id="tags" ng-model="surveySettingsCtrl.question.tags"> <br>
+    Category
+    <input type = 'text' id="category" ng-model="surveySettingsCtrl.question.category"> <br>
+    <button type="button" ng-click="surveySettingsCtrl.add()">ADD</button>
     
 
 

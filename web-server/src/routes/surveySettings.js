@@ -27,8 +27,32 @@ router.get('/', function (req, res) {
 router.delete('/', function(req, res) {
     console.log("delete");
     console.log(req.body);
-    res.sendStatus(200);
+    _surveyData.deletequestion(req.body, function(){
+        res.sendStatus(200);
+    }, function(e){
+        console.log('error deleting: '+e);
+        res.send(500);
+    })
+    // res.sendStatus(200);
     
+});
+router.post('/add', function(req, res){
+//    console.log(req.body);
+   var tags = req.body.tags.split(',');
+   
+   for (var i = 0; i<tags.length; i++) {
+       tags[i] = tags[i].trim();
+   }
+//    console.log(tags);
+   
+   req.body.tags = tags;
+//    console.log(req.body);
+   
+   
+   _surveyData.addQuestion(req.body, function(e){
+       res.send(200);
+        // console.log("add error: "+e);
+   });
 });
 
 module.exports = router;
