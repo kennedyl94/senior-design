@@ -6,7 +6,7 @@
       function($stateProvider) {
         $stateProvider
           .state('root.userSettings', {
-            url: 'userSettings',
+            url: 'admin/userSettings',
             views: {
               'content@': {
                 templateUrl: 'userSettings/userSettings.template.html',
