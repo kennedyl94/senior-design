@@ -7,6 +7,19 @@ function Controller($modalInstance, contents) {
 
   vm.org = contents.org;
 
+  vm.modifiedOrg = {
+    _id: vm.org._id,
+    name: vm.org.name,
+    description: vm.org.description,
+    tags: vm.org.tags,
+    contact: {
+      name: vm.org.contact.name,
+      email: vm.org.contact.email,
+      phone: vm.org.contact.phone
+    }
+  };
+  vm.function = contents.function;
+
   vm.back = function() {
     $modalInstance.close('ok');
   };

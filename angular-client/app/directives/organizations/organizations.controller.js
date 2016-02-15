@@ -13,14 +13,14 @@
     $scope.$watch('ngOrgsCtrl.orgs', function(orgs) {if(orgs){vm.totalItems = orgs.length;}});
 
     $scope.$watch('ngOrgsCtrl.query', function(query) {
-      vm.filtered = $filter('search')(vm.orgs, query);
+      vm.filtered = $filter('search')(vm.orgs, query, vm.settings);
       vm.totalItems = vm.filtered.length;
       if(vm.query != '') { vm.currentPage = 1; };
     });
 
-    vm.modifyOrg = function() {
-      console.log('eeyyyyyy');
-    };
+    vm.isActive = function(org) {
+      return org.tags.indexOf('inactive') == -1;
+    }
 
     // Highlights organization description words that match vm.query
     vm.highlight = function(text, search) {
@@ -79,7 +79,7 @@
   });
 
   angular.module('ngOrganizations').filter('search', function() {
-    return function(arr, query) {
+    return function(arr, query, settings) {
       var filtered = [];
       if(!arr) { return filtered; }
       query = query.toLowerCase() || '';
@@ -107,6 +107,12 @@
           found = true;
           filtered.push(org);
           continue;
+        }
+
+        // WE WANT TO AUTOMATICALLY SHOW INACTIVE ORGS ON THE ORGS SETTINGS PAGE
+        if(settings == 'true' && tags.indexOf('inactive') !== -1) {
+          found = true;
+          filtered.push(org);
         }
 
         var contains =  !!((tags.indexOf('inactive') == -1 &&

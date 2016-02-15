@@ -32,14 +32,18 @@
       return deferred.promise;
     };
 
-    service.inactivity = function(org) {
+    service.activation = function(org, isActive) {
       var deferred = $q.defer();
       var promise =
-        $http({method: 'PUT', data: org, url: config.domain + 'Organizations/inactivity/' + org._id});
+        $http({method: 'PUT', data: {isActive: isActive}, url: config.domain + 'Organizations/activation/' + org._id});
       promise.then(function(data) {
         deferred.resolve();
       });
       return deferred.promise;
+    };
+
+    service.updateOrgs = function() {
+      init();
     };
 
     function init() {

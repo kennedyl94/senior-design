@@ -93,16 +93,19 @@ exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
 	});
 };
 
-exports.inactivity = function(orgId, success, error) {
-	studentOrg.find({_id: orgId}, function(err, org) {
-		if(err) {
-			error(new Error('Unable to modify item with id:' + orgId));
-		} else {
-			var isActive = org.tags.indexOf('inactive') !== -1;
-			console.log(isActive);
-			// USE $push & $pop to modify 'inactive' tag
-		}
-	});
+exports.activation = function(orgId, isActive, success, error) {
+	if(isActive == true) {
+		studentOrg.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(err) {
+			if(err) { error(err); }
+			success();
+		});
+	} else if(isActive == false) {
+		studentOrg.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(err) {
+			if(err) { error(err); }
+			success();
+		});
+	}
+
 };
 //
 //exports.userExists = function(user, success, error){
