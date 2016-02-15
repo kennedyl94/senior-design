@@ -2,7 +2,8 @@
 
 <!--num questions
     will be stored in json file-->
-Number of questions <input id = numQuestions type = number>
+Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.num" type = number> <br>
+<button type = button ng-click="surveySettingsCtrl.questionNum()">Submit</button><br>
     
 
 <br>

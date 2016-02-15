@@ -13,6 +13,7 @@
         tags:"",
         category:""
     }
+    vm.num =0;
     
     vm.del = function(_id){
         
@@ -41,6 +42,24 @@
         url: config.domain+'surveySet/add',
         headers: {},
         data: vm.question
+      }
+      
+       $http(req)
+        .success(function (data, status, headers, config) {
+          console.log(data);
+          location.reload();
+        }).error(function(err, status, headers, config) {
+          console.log('error: ' + err);
+        });
+    }
+    vm.questionNum = function(){
+        console.log(vm.num);
+        
+        var req = {
+        method: 'post',
+        url: config.domain+'surveySet/questionNum',
+        headers: {},
+        data: {num: vm.num}
       }
       
        $http(req)

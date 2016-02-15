@@ -55,4 +55,9 @@ router.post('/add', function(req, res){
    });
 });
 
+router.post('/questionNum', function(req, res){
+//    console.log('num');
+   console.log(req.body.num); 
+});
+
 module.exports = router;
