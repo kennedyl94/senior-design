@@ -37,6 +37,8 @@
       'navSidebar',
       'approvals',
       'userSettings',
+      'editUserModal',
+      'addUserModal',
       'orgSettings',
       'surveySettings',
       'organizations',
@@ -52,7 +54,7 @@
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false')) {
+      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false' || $cookies.get('om_orgAdmin') == 'false')) {
         $location.path('/login');
       }
     });

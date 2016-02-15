@@ -6,13 +6,16 @@
       function($stateProvider) {
         $stateProvider
           .state('root.userSettings', {
-            url: 'admin/userSettings',
+            url: 'userSettings',
             views: {
               'content@': {
                 templateUrl: 'userSettings/userSettings.template.html',
                 controller: 'UserSettingsController',
                 controllerAs: 'userSettingsCtrl'
               }
+            },
+            data: {
+              restricted: true
             }
           });
       }]);

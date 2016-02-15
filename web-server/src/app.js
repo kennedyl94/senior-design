@@ -28,6 +28,8 @@ var test = require("./routes/test.js");
 var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
 
+var userSettings = require("./routes/userSettings.js");
+
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
@@ -39,6 +41,8 @@ app.use(passport.session());
 app.use('/api/login', login);
 
 app.use('/api/logout', logout);
+
+app.use('/api/userSettings', userSettings);
 
 app.use('/api/Organizations/', Orgs);
 

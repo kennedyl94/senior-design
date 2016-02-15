@@ -9,10 +9,25 @@
     "app/organizations/organizations.routes.js",
     "app/organizations/organizations.service.js",
 
+    "app/userSettings/userSettings.module.js",
+    "app/userSettings/userSettings.controller.js",
+    "app/userSettings/userSettings.service.js",
+    "app/userSettings/userSettings.routes.js",
+
     "app/createClub/createClub.module.js",
     "app/createClub/createClub.controller.js",
     "app/createClub/createClub.routes.js",
     "app/createClub/createClub.service.js",
+
+    "app/directives/editUserModal/editUserModal.module.js",
+    "app/directives/editUserModal/editUserModal.directive.js",
+    "app/directives/editUserModal/editUserModal.controller.js",
+    "app/directives/editUserModal/editUserModal.service.js",
+
+    "app/directives/addUserModal/addUserModal.module.js",
+    "app/directives/addUserModal/addUserModal.directive.js",
+    "app/directives/addUserModal/addUserModal.controller.js",
+    "app/directives/addUserModal/addUserModal.service.js",
 
     "app/directives/modal/modal.module.js",
     "app/directives/modal/modal.directive.js",
@@ -64,10 +79,6 @@
     "app/orgSettings/orgSettings.routes.js",
     "app/orgSettings/orgSettings.service.js",
 
-    "app/userSettings/userSettings.module.js",
-    "app/userSettings/userSettings.controller.js",
-    "app/userSettings/userSettings.routes.js",
-
     "app/surveySettings/surveySettings.module.js",
     "app/surveySettings/surveySettings.controller.js",
     "app/surveySettings/surveySettings.routes.js",
@@ -107,6 +118,8 @@
     "app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css",
     "app/components/blueimp-gallery/css/blueimp-gallery.min.css",
     "app/directives/modal/style.css",
+    "app/directives/editUserModal/style.css",
+    "app/directives/addUserModal/style.css",
     "app/directives/navSidebar/style.css",
     "app/createClub/style.css",
     "app/tagSearch/style.css"
