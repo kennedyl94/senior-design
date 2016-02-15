@@ -86,7 +86,8 @@ describe('OrganizationsDirectiveController', function() {
         itemsPerPage: 2,
         currentPage: 1,
         query: '',
-        filtered: []
+        filtered: [],
+        settings: 'false'
       };
 
       ctrl = $controller('ngOrgsController', {$modal:$modal, $scope:$scope, $filter:$filter}, dictionaryOfControllerBindings);
@@ -239,6 +240,23 @@ describe('OrganizationsDirectiveController', function() {
       ctrl.orgs[0].tags.push('inactive');
       $scope.$digest();
       expect(ctrl.filtered.length).toBe(1);
+    });
+    it('should always display inactive orgs when settings is active', function() {
+      ctrl.settings = 'true';
+      ctrl.orgs[0].tags.push('inactive');
+      $scope.$digest();
+      expect(ctrl.filtered.length).toBe(3);
+    });
+  });
+
+  describe('test isActive', function() {
+    it('should return true for an active organization', function() {
+      expect(ctrl.isActive(ctrl.orgs[1])).toBe(true);
+    });
+    it('should return false for an inactive organization', function() {
+      ctrl.orgs[1].tags.push('inactive');
+      $scope.$digest();
+      expect(ctrl.isActive(ctrl.orgs[1])).toBe(false);
     });
   });
 
