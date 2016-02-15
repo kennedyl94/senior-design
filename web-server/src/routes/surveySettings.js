@@ -2,6 +2,8 @@ var express = require('express')
   , router = express.Router();
   var  _dataServices = require('../orgDataServices.js');
   var _surveyData = require('../surveyDataServices.js');
+  var jsonfile = require('jsonfile')
+  var surveyFile ="./src/surveySettings.json";
  
 
 
@@ -57,7 +59,14 @@ router.post('/add', function(req, res){
 
 router.post('/questionNum', function(req, res){
 //    console.log('num');
-   console.log(req.body.num); 
+//    console.log(req.body.num);
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    surveySet.num = req.body.num;
+    console.log(surveySet);
+    jsonfile.writeFileSync(surveyFile, surveySet)
+    res.send(200);
+   
+   
 });
 
 module.exports = router;

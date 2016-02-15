@@ -2,15 +2,24 @@ var express = require('express')
   , router = express.Router();
   var  _dataServices = require('../orgDataServices.js');
   var _surveyData = require('../surveyDataServices.js');
+  var jsonfile = require('jsonfile')
+  var surveyFile ="./src/surveySettings.json";
  
 
 
 router.get('/', function (req, res) {
-    
+    var surveySet = jsonfile.readFileSync(surveyFile)
     
     _surveyData.getAllQuestions(null, function(questionMap){
-        
-        res.send(questionMap);
+        if(Object.keys(questionMap).length <= surveySet.num) {
+            res.send(questionMap);
+        } else {
+            var qmap2 =[];
+            for(var i = 0; i< surveySet.num; i++) {
+                qmap2.push(questionMap[Object.keys(questionMap)[i]]);
+            }
+            res.send(qmap2);
+        }
         
         if(!Object.keys(questionMap).length || questionMap.legnth <= 0)
         {
