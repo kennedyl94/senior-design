@@ -25,15 +25,19 @@
     };
 
     vm.saveNewUser = function() {
-      var user = {
-        Username: vm.name,
-        Password: vm.password,
-        Type: $scope.list_category,
-        Orgs: vm.orgs
+      if (vm.name == "" || vm.password == "") {
+        alert("Please enter a valid username and password");
+      } else {
+        var user = {
+          Username: vm.name,
+          Password: vm.password,
+          Type: $scope.list_category,
+          Orgs: vm.orgs
+        };
+        addUserModalService.saveNewUser(user).then(function () {
+        });
+        $modalInstance.close('ok');
       }
-      addUserModalService.saveNewUser(user).then(function() {
-      })
-      $modalInstance.close('ok');
-    };
+    }
   }
 })();
