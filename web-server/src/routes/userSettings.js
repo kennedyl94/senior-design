@@ -1,7 +1,7 @@
 var express = require('express')
     , router = express.Router();
 
-var  _dataServices = require('../dataServices.js');
+var  _dataServices = require('../userDataServices.js');
 
 router.get('/', function(request, response) {
     _dataServices.getAllUsers(
@@ -42,18 +42,5 @@ router.put('/editExisting/:id', function (request, response) {
            console.log(error);
         });
 });
-
-
-
-//exports.addUser = function(user, success, error) {
-//    if(connected) {
-//        var newUser = new user(user)
-//        newUser.save((function(err, savedUser){
-//            callback(err, savedUser._doc);
-//        }));
-//    } else {
-//        error(new Error('Not connected to database', null));
-//    }
-//};
 
 module.exports = router;
