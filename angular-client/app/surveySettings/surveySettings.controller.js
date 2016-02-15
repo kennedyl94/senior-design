@@ -25,14 +25,15 @@
         headers: {'Content-Type': 'application/json'},
         data: _id
       }
-      
-       $http(req)
-        .success(function (data, status, headers, config) {
+      surveySettingsService.submit(req, function (data, status, headers, config) {
           console.log(data);
-          location.reload();
-        }).error(function(err, status, headers, config) {
-          console.log('error: ' + err);
-        });
+          location.reload()});
+      
+    //    $http(req)
+    //     .success(
+    //     }).error(function(err, status, headers, config) {
+    //       console.log('error: ' + err);
+    //     });
     }
     vm.add = function(){
         console.log(vm.question);
@@ -44,13 +45,9 @@
         data: vm.question
       }
       
-       $http(req)
-        .success(function (data, status, headers, config) {
+      surveySettingsService.submit(req, function (data, status, headers, config) {
           console.log(data);
-          location.reload();
-        }).error(function(err, status, headers, config) {
-          console.log('error: ' + err);
-        });
+          location.reload()});
     }
     vm.questionNum = function(){
         console.log(vm.num);
@@ -62,13 +59,9 @@
         data: {num: vm.num}
       }
       
-       $http(req)
-        .success(function (data, status, headers, config) {
+       surveySettingsService.submit(req, function (data, status, headers, config) {
           console.log(data);
-          location.reload();
-        }).error(function(err, status, headers, config) {
-          console.log('error: ' + err);
-        });
+          location.reload()});
     }
 
   }

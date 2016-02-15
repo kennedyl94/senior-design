@@ -3,7 +3,7 @@ var express = require('express')
   var  _dataServices = require('../orgDataServices.js');
   var _surveyData = require('../surveyDataServices.js');
   var jsonfile = require('jsonfile')
-  var surveyFile ="./src/surveySettings.json";
+  var surveyFile ="./surveySettings.json";
  
 
 

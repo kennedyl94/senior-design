@@ -19,8 +19,11 @@
       promises.push($http({method: 'GET', url: config.domain+"surveySet"}));
       $q.all(promises).then(function(data) {
         service.data.questions = data[0].data;
-        console.log(data[0].data);
+        // console.log(data[0].data);
       });
+    }
+    service.submit = function(post, success){
+        $http(post).then(success);
     }
     
 
