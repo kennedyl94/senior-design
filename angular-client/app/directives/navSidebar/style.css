@@ -68,7 +68,12 @@
   width: 1px;
 }
 
+.nav-bar-collapsed #ng-nav-sidebar-buttons li .ng-nav-sidebar-label {
+  width: 1px;
+}
+
 .nav-bar-collapsed #ng-nav-sidebar-buttons li {
+  width: 75px;
   height: 75px;
 }
 

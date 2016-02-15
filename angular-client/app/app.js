@@ -54,7 +54,8 @@
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false' || $cookies.get('om_orgAdmin') == 'false')) {
+      console.log($cookies.get('om_slAdmin'));
+      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false' && $cookies.get('om_orgAdmin') == 'false')) {
         $location.path('/login');
       }
     });
