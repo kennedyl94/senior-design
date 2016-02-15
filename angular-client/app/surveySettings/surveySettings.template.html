@@ -1,1 +1,24 @@
 <h1 align="center"> Survey Settings </h1>
+
+<!--num questions
+    will be stored in json file-->
+Number of questions <input id = numQuestions type = number>
+    
+
+<br>
+<!--add delete questions
+    need to make call to the back end and use a promis to get the data-->
+
+	<div class="col-sm-12" ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
+        
+        <button type = button ng-click="surveySettingsCtrl.del([q._id])">Delete</button>
+        {{q.question}} 
+        <br>
+
+	</div>
+    
+
+
+<!--add delete rules, based on quetion type
+    make back end call to get data in a promis
+    will be stored in json file-->
