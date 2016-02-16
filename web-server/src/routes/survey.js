@@ -8,7 +8,7 @@ var express = require('express')
 
 
 router.get('/', function (req, res) {
-    var surveySet = jsonfile.readFileSync(surveyFile)
+    var surveySet = jsonfile.readFileSync(surveyFile);
     
     _surveyData.getAllQuestions(null, function(questionMap){
         if(Object.keys(questionMap).length <= surveySet.num) {

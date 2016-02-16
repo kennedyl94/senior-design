@@ -2,9 +2,9 @@
 
 <!--num questions
     will be stored in json file-->
-Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.num" type = number> <br>
+Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.data.num" type = number> <br>
 <button type = button ng-click="surveySettingsCtrl.questionNum()">Submit</button><br>
-    
+ {{surveySettingsCtrl.data.num}}
 
 <br>
 <!--delete questions
@@ -13,7 +13,6 @@ Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.num" t
 	<div class="col-sm-12" ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
         
         <button type = button ng-click="surveySettingsCtrl.del([q._id])">Delete</button>
-        {{q.question}} 
         <br>
 
 	</div>

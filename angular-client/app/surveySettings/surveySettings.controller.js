@@ -13,7 +13,7 @@
         tags:"",
         category:""
     }
-    vm.num =0;
+    vm.data.num = surveySettingsService.num;
     
     vm.del = function(_id){
         

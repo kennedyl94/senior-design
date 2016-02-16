@@ -24,6 +24,13 @@ router.get('/', function (req, res) {
     });
     
 });
+router.get('/num', function (req, res){
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    console.log(surveySet.num);
+    res.send({num: surveySet.num});
+    
+    
+})
 router.delete('/', function(req, res) {
 
     _surveyData.deletequestion(req.body, function(){
