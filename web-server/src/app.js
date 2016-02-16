@@ -26,11 +26,10 @@ var upload = require("./routes/upload.js");
 var tags = require('./routes/tagSearch.js');
 var email = require('./routes/email.js');
 
-
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
-
+var surveySet = require("./routes/surveySettings.js");
 var userSettings = require("./routes/userSettings.js");
 
 var router = express.Router();
@@ -52,6 +51,8 @@ app.use('/api/tagSearch/', tags);
 app.use('/api/createClub', createClub);
 
 app.use('/api/survey', survey);
+
+app.use('/api/surveySet', surveySet);
 
 app.use('/api/UploadFile', upload);
 

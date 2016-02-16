@@ -85,6 +85,7 @@
     "app/surveySettings/surveySettings.module.js",
     "app/surveySettings/surveySettings.controller.js",
     "app/surveySettings/surveySettings.routes.js",
+    "app/surveySettings/surveySettings.service.js",
 
     "app/login/login.module.js",
     "app/login/login.controller.js",
