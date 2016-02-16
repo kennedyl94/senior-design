@@ -19,7 +19,8 @@
 }
 
 #ng-nav-sidebar-buttons li {
-  height: 50px;
+  height: 75px;
+  weight: 75px;
   list-style: none;
   positon: relative;
 }
@@ -29,13 +30,14 @@
 }
 
 #ng-nav-sidebar-buttons li a .logo {
-  height: inherit;
+  height: 75px;
+  weight: 75px;
   position:absolute;
 }
 
 #ng-nav-sidebar-buttons li a .logo svg {
-  height: inherit;
-  width:50px;
+  height: 75px;
+  weight: 75px;
 }
 
 #ng-nav-sidebar-buttons li a .logo svg * {
@@ -52,8 +54,8 @@
 #ng-nav-sidebar-buttons li .ng-nav-sidebar-label span {
   width:200px;
   display:block;
-  padding-left:60px;
-  line-height:50px;
+  padding-left:80px;
+  line-height:75px;
   color:#ffffff;
   font-size:12px;
   float:right;
