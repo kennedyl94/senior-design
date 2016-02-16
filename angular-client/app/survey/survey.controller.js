@@ -2,41 +2,33 @@
   'use strict';
 
   angular.module('survey')
-    .controller('SurveyController', ['surveyService', '$http','config', Controller]);
+    .controller('SurveyController', ['surveyService', Controller]);
 
   function Controller(surveyService, $http, config) {
 
     var vm = this;
     vm.data = surveyService.data;
-    vm.orgs = surveyService.orgs;
-    
-    
+    vm.orgs = {};
+
     // console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
-    
-    vm.ans={};
-    
+
+    vm.ans = {};
+    vm.address = '';
+
+    vm.submitted = false;
+
     vm.submit = function() {
+      vm.submitted = false;
+      surveyService.submit(vm.ans, function(data) {
+        vm.orgs = data;
+        vm.submitted = true;
+      });
+    };
 
-      
-      var req = {
-        method: 'POST',
-        url: config.domain+'survey',
-        headers: {},
-        data: vm.ans
-      
-      }
-      
-      $http(req)
-        .success(function (data, status, headers, config) {
-          console.log(data);
-          vm.orgs = data;
-        }).error(function(err, status, headers, config) {
-          console.log('error: ' + err);
-        });
+    vm.sendResults = function() {
+      surveyService.sendResults(vm.address, vm.orgs);
     }
-     
-
   }
-  
+
 
 })();

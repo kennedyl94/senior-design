@@ -15,6 +15,7 @@ router.post('/', function(req, res) {
 			tagList.push(tag.text);
 		}
 	});
+
 	_dataServices.searchByTags(tagList,
 		function(orgs) {
 			res.send(orgs);

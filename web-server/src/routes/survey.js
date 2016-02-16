@@ -1,13 +1,10 @@
 var express = require('express')
   , router = express.Router();
-  var  _dataServices = require('../orgDataServices.js');
-  var _surveyData = require('../surveyDataServices.js');
- 
+var _dataServices = require('../orgDataServices.js');
+var _surveyData = require('../surveyDataServices.js');
 
 
 router.get('/', function (req, res) {
-    
-    
     _surveyData.getAllQuestions(null, function(questionMap){
         
         res.send(questionMap);
@@ -21,7 +18,6 @@ router.get('/', function (req, res) {
     }, function(e){
         console.log("get in get"+e);
     });
-    
 });
 
 router.post("/", function (req, res) {
@@ -59,8 +55,7 @@ function getOrgsMatchingTags(tags, callback) {
 
 
 
-function addMockData()
-{
+function addMockData() {
     _surveyData.addQuestion(
         {question: "do you like pie",
         tags: ["pie","cool"],
@@ -77,8 +72,6 @@ function addMockData()
         , function(e){
         console.log("add 2"+e);
     });
-    
 }
-
 
 module.exports = router;
