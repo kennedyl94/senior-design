@@ -5,35 +5,10 @@ var dbName = require('../config').mongo;
 var surveyQuestion = database.createModel('survey_questions', require('../config').surveyQuestionSchema);
 
 /*
-/*
- * setup the connection to the database
- * /
-exports.connect = function(){
-    if(!connected){
-        mongoose.connect(dbName);
-        var db = mongoose.connection;
-        db.on('error', function(){
-            console.error.bind(console, 'connection error:');
-            mongoose.disconnect();
-        });
-        db.once('open', function() {
-            connected = true;
-        });
-    }
-};
-
-/*
- * disconnects from the mongo server
- * /
- exports.disconnect = function(){
-     if(connected){
-        mongoose.disconnect(function(){
-            connected = false;
-        });
-    }
- };
+ * gets tags associated with all questions with an id in ids
+ * ids: the ids of the questions
+ * callback: a function that takes the collection of tags
  */
-
 exports.getQuestionsTagsByIds = function(ids, callback) {
    surveyQuestion.find({
        '_id': { $in: ids }
@@ -71,12 +46,9 @@ exports.addQuestion = function(question, callback){
  */ 
 exports.getQuestionById = function(questionId, callback){
     surveyQuestion.findById(questionId, function(err, question) {
-        callback(question, err);
+        callback(err, question);
     });
 };
-// exports.getQuestionById = function(questionId, callback){
-//     surveyQuestion.findById(questionId, callback); 
-// };
 
 /*
  * gets all of the survey questions from the database

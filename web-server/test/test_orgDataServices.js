@@ -26,6 +26,32 @@ var fakeOrg = {
 	}
 };
 
+var invalidOrg = {
+	name: 'name',
+	description: undefined,
+	tags: [
+		'tag1',
+		'tag2',
+		'tag3'
+	],
+	contact: {
+		name: 'name',
+		email: 'name@email.com',
+		phone: '(123)456-7890'
+	}
+};
+
+var fakeOrgs = [
+	fakeOrg,
+	fakeOrg,
+	fakeOrg
+];
+
+var invalidOrgs = [
+	fakeOrg,
+	invalidOrg,
+	fakeOrg
+];
 
 describe('orgDataServices', function () {
 	
@@ -85,6 +111,33 @@ describe('orgDataServices', function () {
 					}, function(){});
 				}
 			);
+		});
+	});
+	
+	describe('#saveAllOrgs', function(){
+		
+		//TODO add an after each function to clear the database
+		it('should return error if entries are malformed', function(done){
+			var connection = mongoose.connection;
+			orgDataServices.saveAllOrgs(invalidOrgs, function(err, orgs){
+				if(err){
+					done();
+				}
+			});
+			process.nextTick(function(){
+				assert.fail();
+			});
+		});
+		
+		it('should return all orgs if they were successfuly saved', function(done){
+			orgDataServices.saveAllOrgs(fakeOrgs, function(err, orgs){
+				if(orgs.length == fakeOrgs.length){
+					done();
+				}
+				else{
+					assert.fail();
+				}
+			});
 		});
 	});
 });

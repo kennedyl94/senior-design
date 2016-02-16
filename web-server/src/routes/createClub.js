@@ -1,7 +1,11 @@
 var express = require('express')
-  , router = express.Router();
+  , router = express.Router()
 var  _dataServices = require('../orgDataServices.js');
-
+  
+router.get('/', function (req, res) {
+	var data = { title: "Create a club entry" }
+	res.send(data);
+});
 
 router.post("/", function (req, res) {
 	var org = req.body.club;

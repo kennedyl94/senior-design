@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('fileUpload')
-    .directive('ngFileUpload', ['fileUploadService', Directive]);
+    .directive('ngFileUpload', ['fileUploadService', 'config', Directive]);
 
-  function Directive(fileUploadService) {
+  function Directive(fileUploadService, config) {
     return {
       restrict: 'A',
       scope: true,
@@ -13,7 +13,7 @@
         element.bind('change', function () {
           var formData = new FormData();
           formData.append('file', element[0].files[0]);
-          fileUploadService.uploadFile('http://orgmatcher.msoe.edu/api/UploadFile', formData, function (callback) {
+          fileUploadService.uploadFile(config.domain + 'UploadFile', formData, function (callback) {
             console.log("TEST: " + callback);
           });
         });

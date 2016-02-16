@@ -1,8 +1,28 @@
 var express = require('express')
-  , router = express.Router();
-var _dataServices = require('../orgDataServices.js');
+  , router = express.Router()
+  
+var  _dataServices = require('../orgDataServices.js');
 var _surveyData = require('../surveyDataServices.js');
+ 
+//mock data until database is done 
+var questions = [
+	{question: "do you like pie?",
+	tags:["pie","cool","american"],
+	id:0},
+	{question: "do you like unicycling?",
+	tags:["cool", "outdoors"],
+	id:1}
+];
+var tags = ["cool", "outdoors", "pie", "american"];
+var orgs;
 
+  _dataServices.getAllOrgs(null, function(orgsMap){
+	  orgs =orgsMap;
+  },
+  function(e)
+  {
+	  console.log(e);
+  });
 
 router.get('/', function (req, res) {
     _surveyData.getAllQuestions(null, function(questionMap){

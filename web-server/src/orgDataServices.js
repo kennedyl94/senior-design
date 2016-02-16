@@ -1,10 +1,10 @@
-var mongoose = require('mongoose');
-var config = require('../config');
+var database = require('./databaseServices');
 
-var dbName = config.mongo;
+var dbName = require('../config').mongo;
 
 //set up the model for the student_orgs collection
-var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
+var studentOrg = database.createModel('student_orgs', require('../config').orgSchema);
+
 
 /*
  * adds one student org to the database
@@ -18,6 +18,11 @@ exports.addStudentOrg = function(org, callback){
 	});
 };
 
+/*
+ * gets all of the student orgs matching the given tags
+ * tags: the tags to match
+ * callback: a function that takes an error object and an object that contains the student orgs
+ */
 exports.getOrgsMatchingTags = function(tags, callback) {
   studentOrg.find({
      'tags': { $in: tags }
@@ -28,7 +33,6 @@ exports.getOrgsMatchingTags = function(tags, callback) {
   });
 };
 
-
 /*
  * gets all of the student orgs from the database
  * sortType: the attribute to sort by
@@ -36,13 +40,46 @@ exports.getOrgsMatchingTags = function(tags, callback) {
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllOrgs = function(sortType, success, error){
-	var sort_order = {};
+var sort_order = {};
 	sort_order[sortType] = 1;
 	studentOrg.find({}).sort(sort_order).lean().exec(function(err, orgs) {
 		success(orgs);
 	});
 };
 
+/*
+ * save a collection of orgs to the database
+ * orgs: the collection of orgs to save to the database
+ * callback: a function that takes an error object and the orgs that were saved to the database
+ */
+exports.saveAllOrgs = function(orgs, callback){
+    var valid = true;
+    for(var i = 0; i < orgs.length; i++){
+        var currentOrg = orgs[i];
+        valid = valid && currentOrg.name != undefined
+                      && currentOrg.description != undefined
+                      && currentOrg.tags != undefined
+                      && currentOrg.contact != undefined
+                      && currentOrg.contact.name != undefined
+                      && currentOrg.contact.email != undefined
+                      && currentOrg.contact.phone != undefined;
+    }
+    if(valid){
+        studentOrg.create(orgs, function(err, savedOrgs){
+            callback(err, savedOrgs);
+        });
+    }
+    else{
+        callback(new Error('Invalid org'), null);
+    }
+};
+
+/*
+ * removes an org from the database
+ * orgId: the id of the org to remove from the database
+ * error: a callback that takes an error object if the org cannot be found
+ * success: a callback that is called upon successful removeal
+ */
 exports.deleteOrg = function(orgId, success, error) {
 	studentOrg.find({ _id: orgId}).remove().exec(function(err) {
 		if(err) {
