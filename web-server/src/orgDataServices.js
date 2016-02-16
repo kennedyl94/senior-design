@@ -5,6 +5,7 @@ var dbName = require('../config').mongo;
 //set up the model for the student_orgs collection
 var studentOrg = database.createModel('student_orgs', require('../config').orgSchema);
 
+
 /*
  * adds one student org to the database
  * org: the student org to add
@@ -41,13 +42,9 @@ exports.getOrgsMatchingTags = function(tags, callback) {
 exports.getAllOrgs = function(sortType, success, error){
 var sort_order = {};
 	sort_order[sortType] = 1;
-	studentOrg.find({}, function(err, orgs) {
-		var orgsMap = {}; 
-		orgs.forEach(function(org) {
-			orgsMap[org._id] = org;
-		});
-		success(orgsMap);
-	}).sort( sort_order );
+	studentOrg.find({}).sort(sort_order).lean().exec(function(err, orgs) {
+		success(orgs);
+	});
 };
 
 /*
@@ -149,6 +146,8 @@ exports.searchByTags = function(tagList, success, error) {
 		tempOrgList.forEach(function(org){
 			orgList.push(org.organization);
 		});
+
+
 
 		success(orgList);
 	});

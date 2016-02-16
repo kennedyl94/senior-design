@@ -12,6 +12,9 @@
                 templateUrl: 'approvals/approvals.template.html',
                 controller: 'ApprovalsController',
                 controllerAs: 'approvalsCtrl'
+              },
+              data: {
+                restricted: true
               }
             }
           });
