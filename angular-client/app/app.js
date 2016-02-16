@@ -26,6 +26,11 @@
       /* used for $cookieStore to maintain session variables */
       'ngCookies',
 
+      /* confirm dialog
+      *  https://github.com/Schlogen/angular-confirm
+      */
+      'angular-confirm',
+
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
       'config',
@@ -44,6 +49,7 @@
       'organizations',
 	    'createClub',
       'modal',
+      'editOrgModal',
       'survey',
       'massUpload',
       'fileUpload',

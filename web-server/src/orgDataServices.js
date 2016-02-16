@@ -52,6 +52,30 @@ exports.deleteOrg = function(orgId, success, error) {
 	});
 };
 
+exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
+	studentOrg.findOneAndUpdate({_id: orgId}, orgToUpdate, function(err) {
+		if(err) {
+			error(new Error('Unable to modify item with id:' + orgId));
+		}
+		success();
+	});
+};
+
+exports.activation = function(orgId, isActive, success, error) {
+	if(isActive == true) {
+		studentOrg.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(err) {
+			if(err) { error(err); }
+			success();
+		});
+	} else if(isActive == false) {
+		studentOrg.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(err) {
+			if(err) { error(err); }
+			success();
+		});
+	}
+
+};
+
 /*
  * Gets all tags currently being used by active clubs.
  * success: A function to call upon successful completion. Takes an object that contains all tags.
