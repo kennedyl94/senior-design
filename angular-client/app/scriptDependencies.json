@@ -1,15 +1,33 @@
 {
   "site": [
     "app/app.js",
+
+    "app/templates/templates.module.js",
+
     "app/organizations/organizations.module.js",
     "app/organizations/organizations.controller.js",
     "app/organizations/organizations.routes.js",
     "app/organizations/organizations.service.js",
 
+    "app/userSettings/userSettings.module.js",
+    "app/userSettings/userSettings.controller.js",
+    "app/userSettings/userSettings.service.js",
+    "app/userSettings/userSettings.routes.js",
+
     "app/createClub/createClub.module.js",
     "app/createClub/createClub.controller.js",
     "app/createClub/createClub.routes.js",
     "app/createClub/createClub.service.js",
+
+    "app/directives/editUserModal/editUserModal.module.js",
+    "app/directives/editUserModal/editUserModal.directive.js",
+    "app/directives/editUserModal/editUserModal.controller.js",
+    "app/directives/editUserModal/editUserModal.service.js",
+
+    "app/directives/addUserModal/addUserModal.module.js",
+    "app/directives/addUserModal/addUserModal.directive.js",
+    "app/directives/addUserModal/addUserModal.controller.js",
+    "app/directives/addUserModal/addUserModal.service.js",
 
     "app/directives/modal/modal.module.js",
     "app/directives/modal/modal.directive.js",
@@ -23,6 +41,10 @@
     "app/directives/navSidebar/navSidebar.module.js",
     "app/directives/navSidebar/navSidebar.directive.js",
     "app/directives/navSidebar/navSidebar.controller.js",
+
+    "app/directives/organizations/organizations.module.js",
+    "app/directives/organizations/organizations.directive.js",
+    "app/directives/organizations/organizations.controller.js",
 
     "app/massUpload/massUpload.module.js",
     "app/massUpload/massUpload.routes.js",
@@ -55,10 +77,7 @@
     "app/orgSettings/orgSettings.module.js",
     "app/orgSettings/orgSettings.controller.js",
     "app/orgSettings/orgSettings.routes.js",
-
-    "app/userSettings/userSettings.module.js",
-    "app/userSettings/userSettings.controller.js",
-    "app/userSettings/userSettings.routes.js",
+    "app/orgSettings/orgSettings.service.js",
 
     "app/surveySettings/surveySettings.module.js",
     "app/surveySettings/surveySettings.controller.js",
@@ -99,6 +118,8 @@
     "app/components/blueimp-bootstrap-image-gallery/css/bootstrap-image-gallery.min.css",
     "app/components/blueimp-gallery/css/blueimp-gallery.min.css",
     "app/directives/modal/style.css",
+    "app/directives/editUserModal/style.css",
+    "app/directives/addUserModal/style.css",
     "app/directives/navSidebar/style.css",
     "app/createClub/style.css",
     "app/tagSearch/style.css"

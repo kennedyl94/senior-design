@@ -86,7 +86,7 @@ module.exports = function (grunt) {
         src: ['**/*template.html'],
         dest: 'dist/dev/angularTemplateCache.js',
         options: {
-          module: '<%= gruntConfig.siteModule %>'
+          module: '<%= gruntConfig.templateModule %>'
         }
       }
     },

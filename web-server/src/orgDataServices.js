@@ -136,7 +136,6 @@ exports.searchByTags = function(tagList, success, error) {
 			tempOrgList.forEach(function(org){
 				orgList.push(org.organization);
 			});
-
 			success(orgList);
 		}
 	});

@@ -23,10 +23,13 @@ var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
 var survey = require("./routes/survey.js");
 var tags = require('./routes/tagSearch.js');
+var email = require('./routes/email.js');
 
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
+
+var userSettings = require("./routes/userSettings.js");
 
 var router = express.Router();
 
@@ -40,6 +43,8 @@ app.use('/api/login', login);
 
 app.use('/api/logout', logout);
 
+app.use('/api/userSettings', userSettings);
+
 app.use('/api/Organizations/', Orgs);
 
 app.use('/api/tagSearch/', tags);
@@ -47,6 +52,8 @@ app.use('/api/tagSearch/', tags);
 app.use('/api/createClub', createClub);
 
 app.use('/api/survey', survey);
+
+app.use('/api/email', email);
 
 // app.use('/api//UploadFile', upload);
 

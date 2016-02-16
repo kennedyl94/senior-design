@@ -1,3 +1,4 @@
 {
-  "siteModule": "orgFinder"
+  "siteModule": "orgFinder",
+  "templateModule": "templates"
 }
