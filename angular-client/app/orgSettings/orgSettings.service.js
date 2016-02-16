@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('organizations')
-    .factory('organizationsService', ['$q', '$http', 'config', GetService]);
+  angular.module('orgSettings')
+    .factory('orgSettingsService', ['$q', '$http', 'config', GetService]);
 
   function GetService($q, $http, config) {
 
@@ -11,6 +11,16 @@
     service.data = {
       orgs: {}
     };
+
+    service.sortOrgs = function(selectedOption) {
+      var deferred = $q.defer();
+      var promise =
+        $http({method: 'GET', url: config.domain + 'Organizations/' + selectedOption.id});
+      promise.then(function(data) {
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    }
 
     function init() {
       var promises = [];

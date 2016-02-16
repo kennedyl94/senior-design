@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('orgSettings')
-    .controller('OrgSettingsController', [Controller]);
+    .controller('OrgSettingsController', ['orgSettingsService', Controller]);
 
-  function Controller() {
+  function Controller(orgSettingsService) {
 
     var vm = this;
-
+    vm.data = orgSettingsService.data;
   }
 })();

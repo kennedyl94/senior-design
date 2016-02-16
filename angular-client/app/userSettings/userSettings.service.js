@@ -1,22 +1,21 @@
 (function() {
   'use strict';
 
-  angular.module('organizations')
-    .factory('organizationsService', ['$q', '$http', 'config', GetService]);
+  angular.module('userSettings')
+    .factory('userSettingsService', ['$q', '$http', 'config', GetService]);
 
   function GetService($q, $http, config) {
-
     var service = this;
 
     service.data = {
-      orgs: {}
+      users: {}
     };
 
     function init() {
       var promises = [];
-      promises.push($http({method: 'GET', url: config.domain + 'Organizations/name'}));
+      promises.push($http({method: 'GET', url: config.domain + 'userSettings'}));
       $q.all(promises).then(function(data) {
-        service.data.orgs = data[0].data;
+        service.data.users = data[0].data;
       });
     }
 

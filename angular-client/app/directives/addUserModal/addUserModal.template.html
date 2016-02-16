@@ -1,0 +1,33 @@
+<div>
+  <div class="modal-header" id="modal-header-Add">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="addUserModalCtrl.back()">×</button>
+    <h2 class="modal-title">Add New User</h2>
+  </div>
+  <div class="modal-body">
+    <div class="row"><div class="modal-info-header">
+      <h4>Username</h4>
+      <input type="text" name="username" ng-model='addUserModalCtrl.name'/>
+    </div></div>
+    <div class="row"><div class="modal-info-header">
+      <h4>Password</h4>
+      <input type="password" name="password" ng-model='addUserModalCtrl.password'/>
+    </div></div>
+    <div class="row"><div class="modal-info-header">
+      <h4>Admin Role</h4>
+      <select id="sel" class="input-block-level" ng-model="list_category" ng-options="obj.id as obj.name for obj in list_categories.data">
+      </select>
+      <!--<input type="text" name="type" ng-model='addUserModalCtrl.type'/>-->
+    </div></div>
+    <div class="row"><div class="modal-info-header">
+      <h4>Organizations</h4>
+      <input type="text" name="orgs" ng-model='addUserModalCtrl.orgs'/>
+    </div></div>
+  </div>
+  <div class="modal-footer">
+    <div class="modal-contact-info">
+      <div class="row">
+        <button class="btn btn-primary" id="admin-save-btn" ng-click="addUserModalCtrl.saveNewUser()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

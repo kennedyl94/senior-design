@@ -13,6 +13,9 @@
                 controller: 'OrgSettingsController',
                 controllerAs: 'orgSettingsCtrl'
               }
+            },
+            data: {
+              restricted: true
             }
           });
       }]);

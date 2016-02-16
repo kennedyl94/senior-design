@@ -13,5 +13,8 @@
     $scope.$watch(function() { return $cookies.get('om_slAdmin'); }, function(isStudentLifeAdmin) {
       vm.isStudentLifeAdmin = isStudentLifeAdmin;
     });
+    $scope.$watch(function() { return $cookies.get('om_orgAdmin'); }, function(isOrgAdmin) {
+      vm.isOrgAdmin = isOrgAdmin;
+    });
   }
 })();

@@ -13,6 +13,9 @@
                 controller: 'SurveySettingsController',
                 controllerAs: 'surveySettingsCtrl'
               }
+            },
+            data: {
+              restricted: true
             }
           });
       }]);

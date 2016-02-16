@@ -1,16 +1,14 @@
 <h1 align="center">Survey</h1>
 <div class="col-sm-12" id="survey-div">
-
-
 	<div class="col-sm-12" ng-repeat="question in surveyCtrl.data.questions | toArray">
 		<div class="row">
 			<div class="col-sm-4">
 				<input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
                ng-false-value=false ng-true-value=true value=false> {{question.question}} </input>
-        <br/>
 			</div>
 		</div>
 	</div>
+  <br/>
   <form name="emailForm">
     <div class="col-sm-12">
       <div class="row">
@@ -26,10 +24,10 @@
       </div>
     </div>
   </form>
-	<div class="col-sm-12" ng-repeat="org in surveyCtrl.orgs | toArray">
-		{{org.name}}
-	</div>
-
-
-
+  <ng-organizations
+    ng-show="surveyCtrl.orgs.length > 0"
+    orgs="surveyCtrl.orgs"
+    total-items="surveyCtrl.orgs.length"
+    items-per-page="5">
+  </ng-organizations>
 </div>
