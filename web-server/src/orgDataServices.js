@@ -83,8 +83,8 @@ exports.saveAllOrgs = function(orgs, callback){
     }
     if(valid){
 		database.getModel(modelName, function(err, model){
-			model.create(orgs, function(err, savedOrgs){
-				callback(err, savedOrgs);
+			model.create(orgs, function(saveErr, savedOrgs){
+				callback(saveErr, savedOrgs);
 			});
 		});
     }
@@ -105,33 +105,62 @@ exports.deleteOrg = function(orgId, success, error) {
 			if(findErr) {
 				error(new Error('Unable to delete item with id: ' + orgId));
 			}
-			success();
+			else{
+				success();
+			}
 		});
 	});
 };
 
+/*
+ * upadtes an org with a given ID
+ * orgID: the id of the org to update
+ * orgToUpdate: the contents to update the org with
+ * success: a function to call upon successfuly updating
+ * error: a function to call if there is an error during updating
+ */
 exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
-	studentOrg.findOneAndUpdate({_id: orgId}, orgToUpdate, function(err) {
-		if(err) {
-			error(new Error('Unable to modify item with id:' + orgId));
-		}
-		success();
+	database.getModel(modelName, function(err, model){
+		model.findOneAndUpdate({_id: orgId}, orgToUpdate, function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to modify item with id:' + orgId));
+			}
+			else{
+				success();
+			}
+		});
 	});
 };
 
+/*
+ * sets the active state of an org
+ * orgId: The id of the org to activate/deactivate.
+ * isActive: If false, the org will be active. If true, the org will be set inactive.
+ * success: A function to call if the update is successful.
+ * error: A function to call if there is an error during updating.
+ */
 exports.activation = function(orgId, isActive, success, error) {
-	if(isActive == true) {
-		studentOrg.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(err) {
-			if(err) { error(err); }
-			success();
-		});
-	} else if(isActive == false) {
-		studentOrg.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(err) {
-			if(err) { error(err); }
-			success();
-		});
-	}
-
+	database.getModel(modelName, function(err, model){
+		if(isActive == true) {
+			model.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(findErr) {
+				if(findErr) { 
+					error(findErr); 
+				}
+				else{
+					success();
+				}
+			});
+		} else if(isActive == false) {
+			model.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(findErr) {
+				if(findErr) { 
+					error(findErr); 
+				}
+				else{
+					success();
+				}
+			});
+		}
+	});
 };
 
 /*

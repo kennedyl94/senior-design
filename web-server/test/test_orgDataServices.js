@@ -15,6 +15,10 @@ var fakeErr = new Error('This is a fake error');
 var fakeModel = {
 	find: function(obj, callback){
 		callback(fakeErr, null);
+	},
+	
+	findOneAndUpdate: function(id, obj, callback){
+		callback(fakeErr);
 	}
 };
 
@@ -273,6 +277,166 @@ describe('orgDataServices', function () {
             });
         });
     });
+    
+    describe('#modifyOrg', function() {
+		
+		afterEach(function(){
+            var connection = mongoose.connection;
+            connection.db.dropDatabase();
+        });   
+		
+		it('should update the org if it exists', function(done){
+			orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+				orgDataServices.modifyOrg(org._id, fakeOrg2,
+				function(){
+					database.getModel('student_orgs', function(err, model){
+						model.findById(org._id).lean().exec(function (err, orgFound){
+							assert.deepEqual({
+								name: orgFound.name,
+								description: orgFound.description,
+								tags: orgFound.tags,
+								contact: orgFound.contact
+							}, fakeOrg2);
+							done();
+						});
+					});
+				},
+				function(err){	
+					assert.fail();
+				});
+			});
+		});
+		
+		it('should call error callback if the org does not exist', function(done){
+			orgDataServices.modifyOrg(1234, fakeOrg,
+			function(){
+				assert.fail();
+			},
+			function(err){
+				assert.notEqual(null, err);
+				done();
+			});
+		});
+		
+		it('should call error callback if there is an error', function(done){
+			orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+				database.getModel = fakeGetModel;
+				orgDataServices.modifyOrg(org._id, fakeOrg2,
+				function(){
+					database.getModel = realGetModel;
+					assert.fail();
+				},
+				function(err){
+					database.getModel = realGetModel;	
+					assert.notEqual(null, err);
+					done();
+				});
+			});
+		});
+	});
+	
+	describe('#activation', function(){
+		
+		 afterEach(function(){
+            var connection = mongoose.connection;
+            connection.db.dropDatabase();
+        });
+		
+		it('should set inactive tag if isActive is true', function(done){
+			orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+				orgDataServices.activation(org._id, true, 
+				function(){
+					database.getModel('student_orgs', function(err, model){
+						model.findById(org._id).lean().exec(function (err, orgFound){
+							assert.notEqual(orgFound.tags.indexOf('inactive'), -1);
+							done();
+						});
+					});
+				},
+				function(err){
+					assert.fail();
+				});
+			});
+		});
+		
+		it('should remove inactive tag if isActive is false', function(done){
+			orgDataServices.addStudentOrg(inactiveOrg, function(err, org){
+				orgDataServices.activation(org._id, false, 
+				function(){
+					database.getModel('student_orgs', function(err, model){
+						model.findById(org._id).lean().exec(function (err, orgFound){
+							assert.equal(orgFound.tags.indexOf('inactive'), -1);
+							done();
+						});
+					});
+				},
+				function(err){
+					assert.fail();
+				});
+			});
+		});
+		
+		it('should keep inactive tag if isActive is true and already inactive', function(done){
+			orgDataServices.addStudentOrg(inactiveOrg, function(err, org){
+				orgDataServices.activation(org._id, true, 
+				function(){
+					database.getModel('student_orgs', function(err, model){
+						model.findById(org._id).lean().exec(function (err, orgFound){
+							assert.notEqual(orgFound.tags.indexOf('inactive'), -1);
+							done();
+						});
+					});
+				},
+				function(err){
+					assert.fail();
+				});
+			});
+		});
+		
+		it('should not add inactive tag if isActive is false and already active', function(done){
+			orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+				orgDataServices.activation(org._id, false, 
+				function(){
+					database.getModel('student_orgs', function(err, model){
+						model.findById(org._id).lean().exec(function (err, orgFound){
+							assert.equal(orgFound.tags.indexOf('inactive'), -1);
+							done();
+						});
+					});
+				},
+				function(err){
+					assert.fail();
+				});
+			});
+		});
+		
+		it('should call error callback if org does not exist', function(done){
+			orgDataServices.activation(1234, false,
+			function(){
+				assert.fail();
+			},
+			function(err){
+				assert.notEqual(null, err);
+				done();
+			});
+		});
+		
+		it('should call error callback if there is an error', function(done){
+			orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+				database.getModel = fakeGetModel;
+				orgDataServices.activation(org._id, false,
+				function(){
+					database.getModel = realGetModel;
+					assert.fail();
+				},
+				function(err){
+					database.getModel = realGetModel;
+					assert.notEqual(null, err);
+					done();
+				});
+			});
+		});
+	});
     
     describe('#getAllTags', function() {
         
