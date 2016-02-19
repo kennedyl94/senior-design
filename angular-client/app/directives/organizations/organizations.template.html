@@ -13,11 +13,25 @@
       </select>
     </div>
   </div>
-  <div class="col-sm-12" ng-repeat="org in ngOrgsCtrl.filtered = ngOrgsCtrl.orgs | search:ngOrgsCtrl.query | orderBy:ngOrgsCtrl.selectedOption.id | startFrom:(ngOrgsCtrl.currentPage-1)*ngOrgsCtrl.itemsPerPage | limitTo:ngOrgsCtrl.itemsPerPage">
+  <div class="col-sm-12" ng-repeat="org in ngOrgsCtrl.filtered = ngOrgsCtrl.orgs | search:ngOrgsCtrl.query:ngOrgsCtrl.settings | orderBy:ngOrgsCtrl.selectedOption.id | startFrom:(ngOrgsCtrl.currentPage-1)*ngOrgsCtrl.itemsPerPage | limitTo:ngOrgsCtrl.itemsPerPage">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-8">
         <h3 class="orgs-header" ng-click="ngOrgsCtrl.openModal(org, ngOrgsCtrl.images)">{{org.name}}</h3>
-        <span id="tags-span" class="col-sm-offset-1" ng-bind-html="ngOrgsCtrl.highlight(org.tags.toString(), query)">{{org.tags.toString()}}</span>
+        <span ng-if="ngOrgsCtrl.tags == 'true'" id="tags-span" class="col-sm-offset-1" ng-bind-html="ngOrgsCtrl.highlight(org.tags.toString(), query)">{{org.tags.toString()}}</span>
+      </div>
+      <div ng-if="ngOrgsCtrl.settings == 'true'" id="settings-div">
+        <div class="col-sm-1">
+          <input type="button" value="{{ngOrgsCtrl.buttons.editBtn.text}}" ng-click="ngOrgsCtrl.buttons.editBtn.function(org)">
+        </div>
+        <div class="col-sm-1">
+          <input type="button" value="{{ngOrgsCtrl.buttons.deleteBtn.text}}" ng-click="ngOrgsCtrl.buttons.deleteBtn.function(org)">
+        </div>
+        <div ng-if="ngOrgsCtrl.isActive(org)" class="col-sm-1">
+          <input type="button" value="{{ngOrgsCtrl.buttons.deactivateBtn.text}}" ng-click="ngOrgsCtrl.buttons.deactivateBtn.function(org)">
+        </div>
+        <div ng-if="!ngOrgsCtrl.isActive(org)" class="col-sm-1">
+          <input type="button" value="{{ngOrgsCtrl.buttons.activateBtn.text}}" ng-click="ngOrgsCtrl.buttons.activateBtn.function(org)">
+        </div>
       </div>
     </div>
     <div class="row" id="description-row">

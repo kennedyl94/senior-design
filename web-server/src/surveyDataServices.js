@@ -6,9 +6,9 @@ var modelName = 'survey_questions';
 database.createModel(modelName, require('../config').surveyQuestionSchema);
 
 /*
- * retreives the tags associated with questions with given ids
- * ids: an array of the question ids
- * callback: a function that takes an array of tags
+ * gets tags associated with all questions with an id in ids
+ * ids: the ids of the questions
+ * callback: a function that takes the collection of tags
  */
 exports.getQuestionsTagsByIds = function(ids, callback) {
 	database.getModel(modelName, function(err, model){
@@ -82,6 +82,16 @@ exports.getAllQuestions = function(sortType, success, error){
 				success(questionsMap);
 			}
 		}).sort( sort_order );
+	});
+};
+
+
+exports.deletequestion = function(questionId, success, error) {
+	surveyQuestion.find({ _id: questionId}).remove().exec(function(err) {
+		if(err) {
+			error(new Error('Unable to delete item with id: ' + questionId));
+		}
+		success();
 	});
 };
 

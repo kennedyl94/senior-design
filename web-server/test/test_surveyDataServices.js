@@ -13,15 +13,15 @@ var database = require('../src/databaseServices');
 var fakeErr = new Error('This is a fake error');
 
 var fakeModel = {
-	find: function(obj, callback){
-		callback(fakeErr, null);
-	}
+    find: function(obj, callback){
+        callback(fakeErr, null);
+    }
 };
 
 var realGetModel = database.getModel;
 
 var fakeGetModel = function(modelName, callback){
-	callback(null, fakeModel);
+    callback(null, fakeModel);
 };
 
 var fakeTags = [
@@ -58,7 +58,7 @@ describe('surveyDataServices', function () {
             var connection = mongoose.connection;
             connection.db.dropDatabase();
         });
-    
+
         it('should not send error to callback if successful.', function(done){
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 assert.equal(err, null);
@@ -79,13 +79,12 @@ describe('surveyDataServices', function () {
     });
     
     describe('#getQuestionById', function(){
-       
-       
+        
         afterEach(function(){
             var connection = mongoose.connection;
             connection.db.dropDatabase();
         });
-        
+
         it('should send null question if id does not exist', function(done){
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 surveyDataServices.getQuestionById('', function(err, question){
@@ -112,6 +111,7 @@ describe('surveyDataServices', function () {
     describe('#getAllQuestions', function() {
 
         afterEach(function(){
+            
             var connection = mongoose.connection;
             connection.db.dropDatabase();
         });
@@ -162,16 +162,16 @@ describe('surveyDataServices', function () {
         });
         
         it('should send an empty array if there is an error', function(done){
-			surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
-				database.getModel = fakeGetModel;
-				surveyDataServices.getQuestionsTagsByIds(
-				[savedQuestion._id], 
-				function(tags){
-					database.getModel = realGetModel;
-					assert.deepEqual(tags, []);
-					done();
-				});
-			});
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                database.getModel = fakeGetModel;
+                surveyDataServices.getQuestionsTagsByIds(
+                [savedQuestion._id], 
+                function(tags){
+                    database.getModel = realGetModel;
+                    assert.deepEqual(tags, []);
+                    done();
+                });
+            });
         });
         
         it('should send all tags associated with the question ids', function(done){

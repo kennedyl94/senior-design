@@ -1,1 +1,33 @@
 <h1 align="center"> Survey Settings </h1>
+
+<!--num questions
+    will be stored in json file-->
+Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.data.num" type = number> <br>
+<button type = button ng-click="surveySettingsCtrl.questionNum()">Submit</button><br>
+<br>
+<!--delete questions
+    need to make call to the back end and use a promise to get the data-->
+
+	<div class="col-sm-12" ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
+        
+        <button type = button ng-click="surveySettingsCtrl.del([q._id])">Delete</button>
+        {{q.question}}
+        <br>
+
+	</div>
+    <!--add questions
+    -->
+    <h1>Add question</h1>
+    Question
+    <input type = 'text' id="question" ng-model="surveySettingsCtrl.question.question"> <br>
+    Tags(comma seperated)
+    <input type = 'text' id="tags" ng-model="surveySettingsCtrl.question.tags"> <br>
+    Category
+    <input type = 'text' id="category" ng-model="surveySettingsCtrl.question.category"> <br>
+    <button type="button" ng-click="surveySettingsCtrl.add()">ADD</button>
+    
+
+
+<!--add delete rules, based on quetion type
+    make back end call to get data in a promis
+    will be stored in json file-->

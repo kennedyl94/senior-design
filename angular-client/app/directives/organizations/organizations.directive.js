@@ -16,7 +16,10 @@
       bindToController : {
         orgs: "=",
         totalItems: "@",
-        itemsPerPage: "="
+        itemsPerPage: "=",
+        settings: "@",
+        tags: "@",
+        buttons: "="
       },
       scope: {}
     };

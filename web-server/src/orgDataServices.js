@@ -20,9 +20,9 @@ exports.addStudentOrg = function(org, callback){
 };
 
 /*
- * gets all of the student orgs that have the given tags
- * tags: an array of tags to look for
- * callback: a function taking an array of the orgs that match the given tags
+ * gets all of the student orgs matching the given tags
+ * tags: the tags to match
+ * callback: a function that takes an error object and an object that contains the student orgs
  */
 exports.getOrgsMatchingTags = function(tags, callback) {
   database.getModel(modelName, function(err, model){
@@ -65,10 +65,39 @@ exports.getAllOrgs = function(sortType, success, error){
 };
 
 /*
- * removes the given org from the database
- * orgId: the id of the org to remove
- * success: a function to call upon successful removal
- * error: a function that takes an error object if removal is not successful
+ * save a collection of orgs to the database
+ * orgs: the collection of orgs to save to the database
+ * callback: a function that takes an error object and the orgs that were saved to the database
+ */
+exports.saveAllOrgs = function(orgs, callback){
+    var valid = true;
+    for(var i = 0; i < orgs.length; i++){
+        var currentOrg = orgs[i];
+        valid = valid && currentOrg.name != undefined
+                      && currentOrg.description != undefined
+                      && currentOrg.tags != undefined
+                      && currentOrg.contact != undefined
+                      && currentOrg.contact.name != undefined
+                      && currentOrg.contact.email != undefined
+                      && currentOrg.contact.phone != undefined;
+    }
+    if(valid){
+		database.getModel(modelName, function(err, model){
+			model.create(orgs, function(err, savedOrgs){
+				callback(err, savedOrgs);
+			});
+		});
+    }
+    else{
+        callback(new Error('Invalid org'), null);
+    }
+};
+
+/*
+ * removes an org from the database
+ * orgId: the id of the org to remove from the database
+ * error: a callback that takes an error object if the org cannot be found
+ * success: a callback that is called upon successful removeal
  */
 exports.deleteOrg = function(orgId, success, error) {
 	database.getModel(modelName, function(err, model){
@@ -79,6 +108,30 @@ exports.deleteOrg = function(orgId, success, error) {
 			success();
 		});
 	});
+};
+
+exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
+	studentOrg.findOneAndUpdate({_id: orgId}, orgToUpdate, function(err) {
+		if(err) {
+			error(new Error('Unable to modify item with id:' + orgId));
+		}
+		success();
+	});
+};
+
+exports.activation = function(orgId, isActive, success, error) {
+	if(isActive == true) {
+		studentOrg.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(err) {
+			if(err) { error(err); }
+			success();
+		});
+	} else if(isActive == false) {
+		studentOrg.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(err) {
+			if(err) { error(err); }
+			success();
+		});
+	}
+
 };
 
 /*

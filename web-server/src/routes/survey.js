@@ -1,19 +1,38 @@
 var express = require('express')
-  , router = express.Router();
-var _dataServices = require('../orgDataServices.js');
+  , router = express.Router()
+  
+var  _dataServices = require('../orgDataServices.js');
 var _surveyData = require('../surveyDataServices.js');
+  var jsonfile = require('jsonfile')
+  var surveyFile ="./surveySettings.json";
+ 
 
+
+var orgs;
+
+  _dataServices.getAllOrgs(null, function(orgsMap){
+	  orgs =orgsMap;
+  },
+  function(e)
+  {
+	  console.log(e);
+  });
 
 router.get('/', function (req, res) {
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    
     _surveyData.getAllQuestions(null, function(questionMap){
-        
-        res.send(questionMap);
-        
-        if(!Object.keys(questionMap).length || questionMap.legnth <= 0)
-        {
-            console.log("should be adding");
-            addMockData();
+        if(Object.keys(questionMap).length <= surveySet.num) {
+            res.send(questionMap);
+        } else {
+            var qmap2 =[];
+            for(var i = 0; i< surveySet.num; i++) {
+                qmap2.push(questionMap[Object.keys(questionMap)[i]]);
+            }
+            res.send(qmap2);
         }
+        
+       
         
     }, function(e){
         console.log("get in get"+e);
@@ -55,23 +74,6 @@ function getOrgsMatchingTags(tags, callback) {
 
 
 
-function addMockData() {
-    _surveyData.addQuestion(
-        {question: "do you like pie",
-        tags: ["pie","cool"],
-        category: "String"},function(e){
-        console.log("add 1"+e);
-    });
 
-        
-    _surveyData.addQuestion(
-        {question: "do you like unicycles",
-        tags: [
-            "unicycle","cool","outdoors"],
-        category: "String"}
-        , function(e){
-        console.log("add 2"+e);
-    });
-}
 
 module.exports = router;

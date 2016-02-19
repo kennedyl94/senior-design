@@ -1,6 +1,10 @@
 var express = require('express')
     , router = express.Router();
 
+var  _dataServices = require('../orgDataServices.js');
+var mongoose = require('mongoose');
+var config = require('../../config');
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -37,5 +41,16 @@ router.post('/', function (request, response) {
         }
     })(request, response);
 });
+
+exports.addUser = function(user, success, error) {
+    if(connected) {
+        var newUser = new user(user)
+        newUser.save((function(err, savedUser){
+            callback(err, savedUser._doc);
+        }));
+    } else {
+        error(new Error('Not connected to database', null));
+    }
+};
 
 module.exports = router;
