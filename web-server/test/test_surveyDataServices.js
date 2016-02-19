@@ -1,8 +1,6 @@
 var assert = require('assert');
-var sinon = require('sinon');
 var mongoose = require('mongoose');
 var async = require('async');
-
 
 var config = require('../config');
 var realDbName = config.mongo;
@@ -10,6 +8,21 @@ var fakeDbName = 'mongodb://localhost/test';
 config.mongo = fakeDbName;
 
 var surveyDataServices = require('../src/surveyDataServices');
+var database = require('../src/databaseServices');
+
+var fakeErr = new Error('This is a fake error');
+
+var fakeModel = {
+	find: function(obj, callback){
+		callback(fakeErr, null);
+	}
+};
+
+var realGetModel = database.getModel;
+
+var fakeGetModel = function(modelName, callback){
+	callback(null, fakeModel);
+};
 
 var fakeTags = [
     "athletic",
@@ -149,8 +162,16 @@ describe('surveyDataServices', function () {
         });
         
         it('should send an empty array if there is an error', function(done){
-            //TODO
-            assert.fail();
+			surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+				database.getModel = fakeGetModel;
+				surveyDataServices.getQuestionsTagsByIds(
+				[savedQuestion._id], 
+				function(tags){
+					database.getModel = realGetModel;
+					assert.deepEqual(tags, []);
+					done();
+				});
+			});
         });
         
         it('should send all tags associated with the question ids', function(done){

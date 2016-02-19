@@ -1,8 +1,9 @@
 var database = require('./databaseServices');
-var dbName = require('../config').mongo;
+
+var modelName = 'survey_questions';
 
 //set up the model for the survey_questions collection
-var surveyQuestion = database.createModel('survey_questions', require('../config').surveyQuestionSchema);
+database.createModel(modelName, require('../config').surveyQuestionSchema);
 
 /*
  * retreives the tags associated with questions with given ids
@@ -10,23 +11,25 @@ var surveyQuestion = database.createModel('survey_questions', require('../config
  * callback: a function that takes an array of tags
  */
 exports.getQuestionsTagsByIds = function(ids, callback) {
-   surveyQuestion.find({
-       '_id': { $in: ids }
-   }, function(err, questions){
-       if(!err) {
-           var tags = [];
-           var i = 0;
-           for(i; i < questions.length; i++) {
-               var j = 0;
-               for(j; j < questions[i].tags.length; j++){
-                   tags.push(questions[i].tags[j]);
-               }
-           }
-           callback(tags);
-       }
-       else{
-           callback([]);    // this is a temporary solution to the possibilty the callback isn't reached
-       }
+	database.getModel(modelName, function(err, model){
+	   model.find({
+		   '_id': { $in: ids }
+	   }, function(findErr, questions){
+		   if(!findErr) {
+			   var tags = [];
+			   var i = 0;
+			   for(i; i < questions.length; i++) {
+				   var j = 0;
+				   for(j; j < questions[i].tags.length; j++){
+					   tags.push(questions[i].tags[j]);
+				   }
+			   }
+			   callback(tags);
+		   }
+		   else{
+			   callback([]);    // this is a temporary solution to the possibilty the callback isn't reached
+		   }
+	   });
    });
 }
 
@@ -36,10 +39,12 @@ exports.getQuestionsTagsByIds = function(ids, callback) {
  * callback: a function that takes an error object and an object representing the saved question document
  */
 exports.addQuestion = function(question, callback){
-    var newQuestion = new surveyQuestion(question);
-    newQuestion.save(function(err, savedQuestion){
-        callback(err, savedQuestion._doc);
-    });
+    database.getModel(modelName, function(err, model){
+		var newQuestion = new model(question);
+		newQuestion.save(function(saveErr, savedQuestion){
+			callback(saveErr, savedQuestion._doc);
+		});
+	});
 };
 
 /*
@@ -48,9 +53,11 @@ exports.addQuestion = function(question, callback){
  * callback: a function that takes an error object and the question matching the id given
  */ 
 exports.getQuestionById = function(questionId, callback){
-    surveyQuestion.findById(questionId, function(err, question) {
-        callback(err, question);
-    });
+    database.getModel(modelName, function(err, model){
+		model.findById(questionId, function(findErr, question) {
+			callback(findErr, question);
+		});
+	});
 };
 
 /*
@@ -60,19 +67,21 @@ exports.getQuestionById = function(questionId, callback){
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllQuestions = function(sortType, success, error){
-    var sort_order = {};
-    sort_order[sortType] = 1;
-    surveyQuestion.find({}, function(err, questions) {
-        if(err){
-            error(err);
-        }
-        else{
-            var questionsMap = {}; 
-            questions.forEach(function(question) {
-                questionsMap[question._id] = question;
-            });
-            success(questionsMap);
-        }
-    }).sort( sort_order );
+	database.getModel(modelName, function(err, model){	
+		var sort_order = {};
+		sort_order[sortType] = 1;
+		model.find({}, function(findErr, questions) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var questionsMap = {}; 
+				questions.forEach(function(question) {
+					questionsMap[question._id] = question;
+				});
+				success(questionsMap);
+			}
+		}).sort( sort_order );
+	});
 };
 

@@ -1,10 +1,9 @@
-var mongoose = require('mongoose');
-var config = require('../config');
+var database = require('./databaseServices');
 
-var dbName = config.mongo;
+var modelName = 'student_orgs';
 
 //set up the model for the student_orgs collection
-var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema));
+database.createModel(modelName, require('../config').orgSchema);
 
 /*
  * adds one student org to the database
@@ -12,9 +11,11 @@ var studentOrg = mongoose.model('student_orgs', mongoose.Schema(config.orgSchema
  * callback: a function that takes an error object and an object representing the saved org document
  */
 exports.addStudentOrg = function(org, callback){
-	var newOrg = new studentOrg(org);
-	newOrg.save(function(err, savedOrg){
-		callback(err, savedOrg._doc);
+	database.getModel(modelName, function(err, model){
+		var newOrg = new model(org);
+		newOrg.save(function(saveErr, savedOrg){
+			callback(saveErr, savedOrg._doc);
+		});
 	});
 };
 
@@ -24,12 +25,17 @@ exports.addStudentOrg = function(org, callback){
  * callback: a function taking an array of the orgs that match the given tags
  */
 exports.getOrgsMatchingTags = function(tags, callback) {
-  studentOrg.find({
-     'tags': { $in: tags },
-  }).lean().exec(function(err, docs){
-     if(!err) {
-        callback(docs);
-     };
+  database.getModel(modelName, function(err, model){
+	  model.find({
+		 'tags': { $in: tags },
+	  }).lean().exec(function(findErr, docs){
+		 if(!findErr) {
+			callback(docs);
+		 }
+		 else{
+			 callback([]);
+		 }
+	  });
   });
 };
 
@@ -40,20 +46,22 @@ exports.getOrgsMatchingTags = function(tags, callback) {
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllOrgs = function(sortType, success, error){
-	var sort_order = {};
-	sort_order[sortType] = 1;
-	studentOrg.find({}, function(err, orgs) {
-		if(err){
-			error(err);
-		}
-		else{
-			var orgsMap = {}; 
-			orgs.forEach(function(org) {
-				orgsMap[org._id] = org;
-			});
-			success(orgsMap);
-		}
-	}).sort( sort_order );
+	database.getModel(modelName, function(err, model){
+		var sort_order = {};
+		sort_order[sortType] = 1;
+		model.find({}, function(findErr, orgs) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var orgsMap = {}; 
+				orgs.forEach(function(org) {
+					orgsMap[org._id] = org;
+				});
+				success(orgsMap);
+			}
+		}).sort( sort_order );
+	});
 };
 
 /*
@@ -63,11 +71,13 @@ exports.getAllOrgs = function(sortType, success, error){
  * error: a function that takes an error object if removal is not successful
  */
 exports.deleteOrg = function(orgId, success, error) {
-	studentOrg.find({ _id: orgId}).remove().exec(function(err) {
-		if(err) {
-			error(new Error('Unable to delete item with id: ' + orgId));
-		}
-		success();
+	database.getModel(modelName, function(err, model){
+		model.find({ _id: orgId}).remove().exec(function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to delete item with id: ' + orgId));
+			}
+			success();
+		});
 	});
 };
 
@@ -77,26 +87,28 @@ exports.deleteOrg = function(orgId, success, error) {
  * error: A function to call if there is an error.
  */
 exports.getAllTags = function(success, error) {
-	studentOrg.find({}, function (err, orgs) {
-		if(err){
-			error(err);
-		}
-		else{
-			var tagMap = [];
-			orgs.forEach(function (org) {
-				if (org.tags.indexOf('inactive') == -1) {
-					org.tags.forEach(function (tag) {
-						if (tagMap.indexOf(tag) == -1 && tag != '') {
-							tagMap.push(tag);
-						}
-					});
-				} else if (tagMap.indexOf('inactive') == -1) {
-					tagMap.push('inactive');
-				}
-			});
-			tagMap.sort();
-			success(tagMap);
-		}
+	database.getModel(modelName, function(err, model){
+		model.find({}, function (findErr, orgs) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var tagMap = [];
+				orgs.forEach(function (org) {
+					if (org.tags.indexOf('inactive') == -1) {
+						org.tags.forEach(function (tag) {
+							if (tagMap.indexOf(tag) == -1 && tag != '') {
+								tagMap.push(tag);
+							}
+						});
+					} else if (tagMap.indexOf('inactive') == -1) {
+						tagMap.push('inactive');
+					}
+				});
+				tagMap.sort();
+				success(tagMap);
+			}
+		});
 	});
 }
 
@@ -107,36 +119,38 @@ exports.getAllTags = function(success, error) {
  * error: A function to call if there is an error.
  */
 exports.searchByTags = function(tagList, success, error) {
-	studentOrg.find({}, function(err, orgs) {
-		if(err){
-			error(err);
-		}
-		else{
-			var tempOrgList = [];
-			var orgList = [];
-			orgs.forEach(function(org) {
-				if (org.tags.indexOf('inactive') == -1) {
-					var rating = 0;
-					tagList.forEach(function(tag) {
-						if (org.tags.indexOf(tag) != -1) {
-							rating++;
+	database.getModel(modelName, function(err, model){
+		model.find({}, function(findErr, orgs) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var tempOrgList = [];
+				var orgList = [];
+				orgs.forEach(function(org) {
+					if (org.tags.indexOf('inactive') == -1) {
+						var rating = 0;
+						tagList.forEach(function(tag) {
+							if (org.tags.indexOf(tag) != -1) {
+								rating++;
+							}
+						});
+
+						if (rating > 0) {
+							tempOrgList.push({organization: org, priority: rating});
 						}
-					});
-
-					if (rating > 0) {
-						tempOrgList.push({organization: org, priority: rating});
 					}
-				}
-			});
+				});
 
-			tempOrgList.sort(function(a, b) {
-				return -(a.priority - b.priority);
-			});
+				tempOrgList.sort(function(a, b) {
+					return -(a.priority - b.priority);
+				});
 
-			tempOrgList.forEach(function(org){
-				orgList.push(org.organization);
-			});
-			success(orgList);
-		}
+				tempOrgList.forEach(function(org){
+					orgList.push(org.organization);
+				});
+				success(orgList);
+			}
+		});
 	});
 }

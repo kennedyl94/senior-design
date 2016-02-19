@@ -1,5 +1,4 @@
 var assert = require('assert');
-var sinon = require('sinon');
 var mongoose = require('mongoose');
 var async = require('async');
 
@@ -9,6 +8,39 @@ var fakeDbName = 'mongodb://localhost/test';
 config.mongo = fakeDbName;
 
 var orgDataServices = require('../src/orgDataServices');
+var database = require('../src/databaseServices');
+
+var fakeErr = new Error('This is a fake error');
+
+var fakeModel = {
+	find: function(obj, callback){
+		callback(fakeErr, null);
+	}
+};
+
+var fakeModel2 = {
+	find: function(obj){
+		return {
+			lean: function(){
+				return {
+					exec: function(callback){
+						callback(fakeErr, null);
+					}
+				};
+			}
+		};
+	}
+};
+
+var realGetModel = database.getModel;
+
+var fakeGetModel = function(modelName, callback){
+	callback(null, fakeModel);
+};
+
+var fakeGetModel2 = function(modelName, callback){
+	callback(null, fakeModel2);
+};
 
 var fakeTags = [
     'tag1',
@@ -136,8 +168,14 @@ describe('orgDataServices', function () {
         });
         
         it('should send empty array if there is an error', function(done){
-            //TODO
-            assert.fail();
+            orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+				database.getModel = fakeGetModel2;
+				orgDataServices.getOrgsMatchingTags(fakeTags, function(docs){
+					database.getModel = realGetModel;
+					assert.deepEqual(docs, []);
+					done();
+				});
+			});
         });
         
         it('should return empty array if no orgs match', function(done){
@@ -217,21 +255,47 @@ describe('orgDataServices', function () {
         });
         
         it('should return all tags from active clubs', function(done){
-            //TODO take care of inactive.
              orgDataServices.addStudentOrg(fakeOrg, function(err, org){
-                orgDataServices.addStudentOrg(fakeOrg2, function(err, org2){
-                    
-            assert.fail();
-        });
+                orgDataServices.addStudentOrg(inactiveOrg, function(err, org2){
+					orgDataServices.getAllTags(
+					function(tags){
+						assert.deepEqual(tags.sort(), fakeTags.concat(['inactive']).sort());
+						done();
+					},
+					function(err){
+						assert.fail();
+					});
+				});
+			});
+		});
         
         it('should not return tags only used by inactive clubs', function(done){
-            //TODO
-            assert.fail();
+            orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+                orgDataServices.addStudentOrg(inactiveOrg, function(err, org2){
+					orgDataServices.getAllTags(
+					function(tags){
+						assert.equal(-1, tags.indexOf('tag6'));
+						done();
+					},
+					function(err){
+						assert.fail();
+					});
+				});
+			});
         });
         
         it('should call error function if there is an error', function(done){
-            //TODO
-            assert.fail();
+			database.getModel = fakeGetModel;
+			orgDataServices.getAllTags(
+			function(tags){
+				database.getModel = realGetModel;
+				assert.fail();
+			},
+			function(err){
+				database.getModel = realGetModel;
+				assert.notEqual(err, null);
+				done();
+			});
         });
     });
     
@@ -243,18 +307,74 @@ describe('orgDataServices', function () {
         });
         
         it('should return all orgs matching tag list', function(done){
-            //TODO
-            assert.fail();
+            orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+                orgDataServices.addStudentOrg(fakeOrg2, function(err, org2){
+					orgDataServices.searchByTags([
+					'tag1',
+					'tag4'
+					],
+					function(orgs){
+						assert.equal(orgs.length, 2);
+						done();
+					},
+					function(err){
+						assert.fail();
+					});
+				});
+			});
         });
         
+        it('should not return inactive orgs', function(done){
+			 orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+                orgDataServices.addStudentOrg(inactiveOrg, function(err, org2){
+					orgDataServices.searchByTags([
+					'tag2'
+					],
+					function(orgs){
+						assert.equal(orgs.length, 1);
+						assert.equal(orgs[0].name, fakeOrg.name);
+						done();
+					},
+					function(err){
+						assert.fail();
+					});
+				});
+			});
+		});
+        
         it('should return orgs in order of most matched tags', function(done){
-            //TODO
-            assert.fail();
+            orgDataServices.addStudentOrg(fakeOrg, function(err, org){
+                orgDataServices.addStudentOrg(fakeOrg2, function(err, org2){
+					orgDataServices.searchByTags([
+					'tag1',
+					'tag5',
+					'tag6'
+					],
+					function(orgs){
+						assert.equal(orgs.length, 2);
+						assert.equal(orgs[0].name, fakeOrg2.name);
+						assert.equal(orgs[1].name, fakeOrg.name);
+						done();
+					},
+					function(err){
+						assert.fail();
+					});
+				});
+			});
         });
         
         it('should call error function if there is an error', function(done){
-            //TODO
-            assert.fail();
+            database.getModel = fakeGetModel;
+            orgDataServices.searchByTags([],
+            function(orgs){
+				database.getModel = realGetModel;
+				assert.fail();
+			},
+			function(err){
+				database.getModel = realGetModel;
+				assert.notEqual(null, err);
+				done();
+			});
         });
     });
 });
