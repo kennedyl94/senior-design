@@ -1,3 +1,5 @@
+var database;
+
 var assert = require('assert');
 var sinon = require('sinon');
 var mongoose = require('mongoose');
@@ -15,7 +17,7 @@ describe('databaseServices', function () {
     
     it('should connect to mongo when first required', function(done){
         process.nextTick(function(){
-            require('../src/databaseServices');
+            database = require('../src/databaseServices');
             assert(mongoose.connect.calledOnce);
             mongoose.connect.restore();
             done();
@@ -24,11 +26,23 @@ describe('databaseServices', function () {
     
     describe('#createModel', function() {
         
-        it('should return the created model', function(done){
-            var database = require('../src/databaseServices');
-            var model = database.createModel(fakeName, fakeSchema);
-            assert.equal(model.modelName, fakeName);
-            done();
+        it('should add the created model to collection of models', function(done){
+            database.createModel(fakeName, fakeSchema);
+            database.getModel(fakeName, function(err, model){
+				database.removeModel(fakeName);
+				assert.equal(model.modelName, fakeName);
+				done();
+			});
         });
     });
+    
+    describe('#getModel', function() {
+		
+		it('should send an error if the model does not exist', function(done){
+			database.getModel(fakeName, function(err, model){
+				assert.notEqual(null, err);
+				done();
+			});
+		});
+	});
 });

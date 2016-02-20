@@ -1,10 +1,9 @@
 var database = require('./databaseServices');
 
-var dbName = require('../config').mongo;
+var modelName = 'student_orgs';
 
 //set up the model for the student_orgs collection
-var studentOrg = database.createModel('student_orgs', require('../config').orgSchema);
-
+database.createModel(modelName, require('../config').orgSchema);
 
 /*
  * adds one student org to the database
@@ -12,9 +11,11 @@ var studentOrg = database.createModel('student_orgs', require('../config').orgSc
  * callback: a function that takes an error object and an object representing the saved org document
  */
 exports.addStudentOrg = function(org, callback){
-	var newOrg = new studentOrg(org);
-	newOrg.save(function(err, savedOrg){
-		callback(err, savedOrg._doc);
+	database.getModel(modelName, function(err, model){
+		var newOrg = new model(org);
+		newOrg.save(function(saveErr, savedOrg){
+			callback(saveErr, savedOrg._doc);
+		});
 	});
 };
 
@@ -24,12 +25,17 @@ exports.addStudentOrg = function(org, callback){
  * callback: a function that takes an error object and an object that contains the student orgs
  */
 exports.getOrgsMatchingTags = function(tags, callback) {
-  studentOrg.find({
-     'tags': { $in: tags }
-  }, function(err, docs){
-     if(!err) {
-        callback(docs);
-     }
+  database.getModel(modelName, function(err, model){
+	  model.find({
+		 'tags': { $in: tags },
+	  }).lean().exec(function(findErr, docs){
+		 if(!findErr) {
+			callback(docs);
+		 }
+		 else{
+			 callback([]);
+		 }
+	  });
   });
 };
 
@@ -40,10 +46,21 @@ exports.getOrgsMatchingTags = function(tags, callback) {
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllOrgs = function(sortType, success, error){
-var sort_order = {};
-	sort_order[sortType] = 1;
-	studentOrg.find({}).sort(sort_order).lean().exec(function(err, orgs) {
-		success(orgs);
+	database.getModel(modelName, function(err, model){
+		var sort_order = {};
+		sort_order[sortType] = 1;
+		model.find({}, function(findErr, orgs) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var orgsMap = {}; 
+				orgs.forEach(function(org) {
+					orgsMap[org._id] = org;
+				});
+				success(orgsMap);
+			}
+		}).sort( sort_order );
 	});
 };
 
@@ -65,9 +82,11 @@ exports.saveAllOrgs = function(orgs, callback){
                       && currentOrg.contact.phone != undefined;
     }
     if(valid){
-        studentOrg.create(orgs, function(err, savedOrgs){
-            callback(err, savedOrgs);
-        });
+		database.getModel(modelName, function(err, model){
+			model.create(orgs, function(saveErr, savedOrgs){
+				callback(saveErr, savedOrgs);
+			});
+		});
     }
     else{
         callback(new Error('Invalid org'), null);
@@ -81,36 +100,67 @@ exports.saveAllOrgs = function(orgs, callback){
  * success: a callback that is called upon successful removeal
  */
 exports.deleteOrg = function(orgId, success, error) {
-	studentOrg.find({ _id: orgId}).remove().exec(function(err) {
-		if(err) {
-			error(new Error('Unable to delete item with id: ' + orgId));
-		}
-		success();
+	database.getModel(modelName, function(err, model){
+		model.find({ _id: orgId}).remove().exec(function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to delete item with id: ' + orgId));
+			}
+			else{
+				success();
+			}
+		});
 	});
 };
 
+/*
+ * upadtes an org with a given ID
+ * orgID: the id of the org to update
+ * orgToUpdate: the contents to update the org with
+ * success: a function to call upon successfuly updating
+ * error: a function to call if there is an error during updating
+ */
 exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
-	studentOrg.findOneAndUpdate({_id: orgId}, orgToUpdate, function(err) {
-		if(err) {
-			error(new Error('Unable to modify item with id:' + orgId));
-		}
-		success();
+	database.getModel(modelName, function(err, model){
+		model.findOneAndUpdate({_id: orgId}, orgToUpdate, function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to modify item with id:' + orgId));
+			}
+			else{
+				success();
+			}
+		});
 	});
 };
 
+/*
+ * sets the active state of an org
+ * orgId: The id of the org to activate/deactivate.
+ * isActive: If false, the org will be active. If true, the org will be set inactive.
+ * success: A function to call if the update is successful.
+ * error: A function to call if there is an error during updating.
+ */
 exports.activation = function(orgId, isActive, success, error) {
-	if(isActive == true) {
-		studentOrg.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(err) {
-			if(err) { error(err); }
-			success();
-		});
-	} else if(isActive == false) {
-		studentOrg.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(err) {
-			if(err) { error(err); }
-			success();
-		});
-	}
-
+	database.getModel(modelName, function(err, model){
+		if(isActive == true) {
+			model.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(findErr) {
+				if(findErr) { 
+					error(findErr); 
+				}
+				else{
+					success();
+				}
+			});
+		} else if(isActive == false) {
+			model.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(findErr) {
+				if(findErr) { 
+					error(findErr); 
+				}
+				else{
+					success();
+				}
+			});
+		}
+	});
 };
 
 /*
@@ -119,22 +169,28 @@ exports.activation = function(orgId, isActive, success, error) {
  * error: A function to call if there is an error.
  */
 exports.getAllTags = function(success, error) {
-	studentOrg.find({}, function (err, orgs) {
-		var tagMap = [];
-		orgs.forEach(function (org) {
-			if (org.tags.indexOf('inactive') == -1) {
-				org.tags.forEach(function (tag) {
-					if (tagMap.indexOf(tag) == -1 && tag != '') {
-						tagMap.push(tag);
+	database.getModel(modelName, function(err, model){
+		model.find({}, function (findErr, orgs) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var tagMap = [];
+				orgs.forEach(function (org) {
+					if (org.tags.indexOf('inactive') == -1) {
+						org.tags.forEach(function (tag) {
+							if (tagMap.indexOf(tag) == -1 && tag != '') {
+								tagMap.push(tag);
+							}
+						});
+					} else if (tagMap.indexOf('inactive') == -1) {
+						tagMap.push('inactive');
 					}
 				});
-			} else if (tagMap.indexOf('inactive') == -1) {
-				tagMap.push('inactive');
+				tagMap.sort();
+				success(tagMap);
 			}
 		});
-
-		tagMap.sort();
-		success(tagMap);
 	});
 }
 
@@ -145,34 +201,38 @@ exports.getAllTags = function(success, error) {
  * error: A function to call if there is an error.
  */
 exports.searchByTags = function(tagList, success, error) {
-	studentOrg.find({}, function(err, orgs) {
-		var tempOrgList = [];
-		var orgList = [];
-		orgs.forEach(function(org) {
-			if (org.tags.indexOf('inactive') == -1) {
-				var rating = 0;
-				tagList.forEach(function(tag) {
-					if (org.tags.indexOf(tag) != -1) {
-						rating++;
+	database.getModel(modelName, function(err, model){
+		model.find({}, function(findErr, orgs) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var tempOrgList = [];
+				var orgList = [];
+				orgs.forEach(function(org) {
+					if (org.tags.indexOf('inactive') == -1) {
+						var rating = 0;
+						tagList.forEach(function(tag) {
+							if (org.tags.indexOf(tag) != -1) {
+								rating++;
+							}
+						});
+
+						if (rating > 0) {
+							tempOrgList.push({organization: org, priority: rating});
+						}
 					}
 				});
 
-				if (rating > 0) {
-					tempOrgList.push({organization: org, priority: rating});
-				}
+				tempOrgList.sort(function(a, b) {
+					return -(a.priority - b.priority);
+				});
+
+				tempOrgList.forEach(function(org){
+					orgList.push(org.organization);
+				});
+				success(orgList);
 			}
 		});
-
-		tempOrgList.sort(function(a, b) {
-			return -(a.priority - b.priority);
-		});
-
-		tempOrgList.forEach(function(org){
-			orgList.push(org.organization);
-		});
-
-
-
-		success(orgList);
 	});
 }

@@ -1,8 +1,6 @@
 var assert = require('assert');
-var sinon = require('sinon');
 var mongoose = require('mongoose');
 var async = require('async');
-
 
 var config = require('../config');
 var realDbName = config.mongo;
@@ -10,23 +8,58 @@ var fakeDbName = 'mongodb://localhost/test';
 config.mongo = fakeDbName;
 
 var surveyDataServices = require('../src/surveyDataServices');
+var database = require('../src/databaseServices');
+
+var fakeErr = new Error('This is a fake error');
+
+var fakeModel = {
+    find: function(obj, callback){
+        callback(fakeErr, null);
+    }
+};
+
+var realGetModel = database.getModel;
+
+var fakeGetModel = function(modelName, callback){
+    callback(null, fakeModel);
+};
+
+var fakeTags = [
+    "athletic",
+    "outdoors",
+    "team"
+];
+
+var fakeTags2 = [
+    "questions",
+    "answers",
+    "forms"
+];
 
 var fakeQuestion = {
     question: "Do you like baseball?",
-    tags: [
-        "athletic",
-        "outdoors",
-        "team"
-    ],
+    tags: fakeTags,
     category: "athletics"
 };
+
+var fakeQuestion2 = {
+    question: "Do you like questions?",
+    tags: fakeTags2,
+    category: "surveys"
+};
+
+var fakeIds = [];
 
 describe('surveyDataServices', function () {
  
     describe('#addQuestion', function() {
-   
-        it('should not send error to callback if successful.', function(done){
+    
+        afterEach(function(){
             var connection = mongoose.connection;
+            connection.db.dropDatabase();
+        });
+
+        it('should not send error to callback if successful.', function(done){
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 assert.equal(err, null);
                 done();
@@ -34,7 +67,6 @@ describe('surveyDataServices', function () {
         });
         
         it('should save new question', function(done) {
-            var connection = mongoose.connection;
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 assert.deepEqual({
                     question: savedQuestion.question,
@@ -47,10 +79,13 @@ describe('surveyDataServices', function () {
     });
     
     describe('#getQuestionById', function(){
-       
-        it('should send null question if id does not exist', function(done){
+        
+        afterEach(function(){
             var connection = mongoose.connection;
             connection.db.dropDatabase();
+        });
+
+        it('should send null question if id does not exist', function(done){
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 surveyDataServices.getQuestionById('', function(err, question){
                     assert.equal(question, null);                           
@@ -60,8 +95,6 @@ describe('surveyDataServices', function () {
         });
         
         it('should send question if id does exist', function(done){
-            var connection = mongoose.connection;
-            connection.db.dropDatabase();
             surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
                 surveyDataServices.getQuestionById(savedQuestion._id, function(err, question){
                     assert.deepEqual({
@@ -76,10 +109,14 @@ describe('surveyDataServices', function () {
     });
     
     describe('#getAllQuestions', function() {
-        
-        it('should find all documents', function(done){
+
+        afterEach(function(){
+            
             var connection = mongoose.connection;
             connection.db.dropDatabase();
+        });
+
+        it('should find all documents', function(done){
             async.parallel([
                 function(callback){
                     surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
@@ -107,6 +144,48 @@ describe('surveyDataServices', function () {
                     }, function(){});
                 }
             );
+        });
+    });
+    
+    describe('#getQuestionsTagsByIds', function(){
+        
+        afterEach(function(){
+            var connection = mongoose.connection;
+            connection.db.dropDatabase();
+        });
+        
+        it('should send an empty array if no questions exist', function(done){
+            surveyDataServices.getQuestionsTagsByIds(fakeIds, function(tags){
+                assert.deepEqual(tags, []);
+                done();
+            });
+        });
+        
+        it('should send an empty array if there is an error', function(done){
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                database.getModel = fakeGetModel;
+                surveyDataServices.getQuestionsTagsByIds(
+                [savedQuestion._id], 
+                function(tags){
+                    database.getModel = realGetModel;
+                    assert.deepEqual(tags, []);
+                    done();
+                });
+            });
+        });
+        
+        it('should send all tags associated with the question ids', function(done){
+            surveyDataServices.addQuestion(fakeQuestion, function(err, savedQuestion){
+                surveyDataServices.addQuestion(fakeQuestion2, function(err, savedQuestion2){
+                    surveyDataServices.getQuestionsTagsByIds(
+                    [savedQuestion._id, 
+                    savedQuestion2._id
+                    ], function(tags){
+                        assert.deepEqual(tags, fakeTags.concat(fakeTags2));
+                        done();
+                    });
+                });
+            });
         });
     });
 });
