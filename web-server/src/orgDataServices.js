@@ -49,7 +49,7 @@ exports.getAllOrgs = function(sortType, success, error){
 	database.getModel(modelName, function(err, model){
 		var sort_order = {};
 		sort_order[sortType] = 1;
-		model.find({}, function(findErr, orgs) {
+		model.find({}).sort(sort_order).lean().exec(function(findErr, orgs) {
 			if(findErr){
 				error(findErr);
 			}
@@ -60,7 +60,7 @@ exports.getAllOrgs = function(sortType, success, error){
 				});
 				success(orgsMap);
 			}
-		}).sort( sort_order );
+		});
 	});
 };
 
