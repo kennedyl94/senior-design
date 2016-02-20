@@ -54,11 +54,7 @@ exports.getAllOrgs = function(sortType, success, error){
 				error(findErr);
 			}
 			else{
-				var orgsMap = {}; 
-				orgs.forEach(function(org) {
-					orgsMap[org._id] = org;
-				});
-				success(orgsMap);
+				success(orgs);
 			}
 		});
 	});
