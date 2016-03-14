@@ -14,6 +14,8 @@ var uploader = multer({storage: multer.memoryStorage()});
 
 /*
  * this will take a file uploaded from the web and parse it to find student orgs
+ * If an org is missing required feilds, it will not be added with the rest of the orgs.
+ * If the CSV is missing columns or is malformed, the server should return 422.
  */
 router.post('/', uploader.single('file'), function(req, res){
     csvParse(req.file.buffer.toString(), function(err, output){
@@ -25,7 +27,6 @@ router.post('/', uploader.single('file'), function(req, res){
         var emailIndex = -1;
         var phoneIndex = -1;
         
-        var success = true;
         var orgs = [];
         
         for (rowIndex in output){
@@ -50,38 +51,33 @@ router.post('/', uploader.single('file'), function(req, res){
                         phone: row[phoneIndex]
                     }
                 }
-					if(newOrg.name.trim() != '' &&
-					newOrg.description.trim() != '' /*&&
-					newOrg.contact.name.trim() != '' &&
-					newOrg.contact.email.trim() != '' &&
-					newOrg.contact.phone.trim() != ''*/
-					){
-					success = success && 
-				   newOrg.name != undefined &&
-				   newOrg.description != undefined &&
-				   newOrg.contact.name != undefined &&
-				   newOrg.contact.email != undefined &&
-				   newOrg.contact.phone != undefined;
-					if(success){
-						orgs.push(newOrg);
-					}
+                
+				var success =  
+				newOrg.name && newOrg.name.trim() != '' &&
+				newOrg.description && newOrg.description.trim() != '' &&
+				newOrg.contact.name &&
+				newOrg.contact.email &&
+				newOrg.contact.phone;
+				
+				if(success){
+					orgs.push(newOrg);
 				}
 			}
 		}
-        if(success){
-            _dataServices.saveAllOrgs(orgs, function(err, savedOrgs){
-                if(err){
-                    res.send(422);
-                }
-                else{
-                    res.send(200);
-                }
-            });
-        }
-        else{
-            res.send(422);
-        }
-    });
+		if(orgs.length > 0){
+			_dataServices.saveAllOrgs(orgs, function(err, savedOrgs){
+				if(err){
+					res.send(422);
+				}
+				else{
+					res.send(200);
+				}
+			});
+		}
+		else{
+			res.send(422);
+		}
+	});
 });
 
 module.exports = router;
