@@ -13,6 +13,11 @@
         tags:"",
         category:""
     }
+    vm.rule = {
+        category:"",
+        num:0
+        
+    }
     vm.data.num = surveySettingsService.num;
     
     vm.del = function(_id){
@@ -48,6 +53,21 @@
       surveySettingsService.submit(req, function (data, status, headers, config) {
           console.log(data);
           location.reload()});
+    }
+    vm.rule = function(){
+        var req = {
+        method: 'post',
+        url: config.domain+'surveySet/rule',
+        headers: {},
+        data: {
+            cat: vm.rule.category,
+            num: vm.rule.num
+            }
+        }
+        surveySettingsService.submit(req, function (data, status, headers, config) {
+          console.log(data);
+          location.reload()});
+        
     }
     vm.questionNum = function(){
         console.log(vm.num);

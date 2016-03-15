@@ -2,7 +2,8 @@
 
 <!--num questions
     will be stored in json file-->
-Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.data.num" type = number> <br>
+Number of questions
+<input id = numQuestions ng-model="surveySettingsCtrl.data.num" type = number> <br>
 <button type = button ng-click="surveySettingsCtrl.questionNum()">Submit</button><br>
 <br>
 <!--delete questions
@@ -31,3 +32,13 @@ Number of questions <input id = numQuestions ng-model="surveySettingsCtrl.data.n
 <!--add delete rules, based on quetion type
     make back end call to get data in a promis
     will be stored in json file-->
+    
+   <h1>Add Rule</h1>
+   <br>
+   Category
+   <Input type='text' id='cat' ng-model="surveySettingsCtrl.rule.category"> <br>
+   Number of questions 
+   <input id = numQuestions ng-model="surveySettingsCtrl.rule.num" type = number> <br>
+   <button type="button" ng-click="surveySettingsCtrl.rule()">SUBMIT</button>
+   
+   <!-- Need to display rules here -->

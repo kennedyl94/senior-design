@@ -55,8 +55,12 @@ router.post('/add', function(req, res){
    
    _surveyData.addQuestion(req.body, function(e){
        res.send(200);
-    
    });
+   
+});
+
+router.post('/rule', function(req, res){
+    console.log(req.data);
 });
 
 router.post('/questionNum', function(req, res){
