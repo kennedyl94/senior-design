@@ -60,7 +60,7 @@
         url: config.domain+'surveySet/rule',
         headers: {},
         data: {
-            cat: vm.rule.category,
+            category: vm.rule.category,
             num: vm.rule.num
             }
         }

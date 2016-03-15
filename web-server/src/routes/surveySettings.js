@@ -60,7 +60,7 @@ router.post('/add', function(req, res){
 });
 
 router.post('/rule', function(req, res){
-    console.log(req.data);
+    console.log(req.body);
 });
 
 router.post('/questionNum', function(req, res){
