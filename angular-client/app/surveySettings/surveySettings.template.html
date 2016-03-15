@@ -42,3 +42,10 @@ Number of questions
    <button type="button" ng-click="surveySettingsCtrl.rule()">SUBMIT</button>
    
    <!-- Need to display rules here -->
+   <br>
+   <div class="col-sm-12" ng-repeat="r in surveySettingsCtrl.data.rules | toArray">
+        
+        <button type = button ng-click="surveySettingsCtrl.delrule([r])">Delete</button>
+        {{r.category}}
+        {{r.num}}
+        <br>

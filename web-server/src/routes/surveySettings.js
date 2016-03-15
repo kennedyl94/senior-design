@@ -59,8 +59,23 @@ router.post('/add', function(req, res){
    
 });
 
-router.post('/rule', function(req, res){
+router.post('/addrule', function(req, res){
     console.log(req.body);
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    console.log(surveySet.rules);
+    surveySet.rules.push({
+        'category':req.body.category,
+        'num':req.body.num
+    });
+    jsonfile.writeFileSync(surveyFile, surveySet);
+    res.send(200);
+    
+});
+router.get('/getrules', function (req, res) {
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    console.log(surveySet.rules);
+    res.send(surveySet.rules);
+    
 });
 
 router.post('/questionNum', function(req, res){

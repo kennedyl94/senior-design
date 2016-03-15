@@ -18,8 +18,9 @@
         num:0
         
     }
-    vm.data.num = surveySettingsService.num;
     
+    vm.data.num = surveySettingsService.num;
+    vm.data.rules =surveySettingsService.rules
     vm.del = function(_id){
         
       console.log(_id);
@@ -57,7 +58,7 @@
     vm.rule = function(){
         var req = {
         method: 'post',
-        url: config.domain+'surveySet/rule',
+        url: config.domain+'surveySet/addrule',
         headers: {},
         data: {
             category: vm.rule.category,
