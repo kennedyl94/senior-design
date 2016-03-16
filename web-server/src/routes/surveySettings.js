@@ -4,6 +4,7 @@ var express = require('express')
   var _surveyData = require('../surveyDataServices.js');
   var jsonfile = require('jsonfile')
   var surveyFile ="./surveySettings.json";
+  var surveyFile2 ="../surveySettings.json";
  
 
 
@@ -25,7 +26,12 @@ router.get('/', function (req, res) {
     
 });
 router.get('/num', function (req, res){
-    var surveySet = jsonfile.readFileSync(surveyFile);
+    try {
+        var surveySet = jsonfile.readFileSync(surveyFile);
+    }
+    catch(e) {
+        var surveySet = jsonfile.readFileSync(surveyFile2);
+    }
     console.log(surveySet.num);
     res.send({num: surveySet.num});
     
@@ -60,8 +66,13 @@ router.post('/add', function(req, res){
 });
 
 router.post('/addrule', function(req, res){
-    console.log(req.body);
-    var surveySet = jsonfile.readFileSync(surveyFile);
+    try {
+        var surveySet = jsonfile.readFileSync(surveyFile);
+    }
+    catch(e) {
+        var surveySet = jsonfile.readFileSync(surveyFile2);
+    }
+    
     console.log(surveySet.rules);
     surveySet.rules.push({
         'category':req.body.category,
@@ -72,14 +83,53 @@ router.post('/addrule', function(req, res){
     
 });
 router.get('/getrules', function (req, res) {
-    var surveySet = jsonfile.readFileSync(surveyFile);
+    try {
+        var surveySet = jsonfile.readFileSync(surveyFile);
+    }
+    catch(e) {
+        var surveySet = jsonfile.readFileSync(surveyFile2);
+    }
     console.log(surveySet.rules);
     res.send(surveySet.rules);
     
 });
+router.delete('/delrule', function (req, res) {
+    // console.log('delete');
+    // console.log(req.body[0]);
+    var r = req.body[0];
+    try {
+        var surveySet = jsonfile.readFileSync(surveyFile);
+    }
+    catch(e) {
+        var surveySet = jsonfile.readFileSync(surveyFile2);
+    }
+    console.log(r);
+    console.log(Object.keys(surveySet.rules).length);
+    console.log(surveySet.rules.indexOf(r));
+    
+    var index = -1;
+    var i =0;
+    
+    for(i = 0; i < Object.keys(surveySet.rules).length; i++) {
+        if(surveyFile.rules[i].category == r.category &&
+            surveyFile.rules[i].num ==r.num) {
+                index = i;
+            }
+    }//TODO: fix this shit!!!!! fuck javascript arrays!!!
+    console.log(index);
+    
+    
+    res.send(200);
+    
+})
 
 router.post('/questionNum', function(req, res){
-    var surveySet = jsonfile.readFileSync(surveyFile);
+   try {
+        var surveySet = jsonfile.readFileSync(surveyFile);
+    }
+    catch(e) {
+        var surveySet = jsonfile.readFileSync(surveyFile2);
+    }
     surveySet.num = req.body.num;
     
     jsonfile.writeFileSync(surveyFile, surveySet)

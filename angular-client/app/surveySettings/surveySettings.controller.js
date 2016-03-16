@@ -70,6 +70,26 @@
           location.reload()});
         
     }
+    vm.delrule = function(rule){
+        
+      console.log(rule);
+      
+      var req = {
+        method: 'delete',
+        url: config.domain+'surveySet/delrule',
+        headers: {'Content-Type': 'application/json'},
+        data: rule
+      }
+      surveySettingsService.submit(req, function (data, status, headers, config) {
+          console.log(data);
+          location.reload()});
+      
+    //    $http(req)
+    //     .success(
+    //     }).error(function(err, status, headers, config) {
+    //       console.log('error: ' + err);
+    //     });
+    }
     vm.questionNum = function(){
         console.log(vm.num);
         
