@@ -118,6 +118,17 @@ var fakeOrgs = [
 	fakeOrg
 ];
 
+var fakeOrgs2 = [
+	fakeOrg,
+	fakeOrg2
+]
+
+var fakeOrgs3 = [
+	fakeOrg,
+	fakeOrg2,
+	inactiveOrg
+]
+
 var invalidOrgs = [
 	fakeOrg,
 	invalidOrg,
@@ -579,23 +590,36 @@ describe('orgDataServices', function () {
 		
 		it('should return error if entries are malformed', function(done){
 			orgDataServices.saveAllOrgs(invalidOrgs, function(err, orgs){
-				if(err){
-					done();
+				if(!err){
+					assert.fail();
 				}
-			});
-			process.nextTick(function(){
-				assert.fail();
+				done();
 			});
 		});
 		
 		it('should return all orgs if they were successfuly saved', function(done){
 			orgDataServices.saveAllOrgs(fakeOrgs, function(err, orgs){
-				if(orgs.length == fakeOrgs.length){
-					done();
-				}
-				else{
+				if(!orgs.length == fakeOrgs.length){
 					assert.fail();
 				}
+				done();
+			});
+		});
+		
+		it('should update orgs that already exist instead of duplicating them', function(done){
+			orgDataServices.saveAllOrgs(fakeOrgs2, function(err, orgs){
+				orgDataServices.saveAllOrgs(fakeOrgs3, function(err2, orgs2){
+					orgDataServices.getAllOrgs(null, function(orgs3){
+						assert.equal(orgs3.length, 3);
+						done();
+					},
+					function(err){
+						console.log(err);
+						assert.fail();
+						done();
+					});
+					
+				});
 			});
 		});
 	});
