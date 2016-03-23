@@ -20,7 +20,7 @@ var fakeSaveAllOrgs3 = function(orgs, callback){
 	callback(null, orgs);
 };
 
-app.use('/api/UploadFile', upload);
+app.use('/test/UploadFile', upload);
 
 describe('#routes/upload', function(){
 	
@@ -33,7 +33,7 @@ describe('#routes/upload', function(){
 		it('should return 200 if at least one org was added', function(done){
 			orgServices.saveAllOrgs = fakeSaveAllOrgs;
 			request(app)
-			.post('/api/UploadFile')
+			.post('/test/UploadFile')
 			.field('csv', 'the orgCSV')
 			.attach('file', './test/testFiles/csvTestFile.csv')
 			.expect(200, done);
@@ -42,7 +42,7 @@ describe('#routes/upload', function(){
 		it('should not add to database if CSV is malformed', function(done){
 			orgServices.saveAllOrgs = fakeSaveAllOrgs2;
 			request(app)
-			.post('/api/UploadFile')
+			.post('/test/UploadFile')
 			.field('csv', 'the orgCSV')
 			.attach('file', './test/testFiles/csvTestFileMalformed.csv')
 			.expect(422, done);
@@ -51,7 +51,7 @@ describe('#routes/upload', function(){
 		it('should not add org to database if parts of the org are missing', function(done){
 			orgServices.saveAllOrgs = fakeSaveAllOrgs3;
 			request(app)
-			.post('/api/UploadFile')
+			.post('/test/UploadFile')
 			.field('csv', 'the orgCSV')
 			.attach('file', './test/testFiles/csvTestFileMissing.csv')
 			.expect(200, done);
@@ -60,7 +60,7 @@ describe('#routes/upload', function(){
 		it('Should send 422 if no orgs were added', function(done){
 			orgServices.saveAllOrgs = fakeSaveAllOrgs2;
 			request(app)
-			.post('/api/UploadFile')
+			.post('/test/UploadFile')
 			.field('csv', 'the orgCSV')
 			.attach('file', './test/testFiles/csvTestFileMalformed.csv')
 			.expect(422, done);

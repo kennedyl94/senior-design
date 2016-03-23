@@ -68,6 +68,7 @@ exports.getAllOrgs = function(sortType, success, error){
  */
 exports.saveAllOrgs = function(orgs, callback){
     database.getModel(modelName, function(err, model){
+		var names = []
 		var valid = true;
 		for(var i = 0; i < orgs.length; i++){
 			var currentOrg = orgs[i];
@@ -78,9 +79,10 @@ exports.saveAllOrgs = function(orgs, callback){
 						  && currentOrg.contact.name != undefined
 						  && currentOrg.contact.email != undefined
 						  && currentOrg.contact.phone != undefined;
+			names[i] = currentOrg.name;
 		}
 		if(valid){
-			model.remove({}, function(err, product){
+			model.remove({name: {$in:names}}, function(err, product){
 				model.create(orgs, function(saveErr, savedOrgs){
 					callback(saveErr, savedOrgs);
 				});

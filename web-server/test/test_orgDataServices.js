@@ -86,6 +86,17 @@ var fakeOrg2 = {
     }
 };
 
+var fakeOrg3 = {
+    name: 'name3',
+    description: 'description3',
+    tags: fakeTags2,
+    contact: {
+        name: 'name3',
+        email: 'name3@email.com',
+        phone: '(123)456-7899'
+    }
+};
+
 var inactiveOrg = {
     name: 'inactive org',
     description: 'this org is inactive',
@@ -120,7 +131,8 @@ var fakeOrgs = [
 
 var fakeOrgs2 = [
 	fakeOrg,
-	fakeOrg2
+	fakeOrg2,
+	fakeOrg3
 ]
 
 var fakeOrgs3 = [
@@ -610,7 +622,7 @@ describe('orgDataServices', function () {
 			orgDataServices.saveAllOrgs(fakeOrgs2, function(err, orgs){
 				orgDataServices.saveAllOrgs(fakeOrgs3, function(err2, orgs2){
 					orgDataServices.getAllOrgs(null, function(orgs3){
-						assert.equal(orgs3.length, 3);
+						assert.equal(orgs3.length, 4);
 						done();
 					},
 					function(err){
