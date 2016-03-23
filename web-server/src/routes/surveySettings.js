@@ -73,6 +73,27 @@ router.post('/addrule', function(req, res){
         var surveySet = jsonfile.readFileSync(surveyFile2);
     }
     
+    var index = -1;
+    var i =0;
+    
+    for(i = 0; i < Object.keys(surveySet.rules).length; i++) {
+        
+        if(surveySet.rules[i].category === req.body.category) {
+                index = i;
+            }
+    }
+    // console.log('index' + index);
+    
+    
+    if(index != -1) {
+        surveySet.rules.splice(index, 1);
+        jsonfile.writeFileSync(surveyFile, surveySet);
+        
+    } 
+    
+    
+    
+    
     console.log(surveySet.rules);
     surveySet.rules.push({
         'category':req.body.category,
@@ -89,7 +110,7 @@ router.get('/getrules', function (req, res) {
     catch(e) {
         var surveySet = jsonfile.readFileSync(surveyFile2);
     }
-    console.log(surveySet.rules);
+    // console.log(surveySet.rules);
     res.send(surveySet.rules);
     
 });
@@ -103,23 +124,35 @@ router.delete('/delrule', function (req, res) {
     catch(e) {
         var surveySet = jsonfile.readFileSync(surveyFile2);
     }
-    console.log(r);
-    console.log(Object.keys(surveySet.rules).length);
-    console.log(surveySet.rules.indexOf(r));
+    // console.log(r);
+    // console.log(Object.keys(surveySet.rules).length);
+    // console.log(typeof(surveySet.rules));
+    // console.log(surveySet.rules[0]);
+    
     
     var index = -1;
     var i =0;
     
     for(i = 0; i < Object.keys(surveySet.rules).length; i++) {
-        if(surveyFile.rules[i].category == r.category &&
-            surveyFile.rules[i].num ==r.num) {
+        // console.log(surveySet.rules[i]);
+        if(surveySet.rules[i].category === r.category) {
                 index = i;
             }
-    }//TODO: fix this shit!!!!! fuck javascript arrays!!!
-    console.log(index);
+    }
+    console.log('index' + index);
     
     
-    res.send(200);
+    if(index != -1) {
+        surveySet.rules.splice(index, 1);
+        jsonfile.writeFileSync(surveyFile, surveySet);
+        res.send(200);
+    } else {
+        res.send(410); 
+        //410 gone. Indicates that the resource requested is no longer
+        //available and will not be available again.
+    }
+    
+    
     
 })
 

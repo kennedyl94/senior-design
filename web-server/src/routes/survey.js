@@ -3,8 +3,10 @@ var express = require('express')
   
 var  _dataServices = require('../orgDataServices.js');
 var _surveyData = require('../surveyDataServices.js');
-  var jsonfile = require('jsonfile')
-  var surveyFile ="./surveySettings.json";
+var jsonfile = require('jsonfile')
+var surveyFile ="./surveySettings.json";
+var surveyFile2 ="../surveySettings.json";
+ 
  
 
 
@@ -19,7 +21,15 @@ var orgs;
   });
 
 router.get('/', function (req, res) {
-    var surveySet = jsonfile.readFileSync(surveyFile);
+    try {
+        var surveySet = jsonfile.readFileSync(surveyFile);
+    }
+    catch(e) {
+        var surveySet = jsonfile.readFileSync(surveyFile2);
+    }
+    _surveyData.getOrgsMatchingCategory('test', function (q) {
+        console.log(q);
+    })
     
     _surveyData.getAllQuestions(null, function(questionMap){
         if(Object.keys(questionMap).length <= surveySet.num) {
@@ -71,8 +81,19 @@ function getOrgsMatchingTags(tags, callback) {
        callback(orgs);
    });
 }
-
-
+/**
+ * Shuffles array in place.
+ * @param {Array} a items The array containing the items.
+ */
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i -= 1) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+}
 
 
 

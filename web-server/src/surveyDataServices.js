@@ -61,6 +61,26 @@ exports.getQuestionById = function(questionId, callback){
 };
 
 /*
+ * gets all of the questions matching the given category
+ * category: the category to match
+ * callback: a function that takes an error object and an object that contains the question
+ */
+exports.getOrgsMatchingCategory = function(category, callback) {
+  database.getModel(modelName, function(err, model){
+	  model.find({
+		 'category': { $in: category },
+	  }).lean().exec(function(findErr, docs){
+		 if(!findErr) {
+			callback(docs);
+		 }
+		 else{
+			 callback([]);
+		 }
+	  });
+  });
+};
+
+/*
  * gets all of the survey questions from the database
  * sortType: the attribute to sort by
  * success: a function to call upon successful completion. it takes an object that contains the survey questions
