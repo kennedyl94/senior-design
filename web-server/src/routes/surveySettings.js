@@ -163,6 +163,7 @@ router.post('/questionNum', function(req, res){
     catch(e) {
         var surveySet = jsonfile.readFileSync(surveyFile2);
     }
+    console.log(req.body.num);
     surveySet.num = req.body.num;
     
     jsonfile.writeFileSync(surveyFile, surveySet)

@@ -8,6 +8,7 @@
 
     var vm = this;
     vm.data = surveySettingsService.data
+    
     vm.question = {
         question:"",
         tags:"",
@@ -19,7 +20,7 @@
         
     }
     
-    vm.data.num = surveySettingsService.num;
+    // vm.data.num = surveySettingsService.num;
     vm.data.rules =surveySettingsService.rules
     vm.del = function(_id){
         
@@ -97,7 +98,7 @@
         method: 'post',
         url: config.domain+'surveySet/questionNum',
         headers: {},
-        data: {num: vm.num}
+        data: {num: vm.data.num}
       }
       
        surveySettingsService.submit(req, function (data, status, headers, config) {
