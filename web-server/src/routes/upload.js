@@ -18,7 +18,7 @@ var contactFirstNameColTitle = 'President\'s Name (First)';
 var contactLastNameColTitle = 'President\'s Name (Last)';
 var emailColTitle = 'President\'s MSOE Email';
 var phoneColTitle = 'President\'s Phone Number';
-var tagsColTitle = 'tags';
+var tagsColTitle = 'Tags';
 
 /*
  * this will take a file uploaded from the web and parse it to find student orgs
