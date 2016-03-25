@@ -8,9 +8,17 @@ var _dataServices = require('../orgDataServices');
 
 var fs = require('fs');
 
-var body = '';
+//var body = '';
 
 var uploader = multer({storage: multer.memoryStorage()});
+
+var orgNameColTitle = 'Organization Name';
+var descriptionColTitle = 'Organization Description';
+var contactFirstNameColTitle = 'President\'s Name (First)';
+var contactLastNameColTitle = 'President\'s Name (Last)';
+var emailColTitle = 'President\'s MSOE Email';
+var phoneColTitle = 'President\'s Phone Number';
+var tagsColTitle = 'Tags';
 
 /*
  * this will take a file uploaded from the web and parse it to find student orgs
@@ -26,24 +34,26 @@ router.post('/', uploader.single('file'), function(req, res){
         var contactLastNameIndex = -1;
         var emailIndex = -1;
         var phoneIndex = -1;
+        var tagIndex = -1;
         
         var orgs = [];
         
         for (rowIndex in output){
             var row = output[rowIndex];
             if(rowIndex == 0){
-                orgNameIndex = row.indexOf('Organization Name');
-                descriptionIndex = row.indexOf('Organization Description');
-                contactFirstNameIndex = row.indexOf('President\'s Name (First)');
-                contactLastNameIndex = row.indexOf('President\'s Name (Last)');
-                emailIndex = row.indexOf('President\'s MSOE Email');
-                phoneIndex = row.indexOf('President\'s Phone Number');
+                orgNameIndex = row.indexOf(orgNameColTitle);
+                descriptionIndex = row.indexOf(descriptionColTitle);
+                contactFirstNameIndex = row.indexOf(contactFirstNameColTitle);
+                contactLastNameIndex = row.indexOf(contactLastNameColTitle);
+                emailIndex = row.indexOf(emailColTitle);
+                phoneIndex = row.indexOf(phoneColTitle);
+                tagIndex = row.indexOf(tagsColTitle);
             }
             else{
                 var newOrg = {
                     name: row[orgNameIndex],
                     description: row[descriptionIndex],
-                    tags: [],
+                    tags: splitTags(row[tagIndex]),
                     active: true,
                     contact: {
                         name: row[contactFirstNameIndex] + ' ' + row[contactLastNameIndex],
@@ -79,5 +89,13 @@ router.post('/', uploader.single('file'), function(req, res){
 		}
 	});
 });
+
+function splitTags(arg){
+	if(!arg){
+		return [];
+	}
+	var tagString = arg.replace('\s','');
+	return tagString.split(',');
+}
 
 module.exports = router;
