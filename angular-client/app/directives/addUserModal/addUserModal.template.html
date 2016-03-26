@@ -6,21 +6,23 @@
   <div class="modal-body">
     <div class="row"><div class="modal-info-header">
       <h4>Username</h4>
-      <input type="text" name="username" ng-model='addUserModalCtrl.name'/>
+      <input type="text" name="username" class="form-control" ng-model='addUserModalCtrl.name'/>
     </div></div>
     <div class="row"><div class="modal-info-header">
       <h4>Password</h4>
-      <input type="password" name="password" ng-model='addUserModalCtrl.password'/>
+      <input type="password" name="password" class="form-control" ng-model='addUserModalCtrl.password'/>
     </div></div>
     <div class="row"><div class="modal-info-header">
       <h4>Admin Role</h4>
-      <select id="sel" class="input-block-level" ng-model="list_category" ng-options="obj.id as obj.name for obj in list_categories.data">
+      <select id="sel" class="btn btn-default dropdown-toggle" ng-model="list_category" ng-options="obj.id as obj.name for obj in list_categories.data">
       </select>
       <!--<input type="text" name="type" ng-model='addUserModalCtrl.type'/>-->
     </div></div>
     <div class="row"><div class="modal-info-header">
       <h4>Organizations</h4>
-      <input type="text" name="orgs" ng-model='addUserModalCtrl.orgs'/>
+      <select id="orgSelect" data-placeholder="Select Organizations" class="btn btn-default dropdown-menu-left dropdown-toggle" multiple="multiple" ng-model="addUserModalCtrl.orgs">
+        <option ng-repeat="org in organizations" value="{{org}}">{{org}}</option>
+      </select>
     </div></div>
   </div>
   <div class="modal-footer">
