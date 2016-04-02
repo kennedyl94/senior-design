@@ -19,7 +19,10 @@
           <input name="email" class="form-control" type="email" ng-model="surveyCtrl.address" placeholder="your.email@email.com" ng-show="surveyCtrl.submitted" required/>
         </div>
         <div class="col-sm-1">
-          <button id="test" class="btn btn-default" type="button" ng-disabled="emailForm.$invalid" ng-click="surveyCtrl.sendResults()" ng-show="surveyCtrl.submitted">Email Results</button>
+          <button id="send" class="btn btn-default" type="button" ng-disabled="emailForm.$invalid" ng-click="surveyCtrl.sendResults()" ng-show="surveyCtrl.submitted">Email Results</button>
+        </div>
+        <div class="col-sm-1">
+          <button id="print" class="btn btn-default" type="button" ng-click="surveyCtrl.printResults()" ng-show="surveyCtrl.submitted">Print Results</button>
         </div>
       </div>
     </div>

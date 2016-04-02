@@ -28,6 +28,10 @@
     vm.sendResults = function() {
       surveyService.sendResults(vm.address, vm.orgs);
     }
+
+    vm.printResults = function() {
+      surveyService.printResults(vm.orgs);
+    }
   }
 
 

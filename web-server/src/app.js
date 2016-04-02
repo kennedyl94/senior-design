@@ -25,7 +25,7 @@ var survey = require("./routes/survey.js");
 var upload = require("./routes/upload.js");
 var tags = require('./routes/tagSearch.js');
 var email = require('./routes/email.js');
-
+var printPdf = require('./routes/printPdf.js');
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
@@ -57,6 +57,8 @@ app.use('/api/surveySet', surveySet);
 app.use('/api/UploadFile', upload);
 
 app.use('/api/email', email);
+
+app.use('/api/printPdf', printPdf);
 
 app.use('/api/test/', test);
 
