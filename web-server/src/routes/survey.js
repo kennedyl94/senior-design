@@ -45,30 +45,42 @@ function getQbyCat(i, rules, qret,num, res) {
             //    console.log(qret);
                 res.send(qret);
            } else {
-               console.log("num: "+num);
-               console.log('qret len: '+qret.length);
-               console.log(qret.legnth < num);// WHY THE FUCK IS THIS ALWAYS FALSE!!!!
+            //    console.log(qret);
+            //    console.log("num: "+num);
+            //    console.log("qret len: "+qret.length);
+            //    console.log("num type: "+typeof(num));
+            //    console.log("qret length type: "+typeof(qret.length));
+            //    console.log(parseInt(qret.length) < num);// WHY THE FUCK IS THIS ALWAYS FALSE!!!!
                
                _surveyData.getAllQuestions(null, function(questionMap){
                    shuffle(questionMap);
-                   for(var j = 0; qret.legnth < num; j++) {
+                //    console.log(questionMap);
+                   for(var j = 0; parseInt(qret.length) < num; j++) {
                        console.log("pushing");
+                       if(!arrContains(qret, questionMap[Object.keys(questionMap)[j]] ) ){
                         qret.push(questionMap[Object.keys(questionMap)[j]]);
+                        }
                     }
                     // console.log(qret);
+                   shuffle(qret);
                    res.send(qret);
                });
            }
            
-        }
-        // console.log(qret);
-        
-            
-        
+        } 
     });
     
     
 
+}
+function arrContains(arr, x){
+    console.log(x);
+    for(var i = 0; i<arr.length; i++){
+        if (arr[i]._id.equals(x._id)){
+            return true;
+        }
+    }
+    return false;
 }
 router.get('/', function (req, res) {
     var surveySet = jsonfile.readFileSync(surveyFile);
@@ -120,11 +132,11 @@ function getOrgsMatchingTags(tags, callback) {
  */
 function shuffle(a) {
     var j, x, i;
-    for (i = a.length; i; i -= 1) {
+    for (i = Object.keys(a).length; i; i -= 1) {
         j = Math.floor(Math.random() * i);
-        x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
+        x = a[Object.keys(a)[i - 1]];
+        a[Object.keys(a)[i - 1]] = a[Object.keys(a)[j]];
+         a[Object.keys(a)[j]] = x;
     }
 }
 
