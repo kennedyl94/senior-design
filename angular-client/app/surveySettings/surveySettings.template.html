@@ -12,7 +12,7 @@ Number of questions
 	<div class="col-sm-12" ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
         
         <button type = button ng-click="surveySettingsCtrl.del([q._id])">Delete</button>
-        {{q.question}}
+        {{q.question}} {{q.category}}
         <br>
 
 	</div>
