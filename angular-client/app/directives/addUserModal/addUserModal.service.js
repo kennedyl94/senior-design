@@ -45,7 +45,7 @@
     //  return deferred.promise();
     //}
 
-    init();
+    //init();
 
     service.saveNewUser = function(user) {
       var deferred = $q.defer();
