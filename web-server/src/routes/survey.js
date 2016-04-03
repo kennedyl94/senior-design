@@ -47,7 +47,7 @@ function getQbyCat(i, rules, qret,num, res) {
            } else {
                console.log("num: "+num);
                console.log('qret len: '+qret.length);
-               console.log(qret.legnth < num);
+               console.log(qret.legnth < num);// WHY THE FUCK IS THIS ALWAYS FALSE!!!!
                
                _surveyData.getAllQuestions(null, function(questionMap){
                    shuffle(questionMap);
