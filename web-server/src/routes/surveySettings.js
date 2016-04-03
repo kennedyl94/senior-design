@@ -3,12 +3,15 @@ var express = require('express')
   var  _dataServices = require('../orgDataServices.js');
   var _surveyData = require('../surveyDataServices.js');
   var jsonfile = require('jsonfile')
-  var surveyFile ="./surveySettings.json";
-  var surveyFile2 ="../surveySettings.json";
+  var surveyFile =__dirname+"/../../surveySettings.json";
+//   var surveyFile2 ="../surveySettings.json";
  
 
 
 router.get('/', function (req, res) {
+    console.log(__filename);
+    console.log(__dirname);
+    
 
     _surveyData.getAllQuestions(null, function(questionMap){
         
@@ -26,12 +29,8 @@ router.get('/', function (req, res) {
     
 });
 router.get('/num', function (req, res){
-    try {
-        var surveySet = jsonfile.readFileSync(surveyFile);
-    }
-    catch(e) {
-        var surveySet = jsonfile.readFileSync(surveyFile2);
-    }
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    
     console.log(surveySet.num);
     res.send({num: surveySet.num});
     
@@ -66,12 +65,7 @@ router.post('/add', function(req, res){
 });
 
 router.post('/addrule', function(req, res){
-    try {
-        var surveySet = jsonfile.readFileSync(surveyFile);
-    }
-    catch(e) {
-        var surveySet = jsonfile.readFileSync(surveyFile2);
-    }
+   var surveySet = jsonfile.readFileSync(surveyFile);
     
     var index = -1;
     var i =0;
@@ -104,12 +98,8 @@ router.post('/addrule', function(req, res){
     
 });
 router.get('/getrules', function (req, res) {
-    try {
-        var surveySet = jsonfile.readFileSync(surveyFile);
-    }
-    catch(e) {
-        var surveySet = jsonfile.readFileSync(surveyFile2);
-    }
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    
     // console.log(surveySet.rules);
     res.send(surveySet.rules);
     
@@ -118,12 +108,9 @@ router.delete('/delrule', function (req, res) {
     // console.log('delete');
     // console.log(req.body[0]);
     var r = req.body[0];
-    try {
-        var surveySet = jsonfile.readFileSync(surveyFile);
-    }
-    catch(e) {
-        var surveySet = jsonfile.readFileSync(surveyFile2);
-    }
+    
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    
     // console.log(r);
     // console.log(Object.keys(surveySet.rules).length);
     // console.log(typeof(surveySet.rules));
@@ -157,12 +144,8 @@ router.delete('/delrule', function (req, res) {
 })
 
 router.post('/questionNum', function(req, res){
-   try {
-        var surveySet = jsonfile.readFileSync(surveyFile);
-    }
-    catch(e) {
-        var surveySet = jsonfile.readFileSync(surveyFile2);
-    }
+   var surveySet = jsonfile.readFileSync(surveyFile);
+   
     console.log(req.body.num);
     surveySet.num = req.body.num;
     

@@ -4,8 +4,8 @@ var express = require('express')
 var  _dataServices = require('../orgDataServices.js');
 var _surveyData = require('../surveyDataServices.js');
 var jsonfile = require('jsonfile')
-var surveyFile ="./surveySettings.json";
-var surveyFile2 ="../surveySettings.json";
+var surveyFile =__dirname+"/../../surveySettings.json";
+// var surveyFile2 ="../surveySettings.json";
  
  
 
@@ -21,12 +21,8 @@ var orgs;
   });
 
 router.get('/', function (req, res) {
-    try {
-        var surveySet = jsonfile.readFileSync(surveyFile);
-    }
-    catch(e) {
-        var surveySet = jsonfile.readFileSync(surveyFile2);
-    }
+    var surveySet = jsonfile.readFileSync(surveyFile);
+    
     _surveyData.getOrgsMatchingCategory('test', function (q) {
         console.log(q);
     })
