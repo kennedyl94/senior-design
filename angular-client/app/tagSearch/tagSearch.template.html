@@ -1,20 +1,26 @@
-<h1 id="tagSearchPageTitle">Search clubs by tags</h1>
-
-<div ng-controller="TagSearchController">
+<h1 id="tagSearchPageTitle">Tag Search</h1>
+<div id="tagSearchDiv">
   <form name="tagList">
-    <div ng-repeat="tag in tsCtrl.tags">
-      <label class="checkbox-inline">
-        <input type="checkbox" name="tagCheck" ng-model="tag.checked"> {{tag.text}}</input>
-      </label>
+    <div class="row">
+      <div ng-repeat="tag in tsCtrl.tags">
+        <div class="clearfix" ng-if="$index % 4 == 0"></div>
+        <div class="col-sm-3">
+          <input type="checkbox" name="tagCheck" ng-model="tag.checked"> {{tag.text}}</input>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
   </form>
-  <ng-organizations
-    ng-show="tsCtrl.orgList.length > 0"
-    orgs="tsCtrl.orgList"
-    total-items="tsCtrl.orgList.length"
-    items-per-page="5"
-    settings="false"
-    tags="true">
-  </ng-organizations>
+  <div id="ts-button-div">
+    <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
+  </div>
 </div>
+</br>
+<ng-organizations
+  ng-show="tsCtrl.orgList.length > 0"
+  orgs="tsCtrl.orgList"
+  total-items="tsCtrl.orgList.length"
+  items-per-page="5"
+  settings="false"
+  tags="true">
+</ng-organizations>
+

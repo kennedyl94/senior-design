@@ -43,6 +43,7 @@
     ];
 
     vm.options = [
+      {id: "", name: ""},
       {id: "name", name: "Name"},
       {id: "description", name: "Description"},
       {id: "contact.name", name: "Contact"}

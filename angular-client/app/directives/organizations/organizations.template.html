@@ -21,13 +21,13 @@
       </div>
       <div ng-if="ngOrgsCtrl.settings == 'true'" id="settings-div">
         <div class="col-sm-1">
-          <input type="button" value="{{ngOrgsCtrl.buttons.editBtn.text}}" ng-click="ngOrgsCtrl.buttons.editBtn.function(org)">
+          <input class="btn btn-default" type="button" value="{{ngOrgsCtrl.buttons.editBtn.text}}" ng-click="ngOrgsCtrl.buttons.editBtn.function(org)">
         </div>
         <div class="col-sm-1">
-          <input type="button" value="{{ngOrgsCtrl.buttons.deleteBtn.text}}" ng-click="ngOrgsCtrl.buttons.deleteBtn.function(org)">
+          <input class="btn btn-default" type="button" value="{{ngOrgsCtrl.buttons.deleteBtn.text}}" ng-click="ngOrgsCtrl.buttons.deleteBtn.function(org)">
         </div>
         <div ng-if="ngOrgsCtrl.isActive(org)" class="col-sm-1">
-          <input type="button" value="{{ngOrgsCtrl.buttons.deactivateBtn.text}}" ng-click="ngOrgsCtrl.buttons.deactivateBtn.function(org)">
+          <input class="btn btn-default" type="button" value="{{ngOrgsCtrl.buttons.deactivateBtn.text}}" ng-click="ngOrgsCtrl.buttons.deactivateBtn.function(org)">
         </div>
         <div ng-if="!ngOrgsCtrl.isActive(org)" class="col-sm-1">
           <input type="button" value="{{ngOrgsCtrl.buttons.activateBtn.text}}" ng-click="ngOrgsCtrl.buttons.activateBtn.function(org)">

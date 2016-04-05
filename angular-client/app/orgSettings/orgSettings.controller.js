@@ -37,7 +37,7 @@
       $confirm({text: 'Are you sure you want to delete: ' + org.name + '?',
                 title: 'Delete Organization',
                 ok: "Delete",
-                cancel: 'Cancel'})
+                cancel: 'Exit'})
         .then(function() {
           orgSettingsService.deleteOrg(org).then(function () {
             vm.updateOrgs();
@@ -49,7 +49,7 @@
       $confirm({text: 'Are you sure you want to activate: ' + org.name + '?',
         title: 'Activate Organization',
         ok: "Activate",
-        cancel: 'Cancel'})
+        cancel: 'Exit'})
         .then(function() {
           orgSettingsService.activation(org, false).then(function () {
             vm.updateOrgs();
@@ -62,7 +62,7 @@
       $confirm({text: 'Are you sure you want to deactivate: ' + org.name + '?',
         title: 'Deactivate Organization',
         ok: "Deactivate",
-        cancel: 'Cancel'})
+        cancel: 'Exit'})
         .then(function() {
           orgSettingsService.activation(org, true).then(function () {
             vm.updateOrgs();

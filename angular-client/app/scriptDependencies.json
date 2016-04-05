@@ -127,7 +127,6 @@
     "app/directives/editUserModal/style.css",
     "app/directives/addUserModal/style.css",
     "app/directives/navSidebar/style.css",
-    "app/createClub/style.css",
     "app/tagSearch/style.css"
   ]
 }
