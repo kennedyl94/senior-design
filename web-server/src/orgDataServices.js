@@ -24,7 +24,7 @@ exports.addStudentOrg = function(org, callback){
  * tags: the tags to match
  * callback: a function that takes an error object and an object that contains the student orgs
  */
-exports.getOrgsMatchingTags = function(tags, callback) {
+exports.getOrgsMatchingTags = function(tags, callback) {	//Deprecated, use searchByTags instead for now
   database.getModel(modelName, function(err, model){
 	  model.find({
 		 'tags': { $in: tags },
@@ -204,10 +204,9 @@ exports.getAllTags = function(success, error) {
 exports.searchByTags = function(tagList, success, error) {
 	database.getModel(modelName, function(err, model){
 		model.find({}, function(findErr, orgs) {
-			if(findErr){
+			if (findErr) {
 				error(findErr);
-			}
-			else{
+			} else {
 				var tempOrgList = [];
 				var orgList = [];
 				orgs.forEach(function(org) {
@@ -229,7 +228,7 @@ exports.searchByTags = function(tagList, success, error) {
 					return -(a.priority - b.priority);
 				});
 
-				tempOrgList.forEach(function(org){
+				tempOrgList.forEach(function(org) {
 					orgList.push(org.organization);
 				});
 				success(orgList);

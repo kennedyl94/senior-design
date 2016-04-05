@@ -15,12 +15,12 @@
     $scope.$watch('ngOrgsCtrl.query', function(query) {
       vm.filtered = $filter('search')(vm.orgs, query, vm.settings);
       vm.totalItems = vm.filtered.length;
-      if(vm.query != '') { vm.currentPage = 1; };
+      if(vm.query != '') { vm.currentPage = 1; }
     });
 
     vm.isActive = function(org) {
       return org.tags.indexOf('inactive') == -1;
-    }
+    };
 
     // Highlights organization description words that match vm.query
     vm.highlight = function(text, search) {
@@ -28,7 +28,7 @@
         return $sce.trustAsHtml(text);
       }
       return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
-    }
+    };
 
     // -- TODO --
     // DUMMY DATA UNTIL IMAGE DATA IS ADDED TO ORGANIZATION SCHEMA
@@ -43,6 +43,7 @@
     ];
 
     vm.options = [
+      {id: "", name: "Default"},
       {id: "name", name: "Name"},
       {id: "description", name: "Description"},
       {id: "contact.name", name: "Contact"}

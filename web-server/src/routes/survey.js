@@ -3,8 +3,8 @@ var express = require('express')
   
 var  _dataServices = require('../orgDataServices.js');
 var _surveyData = require('../surveyDataServices.js');
-  var jsonfile = require('jsonfile')
-  var surveyFile ="./surveySettings.json";
+var jsonfile = require('jsonfile')
+var surveyFile ="./surveySettings.json";
  
 
 
@@ -67,13 +67,9 @@ function getQuestionsTagsByIds(ids, callback) {
 }
 
 function getOrgsMatchingTags(tags, callback) {
-   _dataServices.getOrgsMatchingTags(tags, function(orgs) {
+   _dataServices.searchByTags(tags, function(orgs) {
        callback(orgs);
    });
 }
-
-
-
-
 
 module.exports = router;
