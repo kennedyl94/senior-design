@@ -33,7 +33,7 @@ function getQbyCat(i, rules, qret,num, res) {
         // console.log(q);
         
         
-        for(var j = 0; j< rules[i].num; j++) {
+        for(var j = 0; j< rules[i].num && j < Object.keys(q).length; j++) {
             qret.push(q[Object.keys(q)[j]]);
             // console.log(q[Object.keys(q)[j]]);
         }
