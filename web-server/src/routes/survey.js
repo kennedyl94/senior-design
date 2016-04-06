@@ -55,7 +55,7 @@ function getQbyCat(i, rules, qret,num, res) {
                _surveyData.getAllQuestions(null, function(questionMap){
                    shuffle(questionMap);
                 //    console.log(questionMap);
-                   for(var j = 0; parseInt(qret.length) < num; j++) {
+                   for(var j = 0; parseInt(qret.length) < num && j< Object.keys(questionMap).length; j++) {
                        console.log("pushing");
                        if(!arrContains(qret, questionMap[Object.keys(questionMap)[j]] ) ){
                         qret.push(questionMap[Object.keys(questionMap)[j]]);
