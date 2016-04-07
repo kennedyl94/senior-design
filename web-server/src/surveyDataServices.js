@@ -107,11 +107,13 @@ exports.getAllQuestions = function(sortType, success, error){
 
 
 exports.deletequestion = function(questionId, success, error) {
-	surveyQuestion.find({ _id: questionId}).remove().exec(function(err) {
-		if(err) {
-			error(new Error('Unable to delete item with id: ' + questionId));
-		}
-		success();
+	database.getModel(modelName, function(err, model) {
+		model.find({_id: questionId}).remove().exec(function (err) {
+			if (err) {
+				error(new Error('Unable to delete item with id: ' + questionId));
+			}
+			success();
+		});
 	});
 };
 
