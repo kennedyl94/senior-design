@@ -56,7 +56,7 @@ function getQbyCat(i, rules, qret,num, res) {
                    shuffle(questionMap);
                 //    console.log(questionMap);
                    for(var j = 0; parseInt(qret.length) < num && j< Object.keys(questionMap).length; j++) {
-                       console.log("pushing");
+                       // console.log("pushing");
                        if(!arrContains(qret, questionMap[Object.keys(questionMap)[j]] ) ){
                         qret.push(questionMap[Object.keys(questionMap)[j]]);
                         }
@@ -74,7 +74,7 @@ function getQbyCat(i, rules, qret,num, res) {
 
 }
 function arrContains(arr, x){
-    console.log(x);
+    // console.log(x);
     for(var i = 0; i<arr.length; i++){
         if (arr[i]._id.equals(x._id)){
             return true;
@@ -85,9 +85,24 @@ function arrContains(arr, x){
 router.get('/', function (req, res) {
     var surveySet = jsonfile.readFileSync(surveyFile);
     
-    console.log('num: '+surveySet.num);
-    
-    qSet = getQbyCat(0, surveySet.rules,[],surveySet.num, res);
+    // console.log('num: '+surveySet.num);
+    if(surveySet.rules.length >0) {
+
+        getQbyCat(0, surveySet.rules, [], surveySet.num, res);
+    } else {
+        _surveyData.getAllQuestions(null, function(questionMap){
+           var qret =[];
+            for(var j = 0; parseInt(qret.length) <surveySet.num && j< Object.keys(questionMap).length; j++) {
+                // console.log("pushing");
+                if(!arrContains(qret, questionMap[Object.keys(questionMap)[j]] ) ){
+                    qret.push(questionMap[Object.keys(questionMap)[j]]);
+                }
+            }
+            // console.log(qret);
+            shuffle(qret);
+            res.send(qret);
+        });
+    }
     
     
     
