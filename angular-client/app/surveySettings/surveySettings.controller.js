@@ -64,7 +64,8 @@
     }
     vm.rule = function(){
         console.log(vm.rule.category)
-        if(vm.rule.num == undefined || vm.rule.category == undefined) {
+        if(vm.rule.num == undefined
+          || vm.rule.category == undefined || vm.rule.category.length == 0) {
           return;
         }
         var req = {
