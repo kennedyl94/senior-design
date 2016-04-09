@@ -62,31 +62,36 @@ exports.getAllOrgs = function(sortType, success, error){
 
 /*
  * save a collection of orgs to the database
+ * this will check for duplicated names and replace them instead of adding the duplicates
  * orgs: the collection of orgs to save to the database
  * callback: a function that takes an error object and the orgs that were saved to the database
  */
 exports.saveAllOrgs = function(orgs, callback){
-    var valid = true;
-    for(var i = 0; i < orgs.length; i++){
-        var currentOrg = orgs[i];
-        valid = valid && currentOrg.name != undefined
-                      && currentOrg.description != undefined
-                      && currentOrg.tags != undefined
-                      && currentOrg.contact != undefined
-                      && currentOrg.contact.name != undefined
-                      && currentOrg.contact.email != undefined
-                      && currentOrg.contact.phone != undefined;
-    }
-    if(valid){
-		database.getModel(modelName, function(err, model){
-			model.create(orgs, function(saveErr, savedOrgs){
-				callback(saveErr, savedOrgs);
+    database.getModel(modelName, function(err, model){
+		var names = []
+		var valid = true;
+		for(var i = 0; i < orgs.length; i++){
+			var currentOrg = orgs[i];
+			valid = valid && currentOrg.name != undefined
+						  && currentOrg.description != undefined
+						  && currentOrg.tags != undefined
+						  && currentOrg.contact != undefined
+						  && currentOrg.contact.name != undefined
+						  && currentOrg.contact.email != undefined
+						  && currentOrg.contact.phone != undefined;
+			names[i] = currentOrg.name;
+		}
+		if(valid){
+			model.remove({name: {$in:names}}, function(err, product){
+				model.create(orgs, function(saveErr, savedOrgs){
+					callback(saveErr, savedOrgs);
+				});
 			});
-		});
-    }
-    else{
-        callback(new Error('Invalid org'), null);
-    }
+		}		
+		else{
+			callback(new Error('Invalid org'), null);
+		}
+    });
 };
 
 /*

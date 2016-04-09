@@ -20,7 +20,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "bcrypt-nodejs": "latest",
-    "sinon": "1.17.2"
+    "sinon": "1.17.2",
+    "supertest": "1.2.0"
   },
   "scripts": {
     "start": "node src/app.js"
