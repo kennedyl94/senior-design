@@ -14,15 +14,19 @@
         name: 'Org'
       }]
     };
+
     $scope.list_category = 'SL';
+
+    $scope.organizations = addUserModalService.data.orgs;
 
     vm.name = "";
     vm.password = "";
-    vm.orgs = [].toString();
+    vm.orgs = [];
 
     vm.back = function () {
       $modalInstance.close('ok');
     };
+
 
     vm.saveNewUser = function() {
       if (vm.name == "" || vm.password == "") {
