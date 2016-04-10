@@ -86,6 +86,17 @@ var fakeOrg2 = {
     }
 };
 
+var fakeOrg3 = {
+    name: 'name3',
+    description: 'description3',
+    tags: fakeTags2,
+    contact: {
+        name: 'name3',
+        email: 'name3@email.com',
+        phone: '(123)456-7899'
+    }
+};
+
 var inactiveOrg = {
     name: 'inactive org',
     description: 'this org is inactive',
@@ -117,6 +128,18 @@ var fakeOrgs = [
 	fakeOrg,
 	fakeOrg
 ];
+
+var fakeOrgs2 = [
+	fakeOrg,
+	fakeOrg2,
+	fakeOrg3
+]
+
+var fakeOrgs3 = [
+	fakeOrg,
+	fakeOrg2,
+	inactiveOrg
+]
 
 var invalidOrgs = [
 	fakeOrg,
@@ -579,23 +602,36 @@ describe('orgDataServices', function () {
 		
 		it('should return error if entries are malformed', function(done){
 			orgDataServices.saveAllOrgs(invalidOrgs, function(err, orgs){
-				if(err){
-					done();
+				if(!err){
+					assert.fail();
 				}
-			});
-			process.nextTick(function(){
-				assert.fail();
+				done();
 			});
 		});
 		
 		it('should return all orgs if they were successfuly saved', function(done){
 			orgDataServices.saveAllOrgs(fakeOrgs, function(err, orgs){
-				if(orgs.length == fakeOrgs.length){
-					done();
-				}
-				else{
+				if(!orgs.length == fakeOrgs.length){
 					assert.fail();
 				}
+				done();
+			});
+		});
+		
+		it('should update orgs that already exist instead of duplicating them', function(done){
+			orgDataServices.saveAllOrgs(fakeOrgs2, function(err, orgs){
+				orgDataServices.saveAllOrgs(fakeOrgs3, function(err2, orgs2){
+					orgDataServices.getAllOrgs(null, function(orgs3){
+						assert.equal(orgs3.length, 4);
+						done();
+					},
+					function(err){
+						console.log(err);
+						assert.fail();
+						done();
+					});
+					
+				});
 			});
 		});
 	});

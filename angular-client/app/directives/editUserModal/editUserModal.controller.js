@@ -7,7 +7,7 @@
 
     vm.user = contents.user;
     vm.username = vm.user.Username;
-    vm.orgs = vm.user.Orgs;
+    vm.orgs = [];
 
     $scope.list_categories = {
       data: [{
@@ -18,6 +18,11 @@
         name: 'Org'
       }]
     };
+    vm.user = contents.user;
+    vm.username = vm.user.Username;
+    vm.orgs = [];
+
+    $scope.organizations = editUserModalService.data.orgs;
 
     $scope.list_category = vm.user.Type;
 
