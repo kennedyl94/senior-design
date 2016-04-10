@@ -1,54 +1,35 @@
 var database = require('./databaseServices');
-var dbName = require('../config').mongo;
+
+var modelName = 'survey_questions';
 
 //set up the model for the survey_questions collection
-var surveyQuestion = database.createModel('survey_questions', require('../config').surveyQuestionSchema);
+database.createModel(modelName, require('../config').surveyQuestionSchema);
 
 /*
-/*
- * setup the connection to the database
- * /
-exports.connect = function(){
-    if(!connected){
-        mongoose.connect(dbName);
-        var db = mongoose.connection;
-        db.on('error', function(){
-            console.error.bind(console, 'connection error:');
-            mongoose.disconnect();
-        });
-        db.once('open', function() {
-            connected = true;
-        });
-    }
-};
-
-/*
- * disconnects from the mongo server
- * /
- exports.disconnect = function(){
-     if(connected){
-        mongoose.disconnect(function(){
-            connected = false;
-        });
-    }
- };
+ * gets tags associated with all questions with an id in ids
+ * ids: the ids of the questions
+ * callback: a function that takes the collection of tags
  */
-
 exports.getQuestionsTagsByIds = function(ids, callback) {
-   surveyQuestion.find({
-       '_id': { $in: ids }
-   }, function(err, questions){
-       if(!err) {
-           var tags = [];
-           var i = 0;
-           for(i; i < questions.length; i++) {
-               var j = 0;
-               for(j; j < questions[i].tags.length; j++){
-                   tags.push(questions[i].tags[j]);
-               }
-           }
-           callback(tags);
-       }
+	database.getModel(modelName, function(err, model){
+	   model.find({
+		   '_id': { $in: ids }
+	   }, function(findErr, questions){
+		   if(!findErr) {
+			   var tags = [];
+			   var i = 0;
+			   for(i; i < questions.length; i++) {
+				   var j = 0;
+				   for(j; j < questions[i].tags.length; j++){
+					   tags.push(questions[i].tags[j]);
+				   }
+			   }
+			   callback(tags);
+		   }
+		   else{
+			   callback([]);    // this is a temporary solution to the possibilty the callback isn't reached
+		   }
+	   });
    });
 }
 
@@ -58,25 +39,46 @@ exports.getQuestionsTagsByIds = function(ids, callback) {
  * callback: a function that takes an error object and an object representing the saved question document
  */
 exports.addQuestion = function(question, callback){
-    var newQuestion = new surveyQuestion(question);
-    newQuestion.save(function(err, savedQuestion){
-        callback(err, savedQuestion._doc);
-    });
+    database.getModel(modelName, function(err, model){
+		var newQuestion = new model(question);
+		newQuestion.save(function(saveErr, savedQuestion){
+			callback(saveErr, savedQuestion._doc);
+		});
+	});
 };
 
 /*
  * retreives a question from the database based on its _id
- * questionID the id of the question to return
- * callback a function that takes an error object and the question matching the id given
+ * questionID: the id of the question to return
+ * callback: a function that takes an error object and the question matching the id given
  */ 
 exports.getQuestionById = function(questionId, callback){
-    surveyQuestion.findById(questionId, function(err, question) {
-        callback(question, err);
-    });
+    database.getModel(modelName, function(err, model){
+		model.findById(questionId, function(findErr, question) {
+			callback(findErr, question);
+		});
+	});
 };
-// exports.getQuestionById = function(questionId, callback){
-//     surveyQuestion.findById(questionId, callback); 
-// };
+
+/*
+ * gets all of the questions matching the given category
+ * category: the category to match
+ * callback: a function that takes an error object and an object that contains the question
+ */
+exports.getOrgsMatchingCategory = function(category, callback) {
+  database.getModel(modelName, function(err, model){
+	  model.find({
+		 'category': { $in: category },
+	  }).lean().exec(function(findErr, docs){
+		 if(!findErr) {
+			callback(docs);
+		 }
+		 else{
+			 callback([]);
+		 }
+	  });
+  });
+};
 
 /*
  * gets all of the survey questions from the database
@@ -85,19 +87,33 @@ exports.getQuestionById = function(questionId, callback){
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllQuestions = function(sortType, success, error){
-    var sort_order = {};
-    sort_order[sortType] = 1;
-    surveyQuestion.find({}, function(err, questions) {
-        if(err){
-            error(err);
-        }
-        else{
-            var questionsMap = {}; 
-            questions.forEach(function(question) {
-                questionsMap[question._id] = question;
-            });
-            success(questionsMap);
-        }
-    }).sort( sort_order );
+	database.getModel(modelName, function(err, model){	
+		var sort_order = {};
+		sort_order[sortType] = 1;
+		model.find({}, function(findErr, questions) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				var questionsMap = {}; 
+				questions.forEach(function(question) {
+					questionsMap[question._id] = question;
+				});
+				success(questionsMap);
+			}
+		}).sort( sort_order );
+	});
+};
+
+
+exports.deletequestion = function(questionId, success, error) {
+	database.getModel(modelName, function(err, model) {
+		model.find({_id: questionId}).remove().exec(function (err) {
+			if (err) {
+				error(new Error('Unable to delete item with id: ' + questionId));
+			}
+			success();
+		});
+	});
 };
 

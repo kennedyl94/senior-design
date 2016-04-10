@@ -14,6 +14,7 @@ module.exports = function (config) {
       'dist/dev/lib/vendor/js/bootstrap.min.js',
       'dist/dev/lib/vendor/js/ui-bootstrap.min.js',
       'dist/dev/lib/vendor/js/ui-bootstrap-tpls.min.js',
+      'dist/dev/lib/vendor/js/angular-confirm.min.js',
 
       // All angular module components & templates
       'dist/dev/angularComponents.js',

@@ -21,6 +21,8 @@
             $cookies.put('om_loggedIn', 'true');
             service.isStudentLifeAdmin = true;
           } else if(data.data.type == "Org") {
+            $cookies.put('om_orgAdmin', 'true');
+            $cookies.put('om_loggedIn', 'true');
             service.isOrgLeaderAdmin = true;
           }
           isLoggedIn = true;

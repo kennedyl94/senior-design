@@ -22,23 +22,27 @@ app.use(allowCrossDomain);
 var Orgs  = require('./routes/Orgs.js');
 var createClub = require('./routes/createClub.js');
 var survey = require("./routes/survey.js");
+var upload = require("./routes/upload.js");
 var tags = require('./routes/tagSearch.js');
+var email = require('./routes/email.js');
 
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
+var surveySet = require("./routes/surveySettings.js");
+var userSettings = require("./routes/userSettings.js");
 
 var router = express.Router();
 
 /** Connect the Database Through Data Services **/
-// _dataServices.connect();
-// _surveyData.connect();
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api/login', login);
 
 app.use('/api/logout', logout);
+
+app.use('/api/userSettings', userSettings);
 
 app.use('/api/Organizations/', Orgs);
 
@@ -48,7 +52,11 @@ app.use('/api/createClub', createClub);
 
 app.use('/api/survey', survey);
 
-// app.use('/api//UploadFile', upload);
+app.use('/api/surveySet', surveySet);
+
+app.use('/api/UploadFile', upload);
+
+app.use('/api/email', email);
 
 app.use('/api/test/', test);
 

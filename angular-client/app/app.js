@@ -26,20 +26,30 @@
       /* used for $cookieStore to maintain session variables */
       'ngCookies',
 
+      /* confirm dialog
+      *  https://github.com/Schlogen/angular-confirm
+      */
+      'angular-confirm',
+
       //////////////////////////////////////////////////////////////////////////////////////////
       // LOCAL DEPENDENCIES
       'config',
+      'templates',
       'root',
       'navBar',
       'ngNavSidebar',
+      'ngOrganizations',
       'navSidebar',
       'approvals',
       'userSettings',
+      'editUserModal',
+      'addUserModal',
       'orgSettings',
       'surveySettings',
       'organizations',
 	    'createClub',
       'modal',
+      'editOrgModal',
       'survey',
       'massUpload',
       'fileUpload',
@@ -50,7 +60,7 @@
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false')) {
+      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false' && $cookies.get('om_orgAdmin') == 'false')) {
         $location.path('/login');
       }
     });

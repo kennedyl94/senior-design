@@ -21,7 +21,9 @@
             controllerAs: 'navSideBarCtrl'
           },
           'content': {
-            templateUrl: 'overview/overview.template.html'
+            templateUrl: 'overview/overview.template.html',
+            controller: 'RootController',
+            controllerAs: 'rootCtrl'
           }
         }
       });

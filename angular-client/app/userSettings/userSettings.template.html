@@ -1,1 +1,72 @@
-<h1 align="center"> User Settings </h1>
+<style>
+  .translucent {
+    background-color: rgba(255,255,255,0.8);
+    padding: 3.5% !important;
+  }
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<body>
+<div class="container">
+  <h1 align="center">User Settings</h1>
+  <!--<span class="filesicon"><input data-target="#myModal-Add" data-toggle="modal" type="button" value="Add New User"><i class="mce-ico mce-i-browse"></i></span>-->
+  <div id="user-settings-div">
+    <input type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
+  </div>
+  <br><br>
+  <table class="table table-hover translucent">
+    <thead>
+    <tr>
+      <th>Username</th>
+      <th>Admin Role</th>
+      <th>Organizations</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in userSettingsCtrl.data.users | toArray">
+      <td>{{user.Username}}</td>
+      <td>{{user.Type}}</td>
+      <td>{{user.Orgs.toString()}}</td>
+      <td><input type="button" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="myModal-Add">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 class="modal-title">Add New User</h2>
+      </div>
+      <div class="modal-body">
+        <div class="row"><div class="modal-info-header">
+          <h4>Username</h4>
+          <input type="text" name="username" ng-model='userSettingsCtrl.newUser'/>
+        </div></div>
+        <div class="row"><div class="modal-info-header">
+          <h4>Password</h4>
+          <input type="text" name="password" ng-model='userSettingsCtrl.newPassword'/>
+        </div></div>
+        <div class="row"><div class="modal-info-header">
+          <h4>Admin Role</h4>
+          <input type="text" name="type" ng-model='userSettingsCtrl.newType'/>
+        </div></div>
+        <div class="row"><div class="modal-info-header">
+          <h4>Organizations</h4>
+          <input type="text" name="orgs" ng-model='userSettingsCtrl.newOrgs'/>
+        </div></div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-contact-info">
+          <div class="row">
+            <button class="btn btn-primary" id="admin-save-btn" ng-click="userSettingsCtrl.saveNewUser()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

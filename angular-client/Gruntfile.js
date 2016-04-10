@@ -86,7 +86,7 @@ module.exports = function (grunt) {
         src: ['**/*template.html'],
         dest: 'dist/dev/angularTemplateCache.js',
         options: {
-          module: '<%= gruntConfig.siteModule %>'
+          module: '<%= gruntConfig.templateModule %>'
         }
       }
     },
@@ -120,8 +120,8 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= orgFinder.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= orgFinder.app %>/content/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= orgFinder.app %>/content/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= orgFinder.app %>/content/styles/*.scss'
         ]
       }
     },
@@ -223,6 +223,15 @@ module.exports = function (grunt) {
         configFile: 'karma.conf.js',
         singleRun: true
       }
+    },
+
+    sass: {
+      dist: {
+        sourcemap: 'none',
+        files: {
+          'dist/dev/lib/vendor/css/app/style.css' : 'app/style.scss'
+        }
+      }
     }
   });
 
@@ -248,6 +257,7 @@ module.exports = function (grunt) {
       'ngtemplates',
       'concat:allJs',
       'uglify:js',
+      'sass:dist',
       'copy:indexHtmltoDistDev',
       'copy:content',
       'copy:style',
@@ -263,6 +273,7 @@ module.exports = function (grunt) {
       'ngtemplates',
       'concat:allJs',
       'uglify:js',
+      'sass:dist',
       'copy:indexHtmltoDistDev',
       'copy:content',
       'copy:style',

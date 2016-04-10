@@ -1,0 +1,316 @@
+$background-red: #D30025;
+$outline-grey: #FFBBBC;
+$background-faded: rgba(255,255,255,0.8);
+
+.pagination {
+  background-color: $background-red !important;
+}
+
+input[type="button"], input[type="file"] {
+  background-color: $background-red !important;
+  color: white !important;
+  border-color: $outline-grey !important;
+}
+
+button {
+  background-color: $background-red !important;
+  color: white !important;
+  border-color: $outline-grey !important;
+}
+
+/** INDEX **/
+#background-image {
+  position: fixed;
+  z-index: -2;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 125%;
+  background: transparent url("/content/images/background.jpg");
+  background-size: cover;
+}
+
+/** OVERVIEW **/
+#carousel-div {
+  /*max-height: 400px !important;*/
+  .carousel {
+    /*max-height: 200px !important;*/
+    .carousel-inner {
+      .item {
+        > img {
+          min-width: 100%;
+          height: 400px;
+        }
+      }
+
+    }
+  }
+}
+
+#overview-div-mid {
+  width: 100%;
+  height: 200px;
+  max-height: 200px;
+  margin-top: 5px;
+  background-color: $background-faded;
+  .col-sm-4 {
+    height: 100% !important;
+    .a {
+      height: 100%;
+    }
+  }
+}
+
+/*#first {
+  margin-left: 33%;
+}*/
+
+/** INDEX -- NAVIGATION BAR **/
+#nav-bar-last {
+   float: right;
+}
+
+#site-name {
+  color: white;
+  font-family: "Helvetica Neue";
+  font-size: 32px;
+}
+
+.navbar-default {
+  background-color: $background-red;
+  border-color: #c0392b;
+  z-index: 101;
+  .navbar-brand {
+    color: #ecf0f1;
+    &:hover, &:focus {
+      color: $outline-grey;
+    }
+  }
+  .navbar-nav > {
+    li > a {
+      color: $outline-grey;
+      &:hover, &:focus {
+        color: $outline-grey;
+      }
+    }
+    .active > a {
+      color: $outline-grey;
+      background-color: #AF0023;
+      &:hover, &:focus {
+        color: $outline-grey;
+        background-color: #AF0023;
+      }
+    }
+    .open > a {
+      color: $outline-grey;
+      background-color: #c0392b;
+      &:hover, &:focus {
+        color: $outline-grey;
+        background-color: #c0392b;
+      }
+    }
+    .dropdown > a {
+      .caret {
+        border-top-color: $background-red;
+        border-bottom-color: #D30025;
+      }
+      &:hover .caret, &:focus .caret {
+        border-top-color: $outline-grey;
+        border-bottom-color: $outline-grey;
+      }
+    }
+    .open > a {
+      .caret, &:hover .caret, &:focus .caret {
+        border-top-color: $outline-grey;
+        border-bottom-color: $outline-grey;
+      }
+    }
+  }
+  .navbar-toggle {
+    border-color: #c0392b;
+    &:hover, &:focus {
+      background-color: #c0392b;
+    }
+    .icon-bar {
+      background-color: $background-red;
+    }
+  }
+}
+
+/*@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: $background-red;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: $outline-grey;
+  }
+}*/
+
+#logo {
+  height: 50px;
+  width: 50px;
+}
+
+/** ALL ORGANIZATIONS **/
+.highlightedText {
+  /*background: rgba(255, 0, 0, 0.8);*/
+  background: yellow;
+}
+
+#orgs-header-row {
+  margin-bottom: 15px;
+}
+
+#orgs-div {
+  /*text-align: center;*/
+  background-color: $background-faded;
+}
+
+#org-search-div {
+  padding-top: 25px;
+  padding-left: 25px;
+  float: left;
+}
+
+#org-sort-div {
+  padding-top: 25px;
+  padding-right: 25px;
+  float: right;
+}
+
+#tags-span {
+  font-size: 12px;
+}
+
+#description-row {
+  margin-bottom: 10px;
+}
+
+.orgs-header {
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.orgs-header:hover {
+  color: red;
+}
+
+/** LOGIN **/
+.top-buffer {
+  margin-top: 20px;
+}
+
+#login-div {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 250px;
+  background-color: $background-faded;
+  border-radius: 3px;
+
+  #login-header {
+    color: $background-red;
+    font-family: "Helvetica Neue";
+    font-size: 32px;
+  }
+}
+
+.login-label {
+  font-family: "Helvetica Neue";
+  font-size: 24px;
+}
+
+#login-div-inner {
+  padding: 5% 10% 10% 20%;
+
+  #login-user-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+  #login-pass-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+  #login-btn-div {
+    #login-btn {
+      width: 20%;
+      line-height: 135%;
+    }
+  }
+}
+
+/** CREATE CLUB **/
+#createClubPageTitle {
+  text-align: center;
+}
+
+#clubInfo {
+  background-color: rgba(255,255,255,0.8);
+  padding: 3.5% !important;
+}
+
+/** MASS UPLOAD **/
+#mass-upload-div {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 250px;
+  background-color: $background-faded;
+  border-radius: 3px;
+}
+
+#mass-upload-div-inner {
+  padding: 5% 10% 10% 20%;
+}
+
+/** EDIT ORG MODAL **/
+#edit-org-modal-div {
+  .modal-body {
+    input {
+      width: 90% !important;
+    }
+    textarea {
+      width: 90% !important;
+    }
+  }
+  .modal-footer {
+    #save-btn {
+      float: left;
+    }
+    #exit-btn {
+      float: right;
+    }
+  }
+}
+
+/** USER SETTINGS **/
+#user-settings-div {
+  text-align: center;
+}
+
+/** SURVEY **/
+#survey-div {
+  text-align: center;
+  background-color: $background-faded;
+}
+
+
+
+

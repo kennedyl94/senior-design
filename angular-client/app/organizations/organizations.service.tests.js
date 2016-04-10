@@ -63,45 +63,4 @@ describe('OrganizationsService', function() {
       httpBackend.flush();
     });
   });
-
-  describe('Sort Organizations', function() {
-
-    it('should be defined', function() {
-      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
-      httpBackend.flush();
-      expect(organizationsService).toBeDefined();
-    });
-
-    it('should sort organizations by name', function() {
-      var sortedOrgs = {};
-      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
-      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
-      organizationsService.sortOrgs(options[0]).then(function(result) {
-        sortedOrgs = result;
-      });
-      httpBackend.flush();
-      expect(sortedOrgs).toEqual(fakeOrgs);
-    });
-
-    it('should sort organizations by description', function() {
-      var sortedOrgs = {};
-      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
-      httpBackend.expectGET(GET_ORGS_URL + "description").respond(fakeOrgs);
-      organizationsService.sortOrgs(options[1]).then(function(result) {
-        sortedOrgs = result;
-      });
-      httpBackend.flush();
-      expect(sortedOrgs).toEqual(fakeOrgs);
-    });
-    it('should sort organizations by contact', function() {
-      var sortedOrgs = {};
-      httpBackend.expectGET(GET_ORGS_URL + "name").respond(fakeOrgs);
-      httpBackend.expectGET(GET_ORGS_URL + "contact.name").respond(fakeOrgs);
-      organizationsService.sortOrgs(options[2]).then(function(result) {
-        sortedOrgs = result;
-      });
-      httpBackend.flush();
-      expect(sortedOrgs).toEqual(fakeOrgs);
-    });
-  });
 });
