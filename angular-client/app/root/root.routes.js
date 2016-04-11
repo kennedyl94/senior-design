@@ -20,6 +20,11 @@
             controller: 'NavSidebarController',
             controllerAs: 'navSideBarCtrl'
           },
+          'navOrgSideBar': {
+            templateUrl: 'navOrgSideBar/navOrgSidebar.template.html',
+            controller: 'NavOrgSidebarController',
+            controllerAs: 'navOrgSideBarCtrl'
+          },
           'content': {
             templateUrl: 'overview/overview.template.html',
             controller: 'RootController',

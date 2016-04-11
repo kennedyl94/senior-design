@@ -40,6 +40,7 @@
       'ngNavSidebar',
       'ngOrganizations',
       'navSidebar',
+      'navOrgSidebar',
       'approvals',
       'userSettings',
       'editUserModal',
