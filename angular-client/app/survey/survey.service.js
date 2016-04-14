@@ -26,6 +26,7 @@
     service.printResults = function(orgs) {
       $http({method: 'POST', url: config.domain + 'printPdf', data: {result: orgs}}).then(function(res) {
         console.log(res);
+        window.open('content/tmp/results.pdf');
       });
     };
 

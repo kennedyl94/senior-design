@@ -12,19 +12,13 @@ router.post('/', function(req, res) {
     content = content.concat('</ul></body></html>');
 
     phantom.create().then(function(ph) {
-        console.log('First');
         ph.createPage().then(function(page) {
-            console.log('Second');
             //page.set('paperSize', {
             //    format: 'A4'
             //}, function() {
-                console.log('Third');
                 page.setContent(content, 'http://orgmatcher.msoe.edu').then(function() {
-                    console.log('Fourth');
-                    page.render('tmp/results.pdf');
-                    console.log('Fifth');
+                    page.render('../angular-client/content/tmp/results.pdf');
                     ph.exit();
-                    console.log('Sixth');
                     //var options = {
                     //    dotfiles: 'deny',
                     //    headers: {
@@ -32,23 +26,23 @@ router.post('/', function(req, res) {
                     //        'x-sent': true
                     //    }
                     //};
-                    //console.log(path.resolve('tmp/results.pdf'));
-                    res.set('Content-Type', 'application/pdf');
-                    res.download(path.resolve('tmp/results.pdf'), 'results.pdf', function(err) {
-                        if (err) {console.log(err);}
-                        else {
-                            console.log('Last');
-                            //res.end();
-                        }
-                    });
-
-                    //res.sendFile(path.resolve('tmp/results.pdf'), {}, function(err) {
+                    console.log(path.resolve('../angular-client/content/tmp/results.pdf'));
+                    //res.set('Content-Type', 'application/pdf');
+                    //res.download(path.resolve('tmp/results.pdf'), 'results.pdf', function(err) {
                     //    if (err) {console.log(err);}
                     //    else {
-                    //
-                    //        //res.end();
+                    //        console.log('complete');
                     //    }
                     //});
+
+                    //res.sendFile(path.resolve('tmp/results.pdf'), options, function(err) {
+                    //    if (err) {console.log(err);}
+                    //    else {
+                    //        console.log('complete');
+                    //    }
+                    //});
+
+                    res.sendStatus(200);
                 });
             //});
         });
