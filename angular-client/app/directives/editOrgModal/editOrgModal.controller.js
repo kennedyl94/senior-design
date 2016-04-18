@@ -12,6 +12,8 @@ function Controller($modalInstance, contents) {
     name: vm.org.name,
     description: vm.org.description,
     tags: vm.org.tags,
+    links: vm.org.links,
+    meetings: vm.org.meetings,
     contact: {
       name: vm.org.contact.name,
       email: vm.org.contact.email,

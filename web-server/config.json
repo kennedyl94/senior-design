@@ -6,6 +6,8 @@
 		"tags": [
 			"String"
 		],
+		"links":["String"],
+		"meetings":"String",
 		"contact":{
 			"name": "String",
 			"email": "String",

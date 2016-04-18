@@ -13,6 +13,8 @@
       name: "",
       description: "",
       tags: "",
+      links: "",
+      meetings: "",
       contact: {
         name: "",
         email: "",
@@ -28,6 +30,8 @@
             name: "",
             description: "",
             tags: "",
+            links: "",
+            meetings: "",
             contact: {
               name: "",
               email: "",

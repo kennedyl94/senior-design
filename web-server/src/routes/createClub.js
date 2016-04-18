@@ -20,6 +20,19 @@ router.post("/", function (req, res) {
 		org.tags = [org.tags];
 	}
 
+
+	if (org.links.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
+		org.links = org.links.split(',');
+		for (var i = 0; i < org.links.length; i++) {
+			if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
+				org.links[i] = org.links[i].substring(1);	// remove the space
+			}
+		}
+	} else {
+		org.tags = [org.tags];
+	}
+
+
 	_dataServices.addStudentOrg(org, function(err) {
 		console.log(err);
 	});
