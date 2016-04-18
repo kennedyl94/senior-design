@@ -63,7 +63,7 @@
     $rootScope.$on('$stateChangeStart', function (event, next) {
       if (next.data && next.data.restricted && $cookies.get('om_slAdmin') == 'false') {
         $location.path('/login');
-      } else if(next.data && next.data.restricted && $cookies.get('om_orgAdmin') == 'false') {
+      } else if(next.data && next.data.studentOrgs && $cookies.get('om_orgAdmin') == 'false') {
         $location.path('/login');
       }
     });

@@ -27,7 +27,7 @@ exports.addStudentOrg = function(org, callback){
 exports.getOrgsMatchingTags = function(tags, callback) {	//Deprecated, use searchByTags instead for now
   database.getModel(modelName, function(err, model){
 	  model.find({
-		 'tags': { $in: tags },
+		 'tags': { $in: tags }
 	  }).lean().exec(function(findErr, docs){
 		 if(!findErr) {
 			callback(docs);
@@ -60,6 +60,14 @@ exports.getAllOrgs = function(sortType, success, error){
 	});
 };
 
+exports.getOrgsInfoByName = function(orgNameCollection, callback){
+	database.getModel(modelName, function(err, model) {
+		model.find({name: {$in:orgNameCollection}}, function(err, orgs) {
+			callback(err, orgs);
+		});
+	});
+};
+
 /*
  * save a collection of orgs to the database
  * this will check for duplicated names and replace them instead of adding the duplicates
@@ -68,7 +76,7 @@ exports.getAllOrgs = function(sortType, success, error){
  */
 exports.saveAllOrgs = function(orgs, callback){
     database.getModel(modelName, function(err, model){
-		var names = []
+		var names = [];
 		var valid = true;
 		for(var i = 0; i < orgs.length; i++){
 			var currentOrg = orgs[i];

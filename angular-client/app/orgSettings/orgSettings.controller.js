@@ -2,13 +2,17 @@
   'use strict';
 
   angular.module('orgSettings')
-    .controller('OrgSettingsController', ['orgSettingsService', '$modal', '$confirm', Controller]);
+    .controller('OrgSettingsController', ['orgSettingsService', '$modal', '$confirm', '$scope', Controller]);
 
-  function Controller(orgSettingsService, $modal, $confirm) {
+  function Controller(orgSettingsService, $modal, $confirm, $scope) {
 
     var vm = this;
     var editOrgModal;
     vm.data = orgSettingsService.data;
+
+    $scope.$watch(vm.data, function(){
+      vm.updateOrgs();
+    });
 
     vm.modifyOrg = function(org) {
       orgSettingsService.saveModifiedOrg(org).then(function () {
@@ -55,7 +59,6 @@
             vm.updateOrgs();
           });
         });
-
     };
 
     vm.deactivateOrg = function(org) {
@@ -68,7 +71,6 @@
             vm.updateOrgs();
           });
         });
-
     };
 
     vm.updateOrgs = function() {

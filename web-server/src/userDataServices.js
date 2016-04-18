@@ -10,6 +10,15 @@ exports.addUser = function(user, callback) {
   });
 };
 
+exports.getOrgsForSpecificUser = function(username, success, error) {
+    User.find({Username: username}, function(err, foundUser) {
+        if(err) {
+            error(new Error('Unable to find user with username: ' + username));
+        }
+        success(foundUser[0].Orgs);
+    });
+};
+
 exports.getAllUsers = function(success, error){
     User.find({}, function(err, users) {
         var userMap = {};
@@ -23,7 +32,7 @@ exports.getAllUsers = function(success, error){
 exports.deleteUser = function(id, success, error) {
     User.find({_id: id}).remove().exec(function(err) {
         if(err) {
-            error(new Error('Unable to delete user with username: ' + username));
+            error(new Error('Unable to delete user with id: ' + id));
         }
         success();
     });
