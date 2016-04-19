@@ -4,6 +4,12 @@ $background-faded: rgba(255,255,255,0.8);
 
 .pagination {
   background-color: $background-red !important;
+  > li > a {
+    color: black !important;
+  }
+  .active > a {
+    color: white !important;
+  }
 }
 
 input[type="button"], input[type="file"] {
@@ -294,15 +300,20 @@ button {
     #save-btn {
       float: left;
     }
+    float: right;
     #exit-btn {
-      float: right;
     }
   }
 }
 
 /** USER SETTINGS **/
 #user-settings-div {
-  text-align: center !important;
+  background-color: $background-faded;
+
+  #new-user-btn {
+    margin: 10px;
+    float: right;
+  }
 }
 
 /** SURVEY **/
