@@ -53,16 +53,29 @@ button {
   }
 }
 
+.classWithPad { margin:10px; padding:10px; }
+
 #overview-div-mid {
-  width: 100%;
-  height: 200px;
-  max-height: 200px;
+  height: 300px;
+  max-height: 300px;
   margin-top: 5px;
+  text-align: center !important;
   background-color: $background-faded;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+
   .col-sm-4 {
-    height: 100% !important;
-    .a {
-      height: 100%;
+    text-align: center !important;
+  }
+
+  .logo {
+    width: 200px;
+    height: 200px;
+    text-align: center !important;
+
+    svg {
+      width: 200px;
+      height: 200px;
     }
   }
 }

@@ -17,22 +17,25 @@
       vm.isOrgAdmin = isOrgAdmin;
     });
 
-    vm.navigate = function (image) {
-      $state.go(image.link);
+    vm.navigate = function (link) {
+      $state.go(link);
     };
 
     vm.navButtons = [
       {
-        imgUrl: "content/images/svg/approval.svg",
-        link: "root.tagSearch"
+        imgUrl: "content/images/svg/overview_1.svg",
+        link: "root.tagSearch",
+        description: "TAG SEARCH"
       },
       {
-        imgUrl: "content/images/svg/approval.svg",
-        link: "root.organizations"
+        imgUrl: "content/images/svg/overview_2.svg",
+        link: "root.organizations",
+        description: "ORGANIZATIONS"
       },
       {
-        imgUrl: "content/images/svg/approval.svg",
-        link: "root.survey"
+        imgUrl: "content/images/svg/overview_3.svg",
+        link: "root.survey",
+        description: "SURVEY"
       }
     ]
 
