@@ -60,6 +60,11 @@ exports.getAllOrgs = function(sortType, success, error){
 	});
 };
 
+/*
+ * gets all of the student org information based on the collection of org Names
+ * orgNameCollection: collection of organization names
+ * callback: a function that takes an error object and an object that contains the student orgs to return
+ */
 exports.getOrgsInfoByName = function(orgNameCollection, callback){
 	database.getModel(modelName, function(err, model) {
 		model.find({name: {$in:orgNameCollection}}, function(err, orgs) {
@@ -201,7 +206,7 @@ exports.getAllTags = function(success, error) {
 			}
 		});
 	});
-}
+};
 
 /*
  * Searches The list of orgs by tags and returns the orgs found in the order of most tags to least.
@@ -243,4 +248,4 @@ exports.searchByTags = function(tagList, success, error) {
 			}
 		});
 	});
-}
+};
