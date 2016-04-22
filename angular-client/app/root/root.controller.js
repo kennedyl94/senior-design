@@ -17,6 +17,10 @@
       vm.isOrgAdmin = isOrgAdmin;
     });
 
+    $scope.$watch(function() { return $cookies.get('currentUser'); }, function(currentUser) {
+      vm.currentUser = currentUser;
+    });
+
     vm.navigate = function (image) {
       $state.go(image.link);
     };

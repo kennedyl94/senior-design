@@ -42,10 +42,14 @@ var isValidPassword = function(user, password){
 };
 
 router.post('/', function(request, response) {
-    console.log("hello");
     passport.authenticate('local', { session : true}, function(req, res) {
         if(res != false) {
-            response.send({type: res.Type, code: 200});
+            var user = new User({
+                Username: res.Username,
+                Orgs: res.Orgs,
+                Type: res.Type
+            });
+            response.send({currentUser: user, code: 200});
         } else {
             response.sendStatus(401);
         }

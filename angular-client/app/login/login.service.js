@@ -16,11 +16,13 @@
       var promise = $http({method: 'POST', url: config.domain + 'login', data: {username: username, password:password}});
       promise.then(function(data) {
         if(data.data.code == 200) {
-          if(data.data.type == "SL") {
+          if(data.data.currentUser.Type == "SL") {
+            $cookies.put('currentUser', data.data.currentUser.Username);
             $cookies.put('om_slAdmin', 'true');
             $cookies.put('om_loggedIn', 'true');
             service.isStudentLifeAdmin = true;
-          } else if(data.data.type == "Org") {
+          } else if(data.data.currentUser.Type == "Org") {
+            $cookies.put('currentUser', data.data.currentUser.Username);
             $cookies.put('om_orgAdmin', 'true');
             $cookies.put('om_loggedIn', 'true');
             service.isOrgLeaderAdmin = true;
@@ -31,18 +33,6 @@
       });
       return deferred.promise;
     };
-
-    /*service.setLoginStatus = function(loggedIn) {
-      isLoggedIn = loggedIn;
-      if(!loggedIn) {
-        service.isStudentLifeAdmin = false;
-        service.isOrgLeaderAdmin = false;
-      }
-    }*/
-
-    /*service.getLoginStatus = function() {
-      return isLoggedIn;
-    };*/
 
     return service;
   }

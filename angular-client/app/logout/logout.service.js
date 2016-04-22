@@ -15,6 +15,7 @@
         $cookies.put('om_slAdmin', 'false');
         $cookies.put('om_orgAdmin', 'false');
         $cookies.put('om_loggedIn', 'false');
+        $cookies.remove("currentUser");
         deferred.resolve(data.data);
       });
       return deferred.promise;
