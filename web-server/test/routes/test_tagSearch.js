@@ -1,7 +1,9 @@
 var assert = require('assert');
 var request = require('supertest');
 var express = require('express');
+var bodyParser = require('body-parser');
 var orgDataServices = require('../../src/orgDataServices');
+
 
 var tagSearch = require('../../src/routes/tagSearch');
 
@@ -32,7 +34,8 @@ var fakeSearchByTags = function(tags, success, error){
 	success(fakeOrgs);
 };
 
-var app = express()
+var app = express();
+app.use(bodyParser.json());
 app.use('/test/tagSearch', tagSearch);
 
 describe('#routes/tagSearch', function(){
@@ -77,14 +80,12 @@ describe('#routes/tagSearch', function(){
 			var called = false;
 			orgDataServices.searchByTags = function(tags, success, error){
 				called = true;
-				console.log('hi');
 				success([]);
 			}
 			
 			request(app)
 			.post('/test/tagSearch')
-			.set('Content-Type', 'json')
-			.send(JSON.stringify({tags: fakeTags}))
+			.send({tags: fakeTags})
 			.expect({}, function(){
 					assert(called);
 					orgDataServices.searchByTags = realSearchByTags;
@@ -98,6 +99,7 @@ describe('#routes/tagSearch', function(){
 			
 			request(app)
 			.post('/test/tagSearch')
+			.send({tags: fakeTags})
 			.expect({
 					orgs: fakeOrgs
 				}, function(){

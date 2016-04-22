@@ -1,11 +1,14 @@
 var assert = require('assert');
 var request = require('supertest');
 var express = require('express');
+var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
+
 
 var email = require('../../src/routes/email.js');
 
-var app = express()
+var app = express();
+app.use(bodyParser.json());
 app.use('/test/email', email);
 
 realCreateTransport = nodemailer.createTransport;
@@ -23,15 +26,17 @@ describe('#routes/email', function(){
 		
 		it('should send 200 if email was sent', function(done){
 			nodemailer.createTransport = fakeCreateTransport;
-			request(app)
+			var req = request(app)
 			.post('/test/email')
-			.set(function(req){
-				req.body.address = 'address@email.com';
-			})
+			.send({
+				address: 'address@email.com',
+				result: []
+				})
 			.expect(200, function(){
 				nodemailer.createTransport = realCreateTransport;
 				done();
 			});
+			console.log(req.body);
 		});
 	});
 });
