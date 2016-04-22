@@ -17,7 +17,12 @@ router.post('/', function(req, res) {
             //    format: 'A4'
             //}, function() {
                 page.setContent(content, 'http://orgmatcher.msoe.edu').then(function() {
-                    page.render('../angular-client/content/tmp/results.pdf');
+                    //page.render('../angular-client/content/tmp/results.pdf').then(function() {
+                    page.render('tmp/results.pdf');
+                        //.then(function() {
+                        //res.download(path.resolve('tmp/results.pdf'));
+
+                    //});
                     ph.exit();
                     //var options = {
                     //    dotfiles: 'deny',
@@ -26,7 +31,7 @@ router.post('/', function(req, res) {
                     //        'x-sent': true
                     //    }
                     //};
-                    console.log(path.resolve('../angular-client/content/tmp/results.pdf'));
+                    //console.log(path.resolve('../angular-client/content/tmp/results.pdf'));
                     //res.set('Content-Type', 'application/pdf');
                     //res.download(path.resolve('tmp/results.pdf'), 'results.pdf', function(err) {
                     //    if (err) {console.log(err);}
@@ -42,7 +47,7 @@ router.post('/', function(req, res) {
                     //    }
                     //});
 
-                    res.sendStatus(200);
+                    res.send(path.resolve('tmp/results.pdf'));
                 });
             //});
         });

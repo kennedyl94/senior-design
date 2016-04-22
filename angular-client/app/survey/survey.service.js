@@ -4,7 +4,7 @@
   angular.module('survey')
     .factory('surveyService', ['$q','$http','config', GetService]);
 
-  function GetService($q, $http, config) {
+  function GetService($q, $http, config, path) {
 
     var service = this;
 
@@ -25,8 +25,8 @@
 
     service.printResults = function(orgs) {
       $http({method: 'POST', url: config.domain + 'printPdf', data: {result: orgs}}).then(function(res) {
-        console.log(res);
-        window.open('content/tmp/results.pdf');
+        console.log(String(res.data));
+        window.open(('file:///').concat(String(res.data)));
       });
     };
 
