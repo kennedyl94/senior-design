@@ -6,6 +6,11 @@ router.get('/:sortType', function (req, res) {
   var sortType = req.params.sortType;
   _dataServices.getAllOrgs(sortType,
     function(orgs) {
+        // var i = 0;
+        // for (i; i < Object.keys(orgs).length; i++) {
+        //     orgs[Object.keys(orgs)[i]] = splitOnNewLine(orgs[Object.keys(orgs)[i]]);
+        // }
+        // console.log(orgs);
         res.send(orgs);
     }, function(err) {
        console.log(err);
@@ -25,16 +30,7 @@ router.delete('/delete/:orgId', function(req, res) {
 router.put('/modify/:orgId', function(req, res) {
     var orgId = req.params.orgId;
     var orgToUpdate = req.body;
-    // if (orgToUpdate.tags.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
-    //     orgToUpdate.tags = orgToUpdate.tags.split(',');
-    //     for (var i = 0; i < orgToUpdate.tags.length; i++) {
-    //         if (orgToUpdate.tags[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-    //             orgToUpdate.tags[i] = orgToUpdate.tags[i].substring(1);	// remove the space
-    //         }
-    //     }
-    // } else {
-    //     orgToUpdate.tags = [orgToUpdate.tags];
-    // }
+    // console.log(req.body.meetings);
 
     if (orgToUpdate.tags.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
         orgToUpdate.tags = orgToUpdate.tags.split(',');
@@ -52,8 +48,11 @@ router.put('/modify/:orgId', function(req, res) {
     if (orgToUpdate.links.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
         orgToUpdate.links = orgToUpdate.links.split(',');
         for (var i = 0; i < orgToUpdate.links.length; i++) {
+
             orgToUpdate.links[i] = orgToUpdate.links[i].trim();
-            if(orgToUpdate.links[i].indexOf("http")!=0) {
+
+            if(orgToUpdate.links[i].indexOf("://") == -1) {
+                // console.log(orgToUpdate.links[i]);
                 orgToUpdate.links[i]="http://"+orgToUpdate.links[i];
             }
             // if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
@@ -61,8 +60,13 @@ router.put('/modify/:orgId', function(req, res) {
             // }
         }
     } else {
-        orgToUpdate.links = [orgToUpdate.links];
-        if(orgToUpdate.links[0].indexOf("http")!=0) {
+        // console.log(typeof orgToUpdate.links)
+        if(typeof orgToUpdate.links == 'string') {
+
+            orgToUpdate.links = [orgToUpdate.links];
+        }
+        if(orgToUpdate.links[0].indexOf("://") == -1) {
+            // console.log(orgToUpdate.links[0]);
             orgToUpdate.links[0]="http://"+orgToUpdate.links[0];
         }
     }

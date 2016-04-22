@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 });
 
 router.post("/", function (req, res) {
-	console.log("post");
+	// console.log(req.body.club.meetings);
 	var org = req.body.club;
 	if (org.tags.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
 		org.tags = org.tags.split(',');
@@ -28,7 +28,8 @@ router.post("/", function (req, res) {
 		for (var i = 0; i < org.links.length; i++) {
 
 			org.links[i] = org.links[i].trim();
-			if(org.links[i].indexOf("http") != 0) {
+			
+			if(org.links[i][0].indexOf("://") == -1) {
 				org.links[i]="http://"+org.links[i];
 			}
 			// if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
@@ -36,8 +37,12 @@ router.post("/", function (req, res) {
 			// }
 		}
 	} else {
+		if(typeof org.links == 'string') {
+			org.links = [org.links];
+		}
+
 		org.tags = [org.tags];
-		if(org.links[0].indexOf("http") != 0) {
+		if(org.links[0][0].indexOf("://") == -1) {
 			org.links[0]="http://"+org.links[i];
 		}
 	}

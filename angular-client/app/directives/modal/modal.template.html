@@ -4,7 +4,7 @@
   </div>
   <div class="modal-body">
     <div class="row"><div class="modal-info-header"><h4>Description</h4></div></div>
-    <p>{{modalCtrl.org.description}}</p>
+    <p><pre>{{modalCtrl.org.description}}</pre></p>
     <div class="row"><div class="modal-info-header"><h4>Images</h4></div></div>
     <div class="container" id="modal-thumbnail-container">
       <div id="links" class="orgs-links" ng-repeat="img in modalCtrl.images">
@@ -24,17 +24,21 @@
       <div class="row"><div class="col-sm-3 info"><strong>Social Media Links:</strong></div></div>
 
       <!--<div class="row"><div class="col-sm-3 info">{{modalCtrl.org.links}}</div></div>-->
-      <div class="col-sm-12" ng-repeat="link in modalCtrl.org.links | toArray">
+      <div class="row"><div class="col-sm-3 info">
+        <div class="col-sm-12" ng-repeat="link in modalCtrl.org.links | toArray">
 
-        <a href = {{link.$value}}> {{link.$value}}</a>
+          <a href = {{link.$value}}> {{link.$value}}</a>
 
-      </div>
+        </div>
+        </div></div>
 
 
       <div class="row"><div class="col-sm-3 info"><strong>Regular Meeting Times:</strong></div></div>
-      <div class="row"><p>{{modalCtrl.org.meetings}}</p></div>
+      <div class="row"><div class="col-sm-3 info"><pre>{{modalCtrl.org.meetings}}</pre></div></div>
 
+      <div class="row"><div class="col-sm-3 info"><strong>Phone Number:</strong></div></div>
       <div class="row">
+
         <div class="col-sm-3 info">{{modalCtrl.org.contact.phone}}</div>
         <button class="btn btn-primary" id="modal-back-btn" ng-click="modalCtrl.back()">Back</button>
       </div>

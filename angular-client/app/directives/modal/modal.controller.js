@@ -7,6 +7,7 @@ function Controller($modalInstance, contents) {
 
   vm.org = contents.org;
   vm.images = contents.images;
+  
 
   vm.back = function() {
     $modalInstance.close('ok');
