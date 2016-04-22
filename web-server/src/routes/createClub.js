@@ -8,13 +8,15 @@ router.get('/', function (req, res) {
 });
 
 router.post("/", function (req, res) {
+	console.log("post");
 	var org = req.body.club;
 	if (org.tags.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
 		org.tags = org.tags.split(',');
 		for (var i = 0; i < org.tags.length; i++) {
-			if (org.tags[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-				org.tags[i] = org.tags[i].substring(1);	// remove the space
-			}
+			org.tags[i] = org.tags[i].trim();
+			// if (org.tags[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
+			// 	org.tags[i] = org.tags[i].substring(1);	// remove the space
+			// }
 		}
 	} else {
 		org.tags = [org.tags];
@@ -24,12 +26,20 @@ router.post("/", function (req, res) {
 	if (org.links.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
 		org.links = org.links.split(',');
 		for (var i = 0; i < org.links.length; i++) {
-			if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-				org.links[i] = org.links[i].substring(1);	// remove the space
+
+			org.links[i] = org.links[i].trim();
+			if(org.links[i].indexOf("http") != 0) {
+				org.links[i]="http://"+org.links[i];
 			}
+			// if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
+			// 	org.links[i] = org.links[i].substring(1);	// remove the space
+			// }
 		}
 	} else {
 		org.tags = [org.tags];
+		if(org.links[0].indexOf("http") != 0) {
+			org.links[0]="http://"+org.links[i];
+		}
 	}
 
 
