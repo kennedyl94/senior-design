@@ -1,30 +1,27 @@
 var assert = require('assert');
 var request = require('supertest');
 var express = require('express');
-var passport = require('passport');
 
 var logout = require('../../src/routes/logout.js');
 
 var app = express();
 app.use('/test/logout', logout);
 
-var realLogout = passport.logout;
-
 describe('#routes/logout', function(){
     
     describe('GET /', function(){
         
-        it('should call passport.logout', function(done){
+        it('should call logout from request', function(done){
             var called = false;
-            passport.logout = function(){
+            logout = function(){
                 called = true;
             };
 
-            request(app)
-            .get('/test/logout')
-            .expect({},function(){
+            var req = request(app)
+            .get('/test/logout');
+            req.use(logout);
+            req.expect({},function(){
                 assert(called);
-                passport.authenticate = realAuthenticate;
                 done();
             });
         });
