@@ -12,12 +12,12 @@ app.use('/test/userSettings', userSettings);
 
 var fakeUser = {
     username: 'name',
-    password: 'password'
+    Password: 'password'
 };
 
 var fakeUser2 = {
     username: 'name2',
-    password: 'password2'
+    Password: 'password2'
 };
 
 var fakeUsers = [
@@ -122,7 +122,25 @@ describe('#routes/userSettings', function(){
             var called = false;
             userDataServices.addUser = function(user, callback){
                 called = true;
-                assert.deepEqual(user, fakeUser);
+                assert.equal(user.username, fakeUser.username);
+                callback(null, user);
+            };
+            
+            request(app)
+            .put('/test/userSettings/addNew')
+            .send({user: fakeUser})
+            .expect({}, function(){
+                assert(called);
+                userDataServices.addUser = realAddUser;
+                done();
+            });
+        });
+
+        it('should create a hashed password for the user', function(done){
+            var called = false;
+            userDataServices.addUser = function(user, callback){
+                called = true;
+                assert.notEqual(user.Password, fakeUser.Passowrd);
                 callback(null, user);
             };
             

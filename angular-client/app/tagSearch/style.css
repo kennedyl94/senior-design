@@ -6,3 +6,20 @@
   background-color: rgba(255,255,255,0.8);
   padding: 3.5% !important;
 }
+
+.label {
+  float: left;
+  text-align: left;
+}
+.new-row {
+  clear: left;
+}
+
+#tagSearchDiv {
+  background-color: rgba(255,255,255,0.8);
+  color: #D30025;
+}
+
+#ts-button-div {
+  text-align: center;
+}

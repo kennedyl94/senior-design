@@ -1,6 +1,7 @@
 var express = require('express')
-  , router = express.Router()
+  , router = express.Router();
 var  _dataServices = require('../orgDataServices.js');
+var _userDataServices = require('../userDataServices.js');
 
 router.get('/:sortType', function (req, res) {
   var sortType = req.params.sortType;
@@ -10,6 +11,24 @@ router.get('/:sortType', function (req, res) {
     }, function(err) {
        console.log(err);
     });
+});
+
+router.get('/user/:currentUser', function (req, res) {
+    var currentUser = req.params.currentUser;
+    var userOrgs = {};
+    _userDataServices.getOrgsForSpecificUser(currentUser,
+        function(orgs) {
+            console.log("specific orgs");
+            userOrgs = orgs;
+            _dataServices.getOrgsInfoByName(userOrgs,
+                function (error, orgsWithInfo) {
+                    res.send(orgsWithInfo);
+                }
+            );
+        }, function(err) {
+            console.log(err);
+        }
+    );
 });
 
 router.delete('/delete/:orgId', function(req, res) {

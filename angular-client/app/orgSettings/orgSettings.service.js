@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('orgSettings')
-    .factory('orgSettingsService', ['$q', '$http', 'config', GetService]);
+    .factory('orgSettingsService', ['$q', '$http', 'config', '$cookies', GetService]);
 
-  function GetService($q, $http, config) {
+  function GetService($q, $http, config, $cookies) {
 
     var service = this;
 
@@ -48,7 +48,8 @@
 
     function init() {
       var promises = [];
-      promises.push($http({method: 'GET', url: config.domain + 'Organizations/name'}));
+      var currentUser = $cookies.get('currentUser');
+      promises.push($http({method: 'GET', url: config.domain + 'Organizations/user/' + currentUser}));
       $q.all(promises).then(function(data) {
         service.data.orgs = data[0].data;
       });

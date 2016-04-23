@@ -2,13 +2,17 @@
   'use strict';
 
   angular.module('orgSettings')
-    .controller('OrgSettingsController', ['orgSettingsService', '$modal', '$confirm', Controller]);
+    .controller('OrgSettingsController', ['orgSettingsService', '$modal', '$confirm', '$scope', Controller]);
 
-  function Controller(orgSettingsService, $modal, $confirm) {
+  function Controller(orgSettingsService, $modal, $confirm, $scope) {
 
     var vm = this;
     var editOrgModal;
     vm.data = orgSettingsService.data;
+
+    $scope.$watch(vm.data, function(){
+      vm.updateOrgs();
+    });
 
     vm.modifyOrg = function(org) {
       orgSettingsService.saveModifiedOrg(org).then(function () {
@@ -37,7 +41,7 @@
       $confirm({text: 'Are you sure you want to delete: ' + org.name + '?',
                 title: 'Delete Organization',
                 ok: "Delete",
-                cancel: 'Cancel'})
+                cancel: 'Exit'})
         .then(function() {
           orgSettingsService.deleteOrg(org).then(function () {
             vm.updateOrgs();
@@ -49,26 +53,24 @@
       $confirm({text: 'Are you sure you want to activate: ' + org.name + '?',
         title: 'Activate Organization',
         ok: "Activate",
-        cancel: 'Cancel'})
+        cancel: 'Exit'})
         .then(function() {
           orgSettingsService.activation(org, false).then(function () {
             vm.updateOrgs();
           });
         });
-
     };
 
     vm.deactivateOrg = function(org) {
       $confirm({text: 'Are you sure you want to deactivate: ' + org.name + '?',
         title: 'Deactivate Organization',
         ok: "Deactivate",
-        cancel: 'Cancel'})
+        cancel: 'Exit'})
         .then(function() {
           orgSettingsService.activation(org, true).then(function () {
             vm.updateOrgs();
           });
         });
-
     };
 
     vm.updateOrgs = function() {

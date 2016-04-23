@@ -1,4 +1,4 @@
-<div>
+<div id="edit-org-modal-div">
   <div class="modal-header" id="modal-header">
     <h2 class="modal-title">Edit Organization</h2>
   </div>
@@ -25,8 +25,8 @@
     </div>
   </div>
   <div class="modal-footer">
-    <input type="button" value="Save" ng-click="editOrgModalCtrl.function(editOrgModalCtrl.modifiedOrg)"/>
-    <input type="button" value="Cancel" ng-click="editOrgModalCtrl.back()"/>
+    <input id="save-btn" class="btn btn-default" type="button" value="Save" ng-click="editOrgModalCtrl.function(editOrgModalCtrl.modifiedOrg)"/>
+    <input id="exit-btn" class="btn btn-default" type="button" value="Exit" ng-click="editOrgModalCtrl.back()"/>
   </div>
 </div>
 

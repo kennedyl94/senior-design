@@ -40,6 +40,7 @@
       'ngNavSidebar',
       'ngOrganizations',
       'navSidebar',
+      'navOrgSidebar',
       'approvals',
       'userSettings',
       'editUserModal',
@@ -60,7 +61,9 @@
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      if (next.data && next.data.restricted && ($cookies.get('om_slAdmin') == 'false' && $cookies.get('om_orgAdmin') == 'false')) {
+      if (next.data && next.data.restricted && $cookies.get('om_slAdmin') == 'false') {
+        $location.path('/login');
+      } else if(next.data && next.data.studentOrgs && $cookies.get('om_orgAdmin') == 'false') {
         $location.path('/login');
       }
     });

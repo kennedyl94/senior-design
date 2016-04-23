@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('fileUpload')
-    .factory('fileUploadService', ['$http', GetService]);
+    .factory('fileUploadService', ['$http', 'config', GetService]);
 
-  function GetService($http) {
+  function GetService($http, config, Upload) {
 
     var service = this;
 

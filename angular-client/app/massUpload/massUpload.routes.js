@@ -9,7 +9,7 @@
             url: 'massUpload',
             views: {
               'content@': {
-                templateUrl: 'massUpload/massUpload.template.html',
+                templateUrl: 'massUpload/massUpload.template.html'
               }
             },
             data: {
