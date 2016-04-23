@@ -23,7 +23,7 @@ router.delete('/delete/:orgId', function(req, res) {
     function() {
         res.sendStatus(200);
     }, function(error) {
-        //console.log(error);
+        console.log(error);
   });
 });
 
@@ -44,30 +44,31 @@ router.put('/modify/:orgId', function(req, res) {
         orgToUpdate.tags = [orgToUpdate.tags];
     }
 
+    if(orgToUpdate.links != null && orgToUpdate.links.length > 0) {
+        if (orgToUpdate.links.indexOf(',') != -1) {
+            orgToUpdate.links = orgToUpdate.links.split(',');
+            for (var i = 0; i < orgToUpdate.links.length; i++) {
 
-    if (orgToUpdate.links.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
-        orgToUpdate.links = orgToUpdate.links.split(',');
-        for (var i = 0; i < orgToUpdate.links.length; i++) {
+                orgToUpdate.links[i] = orgToUpdate.links[i].trim();
 
-            orgToUpdate.links[i] = orgToUpdate.links[i].trim();
-
-            if(orgToUpdate.links[i].indexOf("://") == -1) {
-                // console.log(orgToUpdate.links[i]);
-                orgToUpdate.links[i]="http://"+orgToUpdate.links[i];
+                if (orgToUpdate.links[i].indexOf("://") == -1) {
+                    // console.log(orgToUpdate.links[i]);
+                    orgToUpdate.links[i] = "http://" + orgToUpdate.links[i];
+                }
+                // if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
+                // 	org.links[i] = org.links[i].substring(1);	// remove the space
+                // }
             }
-            // if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-            // 	org.links[i] = org.links[i].substring(1);	// remove the space
-            // }
-        }
-    } else {
-        // console.log(typeof orgToUpdate.links)
-        if(typeof orgToUpdate.links == 'string') {
+        } else {
+            // console.log(typeof orgToUpdate.links)
+            if (typeof orgToUpdate.links == 'string') {
 
-            orgToUpdate.links = [orgToUpdate.links];
-        }
-        if(orgToUpdate.links[0].indexOf("://") == -1) {
-            // console.log(orgToUpdate.links[0]);
-            orgToUpdate.links[0]="http://"+orgToUpdate.links[0];
+                orgToUpdate.links = [orgToUpdate.links];
+            }
+            if (orgToUpdate.links[0].indexOf("://") == -1) {
+                // console.log(orgToUpdate.links[0]);
+                orgToUpdate.links[0] = "http://" + orgToUpdate.links[0];
+            }
         }
     }
 
@@ -75,7 +76,7 @@ router.put('/modify/:orgId', function(req, res) {
     function() {
         res.sendStatus(200);
     }, function(error) {
-        //console.log(error);
+        console.log(error);
     });
 });
 
@@ -85,7 +86,7 @@ router.put('/activation/:orgId', function(req, res) {
     _dataServices.activation(orgId, isActive, function() {
         res.sendStatus(200);
     }, function(error) {
-        //console.log(error);
+        console.log(error);
     });
 });
 

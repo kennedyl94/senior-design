@@ -22,28 +22,30 @@ router.post("/", function (req, res) {
 		org.tags = [org.tags];
 	}
 
+	if(org.links!= null && org.links.length > 0) {
+		if (org.links.indexOf(',') != -1) {
+			org.links = org.links.split(',');
+			for (var i = 0; i < org.links.length; i++) {
 
-	if (org.links.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
-		org.links = org.links.split(',');
-		for (var i = 0; i < org.links.length; i++) {
-
-			org.links[i] = org.links[i].trim();
-			
-			if(org.links[i][0].indexOf("://") == -1) {
-				org.links[i]="http://"+org.links[i];
+				org.links[i] = org.links[i].trim();
+				// console.log("hello" +org.links[i]);
+				if (org.links[i].indexOf("://") == -1) {
+					org.links[i] = "http://" + org.links[i];
+				}
+				// if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
+				// 	org.links[i] = org.links[i].substring(1);	// remove the space
+				// }
 			}
-			// if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-			// 	org.links[i] = org.links[i].substring(1);	// remove the space
-			// }
-		}
-	} else {
-		if(typeof org.links == 'string') {
-			org.links = [org.links];
-		}
+		} else {
+			if (typeof org.links == 'string') {
+				org.links = [org.links];
+			}
 
-		org.tags = [org.tags];
-		if(org.links[0][0].indexOf("://") == -1) {
-			org.links[0]="http://"+org.links[i];
+			org.tags = [org.tags];
+			console.log("one tag" + org.tags[0]);
+			if (org.links[0].indexOf("://") == -1) {
+				org.links[0] = "http://" + org.links[0];
+			}
 		}
 	}
 
