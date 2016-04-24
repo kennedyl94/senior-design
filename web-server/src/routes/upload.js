@@ -19,6 +19,8 @@ var contactLastNameColTitle = 'President\'s Name (Last)';
 var emailColTitle = 'President\'s MSOE Email';
 var phoneColTitle = 'President\'s Phone Number';
 var tagsColTitle = 'Tags';
+var LinksColTitle ='Social Media Links';
+var MeetingsColTittle = 'Meeting Times';
 
 /*
  * this will take a file uploaded from the web and parse it to find student orgs
@@ -35,6 +37,8 @@ router.post('/', uploader.single('file'), function(req, res){
         var emailIndex = -1;
         var phoneIndex = -1;
         var tagIndex = -1;
+        var linksIndex = -1;
+        var meetingIndex = -1;
         
         var orgs = [];
         
@@ -48,12 +52,16 @@ router.post('/', uploader.single('file'), function(req, res){
                 emailIndex = row.indexOf(emailColTitle);
                 phoneIndex = row.indexOf(phoneColTitle);
                 tagIndex = row.indexOf(tagsColTitle);
+                linksIndex = row.indexOf(LinksColTitle);
+                meetingIndex = row.indexOf(MeetingsColTittle);
             }
             else{
                 var newOrg = {
                     name: row[orgNameIndex],
                     description: row[descriptionIndex],
                     tags: splitTags(row[tagIndex]),
+                    links: splitLinks(row[linksIndex]),
+                    meetings: row[meetingIndex],
                     active: true,
                     contact: {
                         name: row[contactFirstNameIndex] + ' ' + row[contactLastNameIndex],
@@ -91,11 +99,18 @@ router.post('/', uploader.single('file'), function(req, res){
 });
 
 function splitTags(arg){
-	if(!arg){
-		return [];
-	}
-	var tagString = arg.replace('\s','');
-	return tagString.split(',');
+    if(!arg){
+        return [];
+    }
+    var tagString = arg.replace('\s','');
+    return tagString.split(',');
+}
+function splitLinks(arg){
+    if(!arg){
+        return [];
+    }
+    var tagString = arg.replace('\s','');
+    return arg.split('|');
 }
 
 module.exports = router;
