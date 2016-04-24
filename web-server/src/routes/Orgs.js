@@ -41,8 +41,11 @@ router.put('/modify/:orgId', function(req, res) {
             // }
         }
     } else {
-        orgToUpdate.tags = [orgToUpdate.tags];
+        if (typeof orgToUpdate.tags == 'string') {
+            orgToUpdate.tags = [orgToUpdate.tags];
+        }
     }
+    console.log(orgToUpdate.tags);
 
     if(orgToUpdate.links != null && orgToUpdate.links.length > 0) {
         if (orgToUpdate.links.indexOf(',') != -1) {

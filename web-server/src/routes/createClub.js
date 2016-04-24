@@ -19,7 +19,9 @@ router.post("/", function (req, res) {
 			// }
 		}
 	} else {
-		org.tags = [org.tags];
+		if (typeof org.tags == 'string') {
+			org.tags = [org.tags];
+		}
 	}
 
 	if(org.links!= null && org.links.length > 0) {
