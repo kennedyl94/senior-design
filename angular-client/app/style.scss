@@ -1,9 +1,16 @@
 $background-red: #D30025;
 $outline-grey: #FFBBBC;
 $background-faded: rgba(255,255,255,0.8);
+$site-font: "Helvetica Neue";
 
 .pagination {
   background-color: $background-red !important;
+  > li > a {
+    color: black !important;
+  }
+  .active > a {
+    color: white !important;
+  }
 }
 
 input[type="button"], input[type="file"] {
@@ -48,15 +55,37 @@ button {
 }
 
 #overview-div-mid {
-  width: 100%;
-  height: 200px;
-  max-height: 200px;
+  height: 300px;
+  max-height: 300px;
   margin-top: 5px;
+  text-align: center !important;
   background-color: $background-faded;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  text-align: center !important;
+
   .col-sm-4 {
-    height: 100% !important;
-    .a {
-      height: 100%;
+    text-align: center !important;
+
+    #ov-des-div {
+      margin-top: 25px;
+    }
+
+    #ov-img-div {
+      margin-top: 25px;
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+      .logo {
+        width: 200px !important;
+        height: 200px !important;
+        text-align: center !important;
+
+        svg {
+          width: 300px;
+          height: 300px;
+        }
+      }
     }
   }
 }
@@ -72,7 +101,7 @@ button {
 
 #site-name {
   color: white;
-  font-family: "Helvetica Neue";
+  font-family: $site-font;
   font-size: 32px;
 }
 
@@ -216,13 +245,13 @@ button {
 
   #login-header {
     color: $background-red;
-    font-family: "Helvetica Neue";
+    font-family: $site-font;
     font-size: 32px;
   }
 }
 
 .login-label {
-  font-family: "Helvetica Neue";
+  font-family: $site-font;
   font-size: 24px;
 }
 
@@ -294,23 +323,50 @@ button {
     #save-btn {
       float: left;
     }
+    float: right;
     #exit-btn {
-      float: right;
     }
   }
 }
 
 /** USER SETTINGS **/
 #user-settings-div {
-  text-align: center;
+  background-color: $background-faded;
+
+  #new-user-btn {
+    margin: 10px;
+    float: right;
+  }
 }
 
 /** SURVEY **/
 #survey-div {
   text-align: center;
   background-color: $background-faded;
+  margin-bottom: 25px;
+
+  #survey-input-div {
+    .row {
+      .col-sm-1,.col-sm-3 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+      }
+    }
+  }
+
+  #survey-submit-div {
+    background-color: $background-faded;
+  }
 }
 
+/** SURVEY SETTINGS **/
+#survey-settings-div {
+  background-color: $background-faded;
+
+  input {
+    width: 60% !important;
+  }
+}
 
 
 

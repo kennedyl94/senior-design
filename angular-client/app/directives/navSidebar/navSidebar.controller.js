@@ -10,6 +10,12 @@
 
     vm.toggle = function () {
       $scope.collapsed = !$scope.collapsed;
+
+      if(!$scope.collapsed) {
+        $('#orgmatcher-content-div').css({'margin-left':'295px'});
+      } else {
+        $('#orgmatcher-content-div').css({'margin-left':''});
+      }
     };
 
     vm.navigate = function (button) {
