@@ -178,7 +178,7 @@ exports.activation = function(orgId, isActive, success, error) {
 };
 
 /*
- * Gets all tags currently being used by active clubs.
+ * Gets all tags currently being used by active clubs as well as the inactive tag.
  * success: A function to call upon successful completion. Takes an object that contains all tags.
  * error: A function to call if there is an error.
  */
