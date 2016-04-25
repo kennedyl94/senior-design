@@ -32,8 +32,8 @@
   </div>
   <div id="overview-div-mid" class="row">
     <div class="col-sm-4" ng-repeat="button in rootCtrl.navButtons">
-      <div>{{button.description}}</div>
-      <a href="" ng-click="rootCtrl.navigate(button.link)">
+      <div id="ov-des-div">{{button.description}}</div>
+      <div id="ov-img-div" ng-click="rootCtrl.navigate(button.link)">
         <div class="logo" ng-include="button.imgUrl"></div>
       </a>
     </div>

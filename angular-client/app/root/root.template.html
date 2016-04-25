@@ -1,6 +1,6 @@
 <div ng-controller="RootController as rootCtrl">
   <div ui-view="navBar"></div>
-  <div class="container">
+  <div class="container" id="orgmatcher-content-div">
     <div ng-if="rootCtrl.isStudentLifeAdmin == 'true' || rootCtrl.isOrgAdmin == 'true'" ui-view="navSideBar"></div>
     <div ui-view="content"></div>
   </div>

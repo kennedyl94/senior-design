@@ -1,6 +1,7 @@
 $background-red: #D30025;
 $outline-grey: #FFBBBC;
 $background-faded: rgba(255,255,255,0.8);
+$site-font: "Helvetica Neue";
 
 .pagination {
   background-color: $background-red !important;
@@ -53,8 +54,6 @@ button {
   }
 }
 
-.classWithPad { margin:10px; padding:10px; }
-
 #overview-div-mid {
   height: 300px;
   max-height: 300px;
@@ -63,19 +62,30 @@ button {
   background-color: $background-faded;
   margin-right: 0px !important;
   margin-left: 0px !important;
+  text-align: center !important;
 
   .col-sm-4 {
     text-align: center !important;
-  }
 
-  .logo {
-    width: 200px;
-    height: 200px;
-    text-align: center !important;
+    #ov-des-div {
+      margin-top: 25px;
+    }
 
-    svg {
-      width: 200px;
-      height: 200px;
+    #ov-img-div {
+      margin-top: 25px;
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+      .logo {
+        width: 200px !important;
+        height: 200px !important;
+        text-align: center !important;
+
+        svg {
+          width: 300px;
+          height: 300px;
+        }
+      }
     }
   }
 }
@@ -91,7 +101,7 @@ button {
 
 #site-name {
   color: white;
-  font-family: "Helvetica Neue";
+  font-family: $site-font;
   font-size: 32px;
 }
 
@@ -235,13 +245,13 @@ button {
 
   #login-header {
     color: $background-red;
-    font-family: "Helvetica Neue";
+    font-family: $site-font;
     font-size: 32px;
   }
 }
 
 .login-label {
-  font-family: "Helvetica Neue";
+  font-family: $site-font;
   font-size: 24px;
 }
 
@@ -333,8 +343,30 @@ button {
 #survey-div {
   text-align: center;
   background-color: $background-faded;
+  margin-bottom: 25px;
+
+  #survey-input-div {
+    .row {
+      .col-sm-1,.col-sm-3 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+      }
+    }
+  }
+
+  #survey-submit-div {
+    background-color: $background-faded;
+  }
 }
 
+/** SURVEY SETTINGS **/
+#survey-settings-div {
+  background-color: $background-faded;
+
+  input {
+    width: 60% !important;
+  }
+}
 
 
 

@@ -25,17 +25,23 @@
       {
         imgUrl: "content/images/svg/overview_1.svg",
         link: "root.tagSearch",
-        description: "TAG SEARCH"
+        description: "Do you have an idea of what you are interested in? If so, check out the Tag Search feature. " +
+                      "Tag Search will allow you to select tags representing your interests in order to discover " +
+                      "which organizations best suit you!"
       },
       {
         imgUrl: "content/images/svg/overview_2.svg",
         link: "root.organizations",
-        description: "ORGANIZATIONS"
+        description: "There are many student organizations available at the Milwaukee School of Engineering. " +
+                      "Click here to find out more information on the specific student organizations " +
+                      "available on campus."
       },
       {
         imgUrl: "content/images/svg/overview_3.svg",
         link: "root.survey",
-        description: "SURVEY"
+        description: "Are you unsure of your interests or what student organization you may want to join? " +
+                      "If so, take the Student Organization Survey to be matched to a list of student organizations " +
+                      "that you will most likely be interested in!"
       }
     ]
 
