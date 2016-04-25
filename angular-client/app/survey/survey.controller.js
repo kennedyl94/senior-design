@@ -34,7 +34,6 @@
     vm.downloadResults = function() {
 
       for(var i = 0; i < vm.orgs.length; i++) {
-        console.log("org: " + vm.orgs[i].name);
         vm.content.push(vm.orgs[i].name);
       }
 
@@ -43,7 +42,7 @@
       };
 
       vm.content = [];
-      pdfMake.createPdf(vm.dd).download('orgs.pdf');
+      pdfMake.createPdf(vm.dd).download('msoeStudentOrgResults.pdf');
     }
   }
 })();
