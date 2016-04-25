@@ -38,7 +38,17 @@
       }
 
       vm.dd = {
-        'content' : vm.content
+        'content' : [
+          {text: 'MSOE Student Organization Survey Matches\n\n', style: 'header' },
+          vm.content],
+
+        styles: {
+          header: {
+            fontSize: 24,
+            alignment: 'center',
+            bold: true
+          }
+        }
       };
 
       vm.content = [];
