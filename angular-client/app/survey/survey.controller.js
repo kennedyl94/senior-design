@@ -9,6 +9,8 @@
     var vm = this;
     vm.data = surveyService.data;
     vm.orgs = {};
+    vm.content = [];
+
 
     // console.log("TESTING: " + JSON.stringify(surveyService.data.questions));
 
@@ -27,8 +29,21 @@
 
     vm.sendResults = function() {
       surveyService.sendResults(vm.address, vm.orgs);
+    };
+
+    vm.downloadResults = function() {
+
+      for(var i = 0; i < vm.orgs.length; i++) {
+        console.log("org: " + vm.orgs[i].name);
+        vm.content.push(vm.orgs[i].name);
+      }
+
+      vm.dd = {
+        'content' : vm.content
+      };
+
+      vm.content = [];
+      pdfMake.createPdf(vm.dd).download('orgs.pdf');
     }
   }
-
-
 })();
