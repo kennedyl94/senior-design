@@ -12,27 +12,26 @@
   <h1 align="center">User Settings</h1>
   <!--<span class="filesicon"><input data-target="#myModal-Add" data-toggle="modal" type="button" value="Add New User"><i class="mce-ico mce-i-browse"></i></span>-->
   <div id="user-settings-div">
-    <input type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
+    <input id="new-user-btn" type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
+    <table class="table table-hover translucent">
+      <thead>
+      <tr>
+        <th>Username</th>
+        <th>Admin Role</th>
+        <th>Organizations</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="user in userSettingsCtrl.data.users | toArray">
+        <td>{{user.Username}}</td>
+        <td>{{user.Type}}</td>
+        <td>{{user.Orgs.toString()}}</td>
+        <td><input type="button" class="btn btn-default" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <br><br>
-  <table class="table table-hover translucent">
-    <thead>
-    <tr>
-      <th>Username</th>
-      <th>Admin Role</th>
-      <th>Organizations</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="user in userSettingsCtrl.data.users | toArray">
-      <td>{{user.Username}}</td>
-      <td>{{user.Type}}</td>
-      <td>{{user.Orgs.toString()}}</td>
-      <td><input type="button" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
-    </tr>
-    </tbody>
-  </table>
 </div>
 
 <div class="modal fade" id="myModal-Add">

@@ -21,22 +21,31 @@
       vm.currentUser = currentUser;
     });
 
-    vm.navigate = function (image) {
-      $state.go(image.link);
+    vm.navigate = function (link) {
+      $state.go(link);
     };
 
     vm.navButtons = [
       {
-        imgUrl: "content/images/svg/approval.svg",
-        link: "root.tagSearch"
+        imgUrl: "content/images/svg/overview_1.svg",
+        link: "root.tagSearch",
+        description: "Do you have an idea of what you are interested in? If so, check out the Tag Search feature. " +
+                      "Tag Search will allow you to select tags representing your interests in order to discover " +
+                      "which organizations best suit you!"
       },
       {
-        imgUrl: "content/images/svg/approval.svg",
-        link: "root.organizations"
+        imgUrl: "content/images/svg/overview_2.svg",
+        link: "root.organizations",
+        description: "There are many student organizations available at the Milwaukee School of Engineering. " +
+                      "Click here to find out more information on the specific student organizations " +
+                      "available on campus."
       },
       {
-        imgUrl: "content/images/svg/approval.svg",
-        link: "root.survey"
+        imgUrl: "content/images/svg/overview_3.svg",
+        link: "root.survey",
+        description: "Are you unsure of your interests or what student organization you may want to join? " +
+                      "If so, take the Student Organization Survey to be matched to a list of student organizations " +
+                      "that you will most likely be interested in!"
       }
     ]
 
