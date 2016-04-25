@@ -20,6 +20,7 @@
         </div>
         <div class="col-sm-1">
           <button id="test" class="btn btn-default" type="button" ng-disabled="emailForm.$invalid" ng-click="surveyCtrl.sendResults()" ng-show="surveyCtrl.submitted">Email Results</button>
+          <button id="pdf" class="btn btn-default" type="button" ng-click="surveyCtrl.downloadResults()" ng-show="surveyCtrl.submitted">Download Results</button>
         </div>
       </div>
     </div>

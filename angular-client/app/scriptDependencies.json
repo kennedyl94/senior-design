@@ -119,7 +119,9 @@
     "app/components/bootstrap/dist/js/bootstrap.min.js",
     "app/components/blueimp-bootstrap-image-gallery/js/bootstrap-image-gallery.min.js",
     "app/components/blueimp-gallery/js/jquery.blueimp-gallery.min.js",
-    "app/components/angular-confirm-modal/angular-confirm.min.js"
+    "app/components/angular-confirm-modal/angular-confirm.min.js",
+    "app/components/pdfmake/build/pdfmake.min.js",
+    "app/components/pdfmake/build/vfs_fonts.js"
   ],
 
   "style": [
