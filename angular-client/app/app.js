@@ -56,7 +56,8 @@
       'fileUpload',
       'login',
       'logout',
-      'tagSearch'
+      'tagSearch',
+      'email'
     ])
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {

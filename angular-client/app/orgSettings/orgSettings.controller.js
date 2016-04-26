@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('orgSettings')
-    .controller('OrgSettingsController', ['orgSettingsService', '$modal', '$confirm', '$scope', '$cookies', Controller]);
+    .controller('OrgSettingsController', ['orgSettingsService', 'emailService', '$modal', '$confirm', '$scope', '$cookies', Controller]);
 
-  function Controller(orgSettingsService, $modal, $confirm, $scope, $cookies) {
+  function Controller(orgSettingsService, emailService, $modal, $confirm, $scope, $cookies) {
 
     var vm = this;
     var editOrgModal;
@@ -42,19 +42,26 @@
     };
 
     vm.proposeChange = function(org) {
-      var changes = vm.mapChanges(org);
+      var changes = vm.mapOrgInfoToChanges(org);
       orgSettingsService.submitProposedChange(changes).then(function() {
+        emailService.proposeChange(changes);
         editOrgModal.close('ok');
         vm.updateOrgs();
       });
     };
 
-    vm.mapChanges = function(org){
+    vm.mapOrgInfoToChanges = function(org){
       vm.proposedChange.name = org.name;
       vm.proposedChange.description = org.description;
       vm.proposedChange.tags = org.tags;
       vm.proposedChange.links = org.links;
-      vm.proposedChange.meetings = org.meetings;
+
+      if (org.meetings == undefined) {
+        vm.proposedChange.meetings = ' ';
+      } else {
+        vm.proposedChange.meetings = org.meetings;
+      }
+
       vm.proposedChange.contact = org.contact;
 
       return vm.proposedChange;

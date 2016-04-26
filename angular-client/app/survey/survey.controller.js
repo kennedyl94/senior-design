@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('survey')
-    .controller('SurveyController', ['surveyService', Controller]);
+    .controller('SurveyController', ['surveyService', 'emailService', Controller]);
 
-  function Controller(surveyService, $http, config) {
+  function Controller(surveyService, emailService, $http, config) {
 
     var vm = this;
     vm.data = surveyService.data;
@@ -28,7 +28,7 @@
     };
 
     vm.sendResults = function() {
-      surveyService.sendResults(vm.address, vm.orgs);
+      emailService.sendResults(vm.address, vm.orgs);
     };
 
     vm.downloadResults = function() {
