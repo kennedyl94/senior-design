@@ -39,7 +39,8 @@
 
       vm.dd = {
         'content' : [
-          {text: 'MSOE Student Organization Survey Matches\n\n', style: 'header' },
+          {text: 'MSOE Student Organization Survey Matches', style: 'header' },
+          {text: 'Based on your choices, we suggest the following orgs:\n\n', style: 'subHeader' },
           vm.content],
 
         styles: {
@@ -47,6 +48,12 @@
             fontSize: 24,
             alignment: 'center',
             bold: true
+          },
+          subHeader: {
+            fontSize: 16,
+            alignment: 'center',
+            bold: true,
+            italics: true
           }
         }
       };
