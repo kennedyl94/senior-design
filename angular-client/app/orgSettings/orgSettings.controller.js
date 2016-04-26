@@ -86,7 +86,7 @@
       },
       deleteBtn:
       {
-        text: "Delete",
+        text: "Delete Org",
         function: vm.deleteOrg
       },
       deactivateBtn:
