@@ -16,7 +16,7 @@
       <br>
       <!--delete questions need to make call to the back end and use a promise to get the data-->
       <div ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
-        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.del([q._id])">Delete</button>
+        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.del([q._id])">Delete Question</button>
         {{q.question}} ({{q.category}})
         <br>
       </div>
@@ -34,7 +34,7 @@
       <!-- Need to display rules here -->
       <br>
       <div ng-repeat="r in surveySettingsCtrl.data.rules | toArray">
-        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.delrule([r])">Delete</button>
+        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.delrule([r])">Delete Rule</button>
         {{r.category}}
         {{r.num}}
       </div>
