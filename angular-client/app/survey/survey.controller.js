@@ -40,7 +40,7 @@
       vm.dd = {
         'content' : [
           {text: 'MSOE Student Organization Survey Matches', style: 'header' },
-          {text: 'Based on your choices, we suggest the following orgs:\n\n', style: 'subHeader' },
+          {text: 'Based on your choices, we suggest the following orgs:\n\n', style: 'subheader' },
           vm.content],
 
         styles: {

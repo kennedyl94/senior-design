@@ -1,8 +1,8 @@
 (function(){
   angular.module('ngOrganizations')
-    .controller('ngOrgsController', ['$modal', '$sce', '$scope', '$filter', Controller]);
+    .controller('ngOrgsController', ['$modal', '$sce', '$scope', '$filter', '$cookies', Controller]);
 
-  function Controller($modal, $sce, $scope, $filter) {
+  function Controller($modal, $sce, $scope, $filter, $cookies) {
     var vm = this;
 
     /* PAGINATION MANAGEMENT */
@@ -20,6 +20,10 @@
 
     vm.isActive = function(org) {
       return org.tags.indexOf('inactive') == -1;
+    };
+
+    vm.isStudentLifeAdmin = function() {
+      return $cookies.get('om_slAdmin');
     };
 
     // Highlights organization description words that match vm.query

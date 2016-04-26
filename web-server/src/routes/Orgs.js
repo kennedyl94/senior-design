@@ -112,4 +112,13 @@ router.put('/activation/:orgId', function(req, res) {
     });
 });
 
+router.put('/proposeChange', function(req, res) {
+    var change = req.body.change;
+    _dataServices.proposeChange(change, function() {
+        res.sendStatus(200);
+    }, function(error) {
+        console.log(error);
+    });
+});
+
 module.exports = router;
