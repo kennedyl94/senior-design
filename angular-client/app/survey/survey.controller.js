@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('survey')
-    .controller('SurveyController', ['surveyService', Controller]);
+    .controller('SurveyController', ['surveyService', 'emailService', Controller]);
 
-  function Controller(surveyService, $http, config) {
+  function Controller(surveyService, emailService, $http, config) {
 
     var vm = this;
     vm.data = surveyService.data;
@@ -28,7 +28,7 @@
     };
 
     vm.sendResults = function() {
-      surveyService.sendResults(vm.address, vm.orgs);
+      emailService.sendResults(vm.address, vm.orgs);
     };
 
     vm.downloadResults = function() {
@@ -39,7 +39,8 @@
 
       vm.dd = {
         'content' : [
-          {text: 'MSOE Student Organization Survey Matches\n\n', style: 'header' },
+          {text: 'MSOE Student Organization Survey Matches', style: 'header' },
+          {text: 'Based on your choices, we suggest the following orgs:\n\n', style: 'subheader' },
           vm.content],
 
         styles: {
@@ -47,6 +48,12 @@
             fontSize: 24,
             alignment: 'center',
             bold: true
+          },
+          subHeader: {
+            fontSize: 16,
+            alignment: 'center',
+            bold: true,
+            italics: true
           }
         }
       };

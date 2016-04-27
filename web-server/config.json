@@ -26,5 +26,17 @@
 			"String"
 		],
 		"category": "String"
+	},
+	"proposeChangesSchema": {
+		"name": "String",
+		"description": "String",
+		"tags": ["String"],
+		"links": "String",
+		"meetings": "String",
+		"contact": {
+			"name": "String",
+			"email": "String",
+			"phone": "String"
+		}
 	}
 }

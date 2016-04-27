@@ -19,10 +19,6 @@
         });
     };
 
-    service.sendResults = function(address, orgs) {
-      $http({method: 'POST', url: config.domain + 'email', data: {address: address, result: orgs}});
-    };
-
     function init() {
       //TODO -- Make initial call to get survey questions
       var promises = [];
