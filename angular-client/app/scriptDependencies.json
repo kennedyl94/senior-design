@@ -72,7 +72,7 @@
     "app/navSidebar/navSidebar.controller.js",
 
     "app/navOrgSideBar/navOrgSidebar.module.js",
-    "app/navOrgSidebar/navOrgSidebar.controller.js",
+    "app/navOrgSideBar/navOrgSidebar.controller.js",
 
     "app/approvals/approvals.module.js",
     "app/approvals/approvals.controller.js",

@@ -1,7 +1,16 @@
-var mongoose = require('mongoose');
+var database = require('./databaseServices');
 var config = require('../config');
 
-var User = mongoose.model('users', config.userSchema);
+var bCrypt = require('bcrypt-nodejs');
+
+var modelName = 'users';
+
+//set up the model for the users collection
+database.createModel(modelName, require('../config').userSchema);
+
+var isValidPassword = function(user, password){
+    return bCrypt.compareSync(password, user.Password);
+};
 
 /*
  * adds one admin user to the database
@@ -9,9 +18,11 @@ var User = mongoose.model('users', config.userSchema);
  * callback: a function that takes an error object and an object representing the saved user document
  */
 exports.addUser = function(user, callback) {
-    var newUser = new User(user);
-    newUser.save(function(err, savedUser) {
-        callback(err, savedUser._doc);
+    database.getModel(modelName, function(err, model){
+        var newUser = new model(user);
+        newUser.save(function(err, savedUser) {
+            callback(err, savedUser._doc);
+      });
   });
 };
 
@@ -22,11 +33,13 @@ exports.addUser = function(user, callback) {
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getOrgsForSpecificUser = function(username, success, error) {
-    User.find({Username: username}, function(err, foundUser) {
-        if(err) {
-            error(new Error('Unable to find user with username: ' + username));
-        }
-        success(foundUser[0].Orgs);
+    database.getModel(modelName, function(err, model){
+        model.find({Username: username}, function(err, foundUser) {
+            if(err) {
+                error(new Error('Unable to find user with username: ' + username));
+            }
+            success(foundUser[0].Orgs);
+        });
     });
 };
 
@@ -36,12 +49,14 @@ exports.getOrgsForSpecificUser = function(username, success, error) {
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getAllUsers = function(success, error){
-    User.find({}, function(err, users) {
-        var userMap = {};
-        users.forEach(function(user) {
-            userMap[user._id] = user;
+    database.getModel(modelName, function(err, model){
+        model.find({}, function(err, users) {
+            var userMap = {};
+            users.forEach(function(user) {
+                userMap[user._id] = user;
+            });
+            success(userMap);
         });
-        success(userMap);
     });
 };
 
@@ -52,11 +67,13 @@ exports.getAllUsers = function(success, error){
  * success: a callback that is called upon successful removeal
  */
 exports.deleteUser = function(id, success, error) {
-    User.find({_id: id}).remove().exec(function(err) {
-        if(err) {
-            error(new Error('Unable to delete user with id: ' + id));
-        }
-        success();
+    database.getModel(modelName, function(err, model){
+        model.find({_id: id}).remove().exec(function(err) {
+            if(err) {
+                error(new Error('Unable to delete user with id: ' + id));
+            }
+            success();
+        });
     });
 };
 
@@ -68,10 +85,40 @@ exports.deleteUser = function(id, success, error) {
  * error: a function to call if there is an error during updating
  */
 exports.editUser = function(user, id, success, error) {
-    User.findOneAndUpdate({_id : id}, user, function(err) {
-        if(err) {
-            error(new Error('Unable to modify item with id:' + id));
-        }
-        success();
+    database.getModel(modelName, function(err, model){
+        model.findOneAndUpdate({_id : id}, user, function(err) {
+            if(err) {
+                error(new Error('Unable to modify item with id:' + id));
+            }
+            success();
+        });
+    });
+};
+
+/*
+ * used by passport to authenticate users
+ * username: name of the user
+ * password: hashed password of the user
+ * done: function used by passport
+ */
+exports.authenticateUser = function(username, password, done) {
+    database.getModel(modelName, function(err, model){
+        console.log("username: " + username);
+        model.findOne({ 'Username' :  username },
+            function(err, user) {
+                console.log(user);
+                if (err)
+                    return done(err);
+                if (!user){
+                    console.log('User Not Found with username '+username);
+                    return done(null, false, {message: 'No User Found'});
+                }
+                if (!isValidPassword(user, password)){
+                    console.log('Invalid Password');
+                    return done(null, false, {message: 'Invalid Password'});
+                }
+                return done(null, user);
+            }
+        );
     });
 };
