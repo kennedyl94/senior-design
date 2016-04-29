@@ -280,6 +280,58 @@ button {
   }
 }
 
+/** resetPassword **/
+
+#resetPassword-div {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 300px;
+  background-color: $background-faded;
+  border-radius: 3px;
+
+  #resetPassword-header {
+    color: $background-red;
+    font-family: $site-font;
+    font-size: 32px;
+  }
+}
+.resetPassword-label {
+font-family: $site-font;
+font-size: 24px;
+}
+
+#resetPassword-div-inner {
+padding: 5% 10% 10% 20%;
+
+  #resetPassword-user-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+  #resetPassword-email-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+  #resetPassword-btn-div {
+    #login-btn {
+      width: 20%;
+      line-height: 135%;
+    }
+  }
+}
+
+
 /** CREATE CLUB **/
 #createClubPageTitle {
   text-align: center;
@@ -367,6 +419,3 @@ button {
     width: 60% !important;
   }
 }
-
-
-

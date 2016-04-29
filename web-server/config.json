@@ -17,6 +17,8 @@
 	"userSchema" : {
 	  	"Username": "String",
 	  	"Password": "String",
+        "resetPasswordToken": "String",
+        "resetPasswordExpiration":"Date", 
 	  	"Type": "String",
 	  	"Orgs": ["String"]
 	},

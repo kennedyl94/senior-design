@@ -98,6 +98,11 @@
     "app/login/login.routes.js",
     "app/login/login.service.js",
 
+    "app/resetPassword/resetPassword.module.js",
+    "app/resetPassword/resetPassword.controller.js",
+    "app/resetPassword/resetPassword.routes.js",
+    "app/resetPassword/resetPassword.service.js",
+
     "app/tagSearch/tagSearch.module.js",
     "app/tagSearch/tagSearch.controller.js",
     "app/tagSearch/tagSearch.routes.js",

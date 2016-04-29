@@ -1,8 +1,11 @@
 var express = require('express')
     , router = express.Router();
 
+var _dataServices = require('../userDataServices');
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
 
 passport.use(new LocalStrategy(_dataServices.authenticateUser));
 
