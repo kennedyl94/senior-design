@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('resetPassword')
-    .factory('resetPasswordService', ['$q', '$http','config', '$cookies', GetService]);
+    .factory('resetPasswordService', ['$http','config', GetService]);
 
-  function GetService($q, $http, config, $cookies) {
+  function GetService($http, config) {
 
     var service = this;
 

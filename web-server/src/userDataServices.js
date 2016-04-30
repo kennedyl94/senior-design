@@ -122,3 +122,14 @@ exports.authenticateUser = function(username, password, done) {
         );
     });
 };
+
+/*
+ * checks the database for a username and email combination, then sets a password reset token if a match is found
+ * username: username to search for
+ * email: email to search for
+ * callback: function that takes an error object and the newly created reset token
+ */
+exports.createResetToken = function(username, email, callback){
+  //TODO
+  callback(new Error('ERRNDEF'), null);
+};

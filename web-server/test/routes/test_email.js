@@ -21,9 +21,9 @@ fakeCreateTransport = function(arg){
 };
 
 describe('#routes/email', function(){
-	
+
 	describe(' POST /', function(){
-		
+
 		it('should send 200 if email was sent', function(done){
 			nodemailer.createTransport = fakeCreateTransport;
 			var req = request(app)
@@ -39,4 +39,19 @@ describe('#routes/email', function(){
 			console.log(req.body);
 		});
 	});
+
+  describe(' POST /resetPassword', function(){
+
+    it('should send message if a valid reset token is found', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+
+    it('should send 200 when finished', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+  });
 });

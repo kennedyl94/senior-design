@@ -8,6 +8,10 @@ router.post('/', function (req, res) {
     res.sendStatus(200);
 });
 
+router.post('/resetPassword', function(req, res) {
+  //TODO
+});
+
 router.post('/proposeChange', function(req, res) {
     proposeChangeEmail(req.body.result);
     res.sendStatus(200);
