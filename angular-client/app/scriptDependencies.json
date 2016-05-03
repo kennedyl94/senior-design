@@ -75,11 +75,6 @@
     "app/approvals/approvals.controller.js",
     "app/approvals/approvals.routes.js",
 
-    "app/logout/logout.module.js",
-    "app/logout/logout.controller.js",
-    "app/logout/logout.routes.js",
-    "app/logout/logout.service.js",
-
     "app/orgSettings/orgSettings.module.js",
     "app/orgSettings/orgSettings.controller.js",
     "app/orgSettings/orgSettings.routes.js",

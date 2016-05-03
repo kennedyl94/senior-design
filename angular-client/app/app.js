@@ -55,7 +55,6 @@
       'massUpload',
       'fileUpload',
       'login',
-      'logout',
       'tagSearch'
     ])
 
