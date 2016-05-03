@@ -208,6 +208,19 @@ exports.getAllTags = function(success, error) {
 	});
 };
 
+exports.deleteTag = function(tag, success, error) {
+	database.getModel(modelName, function(err, model){
+		model.find({ _id: orgId}).remove().exec(function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to delete item with id: ' + orgId));
+			}
+			else{
+				success();
+			}
+		});
+	});
+};
+
 /*
  * Searches The list of orgs by tags and returns the orgs found in the order of most tags to least.
  * success: A function to call upon successful completion.
