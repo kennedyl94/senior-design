@@ -4,6 +4,14 @@
       <input type="text" ng-model="ngOrgsCtrl.query" placeholder="Search" class="form-control" id="orgs-search-box"/>
       <i class="form-control-feedback" class="glyphicon glyphicon-search"></i>
     </div>
+    <div class="col-sm-4" id="org-sort-div">
+      <select class="form-control"
+              ng-model="ngOrgsCtrl.selectedOption"
+              ng-options="option.name for option in ngOrgsCtrl.options"
+              ng-change="ngOrgsCtrl.sortOrgs(ngOrgsCtrl.selectedOption)">
+        <option value="" disabled selected>Sort by...</option>
+      </select>
+    </div>
   </div>
   <div class="row" ng-repeat="org in ngOrgsCtrl.filtered = ngOrgsCtrl.orgs | search:ngOrgsCtrl.query:ngOrgsCtrl.settings | orderBy:ngOrgsCtrl.selectedOption.id | startFrom:(ngOrgsCtrl.currentPage-1)*ngOrgsCtrl.itemsPerPage | limitTo:ngOrgsCtrl.itemsPerPage">
     <div ng-class="{ 'col-md-8': ngOrgsCtrl.settings == 'true', 'col-sm-12': ngOrgsCtrl.settings == 'false' }">

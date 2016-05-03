@@ -47,11 +47,6 @@
           text: "Survey Settings",
           imgUrl: "content/images/svg/survey.svg",
           link: "root.surveySettings"
-        },
-        {
-          text: "Tag Settings",
-          imgUrl: "content/images/svg/tag.svg",
-          link: "root.tagSettings"
         }
       ]
     };
