@@ -17,5 +17,13 @@
         vm.orgList = tempOrgList;
       });
     }
+
+    vm.clear = function() {
+      var i = 0;
+      for(i; i < vm.tags.length; i++) {
+        vm.tags[i].checked = false;
+      }
+      vm.orgList = [];
+    }
   }
 })();

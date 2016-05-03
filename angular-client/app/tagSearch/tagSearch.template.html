@@ -5,13 +5,13 @@
       <div ng-repeat="tag in tsCtrl.tags">
         <div class="clearfix" ng-if="$index % 4 == 0"></div>
         <div class="col-sm-3">
-          <input type="checkbox" name="tagCheck" ng-model="tag.checked"> {{tag.text}}</input>
+          <input type="checkbox" name="tagCheck" ng-model="tag.checked" ng-click="tsCtrl.search(tagList)"> {{tag.text}}</input>
         </div>
       </div>
     </div>
   </form>
   <div id="ts-button-div">
-    <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
+    <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Clear</button>
   </div>
 </div>
 </br>
