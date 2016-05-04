@@ -1,1 +1,24 @@
-<h1 align="center"> Approvals </h1>
+<style>
+  .translucent {
+    background-color: rgba(255,255,255,0.8);
+    padding: 3.5% !important;
+  }
+</style>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<body>
+<div class="container">
+  <h1 align="center">Organization Changes</h1>
+  <div id="user-settings-div">
+    <table class="table table-hover translucent">
+      <tbody>
+      <tr ng-repeat="proposedChange in approvalsCtrl.data.changes">
+        <td><h3 class="orgs-header ng-binding" ng-click="approvalsCtrl.openEditChangesModal(proposedChange)">{{proposedChange.name}}</h3></td>
+        <td><input type="button" class="btn btn-default" value="Approve" ng-click="approvalsCtrl.approveChange(proposedChange)"></td>
+        <td><input type="button" class="btn btn-default" value="Reject" ng-click="approvalsCtrl.rejectChange(proposedChange)"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

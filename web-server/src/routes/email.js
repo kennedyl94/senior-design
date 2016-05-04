@@ -32,7 +32,7 @@ function proposeChangeEmail(org) {
 
     var mailOptions = {
         from: 'OrganizationMatcher<donotreplay@msoe.edu>',
-        to: 'msoeSeniorDesignTeam8@gmail.com',
+        to: 'donohewe@gmail.com',
         subject: subject,
         text: builtString
     };
