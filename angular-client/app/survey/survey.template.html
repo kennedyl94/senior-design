@@ -1,8 +1,9 @@
 <h1 align="center">Survey</h1>
+<p align="center">Check all that apply to you</p>
 <div id="survey-div">
 	<div id="survey-input-div" ng-repeat="question in surveyCtrl.data.questions | toArray">
 		<div class="row">
-			<div class="col-sm-1 col-sm-offset-4">
+			<div class="col-sm-1 col-sm-offset-1">
 				<input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
                ng-false-value=false ng-true-value=true value=false>
 			</div>
@@ -15,7 +16,7 @@
   <form name="emailForm">
     <div class="col-sm-12">
       <div id="survey-submit-div" class="row">
-        <div class="col-sm-1 col-sm-offset-4">
+        <div class="col-sm-1 col-sm-offset-1">
           <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
         </div>
         <div class="col-sm-3">
@@ -30,6 +31,12 @@
   </form>
 </div>
 </br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
 <ng-organizations
   ng-show="surveyCtrl.orgs.length > 0"
   orgs="surveyCtrl.orgs"
