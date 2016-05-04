@@ -1,17 +1,18 @@
 <h1 align="center">Survey</h1>
 <p align="center">Check all that apply to you</p>
 <div id="survey-div">
-	<div id="survey-input-div" ng-repeat="question in surveyCtrl.data.questions | toArray">
-		<div class="row">
-			<div class="col-sm-1 col-sm-offset-1">
-				<input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
-               ng-false-value=false ng-true-value=true value=false>
-			</div>
-      <div class="col-sm-3">
-        {{question.question}}
-      </div>
-		</div>
-	</div>
+
+  <div ng-repeat="question in surveyCtrl.data.questions | toArray">
+    <div class="clearfix" ng-if="$index % 4 == 0"></div>
+    <div class="col-sm-3">
+
+      <input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
+      ng-false-value=false ng-true-value=true value=false>
+      {{question.question}}
+
+    </div>
+  </div>
+
   <br/>
   <form name="emailForm">
     <div class="col-sm-12">
