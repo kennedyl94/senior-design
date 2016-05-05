@@ -46,14 +46,6 @@
       {url: "content/images/msoe7.jpg", name: "Picture 7"}
     ];
 
-    vm.options = [
-      {id: "name", name: "Name"},
-      {id: "description", name: "Description"},
-      {id: "contact.name", name: "Contact"}
-    ];
-
-    vm.selectedOption = vm.options[0];
-
     // MODAL CREATIONS
     vm.openModal = function(org, images) {
       return $modal.open({
