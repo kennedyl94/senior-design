@@ -2,26 +2,21 @@
   'use strict';
 
   angular.module('approvals')
-    .controller('ApprovalsController', ['approvalsService', '$modal', Controller]);
+    .controller('ApprovalsController', ['approvalsService', Controller]);
 
-  function Controller(approvalsService, $modal) {
+  function Controller(approvalsService) {
 
     var vm = this;
-    var editChangeModal;
     vm.data = approvalsService.data;
 
-    vm.applyChange = function(change) {
-      console.log("in apply change: " + change.name);
-    };
-
     vm.approveChange = function(change) {
-      var org = mapChangeToOrg(change);
-      approvalsService.updateChanges(org);
+      var org = vm.mapChangeToOrg(change);
+      approvalsService.updateOrg(org);
       approvalsService.removeChange(change);
-      alert("Change for: " + change.name + " approved!!");
+      location.reload();
     };
 
-    function mapChangeToOrg(change) {
+    vm.mapChangeToOrg = function(change) {
       return {
         name: change.name,
         description: change.description,
@@ -34,27 +29,12 @@
           email: change.contact.email
         }
       }
-    }
+    };
 
     vm.rejectChange = function(change) {
       approvalsService.removeChange(change);
-      alert("Change for: " + change.name + " rejected. SUCKS!!");
+      location.reload();
     };
 
-    vm.openEditChangesModal = function(change) {
-      editChangeModal = $modal.open({
-        animation: true,
-        templateUrl: 'directives/editChangeModal/editChangeModal.template.html',
-        controller: 'EditChangeModalController as editChangeModalCtrl',
-        resolve: {
-          contents: function() {
-            return {
-              change: change,
-              function: vm.applyChange
-            };
-          }
-        }
-      });
-    };
   }
 })();

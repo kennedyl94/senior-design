@@ -14,7 +14,7 @@
     <table class="table table-hover translucent">
       <tbody>
       <tr ng-repeat="proposedChange in approvalsCtrl.data.changes">
-        <td><h3 class="orgs-header ng-binding" ng-click="approvalsCtrl.openEditChangesModal(proposedChange)">{{proposedChange.name}}</h3></td>
+        <td><h3>{{proposedChange.name}}</h3></td>
         <td><input type="button" class="btn btn-default" value="Approve" ng-click="approvalsCtrl.approveChange(proposedChange)"></td>
         <td><input type="button" class="btn btn-default" value="Reject" ng-click="approvalsCtrl.rejectChange(proposedChange)"></td>
       </tr>

@@ -11,11 +11,10 @@
       changes: {}
     };
 
-    service.updateChanges = function(org) {
+    service.updateOrg = function(org) {
       var deferred = $q.defer();
       var promise = $http({method: 'PUT', url: config.domain + 'Organizations/modifyOrgByName', data: {org: org}});
       promise.then(function(data) {
-        alert("saved (but you should still check)!!");
         deferred.resolve(data.data);
       });
       return deferred.promise;
@@ -25,7 +24,6 @@
       var deferred = $q.defer();
       var promise = $http({method: 'DELETE', url: config.domain + 'proposeChanges/delete/' + change._id});
       promise.then(function(data) {
-        alert("removed (but you should still check)!!");
         deferred.resolve();
       });
       return deferred.promise;
@@ -36,8 +34,6 @@
       promises.push($http({method: 'GET', url: config.domain + 'proposeChanges/allChanges'}));
       $q.all(promises).then(function(data) {
         service.data.changes = data[0].data;
-        console.log("got the data");
-        console.log("service.data.changes: " + service.data.changes[0].name);
       });
     }
 
