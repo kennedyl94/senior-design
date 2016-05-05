@@ -10,6 +10,7 @@
 
     vm.isStudentLifeAdmin = $cookies.get('om_slAdmin');
     vm.isOrgAdmin = $cookies.get('om_orgAdmin');
+    vm.currentUser = $cookies.get('currentUser');
 
     $scope.$watch(function() { return $cookies.get('om_slAdmin'); }, function(isStudentLifeAdmin) {
       vm.isStudentLifeAdmin = isStudentLifeAdmin;

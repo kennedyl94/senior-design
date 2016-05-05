@@ -55,7 +55,6 @@
       'massUpload',
       'fileUpload',
       'login',
-      'logout',
       'tagSearch',
       'email'
     ])
@@ -66,6 +65,10 @@
         $location.path('/login');
       } else if(next.data && next.data.studentOrgs && $cookies.get('om_orgAdmin') == 'false') {
         $location.path('/login');
+      }
+
+      if(next.data && next.data.logInRestricted && $cookies.get('om_loggedIn') == 'true') {
+        $location.path('/organizations');
       }
     });
   }]);
