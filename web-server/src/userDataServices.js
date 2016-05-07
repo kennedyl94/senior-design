@@ -2,6 +2,7 @@ var database = require('./databaseServices');
 var config = require('../config');
 
 var bCrypt = require('bcrypt-nodejs');
+var crypto = require('crypto');
 
 var modelName = 'users';
 
@@ -18,11 +19,18 @@ var isValidPassword = function(user, password){
  * callback: a function that takes an error object and an object representing the saved user document
  */
 exports.addUser = function(user, callback) {
-    database.getModel(modelName, function(err, model){
+  database.getModel(modelName, function(err, model){
+    model.find({Username: user.Username}, function(err, foundUser){
+      if (foundUser.length > 0){
+        callback(new Error("ERR: Username taken"), null);
+      }
+      else{
         var newUser = new model(user);
         newUser.save(function(err, savedUser) {
-            callback(err, savedUser._doc);
-      });
+          callback(err, savedUser._doc);
+        });
+      }
+    });
   });
 };
 
@@ -130,6 +138,19 @@ exports.authenticateUser = function(username, password, done) {
  * callback: function that takes an error object and the newly created reset token
  */
 exports.createResetToken = function(username, email, callback){
-  //TODO
-  callback(new Error('ERRNDEF'), null);
+  var token = crypto.randomBytes(18).toString('hex');
+  database.getModel(modelName, function(err, model){
+    model.findOneAndUpdate({Username: username, Email: email},
+      {$set: {
+        resetPasswordToken: token,
+        resetPasswordExpiration: Date.now() + 1200000 // 20 minutes
+      }}, function(err, document){
+      if(document){
+        callback(null, token);
+      }
+      else{
+        callback(new Error("ERR:NOUSER"), null);
+      }
+    });
+  });
 };

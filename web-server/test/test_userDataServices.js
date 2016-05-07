@@ -12,11 +12,8 @@ var database = require('../src/databaseServices');
 var fakeToken = "FakeToken";
 
 var realRandomBytes = crypto.randomBytes;
-var fakeRandomBytes = function(bytes, callback){
-  callback(null, fakeToken);
-};
-var fakeRandomBytes2 = function(bytes, callback){
-  callback(new Error("ERRFAKEERR"), null);
+var fakeRandomBytes = function(bytes){
+  return fakeToken;
 };
 
 var fakeUsername = "username";
