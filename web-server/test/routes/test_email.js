@@ -43,15 +43,49 @@ describe('#routes/email', function(){
   describe(' POST /resetPassword', function(){
 
     it('should send message if a valid reset token is found', function(done){
-      //TODO
-      assert.fail();
-      done();
+      var called = false;
+      nodemailer.createTransport = function(arg){
+      	return {
+      		sendMail: function(options, callback){
+            called = true;
+      			callback(null, {response: 200});
+      		}
+      	};
+      };
+
+      request(app)
+      .post('/test/email/resetPassword')
+      .send({
+        token: null
+      })
+      .expect(200, function(){
+        nodemailer.createTransport = realCreateTransport;
+        assert(called);
+        done();
+      });
     });
 
     it('should not send message if no valid reset token is found', function(done){
-      //TODO
-      assert.fail();
-      done();
+      var called = false;
+      nodemailer.createTransport = function(arg){
+        return {
+          sendMail: function(options, callback){
+            called = true;
+            callback(null, {response: 200});
+          }
+        };
+      };
+
+      request(app)
+      .post('/test/email/resetPassword')
+      .send({
+        token: null
+      })
+      .expect(200, function(){
+        nodemailer.createTransport = realCreateTransport;
+        assert(!called);
+        done();
+      });
     });
   });
 });

@@ -10,6 +10,7 @@ router.post('/', function (req, res) {
 
 router.post('/resetPassword', function(req, res) {
   //TODO
+  res.send(200);
 });
 
 router.post('/proposeChange', function(req, res) {

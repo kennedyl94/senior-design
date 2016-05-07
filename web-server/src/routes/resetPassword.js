@@ -5,7 +5,7 @@ var _dataServices = require('../userDataServices');
 
 router.post('/', function(req, res, next) {
     console.log("Hi, there!");
-    //next();
+    next();
 });
 
 module.exports = router;
