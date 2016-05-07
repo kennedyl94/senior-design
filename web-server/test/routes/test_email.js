@@ -48,7 +48,7 @@ describe('#routes/email', function(){
       done();
     });
 
-    it('should send 200 when finished', function(done){
+    it('should not send message if no valid reset token is found', function(done){
       //TODO
       assert.fail();
       done();

@@ -5,6 +5,9 @@ var userDataServices = require('../../src/userDataServices')
 
 var resetPassword = require('../../src/routes/resetPassword.js');
 
+var nextFunc = function(token){
+
+};
 
 var nextRoute = express.Router();
 nextRoute.post('/', function(req, res){

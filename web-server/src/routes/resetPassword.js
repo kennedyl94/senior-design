@@ -4,8 +4,8 @@ var express = require('express')
 var _dataServices = require('../userDataServices');
 
 router.post('/', function(req, res, next) {
-
-    next();
+    console.log("Hi, there!");
+    //next();
 });
 
 module.exports = router;
