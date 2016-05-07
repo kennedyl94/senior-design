@@ -15,7 +15,7 @@ var fakeCreateResetToken = function(username, email, callback){
   callback(null, fakeToken);
 };
 
-var fakeCreateResetToken2 = function(username,email, callback){
+var fakeCreateResetToken2 = function(username, email, callback){
   callback(new Error("ERRFAKEERR"), null);
 };
 
@@ -94,7 +94,7 @@ describe('#routes/resetPassword', function(){
       var pass = true;
       nextFunc = function(token, callback){
         try{
-          assert.equal(null, fakeToken);
+          assert.equal(null, token);
         }
         catch(err){
           pass = false;

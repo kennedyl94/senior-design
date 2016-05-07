@@ -18,6 +18,10 @@ router.post('/proposeChange', function(req, res) {
     res.sendStatus(200);
 });
 
+router.post('/resetPassword', function(req, res) {
+  
+})
+
 function proposeChangeEmail(org) {
     var builtString = "The following changes have been requested:\r\n\r\n";
     builtString = builtString.concat('Org Name:\r\n    ' + org.name + '\r\n');
