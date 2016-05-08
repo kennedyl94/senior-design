@@ -4,8 +4,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
 
-
 var email = require('../../src/routes/email.js');
+
+var fakeToken = '12345678';
 
 var app = express();
 app.use(bodyParser.json());
@@ -40,7 +41,7 @@ describe('#routes/email', function(){
 		});
 	});
 
-  describe(' POST /resetPassword', function(){
+  describe(' POST /sendReset', function(){
 
     it('should send message if a valid reset token is found', function(done){
       var called = false;
@@ -54,9 +55,9 @@ describe('#routes/email', function(){
       };
 
       request(app)
-      .post('/test/email/resetPassword')
+      .post('/test/email/sendReset')
       .send({
-        token: null
+        token: fakeToken
       })
       .expect(200, function(){
         nodemailer.createTransport = realCreateTransport;
@@ -77,7 +78,7 @@ describe('#routes/email', function(){
       };
 
       request(app)
-      .post('/test/email/resetPassword')
+      .post('/test/email/sendReset')
       .send({
         token: null
       })

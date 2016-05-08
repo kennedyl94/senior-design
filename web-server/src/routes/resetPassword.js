@@ -3,13 +3,15 @@ var express = require('express')
 
 var _dataServices = require('../userDataServices');
 
-router.post('/', function(req, res, next) {
-  _dataServices.createResetToken(req.body.Username, req.body.email, function(err, token){
+router.post('/sendReset', function(req, res, next) {
+  _dataServices.createResetToken(req.body.username, req.body.email, function(err, token){
     if(err){
-      next(null);
+      req.body.token = null;
+      next();
     }
     else{
-      next(token);
+      req.body.token = token;
+      next();
     }
   });
 });

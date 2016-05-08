@@ -42,7 +42,7 @@ var realCreateResetToken = userDataServices.createResetToken;
 
 describe('#routes/resetPassword', function(){
 
-	describe(' POST /', function(){
+	describe(' POST /sendReset', function(){
 
     it('should request reset token be added for user in database', function(done){
       var called = false;
@@ -52,7 +52,7 @@ describe('#routes/resetPassword', function(){
       };
 
       request(app)
-			.post('/test/resetPassword')
+			.post('/test/resetPassword/sendReset')
       .send({
         username: fakeUsername,
         email: fakeEmail
@@ -78,7 +78,7 @@ describe('#routes/resetPassword', function(){
       userDataServices.createResetToken = fakeCreateResetToken;
 
       request(app)
-      .post('/test/resetPassword')
+      .post('/test/resetPassword/sendReset')
       .send({
         username: fakeUsername,
         email: fakeEmail
@@ -104,7 +104,7 @@ describe('#routes/resetPassword', function(){
       userDataServices.createResetToken = fakeCreateResetToken2;
 
       request(app)
-      .post('/test/resetPassword')
+      .post('/test/resetPassword/sendReset')
       .send({
         username: fakeUsername,
         email: fakeEmail

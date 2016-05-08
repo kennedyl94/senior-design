@@ -9,7 +9,7 @@
     var service = this;
 
     service.sendReset = function(username, email) {
-      $http({method: 'POST', url: config.domain + 'resetPassword', data: {username: username, email:email}});
+      $http({method: 'POST', url: config.domain + 'resetPassword/sendReset', data: {username: username, email:email}});
     };
     return service;
   }

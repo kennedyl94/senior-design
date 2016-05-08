@@ -10,7 +10,7 @@
     vm.email = "";
 
     vm.sendReset = function() {
-      resetPasswordService.sendReset(vm.username, vm.password)
+      resetPasswordService.sendReset(vm.username, vm.email);
       $state.go('root.login', {redirect: true});
     };
   }

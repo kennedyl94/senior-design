@@ -59,7 +59,7 @@ app.use('/api/UploadFile', upload);
 
 app.use('/api/email', email);
 
-app.use('/api/resetPassword', resetPassword);
+app.use('/api/resetPassword', resetPassword, email);
 
 app.use('/api/test/', test);
 
