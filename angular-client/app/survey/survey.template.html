@@ -1,7 +1,7 @@
 <h1 align="center">Survey</h1>
-<p align="center">Check all that apply to you</p>
-<div id="survey-div">
 
+<div id="survey-div">
+  <p id="inst">Check all that apply to you</p>
   <div ng-repeat="question in surveyCtrl.data.questions | toArray">
     <div class="clearfix" ng-if="$index % 4 == 0"></div>
     <div class="col-sm-3">
