@@ -12,15 +12,17 @@
       $http({method: 'POST', url: config.domain + 'resetPassword/sendReset', data: {username: username, email:email}});
     };
 
-    service.checkValidToken = function(token){
-      var promise = $http({method: 'POST', url: config.domain + 'resetPassword/checkToken', data: {token: token}});
-      return promise;
+    service.checkValidToken = function(token, callback){
+      $http({method: 'GET', url: config.domain + 'resetPassword/checkValidToken/'+token}).then(function(){}, function(data){
+        console.log(data);
+        callback(data);
+      });
     };
 
     service.sendNewPassword = function(token, password){
       $http({method: 'POST', url: config.domain + 'resetPassword/', data: {token: token, password: password}});
     };
-    
+
     return service;
   }
 })();

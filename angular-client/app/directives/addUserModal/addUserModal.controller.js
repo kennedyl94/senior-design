@@ -21,6 +21,7 @@
 
     vm.name = "";
     vm.password = "";
+    vm.email = "";
     vm.orgs = [];
 
     vm.back = function () {
@@ -35,6 +36,7 @@
         var user = {
           Username: vm.name,
           Password: vm.password,
+          Email: vm.email,
           Type: $scope.list_category,
           Orgs: vm.orgs
         };

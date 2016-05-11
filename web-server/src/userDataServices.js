@@ -165,7 +165,10 @@ exports.checkValidToken = function(token, callback){
   database.getModel(modelName, function(err, model){
     model.findOne({resetPasswordToken: token}, function(err2, user){
       if(user){
-        retval = true;
+        console.log(user);
+        if(Date.now() < user.resetPasswordExpiration){
+          retval = true;
+        }
       };
       callback(err2, retval);
     });
@@ -186,7 +189,7 @@ exports.checkValidToken = function(token, callback){
          resetPasswordToken: undefined,
          resetPasswordExpiration: undefined
        }},{
-        new: true 
+        new: true
        }, function(err, document){
        if(document){
          callback(null, document);

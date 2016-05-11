@@ -19,8 +19,7 @@ router.post('/sendReset', function(req, res, next) {
 });
 
 router.get('/checkValidToken/:token', function(req, res){
-  //TODO
-  var token = req.params.token
+  var token = req.params.token;
   _dataServices.checkValidToken(token, function(err, found){
     if(found){
       res.send(200);

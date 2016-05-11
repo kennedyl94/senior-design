@@ -13,9 +13,9 @@
     vm.token = $state.params.token;
     vm.validPassword = false;
 
-    resetPasswordService.checkValidToken().then(function(data){
-      if(data.code == 200){
-        $state.go('root.login', {redirect: true});
+    var promise = resetPasswordService.checkValidToken(vm.token, function(data){
+      if(data.data.code != 200){
+        vm.token = "";
       }
     });
 

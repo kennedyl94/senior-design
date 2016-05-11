@@ -37,7 +37,7 @@ describe('resetPasswordService', function() {
 
   describe('Get check valid token', function(){
     it('should call to verify reset token', function(){
-      httpBacked.expectGET(URL + checkValidToken +'/' + fakeToken);
+      httpBacked.expectGET(URL + 'checkValidToken/' + fakeToken);
       resetPasswordService.checkValidToken(fakeToken);
       httpBackend.flush();
     });
