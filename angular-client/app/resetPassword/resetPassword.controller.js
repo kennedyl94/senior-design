@@ -31,7 +31,8 @@
 
     function sendNewPassword(){
       if(vm.validPassword){
-          resetPasswordService.sendNewPassword(vm.token, vm.newPassword);
+        resetPasswordService.sendNewPassword(vm.token, vm.newPassword);
+        $state.go('root.login', {redirect: true});
       }
     }
 
