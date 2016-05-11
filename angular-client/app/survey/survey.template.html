@@ -1,21 +1,23 @@
 <h1 align="center">Survey</h1>
+
 <div id="survey-div">
-	<div id="survey-input-div" ng-repeat="question in surveyCtrl.data.questions | toArray">
-		<div class="row">
-			<div class="col-sm-1 col-sm-offset-4">
-				<input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
-               ng-false-value=false ng-true-value=true value=false>
-			</div>
-      <div class="col-sm-3">
-        {{question.question}}
-      </div>
-		</div>
-	</div>
+  <p id="inst">Check all that apply to you</p>
+  <div ng-repeat="question in surveyCtrl.data.questions | toArray">
+    <div class="clearfix" ng-if="$index % 4 == 0"></div>
+    <div class="col-sm-3">
+
+      <input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
+      ng-false-value=false ng-true-value=true value=false>
+      {{question.question}}
+
+    </div>
+  </div>
+
   <br/>
   <form name="emailForm">
     <div class="col-sm-12">
       <div id="survey-submit-div" class="row">
-        <div class="col-sm-1 col-sm-offset-4">
+        <div class="col-sm-1 col-sm-offset-1">
           <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
         </div>
         <div class="col-sm-3">
@@ -29,7 +31,8 @@
     </div>
   </form>
 </div>
-</br>
+
+
 <ng-organizations
   ng-show="surveyCtrl.orgs.length > 0"
   orgs="surveyCtrl.orgs"

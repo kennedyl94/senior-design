@@ -341,9 +341,9 @@ button {
 
 /** SURVEY **/
 #survey-div {
-  text-align: center;
+  text-align: left;
   background-color: $background-faded;
-  margin-bottom: 25px;
+  margin-bottom: 100px;
 
   #survey-input-div {
     .row {
@@ -356,6 +356,10 @@ button {
 
   #survey-submit-div {
     background-color: $background-faded;
+  }
+  #inst {
+    text-align: center;
+    font-weight: bold;
   }
 }
 
