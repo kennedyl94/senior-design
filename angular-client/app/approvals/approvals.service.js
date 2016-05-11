@@ -29,6 +29,15 @@
       return deferred.promise;
     };
 
+    service.changeEmail = function(email) {
+      var deferred = $q.defer();
+      var promise = $http({method: 'PUT', url: config.domain + 'proposeChanges/changeAdminEmail', data: {adminEmail: email}});
+      promise.then(function(data) {
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    };
+
     function init() {
       var promises = [];
       promises.push($http({method: 'GET', url: config.domain + 'proposeChanges/allChanges'}));

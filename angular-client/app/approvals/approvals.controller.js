@@ -8,6 +8,8 @@
 
     var vm = this;
     vm.data = approvalsService.data;
+    vm.address = "";
+    vm.showEmailField = false;
 
     vm.approveChange = function(change) {
       var org = vm.mapChangeToOrg(change);
@@ -36,5 +38,14 @@
       location.reload();
     };
 
+    vm.showAdminEmail = function() {
+      vm.showEmailField = true;
+    };
+
+    vm.changeEmail = function() {
+      approvalsService.changeEmail(vm.address);
+      vm.showEmailField = false;
+      vm.address = "";
+    }
   }
 })();

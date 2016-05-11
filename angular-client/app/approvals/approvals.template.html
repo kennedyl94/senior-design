@@ -9,8 +9,23 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <body>
 <div class="container">
-  <h1 align="center">Organization Changes</h1>
+  <h1 align="center">Organization Change Approvals</h1>
   <div id="user-settings-div">
+    <form name="adminEmailForm">
+      <div class="col-xs-offset-5">
+        <div id="admin-Email-div" class="row">
+          <div>
+            <button id="showChangeAdminEmail" class="btn btn-default" type="button" ng-click="approvalsCtrl.showAdminEmail()" ng-show="!approvalsCtrl.showEmailField">Change Admin Email</button>
+          </div>
+          <div class="col-xs-4">
+            <input name="email" class="form-control" type="email" ng-model="approvalsCtrl.address" placeholder="your.email@email.com" ng-show="approvalsCtrl.showEmailField" required/>
+          </div>
+          <div class="col-xs-3">
+            <button id="submitAdminEmail" class="btn btn-default" type="button" ng-disabled="adminEmailForm.$invalid" ng-click="approvalsCtrl.changeEmail()" ng-show="approvalsCtrl.showEmailField">Submit Change</button>
+          </div>
+        </div>
+      </div>
+    </form>
     <table class="table table-hover translucent">
       <tbody>
       <tr ng-repeat="proposedChange in approvalsCtrl.data.changes">

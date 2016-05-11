@@ -3,6 +3,8 @@ var express = require('express')
 
 var  _dataServices = require('../orgDataServices.js');
 var config = require('../../config');
+var jsonfile = require('jsonfile');
+var adminEmailFile =__dirname+"/../../adminEmailConfig.json";
 
 router.get('/allChanges', function (req, res) {
     console.log("in all changes on web server side");
@@ -22,6 +24,18 @@ router.delete('/delete/:id', function(request, response) {
         }, function(error) {
             console.log(error);
         });
+});
+
+router.getAdminEmail = function() {
+    var adminEmail = jsonfile.readFileSync(adminEmailFile);
+    return adminEmail.email;
+};
+
+router.put('/changeAdminEmail', function(req, res) {
+    var adminEmail = jsonfile.readFileSync(adminEmailFile);
+    adminEmail.email = req.body.adminEmail;
+    jsonfile.writeFileSync(adminEmailFile, adminEmail);
+    res.send(200);
 });
 
 module.exports = router;

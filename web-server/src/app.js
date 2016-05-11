@@ -57,9 +57,9 @@ app.use('/api/surveySet', surveySet);
 
 app.use('/api/UploadFile', upload);
 
-app.use('/api/email', email);
-
 app.use('/api/proposeChanges', proposeChanges);
+
+app.use('/api/email', email);
 
 app.use('/api/test/', test);
 
