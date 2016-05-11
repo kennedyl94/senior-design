@@ -87,7 +87,7 @@ describe('#routes/resetPassword', function(){
         userDataServices.createResetToken = realCreateResetToken;
         assert(pass);
         done();
-      })
+      });
     });
 
     it('should pass null to next route if an error occured', function(done){
@@ -113,7 +113,31 @@ describe('#routes/resetPassword', function(){
         userDataServices.createResetToken = realCreateResetToken;
         assert(pass);
         done();
-      })
-    })
+      });
+    });
+  });
+
+  describe('GET /checkValidToken', function(){
+
+    it('should send 200 if the token is valid', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+
+    it('should send 404 if the token is invalid', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+  });
+
+  describe('POST /', function(){
+
+    it('should request the user\'s password be changed in the database', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
   });
 });

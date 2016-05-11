@@ -74,4 +74,40 @@ describe('userDataServices', function () {
       });
     });
   });
+
+  describe('#checkValidToken', function(){
+
+    it('should return true if the token is found in the database', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+
+    it('should return false if the token is not found in the database', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+  });
+
+  describe('#setPasswordByToken', function(){
+
+    it('should set the password for the user if token exists', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+
+    it('should send error to callback if there was a problem setting the password', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+
+    it('should invalidate reset token when pasword reset is successful', function(done){
+      //TODO
+      assert.fail();
+      done();
+    });
+  });
 });
