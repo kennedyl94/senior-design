@@ -29,6 +29,7 @@
 
     vm.navButtons = [
       {
+        title: "Search by Tags",
         imgUrl: "content/images/svg/overview_1.svg",
         link: "root.tagSearch",
         description: "Do you have an idea of what you are interested in? If so, check out the Tag Search feature. " +
@@ -36,6 +37,7 @@
                       "which organizations best suit you!"
       },
       {
+        title: "View Organizations",
         imgUrl: "content/images/svg/overview_2.svg",
         link: "root.organizations",
         description: "There are many student organizations available at the Milwaukee School of Engineering. " +
@@ -43,10 +45,11 @@
                       "available on campus."
       },
       {
+        title: "Take Survey",
         imgUrl: "content/images/svg/overview_3.svg",
         link: "root.survey",
         description: "Are you unsure of your interests or what student organization you may want to join? " +
-                      "If so, take the Student Organization Survey to be matched to a list of student organizations " +
+                      "Take the Student Organization Survey to be matched to a list of student organizations " +
                       "that you will most likely be interested in!"
       }
     ]
