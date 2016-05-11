@@ -10,7 +10,6 @@
     vm.data = surveyService.data;
     vm.orgs = {};
     vm.ans = {};
-    vm.address = '';
     vm.submitted = false;
 
     vm.submit = function() {

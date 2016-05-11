@@ -12,20 +12,17 @@
 		</div>
 	</div>
   <br/>
-  <form name="emailForm">
-    <div class="col-sm-12">
-      <div id="survey-submit-div" class="row">
-        <div class="col-sm-1 col-sm-offset-4">
-          <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
-        </div>
-        <ng-email
-          orgs='surveyCtrl.orgs'
-          submitted='surveyCtrl.submitted',
-          address='surveyCtrl.address'>
-        </ng-email>
+  <div class="col-sm-12">
+    <div id="survey-submit-div" class="row">
+      <div class="col-sm-1 col-sm-offset-4">
+        <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
       </div>
+      <ng-email
+        orgs='surveyCtrl.orgs'
+        submitted='surveyCtrl.submitted'>
+      </ng-email>
     </div>
-  </form>
+  </div>
 </div>
 </br>
 <ng-organizations

@@ -9,12 +9,14 @@
     var vm = this;
     vm.tags = tagSearchService.data.tags;
     vm.orgList = [];
+    vm.submitted = false;
 
     vm.search = function() {
-      vm.showOrgs = false;
+      vm.submitted = false;
       vm.orgList = [];
       tagSearchService.searchTags(vm.tags, function(tempOrgList) {
         vm.orgList = tempOrgList;
+        vm.submitted = true;
       });
     }
 

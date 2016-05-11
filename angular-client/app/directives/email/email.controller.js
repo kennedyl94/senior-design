@@ -14,7 +14,6 @@
     };
 
     vm.downloadResults = function() {
-      console.log('we here');
       for(var i = 0; i < vm.orgs.length; i++) {
         vm.content.push(vm.orgs[i].name);
       }

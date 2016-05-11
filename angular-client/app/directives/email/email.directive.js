@@ -10,8 +10,7 @@
       controllerAs: 'emailCtrl',
       bindToController : {
         orgs: "=",
-        submitted: "=",
-        address: "="
+        submitted: "="
       },
       scope: {}
     };
