@@ -18,13 +18,11 @@
         <div class="col-sm-1 col-sm-offset-4">
           <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
         </div>
-        <div class="col-sm-3">
-          <input name="email" class="form-control" type="email" ng-model="surveyCtrl.address" placeholder="your.email@email.com" ng-show="surveyCtrl.submitted" required/>
-        </div>
-        <div class="col-sm-1">
-          <button id="test" class="btn btn-default" type="button" ng-disabled="emailForm.$invalid" ng-click="surveyCtrl.sendResults()" ng-show="surveyCtrl.submitted">Email Results</button>
-          <button id="pdf" class="btn btn-default" type="button" ng-click="surveyCtrl.downloadResults()" ng-show="surveyCtrl.submitted">Download Results</button>
-        </div>
+        <ng-email
+          orgs='surveyCtrl.orgs'
+          submitted='surveyCtrl.submitted',
+          address='surveyCtrl.address'>
+        </ng-email>
       </div>
     </div>
   </form>

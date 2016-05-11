@@ -25,6 +25,8 @@
     "app/directives/editUserModal/editUserModal.service.js",
 
     "app/directives/email/email.module.js",
+    "app/directives/email/email.directive.js",
+    "app/directives/email/email.controller.js",
     "app/directives/email/email.service.js",
 
     "app/directives/addUserModal/addUserModal.module.js",

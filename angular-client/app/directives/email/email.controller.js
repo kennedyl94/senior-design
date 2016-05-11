@@ -1,0 +1,48 @@
+(function() {
+  'use strict';
+
+  angular.module('email')
+    .controller('EmailController', ['emailService', Controller]);
+
+  function Controller(emailService) {
+
+    var vm = this;
+    vm.content = [];
+
+    vm.sendResults = function() {
+      emailService.sendResults(vm.address, vm.orgs);
+    };
+
+    vm.downloadResults = function() {
+      console.log('we here');
+      for(var i = 0; i < vm.orgs.length; i++) {
+        vm.content.push(vm.orgs[i].name);
+      }
+
+      vm.dd = {
+        'content' : [
+          {text: 'MSOE Student Organization Survey Matches', style: 'header' },
+          {text: 'Based on your choices, we suggest the following orgs:\n\n', style: 'subheader' },
+          vm.content],
+
+        styles: {
+          header: {
+            fontSize: 24,
+            alignment: 'center',
+            bold: true
+          },
+          subHeader: {
+            fontSize: 16,
+            alignment: 'center',
+            bold: true,
+            italics: true
+          }
+        }
+      };
+
+      vm.content = [];
+      pdfMake.createPdf(vm.dd).download('msoeStudentOrgResults.pdf');
+    }
+  }
+
+})();
