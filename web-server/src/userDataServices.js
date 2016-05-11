@@ -154,3 +154,46 @@ exports.createResetToken = function(username, email, callback){
     });
   });
 };
+
+/*
+ * checks the database for the given token, and returns if it is found
+ * token: the token to search for
+ * callback: a function that takes an error and a boolean
+ */
+exports.checkValidToken = function(token, callback){
+  var retval = false;
+  database.getModel(modelName, function(err, model){
+    model.findOne({resetPasswordToken: token}, function(err2, user){
+      if(user){
+        retval = true;
+      };
+      callback(err2, retval);
+    });
+  });
+};
+
+/*
+ *checks the database for the given token, and sets the password if the token is found
+ * token: the token to search for
+ * password: the new password for the token holder
+ * callback: a function that takes an error and the new user document
+ */
+ exports.setPasswordByToken = function(token, password, callback){
+   database.getModel(modelName, function(err, model){
+     model.findOneAndUpdate({resetPasswordToken: token},
+       {$set: {
+         Password: password,
+         resetPasswordToken: undefined,
+         resetPasswordExpiration: undefined
+       }},{
+        new: true 
+       }, function(err, document){
+       if(document){
+         callback(null, document);
+       }
+       else{
+         callback(new Error("ERR:NOUSER"), null);
+       }
+     });
+   });
+ };

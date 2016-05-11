@@ -10,13 +10,14 @@
     vm.email = "";
     vm.newPassword="";
     vm.confirmPassword="";
-    //vm.token = $state.params.token;
+    vm.token = $state.params.token;
     vm.validPassword = false;
 
     resetPasswordService.checkValidToken().then(function(data){
       if(data.code == 200){
-        $state.go('root.login,' {redirect: true});
+        $state.go('root.login', {redirect: true});
       }
+    });
 
     vm.parseForm = function(){
       vm.validPassword = vm.newPassword.length > 0 && vm.newPassword == vm.confirmPassword;
@@ -30,7 +31,7 @@
 
     function sendNewPassword(){
       if(vm.validPassword){
-          resetPasswordService.sendNewPassword(vm.newPassword, vm.token);
+          resetPasswordService.sendNewPassword(vm.token, vm.newPassword);
       }
     }
 

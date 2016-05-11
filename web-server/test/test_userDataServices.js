@@ -9,6 +9,14 @@ config.mongo = fakeDbName;
 var userDataServices = require('../src/userDataServices');
 var database = require('../src/databaseServices');
 
+var fakeErr = 'ERRFAKEERR';
+var fakeFindOne = function(query, callback){
+  callback(fakeErr, null);
+};
+var fakeFindOneAndUpdate = function(qurey, select, options, callback){
+  callback(fakeErr, null);
+};
+
 var fakeToken = "FakeToken";
 
 var realRandomBytes = crypto.randomBytes;
@@ -17,6 +25,7 @@ var fakeRandomBytes = function(bytes){
 };
 
 var fakeUsername = "username";
+var fakePassword = "password";
 var invalidUsername = "invalid";
 var fakeEmail = "me@me.me";
 
@@ -78,36 +87,72 @@ describe('userDataServices', function () {
   describe('#checkValidToken', function(){
 
     it('should return true if the token is found in the database', function(done){
-      //TODO
-      assert.fail();
-      done();
+      userDataServices.addUser(fakeUser, function(err, savedUser){
+        userDataServices.createResetToken(fakeUsername, fakeEmail, function(err, token){
+          userDataServices.checkValidToken(token, function(err, found){
+            assert(found);
+            done();
+          });
+        });
+      });
     });
 
     it('should return false if the token is not found in the database', function(done){
-      //TODO
-      assert.fail();
-      done();
+      userDataServices.checkValidToken(fakeToken, function(err, found){
+        assert(!found);
+        done();
+      });
+    });
+
+    it('should send error if there is an error checking the token', function(done){
+      database.getModel('users', function(err, model){
+        var realFindOne = model.findOne;
+        model.findOne = fakeFindOne;
+        userDataServices.checkValidToken(fakeToken, function(err, found){
+          assert.equal(err, fakeErr);
+          model.findOne = realFindOne;
+          done();
+        });
+      });
     });
   });
 
   describe('#setPasswordByToken', function(){
 
     it('should set the password for the user if token exists', function(done){
-      //TODO
-      assert.fail();
-      done();
+      userDataServices.addUser(fakeUser, function(err, savedUser){
+        userDataServices.createResetToken(fakeUsername, fakeEmail, function(err, token){
+          userDataServices.setPasswordByToken(token, fakePassword, function(err, savedUser){
+            assert.equal(savedUser.Password, fakePassword);
+            done();
+          });
+        });
+      });
     });
 
     it('should send error to callback if there was a problem setting the password', function(done){
-      //TODO
-      assert.fail();
-      done();
+      database.getModel('users', function(err, model){
+        var realFindOneAndUpdate = model.findOneAndUpdate;
+        model.findOneAndUpdate = fakeFindOneAndUpdate;
+        userDataServices.setPasswordByToken(fakeToken, fakePassword, function(err, savedUser){
+          assert.notEqual(err, null);
+          model.findOneAndUpdate = realFindOneAndUpdate;
+          done();
+        });
+      });
     });
 
     it('should invalidate reset token when pasword reset is successful', function(done){
-      //TODO
-      assert.fail();
-      done();
+      userDataServices.addUser(fakeUser, function(err, savedUser){
+        userDataServices.createResetToken(fakeUsername, fakeEmail, function(err, token){
+          userDataServices.setPasswordByToken(token, fakePassword, function(err, savedUser){
+            userDataServices.checkValidToken(token, function(err, found){
+              assert(!found);
+              done();
+            });
+          });
+        });
+      });
     });
   });
 });

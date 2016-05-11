@@ -10,6 +10,11 @@ var fakeToken = "FakeToken";
 var fakeUsername = "user";
 var fakeEmail = "me@me.me";
 
+var fakeUser = {
+  username: fakeUsername,
+  email: fakeEmail
+};
+
 var realCreateResetToken = userDataServices.createResetToken;
 var fakeCreateResetToken = function(username, email, callback){
   callback(null, fakeToken);
@@ -39,6 +44,11 @@ app.use(bodyParser.json());
 app.use('/test/resetPassword', resetPassword, nextRoute);
 
 var realCreateResetToken = userDataServices.createResetToken;
+
+var realCheckValidToken = userDataServices.checkValidToken;
+
+var realSetPasswordByToken = userDataServices.setPasswordByToken;
+
 
 describe('#routes/resetPassword', function(){
 
@@ -120,24 +130,45 @@ describe('#routes/resetPassword', function(){
   describe('GET /checkValidToken', function(){
 
     it('should send 200 if the token is valid', function(done){
-      //TODO
-      assert.fail();
-      done();
+      userDataServices.checkValidToken = function(token, callback){
+        callback(null, true);
+      };
+      request(app)
+      .get('/test/resetPassword/checkValidToken/'+fakeToken)
+      .expect(200, function(err, res){
+        userDataServices.checkValidToken = realCheckValidToken;
+        done(err);
+      });
     });
 
     it('should send 404 if the token is invalid', function(done){
-      //TODO
-      assert.fail();
-      done();
+      userDataServices.checkValidToken = function(token, callback){
+        callback(null, false);
+      };
+      request(app)
+      .get('/test/resetPassword/checkValidToken/'+fakeToken)
+      .expect(404, function(err, res){
+        userDataServices.checkValidToken = realCheckValidToken;
+        done(err);
+      });
     });
   });
 
   describe('POST /', function(){
 
     it('should request the user\'s password be changed in the database', function(done){
-      //TODO
-      assert.fail();
-      done();
+      var called = false;
+      userDataServices.setPasswordByToken = function(token, password, callback){
+        called = true;
+        callback(null, fakeUser);
+      };
+      request(app)
+      .post('/test/resetPassword/')
+      .expect(200, function(){
+        assert(called);
+        userDataServices.setPasswordByToken = realSetPasswordByToken;
+        done();
+      });
     });
   });
 });
