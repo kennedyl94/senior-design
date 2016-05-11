@@ -57,6 +57,7 @@
       'login',
       'logout',
       'tagSearch',
+      'tagSettings',
       'email'
     ])
 

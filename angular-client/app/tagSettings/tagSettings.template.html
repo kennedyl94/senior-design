@@ -4,7 +4,14 @@
     <div class="col-lg-4">
       <h3 align="center">Add Tag</h3>
       <br/>
-      New tag: <input type="text" class="form-control" ng-model="tagSettingsCtrl.tagInput">
+      New tag: <input type="text" class="form-control" ng-model="tagSetCtrl.tagInput">
+    </div>
+    <div class="col-lg-6 col-lg-offset-2">
+      <h3 align="center">Tags</h3>
+      <br/>
+      <select id="tagSelect" class="dropdown-menu-left dropdown-toggle" multiple="multiple" ng-model="tagSetCtrl.tagList">
+        <option ng-repeat="tag in tagList" value="{{tag}}">{{tag}}</option>
+      </select>
     </div>
   </div>
 </div>

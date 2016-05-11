@@ -25,7 +25,6 @@
       $http({method: 'post', url: config.domain + 'tagSettings', data: tag}).then(success);
     };
 
-
     init();
 
     return service;
