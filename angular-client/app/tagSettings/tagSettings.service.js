@@ -21,7 +21,7 @@
       $http({method: 'delete', url: config.domain+'tagSettings', data: id}).then(success);
     };
 
-    service.submit = function(tag, sucess) {
+    service.submit = function(tag, success) {
       $http({method: 'post', url: config.domain + 'tagSettings', data: tag}).then(success);
     };
 

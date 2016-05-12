@@ -103,6 +103,11 @@
     "app/tagSearch/tagSearch.routes.js",
     "app/tagSearch/tagSearch.service.js",
 
+    "app/tagSettings/tagSettings.module.js",
+    "app/tagSettings/tagSettings.controller.js",
+    "app/tagSettings/tagSettings.routes.js",
+    "app/tagSettings/tagSettings.service.js",
+
     "app/config/config.module.js"
   ],
 

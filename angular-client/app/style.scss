@@ -368,5 +368,11 @@ button {
   }
 }
 
+/** TAG SETTINGS **/
+#tag-settings-div {
+  background-color: $background-faded;
 
-
+  input {
+    width: 60% !important;
+  }
+}
