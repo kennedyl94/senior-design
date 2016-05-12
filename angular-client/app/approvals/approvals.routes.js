@@ -14,7 +14,8 @@
                 controllerAs: 'approvalsCtrl'
               },
               data: {
-                restricted: true
+                restricted: true,
+                studentOrgs: false
               }
             }
           });

@@ -1,6 +1,7 @@
 var express = require('express')
     , router = express.Router();
 var nodemailer = require('nodemailer');
+var  proposeChanges = require('./proposeChanges.js');
 //var xoauth2 = require('xoauth2');
 
 router.post('/', function (req, res) {
@@ -32,7 +33,7 @@ function proposeChangeEmail(org) {
 
     var mailOptions = {
         from: 'OrganizationMatcher<donotreplay@msoe.edu>',
-        to: 'msoeSeniorDesignTeam8@gmail.com',
+        to: proposeChanges.getAdminEmail(),
         subject: subject,
         text: builtString
     };
