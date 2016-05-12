@@ -21,6 +21,7 @@
     }
 
     vm.clear = function() {
+      vm.submitted = false;
       var i = 0;
       for(i; i < vm.tags.length; i++) {
         vm.tags[i].checked = false;
