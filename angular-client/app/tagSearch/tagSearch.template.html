@@ -13,13 +13,18 @@
   <div id="ts-button-div">
     <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Clear</button>
   </div>
+  <div id='ts-email-div' class="col-sm-12">
+    <ng-email
+      orgs='tsCtrl.orgList'
+      submitted='tsCtrl.submitted'>
+    </ng-email>
+  </div>
 </div>
-</br>
 <ng-organizations
   ng-show="tsCtrl.orgList.length > 0"
   orgs="tsCtrl.orgList"
   total-items="tsCtrl.orgList.length"
-  items-per-page="5"
+  items-per-page="10"
   settings="false"
   tags="true">
 </ng-organizations>
