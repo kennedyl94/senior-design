@@ -1,0 +1,18 @@
+<div id="edit-tag-modal-div">
+  <div class="modal-header" id="modal-header">
+    <h2 class="modal-title">Edit Organization</h2>
+  </div>
+  <div class="modal-body">
+    <div class="row"><div class="modal-info-header"><h4>Organization Info</h4></div></div>
+    <!-- EDIT TAG INFO -->
+    <div class="row">
+      <div class="col-sm-3">Tag:</div>
+      <div class="col-sm-9"><input type="text" ng-model="editTagModalCtrl.modifiedTag.name"></div>
+    </div>
+    <div class="row"><div class="modal-info-header"><h4>Contact Info</h4></div></div>
+  </div>
+  <div class="modal-footer">
+    <input id="save-btn" class="btn btn-default" type="button" value="Save" ng-click="editTagModalCtrl.function(editTagModalCtrl.modifiedTag)"/>
+    <input id="exit-btn" class="btn btn-default" type="button" value="Exit" ng-click="editTagModalCtrl.back()"/>
+  </div>
+</div>

@@ -3,19 +3,31 @@ var database = require('./databaseServices');
 var modelName = 'tags';
 
 //set up the model for the student_orgs collection
-database.createModel(modelName, require('../config').orgSchema);
+database.createModel(modelName, require('../config').tagSchema);
 
 /*
  * adds one tag to the database
  * tag: the tag to add to the database
  * callback: a function that takes an error object and an object representing the saved tag document
  */
-exports.addTag = function(tag, callback){
-    database.getModel(modelName, function(err, model){
-        var newOrg = new model(tag);
-        newOrg.save(function(saveErr, savedTag){
+exports.addTag = function(tag, callback) {
+    database.getModel(modelName, function(err, model) {
+        var newTag = new model(tag);
+        newTag.save(function(saveErr, savedTag) {
             callback(saveErr, savedTag._doc);
         });
+    });
+};
+
+exports.editTag = function(tagId, tagEdit, success, error) {
+    database.getModel(modelName, function(err, model) {
+       model.findOneAndUpdate({_id: tagId}, tagEdit, function(findErr) {
+          if(findErr) {
+              error(new Error('Unable to modify item with id:' + tagId));
+          } else {
+              success();
+          }
+       });
     });
 };
 
@@ -24,14 +36,14 @@ exports.addTag = function(tag, callback){
  * success: a function to call upon successful completion. it takes an object that contains the student orgs
  * error: a function to call if there is an error. it takes an error object
  */
-exports.getAllTags = function(success, error){
-    database.getModel(modelName, function(err, model){
+exports.getAllTags = function(success, error) {
+    database.getModel(modelName, function(err, model) {
         var sort_order = {};
         model.find({}).sort(sort_order).lean().exec(function(findErr, tags) {
-            if(findErr){
+            if(findErr) {
                 error(findErr);
             }
-            else{
+            else {
                 success(tags);
             }
         });

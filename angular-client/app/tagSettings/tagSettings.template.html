@@ -1,18 +1,41 @@
 <h1 align="center">Tag Options</h1>
 <div class="container" id="tag-settings-div">
-  <div class="row">
-    <div class="col-lg-4">
+  <div class="col-sm-10 col-sm-offset-1" id="tag-add-div">
+    <div class="row">
       <h3 align="center">Add Tag</h3>
-      <br/>
-      New tag: <input type="text" class="form-control" ng-model="tagSetCtrl.tagInput">
-      <button class="btn btn-default" type="button" ng-click="tagSetCtrl.add()">Add</button>
     </div>
-    <div class="col-lg-6 col-lg-offset-2">
+    <div class="row">
+      <div class="col-sm-5">
+        New tag: <input type="text" class="form-control" ng-model="tagSetCtrl.tagInput">
+      </div>
+      <div class="col-sm-4 col-sm-offset-1">
+        <button class="btn btn-default" type="button" ng-click="tagSetCtrl.add()">Add</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-10 col-sm-offset-1" id="tags-div">
+    <div class="row">
       <h3 align="center">Tags</h3>
-      <br/>
-      <select id="tagSelect" class="dropdown-menu-left dropdown-toggle" multiple="multiple" ng-model="tagSetCtrl.tagList">
-        <option ng-repeat="tag in tagList" value="{{tag}}">{{tag}}</option>
-      </select>
+    </div>
+    <div class="row" ng-repeat="tag in ngTagsCtrl.tagList">
+      <div nclass="col-md-8">
+        <h4 class="tags-header">{{tag.name}}</h4>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+          <input class="col-sm-4">
+            <input class="btn btn-default" type="button" ng-click="tagSetCtrl.edit()">Edit</input>
+          </div>
+          <input class="col-sm-4">
+            <input class="btn btn-default" type="button" ng-click="tagSetCtrl.del()">Delete</input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-sm-offset-3">
+        <pagination total-items="ngTagsCtrl.totalItems" ng-model="ngTagsCtrl.currentPage" class="pagination-sm" items-per-page="ngTagsCtrl.itemsPerPage"></pagination>
+      </div>
     </div>
   </div>
 </div>

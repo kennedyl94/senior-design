@@ -13,19 +13,29 @@ router.get('/', function(request, response) {
 
 router.delete('/:id', function(request, response) {
     var id = request.params.id;
-    _dataServices.deleteTag(id, function() {
+    _dataServices.deleteTag(id, function(err) {
+        console.log(err);
+    });
+    response.send(200);
+});
+
+router.put('/', function (request, response) {
+    var tag = {tag: request.body.tag};
+    console.log(tag);
+    _dataServices.addTag(tag, function() {
         response.sendStatus(200);
     }, function(error) {
         console.log(error);
     });
 });
 
-router.post('/', function (request, response) {
-    var tag = request.body.tag;
-    _dataServices.addTag(tag, function() {
+router.post('/:id', function(request, response) {
+    var tagId = request.params.id;
+    var tagEdit = {tag: request.body.tag};
+    _dataServices.addTag(tagId, tagEdit, function() {
         response.sendStatus(200);
-    }, function(error) {
-        console.log(error);
+    }, function(err) {
+        console.log(err);
     });
 });
 

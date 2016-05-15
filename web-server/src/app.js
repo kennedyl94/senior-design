@@ -31,6 +31,7 @@ var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
 var surveySet = require("./routes/surveySettings.js");
 var userSettings = require("./routes/userSettings.js");
+var tagSettings = require('./routes/tagSettings.js');
 
 var router = express.Router();
 
@@ -47,6 +48,8 @@ app.use('/api/userSettings', userSettings);
 app.use('/api/Organizations/', Orgs);
 
 app.use('/api/tagSearch/', tags);
+
+app.use('/api/tagSettings', tagSettings);
 
 app.use('/api/createClub', createClub);
 
