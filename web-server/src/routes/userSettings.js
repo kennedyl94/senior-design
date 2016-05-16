@@ -10,9 +10,8 @@ var createHash = function(password){
 };
 
 router.get('/user/:user', function(request, response) {
-    console.log("is it here?");
-    console.log(request.params.user);
-    currentUser = request.params.user;
+
+    var currentUser = request.params.user;
     _dataServices.getUserByName(currentUser, function (usermap){
         if (usermap.Type == "SL"){
             _dataServices.getAllUsers( //if they are a sl admin return all users
@@ -44,7 +43,7 @@ router.delete('/delete/:id', function(request, response) {
 });
 
 router.put('/addNew', function (request, response) {
-    console.log("in add new in userSettings");
+    // console.log("in add new in userSettings");
     var user = request.body.user;
     user.Password = createHash(user.Password);
     _dataServices.addUser(user,
@@ -64,6 +63,16 @@ router.put('/editExisting/:id', function (request, response) {
         }, function(error) {
            console.log(error);
         });
+});
+router.get('/userType/user/:user', function(request, response) {
+    var currentUser = request.params.user;
+    _dataServices.getUserByName(currentUser, function (usermap) {
+        response.send(usermap.Type);
+
+    }, function (err) {
+        console.log(err);
+
+    });
 });
 
 module.exports = router;

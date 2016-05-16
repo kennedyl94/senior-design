@@ -7,6 +7,7 @@
   function Controller(userSettingsService, $modal, $window) {
     var vm = this;
     vm.data = userSettingsService.data;
+    
 
     // MODAL CREATIONS
     vm.openEditUserModal = function (user) {
