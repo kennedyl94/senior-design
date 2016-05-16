@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('tagSettings')
-    .factory('tagSettingsService', ['$http','config', GetService]);
+    .factory('tagSettingsService', ['$q', '$http', 'config', GetService]);
 
-  function GetService($http, config) {
+  function GetService($q, $http, config) {
 
     var service = this;
 
@@ -12,10 +12,10 @@
 
 
     function init() {
-      console.log("Test");
-      $http({method: 'GET', url: config.domain+"tagSettings"}).then(function(retTags) {
-        console.log(retTags);
-        service.data = {tags: retTags, numTags: retTags.length, first: retTags[0]};
+      var promises = [];
+      promises.push($http({method: 'GET', url: config.domain + 'tagSettings'}));
+      $q.all(promises).then(function(data) {
+        service.data.tags = data[0].data;
       });
     }
 

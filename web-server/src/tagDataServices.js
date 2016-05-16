@@ -38,8 +38,7 @@ exports.editTag = function(tagId, tagEdit, success, error) {
  */
 exports.getAllTags = function(success, error) {
     database.getModel(modelName, function(err, model) {
-        var sort_order = {};
-        model.find({}).sort(sort_order).lean().exec(function(findErr, tags) {
+        model.find({}).sort({}).lean().exec(function(findErr, tags) {
             if(findErr) {
                 error(findErr);
             }

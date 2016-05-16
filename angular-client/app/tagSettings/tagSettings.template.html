@@ -1,29 +1,27 @@
 <h1 align="center">Tag Options</h1>
-<div ng-controller="tagSettingsController">
-  <div class="container" id="tag-settings-div">
-    <div class="col-sm-12" id="tag-add-div">
-      <div class="row">
-        <h3 align="center">Add Tag</h3>
-      </div>
-      <div class="row col-sm-offset-3">
-        <p>New Tag:</p>
-        <input type="text" id="new-tag" class="form-control" ng-model="tagSetCtrl.tagInput"/>
-        <button id="add-btn" class="btn btn-default" type="button" ng-click="tagSetCtrl.add()">Add</button>
-      </div>
+<div class="container" id="tag-settings-div">
+  <div class="col-sm-12" id="tag-add-div">
+    <div class="row">
+      <h3 align="center">Add Tag</h3>
     </div>
-    <div class="col-sm-12" id="tags-div">
-      <div class="row">
-        <h3 align="center">Tags</h3>
-      </div>
-      <div class="row" ng-repeat="tag in tagSetCtrl.tagList | startFrom:(tagSetCtrl.currentPage-1)*tagSetCtrl.itemsPerPage | limitTo:tagSetCtrl.itemsPerPage | toArray">
-        <h4 class="tags-header">{{tag.tag}}</h4>
-        <!--<input class="btn btn-default" type="button" ng-click="tagSetCtrl.edit()">Edit</input>
-        <input class="btn btn-default" type="button" ng-click="tagSetCtrl.del()">Delete</input>-->
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <pagination total-items="tagSetCtrl.totalItems" ng-model="tagSetCtrl.currentPage" class="pagination-sm" items-per-page="tagSetCtrl.itemsPerPage"></pagination>
-        </div>
+    <div class="row col-sm-offset-3">
+      <p>New Tag:</p>
+      <input type="text" id="new-tag" class="form-control" ng-model="tagSetCtrl.tagInput"/>
+      <button id="add-btn" class="btn btn-default" type="button" ng-click="tagSetCtrl.add()">Add</button>
+    </div>
+  </div>
+  <div class="col-sm-12" id="tags-div">
+    <div class="row">
+      <h3 align="center">Tags</h3>
+    </div>
+    <div class="row col-sm-offset-3" ng-repeat="tag in tagSetCtrl.data.tags | startFrom:(tagSetCtrl.currentPage-1)*tagSetCtrl.itemsPerPage | limitTo:tagSetCtrl.itemsPerPage | toArray">
+      <h4 class="tags-header col-sm-5">{{tag.tag}}</h4>
+      <button class="btn btn-default" type="button" ng-click="tagSetCtrl.edit(tag)">Edit</button>
+      <button class="btn btn-default" type="button" ng-click="tagSetCtrl.del(tag._id)">Delete</button>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-sm-offset-5">
+        <pagination total-items="tagSetCtrl.totalItems" ng-model="tagSetCtrl.currentPage" class="pagination-sm" items-per-page="tagSetCtrl.itemsPerPage"></pagination>
       </div>
     </div>
   </div>
