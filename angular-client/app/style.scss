@@ -374,5 +374,10 @@ button {
 
   input {
     width: 60% !important;
+    display: inline-block;
+  }
+
+  #add-btn {
+    display: inline-block;
   }
 }

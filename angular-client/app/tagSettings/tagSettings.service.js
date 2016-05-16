@@ -15,7 +15,7 @@
       console.log("Test");
       $http({method: 'GET', url: config.domain+"tagSettings"}).then(function(retTags) {
         console.log(retTags);
-        service.data = {tags: retTags};
+        service.data = {tags: retTags, numTags: retTags.length, first: retTags[0]};
       });
     }
 

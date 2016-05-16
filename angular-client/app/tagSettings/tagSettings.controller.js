@@ -9,6 +9,10 @@
     var vm = this;
     vm.tagList = tagSettingsService.data.tags;
     vm.tagInput = "";
+    vm.totalItems = tagSettingsService.data.numTags;
+    vm.currentPage = 1;
+    vm.itemsPerPage = 10;
+    vm.first = tagSettingsService.data.first;
 
     vm.del = function(_id) {
       console.log(_id);
