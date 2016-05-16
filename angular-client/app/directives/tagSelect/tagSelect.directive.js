@@ -14,7 +14,8 @@
        * we still have to use $scope for watchers.
        */
       bindToController : {
-        tags: "="
+        tags: "=",
+        tagList: "@"
       },
       scope: {}
     };

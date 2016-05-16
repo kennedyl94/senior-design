@@ -7,6 +7,7 @@
   function Controller(createClubService) {
 
     var vm = this;
+    vm.data = createClubService.data;
 
     vm.submitted = false;
     vm.club = {
