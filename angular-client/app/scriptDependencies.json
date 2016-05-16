@@ -108,6 +108,15 @@
     "app/tagSettings/tagSettings.routes.js",
     "app/tagSettings/tagSettings.service.js",
 
+    "app/directives/editTagModal/editTagModal.module.js",
+    "app/directives/editTagModal/editTagModal.controller.js",
+    "app/directives/editTagModal/editTagModal.directive.js",
+
+    "app/directives/tagSelect/tagSelect.module.js",
+    "app/directives/tagSelect/tagSelect.controller.js",
+    "app/directives/tagSelect/tagSelect.directive.js",
+    "app/directives/tagSelect/tagSelect.service.js",
+
     "app/config/config.module.js"
   ],
 

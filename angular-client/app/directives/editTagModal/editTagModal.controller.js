@@ -15,4 +15,10 @@ function Controller($modalInstance, contents) {
   vm.back = function() {
     $modalInstance.close('ok');
   };
+
+  vm.saveChanges = function() {
+    editTagModalService.saveChanges(vm.user).then(function(response) {
+    });
+    $modalInstance.close('ok');
+  };
 }

@@ -7,6 +7,8 @@
   function Controller(tagSettingsService, $http, $modal, config) {
 
     var vm = this;
+
+    var editTagModal;
     vm.data = tagSettingsService.data;
     vm.tagInput = "";
     vm.currentPage = 1;
@@ -32,16 +34,29 @@
       }
     };
 
+    vm.updateTags = function() {
+      tagSettingsService.updateTags();
+      vm.data = tagSettingsService.data;
+    };
+
+    vm.modifyTag = function(tag) {
+      tagSettingsService.edit(tag._id, tag, function() {
+        editTagModal.close('ok');
+        vm.updateTags();
+      });
+    };
+
     // MODAL CREATION
     vm.edit = function(tag) {
-      return $modal.open({
+      editTagModal = $modal.open({
         animation: true,
         templateUrl: 'directives/editTagModal/editTagModal.template.html',
         controller: 'EditTagModalController as editTagModalCtrl',
         resolve: {
           contents: function() {
             return {
-              tag: tag
+              tag: tag,
+              function: vm.modifyTag
             };
           }
         }

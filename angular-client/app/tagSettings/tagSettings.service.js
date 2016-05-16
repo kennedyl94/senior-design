@@ -10,6 +10,9 @@
 
     service.data = {};
 
+    service.updateTags = function() {
+      init();
+    };
 
     function init() {
       var promises = [];

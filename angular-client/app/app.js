@@ -58,6 +58,8 @@
       'logout',
       'tagSearch',
       'tagSettings',
+      'editTagModal',
+      'ngTagSelect',
       'email'
     ])
 
