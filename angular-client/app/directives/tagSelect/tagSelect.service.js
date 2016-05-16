@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('ngTagSelect')
-    .factory('ngTagSelectService', ['$http', 'config', GetService]);
+    .factory('ngTagSelectService', ['$q', '$http', 'config', GetService]);
 
-  function GetService($http, config) {
+  function GetService($q, $http, config) {
 
     var service = this;
 
@@ -13,8 +13,10 @@
     };
 
     function init() {
-      $http({method: 'GET', url: config.domain + 'tagSettings'}).then(function(retTags) {
-        service.data.tags = retTags;
+      var promises = [];
+      promises.push($http({method: 'GET', url: config.domain + 'tagSettings'}));
+      $q.all(promises).then(function(data) {
+        service.data.tags = data[0].data;
       });
     }
 

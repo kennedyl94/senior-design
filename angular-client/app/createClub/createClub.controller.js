@@ -12,7 +12,7 @@
     vm.club = {
       name: "",
       description: "",
-      tags: "",
+      tags: [],
       links: "",
       meetings: "",
       contact: {
@@ -29,7 +29,7 @@
           vm.club = {
             name: "",
             description: "",
-            tags: "",
+            tags: [],
             links: "",
             meetings: "",
             contact: {
