@@ -79,11 +79,19 @@ router.post("/updatePass", function (req, res) {
 
     _dataServices.getUserByName(req.body.user, function (usermap){
         // console.log(usermap);
-        var pass  = createHash(req.body.old);
-        console.log(pass);
+        // var pass  = createHash(req.body.old);
+        // console.log(pass);
         if(req.body.newPass == req.body.repeat) {
-            if(pass == usermap.Password)
+            if(bCrypt.compareSync(req.body.old,usermap.Password))
             {
+                usermap.Password = createHash(req.body.newPass);
+                _dataServices.editUser(usermap,usermap._id,function () {
+                    res.send(200);
+
+                }, function (err) {
+                    console.log(err)
+
+                })
                 console.log("woohoo correct");
             }
         }
