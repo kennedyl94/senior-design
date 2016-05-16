@@ -201,8 +201,8 @@ exports.getAllTags = function(success, error) {
 								tagMap.push(tag);
 							}
 						});
-					} else if (tagMap.indexOf('inactive') == -1) {
-						tagMap.push('inactive');
+					//} else if (tagMap.indexOf('inactive') == -1) {
+					//	tagMap.push('inactive');
 					}
 				});
 				tagMap.sort();
@@ -226,11 +226,16 @@ exports.searchByTags = function(tagList, success, error) {
 			} else {
 				var tempOrgList = [];
 				var orgList = [];
+				var tempTags = [];
 				orgs.forEach(function(org) {
-					if (org.tags.indexOf('inactive') == -1) {
+					tempTags = [];
+					org.tags.forEach(function(tag) {
+						tempTags.push(tag.text);
+					});
+					if (tempTags.indexOf('inactive') == -1) {
 						var rating = 0;
 						tagList.forEach(function(tag) {
-							if (org.tags.indexOf(tag) != -1) {
+							if (tempTags.indexOf(tag.text) != -1) {
 								rating++;
 							}
 						});

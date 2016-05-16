@@ -8,8 +8,8 @@
       <br>
       Question:
       <input type="text" class="form-control" id="question" ng-model="surveySettingsCtrl.question.question"> <br>
-      Tags(comma separated):
-      <input type="text" class="form-control" id="tags" ng-model="surveySettingsCtrl.question.tags"> <br>
+      Tags:
+      <ng-tag-select tags="surveySettingsCtrl.question.tags"></ng-tag-select> <br>
       Category:
       <input type="text" class="form-control" id="category" ng-model="surveySettingsCtrl.question.category"> <br>
       <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.add()">Add Question</button>

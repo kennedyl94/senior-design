@@ -13,6 +13,7 @@
     vm.tagInput = "";
     vm.currentPage = 1;
     vm.itemsPerPage = 10;
+    //console.log(vm.data.tags);
 
     vm.del = function(_id) {
       console.log(_id);

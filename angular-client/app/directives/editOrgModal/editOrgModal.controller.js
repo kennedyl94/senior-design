@@ -20,7 +20,7 @@ function Controller($modalInstance, contents) {
       phone: vm.org.contact.phone
     }
   };
-  vm.function = contents.function
+  vm.function = contents.function;
 
   vm.back = function() {
     $modalInstance.close('ok');

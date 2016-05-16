@@ -11,23 +11,19 @@ var express = require('express')
 router.get('/', function (req, res) {
     console.log(__filename);
     console.log(__dirname);
-    
 
-    _surveyData.getAllQuestions(null, function(questionMap){
-        
+    _surveyData.getAllQuestions(null, function(questionMap) {
         res.send(questionMap);
         
-        if(!Object.keys(questionMap).length || questionMap.legnth <= 0)
-        {
+        if(!Object.keys(questionMap).length || questionMap.legnth <= 0) {
             console.log("should be adding");
-           
         }
         
     }, function(e){
         console.log("get in get"+e);
     });
-    
 });
+
 router.get('/num', function (req, res){
     var surveySet = jsonfile.readFileSync(surveyFile);
     
@@ -35,7 +31,8 @@ router.get('/num', function (req, res){
     res.send({num: surveySet.num});
     
     
-})
+});
+
 router.delete('/', function(req, res) {
 
     _surveyData.deletequestion(req.body, function(){
@@ -46,21 +43,23 @@ router.delete('/', function(req, res) {
     })
     
 });
+
 router.post('/add', function(req, res){
-
-   var tags = req.body.tags.split(',');
-   
-   for (var i = 0; i<tags.length; i++) {
-       tags[i] = tags[i].trim();
-   }
-   
-   req.body.tags = tags;
-
-   
-   
-   _surveyData.addQuestion(req.body, function(e){
+   //
+   //var tags = req.body.tags.split(',');
+   //
+   //for (var i = 0; i<tags.length; i++) {
+   //    tags[i] = tags[i].trim();
+   //}
+   //
+   //req.body.tags = tags;
+   //
+   //
+   //
+   // console.log(req.body);
+    _surveyData.addQuestion(req.body, function(e){
        res.send(200);
-   });
+    });
    
 });
 
@@ -77,17 +76,13 @@ router.post('/addrule', function(req, res){
             }
     }
     // console.log('index' + index);
-    
-    
+
     if(index != -1) {
         surveySet.rules.splice(index, 1);
         jsonfile.writeFileSync(surveyFile, surveySet);
         
     } 
-    
-    
-    
-    
+
     console.log(surveySet.rules);
     surveySet.rules.push({
         'category':req.body.category,
@@ -95,15 +90,15 @@ router.post('/addrule', function(req, res){
     });
     jsonfile.writeFileSync(surveyFile, surveySet);
     res.send(200);
-    
 });
+
 router.get('/getrules', function (req, res) {
     var surveySet = jsonfile.readFileSync(surveyFile);
     
     // console.log(surveySet.rules);
     res.send(surveySet.rules);
-    
 });
+
 router.delete('/delrule', function (req, res) {
     // console.log('delete');
     // console.log(req.body[0]);
@@ -116,7 +111,6 @@ router.delete('/delrule', function (req, res) {
     // console.log(typeof(surveySet.rules));
     // console.log(surveySet.rules[0]);
     
-    
     var index = -1;
     var i =0;
     
@@ -127,8 +121,7 @@ router.delete('/delrule', function (req, res) {
             }
     }
     console.log('index' + index);
-    
-    
+
     if(index != -1) {
         surveySet.rules.splice(index, 1);
         jsonfile.writeFileSync(surveyFile, surveySet);
@@ -138,10 +131,7 @@ router.delete('/delrule', function (req, res) {
         //410 gone. Indicates that the resource requested is no longer
         //available and will not be available again.
     }
-    
-    
-    
-})
+});
 
 router.post('/questionNum', function(req, res){
    var surveySet = jsonfile.readFileSync(surveyFile);
@@ -151,8 +141,6 @@ router.post('/questionNum', function(req, res){
     
     jsonfile.writeFileSync(surveyFile, surveySet)
     res.send(200);
-   
-   
 });
 
 module.exports = router;

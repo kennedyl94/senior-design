@@ -8,7 +8,7 @@ function Controller($modalInstance, contents) {
 
   vm.modifiedTag = {
     _id: vm.tag._id,
-    tag: vm.tag.tag
+    tag: vm.tag.text
   };
   vm.function = contents.function;
 
@@ -17,8 +17,8 @@ function Controller($modalInstance, contents) {
   };
 
   vm.saveChanges = function() {
-    editTagModalService.saveChanges(vm.user).then(function(response) {
-    });
+    //editTagModalService.saveChanges(vm.user).then(function(response) {
+    //});
     $modalInstance.close('ok');
   };
 }

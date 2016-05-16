@@ -12,7 +12,7 @@ router.post('/', function(req, res) {
 	var tagList = [];
 	tags.forEach(function(tag) {
 		if (tag.checked) {
-			tagList.push(tag.text);
+			tagList.push(tag.tag);
 		}
 	});
 

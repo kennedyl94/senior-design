@@ -15,7 +15,7 @@
       <h3 align="center">Tags</h3>
     </div>
     <div class="row col-sm-offset-3" ng-repeat="tag in tagSetCtrl.data.tags | startFrom:(tagSetCtrl.currentPage-1)*tagSetCtrl.itemsPerPage | limitTo:tagSetCtrl.itemsPerPage | toArray">
-      <h4 class="tags-header col-sm-5">{{tag.tag}}</h4>
+      <h4 class="tags-header col-sm-5">{{tag.text}}</h4>
       <button class="btn btn-default" type="button" ng-click="tagSetCtrl.edit(tag)">Edit</button>
       <button class="btn btn-default" type="button" ng-click="tagSetCtrl.del(tag._id)">Delete</button>
     </div>

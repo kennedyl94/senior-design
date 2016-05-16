@@ -27,22 +27,23 @@
       vm.submitted = false;
 
       createClubService.submitClub(vm.club, function() {
-          vm.club = {
+        console.log(vm.club.tags);
+        vm.club = {
+          name: "",
+          description: "",
+          tags: [],
+          links: "",
+          meetings: "",
+          contact: {
             name: "",
-            description: "",
-            tags: [],
-            links: "",
-            meetings: "",
-            contact: {
-              name: "",
-              email: "",
-              phone: ""
-            }
-          };
-          form.$setPristine();
-          form.$setUntouched();
-          vm.submitted = true;
-        });
+            email: "",
+            phone: ""
+          }
+        };
+        form.$setPristine();
+        form.$setUntouched();
+        vm.submitted = true;
+      });
     }
   }
 

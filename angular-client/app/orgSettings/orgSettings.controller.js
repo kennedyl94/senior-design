@@ -12,7 +12,7 @@
     vm.proposedChange = {
       name: "",
       description: "",
-      tags: "",
+      tags: [],
       links: "",
       meetings: "",
       contact: {
@@ -22,7 +22,7 @@
       }
     };
 
-    $scope.$watch(vm.data, function(){
+    $scope.$watch(vm.data, function() {
       vm.updateOrgs();
     });
 
@@ -50,7 +50,7 @@
       });
     };
 
-    vm.mapOrgInfoToChanges = function(org){
+    vm.mapOrgInfoToChanges = function(org) {
       vm.proposedChange.name = org.name;
       vm.proposedChange.description = org.description;
       vm.proposedChange.tags = org.tags;

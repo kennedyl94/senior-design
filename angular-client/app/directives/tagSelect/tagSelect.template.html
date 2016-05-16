@@ -1,5 +1,5 @@
 <select ng-model="ngTagSelCtrl.tags"
-        ng-options="tag._id as tag.tag for tag in ngTagSelCtrl.data.tags"
+        ng-options="tag as tag.text for tag in ngTagSelCtrl.data.tags"
         id="tag-select"
         class="dropdown-menu-left dropdown-toggle"
         multiple="multiple">

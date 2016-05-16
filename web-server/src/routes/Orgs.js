@@ -51,18 +51,8 @@ router.put('/modify/:orgId', function(req, res) {
     var orgToUpdate = req.body;
     // console.log(req.body.meetings);
 
-    if (orgToUpdate.tags.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
-        orgToUpdate.tags = orgToUpdate.tags.split(',');
-        for (var i = 0; i < orgToUpdate.tags.length; i++) {
-            orgToUpdate.tags[i] = orgToUpdate.tags[i].trim();
-            // if (org.tags[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-            // 	org.tags[i] = org.tags[i].substring(1);	// remove the space
-            // }
-        }
-    } else {
-        if (typeof orgToUpdate.tags == 'string') {
-            orgToUpdate.tags = [orgToUpdate.tags];
-        }
+    for (var i = 0; i < orgToUpdate.tags.length; i++) {
+        orgToUpdate.tags[i] = {_id: orgToUpdate.tags[i]._id, tag: orgToUpdate.tags[i].text};
     }
     console.log(orgToUpdate.tags);
 

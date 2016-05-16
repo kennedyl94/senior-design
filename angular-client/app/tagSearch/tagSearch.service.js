@@ -30,7 +30,7 @@
         }
 
         tempTags.forEach(function(tag) {
-          service.data.tags.push({text: tag, checked: false});
+          service.data.tags.push({text: tag.text, checked: false, tag: tag});
         });
       });
     }

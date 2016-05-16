@@ -62,6 +62,15 @@
         }
       });
     };
+
+    vm.displayTags = function(org) {
+      var tagString = '';
+      tagString += org.tags[0].text;
+      for (var i = 1; i < org.tags.length; i++) {
+        tagString += ', ' + org.tags[i].text;
+      }
+      return tagString;
+    }
   }
 
   angular.module('ngOrganizations').filter('startFrom', function () {
@@ -89,11 +98,13 @@
         var name = org.name.toLowerCase();
         var description = org.description.toLowerCase();
         var tags = org.tags;
+        //console.log(tags);
 
         if (query != 'inactive' && tags.indexOf('inactive') == -1) {
           var j = 0;
           for (j; j < tags.length; j++) {
-            if (tags[j].toLowerCase().indexOf(query || '') !== -1) {
+            //console.log(tags[j].text);
+            if (tags != undefined && tags[j].text != '' && tags[j].text.toLowerCase().indexOf(query || '') !== -1) {
               found = true;
               filtered.push(org);
               break;

@@ -57,6 +57,10 @@
     "app/directives/editOrgModal/editOrgModal.directive.js",
     "app/directives/editOrgModal/editOrgModal.controller.js",
 
+    "app/directives/editTagModal/editTagModal.module.js",
+    "app/directives/editTagModal/editTagModal.directive.js",
+    "app/directives/editTagModal/editTagModal.controller.js",
+
     "app/massUpload/massUpload.module.js",
     "app/massUpload/massUpload.routes.js",
 
@@ -112,10 +116,6 @@
     "app/tagSettings/tagSettings.controller.js",
     "app/tagSettings/tagSettings.routes.js",
     "app/tagSettings/tagSettings.service.js",
-
-    "app/directives/editTagModal/editTagModal.module.js",
-    "app/directives/editTagModal/editTagModal.controller.js",
-    "app/directives/editTagModal/editTagModal.directive.js",
 
     "app/config/config.module.js"
   ],
