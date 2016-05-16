@@ -29,10 +29,20 @@
         <td>{{user.Username}}</td>
         <td>{{user.Type}}</td>
         <td>{{user.Orgs.toString()}}</td>
-        <div ng-show="userSettingsCtrl.data.type == 'SL'">
-          <td><input type="button" class="btn btn-default" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
-        </div>
 
+        <td><input ng-show="userSettingsCtrl.data.type == 'SL'" type="button" class="btn btn-default" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
+
+        <td ng-show="userSettingsCtrl.data.type == 'Org'">
+          Reset Your Password<br>
+          Old Password<br>
+          <input type="password" ng-model="userSettingsCtrl.update.old"><br>
+          New Password<br>
+          <input type="password" ng-model="userSettingsCtrl.update.newPass"><br>
+          Retype Your New Password<br>
+          <input type="password" ng-model="userSettingsCtrl.update.repeat"><br>
+          <input type =button value="Submit" ng-click="userSettingsCtrl.changePassword()">
+
+        </td>
 
       </tr>
       </tbody>

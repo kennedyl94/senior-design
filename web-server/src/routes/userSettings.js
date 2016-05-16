@@ -74,5 +74,27 @@ router.get('/userType/user/:user', function(request, response) {
 
     });
 });
+router.post("/updatePass", function (req, res) {
+    // console.log(req.body.user);
+
+    _dataServices.getUserByName(req.body.user, function (usermap){
+        // console.log(usermap);
+        var pass  = createHash(req.body.old);
+        console.log(pass);
+        if(req.body.newPass == req.body.repeat) {
+            if(pass == usermap.Password)
+            {
+                console.log("woohoo correct");
+            }
+        }
+
+
+    }, function (err) {
+        console.log(err)
+
+    });
+
+    
+});
 
 module.exports = router;

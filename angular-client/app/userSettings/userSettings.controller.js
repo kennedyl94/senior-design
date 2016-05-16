@@ -7,7 +7,12 @@
   function Controller(userSettingsService, $modal, $window) {
     var vm = this;
     vm.data = userSettingsService.data;
-    
+
+    vm.update ={
+      old:"",
+      newPass:"",
+      repeat:""
+    }
 
     // MODAL CREATIONS
     vm.openEditUserModal = function (user) {
@@ -40,5 +45,10 @@
         }
       })
     };
+    vm.changePassword = function(){
+      console.log(vm.update.newPass);
+      userSettingsService.updatePassword(vm.update.old, vm.update.newPass, vm.update.repeat);
+    }
+
   }
 })();
