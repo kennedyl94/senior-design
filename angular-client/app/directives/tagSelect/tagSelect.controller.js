@@ -1,14 +1,11 @@
 (function(){
   angular.module('ngTagSelect')
-    .controller('ngTagSelectController', ['$scope', 'ngTagSelectService', Controller]);
+    .controller('ngTagSelectController', ['ngTagSelectService', Controller]);
 
-  function Controller($scope, ngTagSelectService) {
+  function Controller(ngTagSelectService) {
     var vm = this;
 
-    //vm.data = ngTagSelectService.data;
-
-    //$scope.tagList = vm.data.tags;
-    setTimeout(function(){console.log(vm.tagList);}, 5000);
-    vm.tags = [];
+    vm.data = ngTagSelectService.data;
+    vm.tagList = [];
   }
 })();

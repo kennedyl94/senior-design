@@ -1,3 +1,6 @@
-<select id="tag-select" class="dropdown-menu-left dropdown-toggle" ng-options="tag as tag.tag for tag in ngTagSelCtrltagList" multiple="multiple" ng-model="ngTagSelCtrl.tags">
-  <!--option ng-repeat="tag in tagList" value="{{tag.tag}}">{{tag.tag}}</option-->
+<select ng-model="ngTagSelCtrl.tags"
+        ng-options="tag._id as tag.tag for tag in ngTagSelCtrl.data.tags"
+        id="tag-select"
+        class="dropdown-menu-left dropdown-toggle"
+        multiple="multiple">
 </select>
