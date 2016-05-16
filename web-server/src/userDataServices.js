@@ -45,6 +45,21 @@ exports.getAllUsers = function(success, error){
     });
 };
 
+
+/*
+ * gets a single user
+ * username: the username of the current logged in user
+ * success: a function to call upon successful completion. it takes an object that contains the found user's orgs
+ * error: a function to call if there is an error. it takes an error object
+ */
+exports.getUserByName = function(username, success, error) {
+    User.find({Username: username}, function(err, foundUser) {
+        if(err) {
+            error(new Error('Unable to find user with username: ' + username));
+        }
+        success(foundUser[0]);
+    });
+};
 /*
  * removes a user from the database
  * id: the id of the user to remove from the database

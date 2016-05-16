@@ -9,13 +9,28 @@ var createHash = function(password){
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 };
 
-router.get('/', function(request, response) {
-    _dataServices.getAllUsers(
-        function(users) {
-            response.send(users);
-        }, function(err) {
-            console.log(err);
+router.get('/user/:user', function(request, response) {
+    console.log("is it here?");
+    console.log(request.params.user);
+    currentUser = request.params.user;
+    _dataServices.getUserByName(currentUser, function (usermap){
+        if (usermap.Type == "SL"){
+            _dataServices.getAllUsers( //if they are a sl admin return all users
+                function(users) {
+                    response.send(users);
+                }, function(err) {
+                    console.log(err);
+                });
+
+        } else {
+            response.send([usermap]);
+        }
+
+    }, function (err) {
+        console.log(err)
+
         });
+
 });
 
 router.delete('/delete/:id', function(request, response) {
