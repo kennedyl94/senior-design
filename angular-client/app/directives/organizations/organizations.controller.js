@@ -111,7 +111,7 @@
           var j = 0;
           for (j; j < tags.length; j++) {
             //console.log(tags[j].text);
-            if (tags != undefined && tags[j] != '' && tags[j].toLowerCase().indexOf(query || '') !== -1) {
+            if (tags != undefined && tags.length > 0 && tags[j] != '' && tags[j].toLowerCase().indexOf(query || '') !== -1) {
               found = true;
               filtered.push(org);
               break;
