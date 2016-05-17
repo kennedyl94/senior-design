@@ -19,7 +19,11 @@
     });
 
     vm.isActive = function(org) {
-      return org.tags.indexOf('inactive') == -1;
+      var tempTags = [];
+      for (var i = 0; i < org.tags.length; i++) {
+        tempTags.push(org.tags[i].text);
+      }
+      return tempTags.indexOf('inactive') == -1;
     };
 
     vm.isStudentLifeAdmin = function() {
@@ -97,14 +101,17 @@
         var org = arr[i];
         var name = org.name.toLowerCase();
         var description = org.description.toLowerCase();
-        var tags = org.tags;
+        var tags = [];
+        for (var q = 0; q < org.tags.length; q++) {
+          tags.push(org.tags[q].text);
+        }
         //console.log(tags);
 
         if (query != 'inactive' && tags.indexOf('inactive') == -1) {
           var j = 0;
           for (j; j < tags.length; j++) {
             //console.log(tags[j].text);
-            if (tags != undefined && tags[j].text != '' && tags[j].text.toLowerCase().indexOf(query || '') !== -1) {
+            if (tags != undefined && tags[j] != '' && tags[j].toLowerCase().indexOf(query || '') !== -1) {
               found = true;
               filtered.push(org);
               break;

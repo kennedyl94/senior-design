@@ -160,7 +160,7 @@ exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
 exports.activation = function(orgId, isActive, success, error) {
 	database.getModel(orgModelName, function(err, model){
 		if(isActive == true) {
-			model.findOneAndUpdate({_id: orgId}, {$push: {tags: 'inactive'}}, function(findErr) {
+			model.findOneAndUpdate({_id: orgId}, {$push: {tags: {text: 'inactive'}}}, function(findErr) {
 				if(findErr) { 
 					error(findErr); 
 				}
@@ -169,7 +169,7 @@ exports.activation = function(orgId, isActive, success, error) {
 				}
 			});
 		} else if(isActive == false) {
-			model.findOneAndUpdate({_id: orgId}, {$pull: {tags: 'inactive'}}, function(findErr) {
+			model.findOneAndUpdate({_id: orgId}, {$pull: {tags: {text: 'inactive'}}}, function(findErr) {
 				if(findErr) { 
 					error(findErr); 
 				}
@@ -186,7 +186,7 @@ exports.activation = function(orgId, isActive, success, error) {
  * success: A function to call upon successful completion. Takes an object that contains all tags.
  * error: A function to call if there is an error.
  */
-exports.getAllTags = function(success, error) {
+exports.getAllTags = function(success, error) {		//Deprecated
 	database.getModel(orgModelName, function(err, model){
 		model.find({}, function (findErr, orgs) {
 			if(findErr){
@@ -194,8 +194,13 @@ exports.getAllTags = function(success, error) {
 			}
 			else{
 				var tagMap = [];
+				var tempTags = [];
 				orgs.forEach(function (org) {
-					if (org.tags.indexOf('inactive') == -1) {
+					tempTags = [];
+					for (var i = 0; i < org.tags.length; i++) {
+						tempTags.push(org.tags[i].text);
+					}
+					if (tempTags.indexOf('inactive') == -1) {
 						org.tags.forEach(function (tag) {
 							if (tagMap.indexOf(tag) == -1 && tag != '') {
 								tagMap.push(tag);
