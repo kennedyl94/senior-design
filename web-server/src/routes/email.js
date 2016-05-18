@@ -4,6 +4,8 @@ var nodemailer = require('nodemailer');
 var  proposeChanges = require('./proposeChanges.js');
 //var xoauth2 = require('xoauth2');
 
+var domain = require('../../config.json').domain;
+
 router.post('/', function (req, res) {
     sendResults(req.body.address, req.body.result);
     res.sendStatus(200);
@@ -12,6 +14,15 @@ router.post('/', function (req, res) {
 router.post('/proposeChange', function(req, res) {
     proposeChangeEmail(req.body.result);
     res.sendStatus(200);
+});
+
+router.post('/sendReset', function(req, res) {
+  var token = req.body.token;
+  var address = req.body.email;
+  if(token){
+    sendReset(token, address);
+  }
+  res.send(200);
 });
 
 function proposeChangeEmail(org) {
@@ -84,6 +95,33 @@ function sendResults(address, orgs) {
         }
         console.log('Message sent: ' + info.response);
     });
+}
+
+function sendReset(token, address){
+  var builtString =
+    'This email has been sent because a password reset was requested for your account.' +
+    ' To reset your password, please click on the link below, or paste it into your web browser'+
+    '\n\n' + domain + 'resetPassword/' + token +
+    '\n\nIf you did not request the password reset, please disregard this email.';
+
+  var subject = '[OrgMatcher] Password reset';
+
+  var transporter = nodemailer.createTransport(
+      'smtps://msoeSeniorDesignTeam8@gmail.com:duckduckgoose42@smtp.gmail.com'
+  );
+
+  var mailOptions = {
+      from: 'OrganizationMatcher<donotreplay@msoe.edu>',
+      to: address,
+      subject: subject,
+      text: builtString
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+          return console.log(error);
+      }
+  });
 }
 
 module.exports = router;

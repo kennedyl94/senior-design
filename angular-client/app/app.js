@@ -48,13 +48,15 @@
       'orgSettings',
       'surveySettings',
       'organizations',
-	    'createClub',
+      'createClub',
       'modal',
       'editOrgModal',
       'survey',
       'massUpload',
       'fileUpload',
       'login',
+      'logout',
+      'resetPassword',
       'tagSearch',
       'email'
     ])

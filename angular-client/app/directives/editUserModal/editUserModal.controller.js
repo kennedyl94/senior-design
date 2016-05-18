@@ -7,6 +7,7 @@
 
     vm.user = contents.user;
     vm.username = vm.user.Username;
+    vm.email = vm.user.Email;
     vm.orgs = [];
 
     $scope.list_categories = {
@@ -20,6 +21,7 @@
     };
     vm.user = contents.user;
     vm.username = vm.user.Username;
+    vm.email = vm.user.Email;
     vm.orgs = [];
 
     $scope.organizations = editUserModalService.data.orgs;
@@ -32,6 +34,7 @@
 
     vm.saveChanges = function() {
       vm.user.Username = vm.username;
+      vm.user.Email = vm.email;
       vm.user.Type = $scope.list_category;
       vm.user.Orgs = vm.orgs;
       editUserModalService.saveChanges(vm.user).then(function(response) {
