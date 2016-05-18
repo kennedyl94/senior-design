@@ -1,8 +1,8 @@
 (function(){
   angular.module('editUserModal')
-    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', '$window', Controller]);
+    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', '$window', '$confirm', Controller]);
 
-  function Controller($scope, $modalInstance, editUserModalService, contents, $window) {
+  function Controller($scope, $modalInstance, editUserModalService, contents, $window, $confirm) {
     var vm = this;
 
     vm.user = contents.user;
@@ -43,10 +43,15 @@
     };
 
     vm.deleteUser = function () {
-      //DIALOG -- ARE YOU SURE YOU WANT TO DELETE THIS ORG?
-      editUserModalService.deleteUser(vm.user).then(function () {
-      });
-      $window.location.reload();
+      $confirm({text: 'Are you sure you want to delete: ' + vm.user.Username + '?',
+        title: 'Delete User',
+        ok: "Delete",
+        cancel: 'Exit'})
+        .then(function() {
+          editUserModalService.deleteUser(vm.user).then(function () {
+            $window.location.reload();
+          });
+        });
     };
   }
 })();

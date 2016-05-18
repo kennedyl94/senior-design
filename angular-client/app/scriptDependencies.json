@@ -25,6 +25,8 @@
     "app/directives/editUserModal/editUserModal.service.js",
 
     "app/directives/email/email.module.js",
+    "app/directives/email/email.directive.js",
+    "app/directives/email/email.controller.js",
     "app/directives/email/email.service.js",
 
     "app/directives/addUserModal/addUserModal.module.js",
@@ -77,11 +79,7 @@
     "app/approvals/approvals.module.js",
     "app/approvals/approvals.controller.js",
     "app/approvals/approvals.routes.js",
-
-    "app/logout/logout.module.js",
-    "app/logout/logout.controller.js",
-    "app/logout/logout.routes.js",
-    "app/logout/logout.service.js",
+    "app/approvals/approvals.service.js",
 
     "app/orgSettings/orgSettings.module.js",
     "app/orgSettings/orgSettings.controller.js",
