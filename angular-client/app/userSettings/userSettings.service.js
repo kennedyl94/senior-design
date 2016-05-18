@@ -42,8 +42,7 @@
       promises.push($http(req));
 
       $q.all(promises).then(function(data) {
-        service.data.users = data[0].data;
-        service.data.type = data[1].data;
+        location.reload();
       });
     }
 
