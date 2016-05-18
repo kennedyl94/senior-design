@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('userSettings')
-    .controller('UserSettingsController', ['userSettingsService', '$modal', '$window', Controller]);
+    .controller('UserSettingsController', ['userSettingsService', '$modal', '$window', 'config', '$cookies', Controller]);
 
-  function Controller(userSettingsService, $modal, $window) {
+  function Controller(userSettingsService, $modal, $window, config, $cookies) {
     var vm = this;
     vm.data = userSettingsService.data;
 
@@ -13,6 +13,7 @@
       newPass:"",
       repeat:""
     }
+    vm.err=""
 
     // MODAL CREATIONS
     vm.openEditUserModal = function (user) {
@@ -47,7 +48,38 @@
     };
     vm.changePassword = function(){
       console.log(vm.update.newPass);
-      userSettingsService.updatePassword(vm.update.old, vm.update.newPass, vm.update.repeat);
+      // userSettingsService.updatePassword(vm.update.old, vm.update.newPass, vm.update.repeat).then(function () {
+        // vm.data.err=userSettingsService.data.err;
+
+      // });
+      var currentUser = $cookies.get('currentUser');
+      var req = {
+        method: 'post',
+        url: config.domain+'userSettings/updatePass',
+        headers: {},
+        data: {
+          user: currentUser,
+          old: vm.update.old,
+          newPass: vm.update.newPass,
+          repeat: vm.update.repeat
+        }
+      };
+      userSettingsService.submit(req, function (data) {
+        console.log(data);
+        var code = data.status;
+        console.log(code);
+        if(code == 200){
+          location.reload();
+        } else if(code == 201){
+          vm.err="There was an Error Changing your Password: Incorrect Password";
+        } else if(code == 202) {
+          vm.err = "There was an Error Changing your Password: Passwords do not match";
+        } else {
+          vm.err = "There was an Error Changing your Password";
+        }
+
+      })
+
     }
 
   }

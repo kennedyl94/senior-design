@@ -89,11 +89,16 @@ router.post("/updatePass", function (req, res) {
                     res.send(200);
 
                 }, function (err) {
+                    res.send(500);
                     console.log(err)
 
                 })
-                console.log("woohoo correct");
+
+            } else { //if old password doesn't match current
+                res.send(201)
             }
+        } else { // if the new one and it repeated don't match
+            res.send(202)
         }
 
 

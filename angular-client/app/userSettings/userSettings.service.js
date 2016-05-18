@@ -9,7 +9,8 @@
 
     service.data = {
       users: {},
-      type:""
+      type:"",
+      err:""
     };
 
     function init() {
@@ -21,6 +22,9 @@
         service.data.users = data[0].data;
         service.data.type = data[1].data;
       });
+    }
+    service.submit = function(post, success){
+      $http(post).then(success);
     }
     service.updatePassword = function(old, newPass, repeat) {
       // console.log(old);
@@ -42,8 +46,16 @@
       promises.push($http(req));
 
       $q.all(promises).then(function(data) {
-        location.reload();
-      });
+        var code = data[0].status;
+        // console.log(code);
+        if(code == 200){
+          location.reload();
+        } else {
+          service.data.err="There was an Error Changing your Password";
+        }
+
+      })
+
     }
 
     init();
