@@ -69,9 +69,12 @@
 
     vm.displayTags = function(org) {
       var tagString = '';
-      tagString += org.tags[0].text;
-      for (var i = 1; i < org.tags.length; i++) {
-        tagString += ', ' + org.tags[i].text;
+      if (org.tags != undefined && org.tags.length > 0) {
+        //console.log(org.tags);
+        tagString += org.tags[0].text;
+        for (var i = 1; i < org.tags.length; i++) {
+          tagString += ', ' + org.tags[i].text;
+        }
       }
       return tagString;
     }
@@ -92,6 +95,7 @@
       var filtered = [];
       if(!arr) { return filtered; }
       query = query.toLowerCase() || '';
+      //console.log(arr);
 
       var contains = false;
       var i = 0;
@@ -105,13 +109,14 @@
         for (var q = 0; q < org.tags.length; q++) {
           tags.push(org.tags[q].text);
         }
-        //console.log(tags);
+        //console.log(org);
 
         if (query != 'inactive' && tags.indexOf('inactive') == -1) {
           var j = 0;
           for (j; j < tags.length; j++) {
-            //console.log(tags[j].text);
-            if (tags != undefined && tags.length > 0 && tags[j] != '' && tags[j].toLowerCase().indexOf(query || '') !== -1) {
+            //console.log(query);
+            if (query == '' || (tags.length > 0 && tags[j].toLowerCase().indexOf(query || '') !== -1)) {
+              //console.log(tags);
               found = true;
               filtered.push(org);
               break;

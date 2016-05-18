@@ -7,6 +7,8 @@ function Controller($modalInstance, contents) {
 
   vm.org = contents.org;
 
+  console.log(vm.org);
+
   vm.modifiedOrg = {
     _id: vm.org._id,
     name: vm.org.name,
@@ -23,6 +25,7 @@ function Controller($modalInstance, contents) {
   vm.function = contents.function;
 
   vm.back = function() {
+    console.log(vm.modifiedOrg);
     $modalInstance.close('ok');
   };
 }

@@ -52,7 +52,7 @@ router.put('/modify/:orgId', function(req, res) {
     // console.log(req.body.meetings);
 
     for (var i = 0; i < orgToUpdate.tags.length; i++) {
-        orgToUpdate.tags[i] = {_id: orgToUpdate.tags[i]._id, tag: orgToUpdate.tags[i].text};
+        orgToUpdate.tags[i] = {_id: orgToUpdate.tags[i]._id, text: orgToUpdate.tags[i].text};
     }
     console.log(orgToUpdate.tags);
 

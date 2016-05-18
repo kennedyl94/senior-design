@@ -1,15 +1,15 @@
 var express = require('express')
-  , router = express.Router()
+  , router = express.Router();
 var  _dataServices = require('../orgDataServices.js');
 
 router.post("/", function (req, res) {
 	// console.log(req.body.club.meetings);
 	var org = req.body.club;
-
-	for (var i = 0; i < org.tags.length; i++) {
-		org.tags[i] = {_id: org.tags[i]._id, text: org.tags[i].text};
-	}
 	console.log(org.tags);
+	//for (var i = 0; i < org.tags.length; i++) {
+	//	org.tags[i] = {_id: org.tags[i]._id, text: org.tags[i].text};
+	//}
+	//console.log(org.tags);
 
 	if (org.links!= null && org.links.length > 0) {
 		if (org.links.indexOf(',') != -1) {
