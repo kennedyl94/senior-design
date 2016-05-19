@@ -48,14 +48,14 @@
       'orgSettings',
       'surveySettings',
       'organizations',
-	    'createClub',
+      'createClub',
       'modal',
       'editOrgModal',
       'survey',
       'massUpload',
       'fileUpload',
       'login',
-      'logout',
+      'resetPassword',
       'tagSearch',
       'tagSettings',
       'editTagModal',
@@ -69,6 +69,10 @@
         $location.path('/login');
       } else if(next.data && next.data.studentOrgs && $cookies.get('om_orgAdmin') == 'false') {
         $location.path('/login');
+      }
+
+      if(next.data && next.data.logInRestricted && $cookies.get('om_loggedIn') == 'true') {
+        $location.path('/organizations');
       }
     });
   }]);

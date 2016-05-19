@@ -150,6 +150,20 @@ exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
 	});
 };
 
+exports.modifyOrgByName = function(orgToUpdate, success, error) {
+	console.log("in modifyOrgByName in orgDataServices: " + orgToUpdate.name);
+	database.getModel(orgModelName, function(err, model){
+		model.findOneAndUpdate({name: orgToUpdate.name}, orgToUpdate, function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to modify item with name:' + orgToUpdate.name));
+			}
+			else{
+				success();
+			}
+		});
+	});
+};
+
 /*
  * Sets the active state of an org
  * orgId: The id of the org to activate/deactivate.
@@ -274,6 +288,32 @@ exports.proposeChange = function(changes, callback) {
 		var proposedChange = new model(changes);
         proposedChange.save(function(saveErr, savedChanges){
    		    callback(saveErr, savedChanges._doc);
+		});
+	});
+};
+
+exports.getAllChanges = function(success, error) {
+	database.getModel(proposeChangesModelName, function(err, model){
+		model.find({}).exec(function(findErr, changes) {
+			if(findErr){
+				error(findErr);
+			}
+			else{
+				success(changes);
+			}
+		});
+	});
+};
+
+exports.deleteChange = function(changeId, success, error) {
+	database.getModel(proposeChangesModelName, function(err, model){
+		model.find({ _id: changeId}).remove().exec(function(findErr) {
+			if(findErr) {
+				error(new Error('Unable to delete item with id: ' + changeId));
+			}
+			else{
+				success();
+			}
 		});
 	});
 };

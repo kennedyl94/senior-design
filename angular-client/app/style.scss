@@ -1,7 +1,11 @@
 $background-red: #D30025;
 $outline-grey: #FFBBBC;
 $background-faded: rgba(255,255,255,0.8);
-$site-font: "Helvetica Neue";
+$site-font: "sans-serif";
+
+body {
+  font-family: $site-font !important;
+}
 
 .pagination {
   background-color: $background-red !important;
@@ -55,9 +59,9 @@ button {
 }
 
 #overview-div-mid {
-  height: 300px;
-  max-height: 300px;
-  margin-top: 5px;
+  height: 375px;
+  min-height: 375px;
+  max-height: 500px;
   text-align: center !important;
   background-color: $background-faded;
   margin-right: 0px !important;
@@ -66,24 +70,38 @@ button {
 
   .col-sm-4 {
     text-align: center !important;
+    height: 375px !important;
 
-    #ov-des-div {
-      margin-top: 25px;
-    }
+    .overview-div-inner {
+      height: 350px !important;
+      background-color: $background-faded;
 
-    #ov-img-div {
-      margin-top: 25px;
-      &:hover, &:focus {
-        cursor: pointer;
+      #ov-title-div {
+        margin-top: 25px;
+        font-size: 32px;
       }
-      .logo {
-        width: 200px !important;
-        height: 200px !important;
-        text-align: center !important;
 
-        svg {
-          width: 300px;
-          height: 300px;
+      #ov-des-div {
+        margin-top: 10px;
+        font-size: 15px;
+      }
+
+      #ov-img-div {
+        margin-top: 25px;
+        &:hover, &:focus {
+          cursor: pointer;
+        }
+        .logo {
+          width: 100% !important;
+          height: 100% !important;
+          text-align: center !important;
+
+          svg {
+            display: block !important;
+            margin: auto !important;
+            width: 100% !important;
+            height: 100% !important;
+          }
         }
       }
     }
@@ -105,6 +123,10 @@ button {
   font-size: 32px;
 }
 
+#nav-header-div {
+  width: 100% !important;
+}
+
 .navbar-default {
   background-color: $background-red;
   border-color: #c0392b;
@@ -118,6 +140,7 @@ button {
   .navbar-nav > {
     li > a {
       color: $outline-grey;
+      font-size: 17px;
       &:hover, &:focus {
         color: $outline-grey;
       }
@@ -251,7 +274,7 @@ button {
 }
 
 .login-label {
-  font-family: $site-font;
+  font-family: $site-font !important;
   font-size: 24px;
 }
 
@@ -273,6 +296,88 @@ button {
   }
 
   #login-btn-div {
+    #login-btn {
+      width: 20%;
+      line-height: 135%;
+    }
+  }
+}
+
+/** resetPassword **/
+
+#resetPassword-div {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 300px;
+  background-color: $background-faded;
+  border-radius: 3px;
+
+
+
+  #resetPassword-header {
+    color: $background-red;
+    font-family: $site-font;
+    font-size: 32px;
+  }
+}
+.resetPassword-label {
+font-family: $site-font;
+font-size: 24px;
+}
+
+#resetConfirm-div {
+    text-align: center;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 400px;
+    background-color: $background-faded;
+    border-radius: 3px;
+    
+    
+    
+    #resetPassword-header {
+        color: $background-red;
+        font-family: $site-font;
+        font-size: 32px;
+    }
+}
+
+#resetPassword-div-inner {
+padding: 5% 10% 10% 20%;
+
+  #resetPassword-user-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+#resetPassword-password-div {
+    input {
+        width: 80%;
+        line-height: 24px;
+    }
+}
+
+  #resetPassword-email-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+  #resetPassword-btn-div {
     #login-btn {
       width: 20%;
       line-height: 135%;
@@ -337,13 +442,16 @@ button {
     margin: 10px;
     float: right;
   }
+  .error {
+    color:red;
+  }
 }
 
 /** SURVEY **/
 #survey-div {
-  text-align: center;
+  text-align: left;
   background-color: $background-faded;
-  margin-bottom: 25px;
+  margin-bottom: 100px;
 
   #survey-input-div {
     .row {
@@ -356,6 +464,10 @@ button {
 
   #survey-submit-div {
     background-color: $background-faded;
+  }
+  #inst {
+    text-align: center;
+    font-weight: bold;
   }
 }
 

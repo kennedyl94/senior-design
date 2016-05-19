@@ -46,43 +46,24 @@ router.delete('/delete/:orgId', function(req, res) {
   });
 });
 
+router.put('/modifyOrgByName', function(req, res) {
+    var orgToUpdate = req.body.org;
+    console.log("name of org to update: " + orgToUpdate.name);
+    orgToUpdate = styleOrgToUpdate(orgToUpdate);
+
+    _dataServices.modifyOrgByName(orgToUpdate,
+        function() {
+            res.sendStatus(200);
+        }, function(error) {
+            console.log(error);
+        });
+});
+
 router.put('/modify/:orgId', function(req, res) {
     var orgId = req.params.orgId;
     var orgToUpdate = req.body;
-    // console.log(req.body.meetings);
 
-    for (var i = 0; i < orgToUpdate.tags.length; i++) {
-        orgToUpdate.tags[i] = {_id: orgToUpdate.tags[i]._id, text: orgToUpdate.tags[i].text};
-    }
-    console.log(orgToUpdate.tags);
-
-    if(orgToUpdate.links != null && orgToUpdate.links.length > 0) {
-        if (orgToUpdate.links.indexOf(',') != -1) {
-            orgToUpdate.links = orgToUpdate.links.split(',');
-            for (var i = 0; i < orgToUpdate.links.length; i++) {
-
-                orgToUpdate.links[i] = orgToUpdate.links[i].trim();
-
-                if (orgToUpdate.links[i].indexOf("://") == -1) {
-                    // console.log(orgToUpdate.links[i]);
-                    orgToUpdate.links[i] = "http://" + orgToUpdate.links[i];
-                }
-                // if (org.links[i].indexOf(' ') == 0) {	//Tags likely begin with a single space after being split
-                // 	org.links[i] = org.links[i].substring(1);	// remove the space
-                // }
-            }
-        } else {
-            // console.log(typeof orgToUpdate.links)
-            if (typeof orgToUpdate.links == 'string') {
-
-                orgToUpdate.links = [orgToUpdate.links];
-            }
-            if (orgToUpdate.links[0].indexOf("://") == -1) {
-                // console.log(orgToUpdate.links[0]);
-                orgToUpdate.links[0] = "http://" + orgToUpdate.links[0];
-            }
-        }
-    }
+    orgToUpdate = styleOrgToUpdate(orgToUpdate);
 
     _dataServices.modifyOrg(orgId, orgToUpdate,
     function() {
@@ -91,6 +72,33 @@ router.put('/modify/:orgId', function(req, res) {
         console.log(error);
     });
 });
+
+function styleOrgToUpdate(orgToUpdate) {
+    for (var i = 0; i < orgToUpdate.tags.length; i++) {
+        orgToUpdate.tags[i] = {_id: orgToUpdate.tags[i]._id, text: orgToUpdate.tags[i].text};
+    }
+
+    if(orgToUpdate.links != null && orgToUpdate.links.length > 0) {
+        if (orgToUpdate.links.indexOf(',') != -1) {
+            orgToUpdate.links = orgToUpdate.links.split(',');
+            for (var i = 0; i < orgToUpdate.links.length; i++) {
+                orgToUpdate.links[i] = orgToUpdate.links[i].trim();
+
+                if (orgToUpdate.links[i].indexOf("://") == -1) {
+                    orgToUpdate.links[i] = "http://" + orgToUpdate.links[i];
+                }
+            }
+        } else {
+            if (typeof orgToUpdate.links == 'string') {
+                orgToUpdate.links = [orgToUpdate.links];
+            }
+            if (orgToUpdate.links[0].indexOf("://") == -1) {
+                orgToUpdate.links[0] = "http://" + orgToUpdate.links[0];
+            }
+        }
+    }
+    return orgToUpdate;
+}
 
 router.put('/activation/:orgId', function(req, res) {
     var orgId = req.params.orgId;

@@ -5,6 +5,10 @@
   </div>
   <div class="modal-body">
     <div class="row"><div class="modal-info-header">
+      <h4>Email</h4>
+      <input type="text" name="email" class="form-control" ng-model='editUserModalCtrl.email'/>
+    </div></div>
+    <div class="row"><div class="modal-info-header">
       <h4>Admin Role</h4>
       <select id="sel" class="btn btn-default dropdown-toggle" ng-model="list_category" ng-options="obj.id as obj.name for obj in list_categories.data">
       </select>

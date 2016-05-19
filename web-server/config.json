@@ -1,4 +1,6 @@
 {
+  "_domain": "http://orgmatcher.msoe.edu/#/",
+  "domain": "http://localhost:9000/#/",
 	"mongo": "mongodb://localhost:27017/StudentOrgMatcher",
 	"orgSchema": {
 		"name": "String",
@@ -18,6 +20,9 @@
 	"userSchema" : {
 	  	"Username": "String",
 	  	"Password": "String",
+      "Email": "String",
+      "resetPasswordToken": "String",
+      "resetPasswordExpiration":"Date",
 	  	"Type": "String",
 	  	"Orgs": ["String"]
 	},

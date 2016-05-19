@@ -1,12 +1,13 @@
 (function(){
   angular.module('editUserModal')
-    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', '$window', Controller]);
+    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', '$window', '$confirm', Controller]);
 
-  function Controller($scope, $modalInstance, editUserModalService, contents, $window) {
+  function Controller($scope, $modalInstance, editUserModalService, contents, $window, $confirm) {
     var vm = this;
 
     vm.user = contents.user;
     vm.username = vm.user.Username;
+    vm.email = vm.user.Email;
     vm.orgs = [];
 
     $scope.list_categories = {
@@ -20,6 +21,7 @@
     };
     vm.user = contents.user;
     vm.username = vm.user.Username;
+    vm.email = vm.user.Email;
     vm.orgs = [];
 
     $scope.organizations = editUserModalService.data.orgs;
@@ -32,6 +34,7 @@
 
     vm.saveChanges = function() {
       vm.user.Username = vm.username;
+      vm.user.Email = vm.email;
       vm.user.Type = $scope.list_category;
       vm.user.Orgs = vm.orgs;
       editUserModalService.saveChanges(vm.user).then(function(response) {
@@ -40,10 +43,15 @@
     };
 
     vm.deleteUser = function () {
-      //DIALOG -- ARE YOU SURE YOU WANT TO DELETE THIS ORG?
-      editUserModalService.deleteUser(vm.user).then(function () {
-      });
-      $window.location.reload();
+      $confirm({text: 'Are you sure you want to delete: ' + vm.user.Username + '?',
+        title: 'Delete User',
+        ok: "Delete",
+        cancel: 'Exit'})
+        .then(function() {
+          editUserModalService.deleteUser(vm.user).then(function () {
+            $window.location.reload();
+          });
+        });
     };
   }
 })();

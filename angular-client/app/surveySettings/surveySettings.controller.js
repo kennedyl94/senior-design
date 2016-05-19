@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('surveySettings')
-    .controller('SurveySettingsController', ["surveySettingsService", '$http', 'config', Controller]);
+    .controller('SurveySettingsController', ["surveySettingsService", '$confirm', 'config', Controller]);
 
-  function Controller(surveySettingsService, $http, config) {
+  function Controller(surveySettingsService, $confirm, config) {
 
     var vm = this;
     vm.data = surveySettingsService.data;
@@ -33,10 +33,15 @@
         data: _id
       };
 
-      surveySettingsService.submit(req, function (data, status, headers, config) {
-          console.log(data);
-          location.reload()});
-
+      $confirm({text: 'Are you sure you want to delete this question?',
+        title: 'Delete Question',
+        ok: "Delete",
+        cancel: 'Exit'})
+        .then(function() {
+          surveySettingsService.submit(req, function (data, status, headers, config) {
+            location.reload()
+          });
+      });
     //    $http(req)
     //     .success(
     //     }).error(function(err, status, headers, config) {
@@ -100,10 +105,18 @@
         data: rule
       };
 
-      surveySettingsService.submit(req, function (data, status, headers, config) {
-          console.log(data);
-          location.reload();
+
+      $confirm({text: 'Are you sure you want to delete this rule?',
+        title: 'Delete Rule',
+        ok: "Delete",
+        cancel: 'Exit'})
+        .then(function() {
+          surveySettingsService.submit(req, function (data, status, headers, config) {
+            location.reload()
+          });
       });
+
+
 
     //    $http(req)
     //     .success(

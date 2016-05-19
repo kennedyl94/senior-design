@@ -12,7 +12,9 @@
   <h1 align="center">User Settings</h1>
   <!--<span class="filesicon"><input data-target="#myModal-Add" data-toggle="modal" type="button" value="Add New User"><i class="mce-ico mce-i-browse"></i></span>-->
   <div id="user-settings-div">
-    <input id="new-user-btn" type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
+    <div ng-show="userSettingsCtrl.data.type == 'SL'">
+      <input id="new-user-btn" type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
+    </div>
     <table class="table table-hover translucent">
       <thead>
       <tr>
@@ -27,7 +29,38 @@
         <td>{{user.Username}}</td>
         <td>{{user.Type}}</td>
         <td>{{user.Orgs.toString()}}</td>
-        <td><input type="button" class="btn btn-default" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
+
+        <td><input ng-show="userSettingsCtrl.data.type == 'SL'" type="button" class="btn btn-default" value="Edit" ng-click="userSettingsCtrl.openEditUserModal(user)"></td>
+
+        <td ng-show="userSettingsCtrl.data.type == 'Org'">
+          Reset Your Password<br>
+          Old Password<br>
+          <input type="password" ng-model="userSettingsCtrl.update.old"><br>
+          New Password<br>
+          <input type="password" ng-model="userSettingsCtrl.update.newPass"><br>
+          Retype Your New Password<br>
+          <input type="password" ng-model="userSettingsCtrl.update.repeat"><br>
+          <input type =button value="Submit" ng-click="userSettingsCtrl.changePassword()">
+          <br>
+          <span class="error">{{userSettingsCtrl.err}}</span>
+
+        </td>
+        <div ng-show="userSettingsCtrl.data.type == 'SL'">
+
+            Reset Your Password<br>
+            Old Password<br>
+            <input type="password" ng-model="userSettingsCtrl.update.old"><br>
+            New Password<br>
+            <input type="password" ng-model="userSettingsCtrl.update.newPass"><br>
+            Retype Your New Password<br>
+            <input type="password" ng-model="userSettingsCtrl.update.repeat"><br>
+            <input type =button value="Submit" ng-click="userSettingsCtrl.changePassword()">
+          <br>
+
+          <span class="error">{{userSettingsCtrl.err}}</span>
+
+        </div>
+
       </tr>
       </tbody>
     </table>
@@ -45,6 +78,10 @@
         <div class="row"><div class="modal-info-header">
           <h4>Username</h4>
           <input type="text" name="username" ng-model='userSettingsCtrl.newUser'/>
+        </div></div>
+        <div class="row"><div class="modal-info-header">
+          <h4>Email</h4>
+          <input type="text" name="email" ng-model='userSettingsCtrl.newEmail'/>
         </div></div>
         <div class="row"><div class="modal-info-header">
           <h4>Password</h4>
