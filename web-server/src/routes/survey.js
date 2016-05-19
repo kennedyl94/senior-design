@@ -87,12 +87,11 @@ router.get('/', function (req, res) {
     
     // console.log('num: '+surveySet.num);
     if(surveySet.rules.length >0) {
-
         getQbyCat(0, surveySet.rules, [], surveySet.num, res);
     } else {
         _surveyData.getAllQuestions(null, function(questionMap){
-           var qret =[];
-            for(var j = 0; parseInt(qret.length) <surveySet.num && j< Object.keys(questionMap).length; j++) {
+           var qret = [];
+            for(var j = 0; parseInt(qret.length) < surveySet.num && j < Object.keys(questionMap).length; j++) {
                 // console.log("pushing");
                 if(!arrContains(qret, questionMap[Object.keys(questionMap)[j]] ) ){
                     qret.push(questionMap[Object.keys(questionMap)[j]]);
@@ -103,10 +102,6 @@ router.get('/', function (req, res) {
             res.send(qret);
         });
     }
-    
-    
-    
-    
 });
 
 router.post("/", function (req, res) {
@@ -132,6 +127,7 @@ function matchOrgs(ids, callback) {
 
 function getQuestionsTagsByIds(ids, callback) {
    _surveyData.getQuestionsTagsByIds(ids, function(tags){
+       console.log(tags);
        callback(tags);
    });
 }

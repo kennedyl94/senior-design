@@ -1,0 +1,28 @@
+<h1 align="center">Tag Settings</h1>
+<div class="container" id="tag-settings-div">
+  <div class="col-sm-12" id="tag-add-div">
+    <div class="row">
+      <h3 align="center">Add Tag</h3>
+    </div>
+    <div class="row col-sm-offset-3">
+      <p>New Tag:</p>
+      <input type="text" id="new-tag" class="form-control" ng-model="tagSetCtrl.tagInput"/>
+      <button id="add-btn" class="btn btn-default" type="button" ng-click="tagSetCtrl.add()">Add</button>
+    </div>
+  </div>
+  <div class="col-sm-12" id="tags-div">
+    <div class="row">
+      <h3 align="center">Tags</h3>
+    </div>
+    <div class="row col-sm-offset-3" ng-repeat="tag in tagSetCtrl.data.tags | startFrom:(tagSetCtrl.currentPage-1)*tagSetCtrl.itemsPerPage | limitTo:tagSetCtrl.itemsPerPage | toArray">
+      <h4 class="tags-header col-sm-5">{{tag.text}}</h4>
+      <button class="btn btn-default" type="button" ng-click="tagSetCtrl.edit(tag)">Edit</button>
+      <button class="btn btn-default" type="button" ng-click="tagSetCtrl.del(tag._id)">Delete</button>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-sm-offset-5">
+        <pagination total-items="tagSetCtrl.totalItems" ng-model="tagSetCtrl.currentPage" class="pagination-sm" items-per-page="tagSetCtrl.itemsPerPage"></pagination>
+      </div>
+    </div>
+  </div>
+</div>

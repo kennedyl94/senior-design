@@ -1,9 +1,10 @@
 var express = require('express')
   , router = express.Router();
-var  _dataServices = require('../orgDataServices.js');
+var  _orgServices = require('../orgDataServices.js'),
+	_tagServices = require('../tagDataServices.js');
   
 router.get('/', function(req, res) {
-	_dataServices.getAllTags(function(tags){res.send(tags);},
+	_tagServices.getAllTags(function(tags){res.send(tags);},
 		function(err){console.log(err);});
 });
 
@@ -12,11 +13,11 @@ router.post('/', function(req, res) {
 	var tagList = [];
 	tags.forEach(function(tag) {
 		if (tag.checked) {
-			tagList.push(tag.text);
+			tagList.push(tag.tag);
 		}
 	});
 
-	_dataServices.searchByTags(tagList,
+	_orgServices.searchByTags(tagList,
 		function(orgs) {
 			res.send(orgs);
 		},

@@ -5,9 +5,10 @@
 	"orgSchema": {
 		"name": "String",
 		"description": "String",
-		"tags": [
-			"String"
-		],
+		"tags": [{
+			"_id": "String",
+			"text": "String"
+		}],
 		"links":["String"],
 		"meetings":"String",
 		"contact":{
@@ -27,15 +28,19 @@
 	},
 	"surveyQuestionSchema": {
 		"question" : "String",
-		"tags": [
-			"String"
-		],
+		"tags": [{
+			"_id": "String",
+			"text": "String"
+		}],
 		"category": "String"
 	},
 	"proposeChangesSchema": {
 		"name": "String",
 		"description": "String",
-		"tags": ["String"],
+		"tags": [{
+			"_id": "String",
+			"text": "String"
+		}],
 		"links": "String",
 		"meetings": "String",
 		"contact": {
@@ -43,5 +48,8 @@
 			"email": "String",
 			"phone": "String"
 		}
+	},
+	"tagSchema": {
+		"text": "String"
 	}
 }

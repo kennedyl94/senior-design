@@ -76,11 +76,13 @@ exports.getAllUsers = function(success, error){
  * error: a function to call if there is an error. it takes an error object
  */
 exports.getUserByName = function(username, success, error) {
-    User.find({Username: username}, function(err, foundUser) {
-        if(err) {
-            error(new Error('Unable to find user with username: ' + username));
-        }
-        success(foundUser[0]);
+    database.getModel(modelName, function(err, model) {
+        model.find({Username: username}, function(err, foundUser) {
+            if(err) {
+                error(new Error('Unable to find user with username: ' + username));
+            }
+            success(foundUser[0]);
+        });
     });
 };
 /*

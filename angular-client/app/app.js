@@ -57,6 +57,9 @@
       'login',
       'resetPassword',
       'tagSearch',
+      'tagSettings',
+      'editTagModal',
+      'ngTagSelect',
       'email'
     ])
 

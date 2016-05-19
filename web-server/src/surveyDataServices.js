@@ -27,7 +27,7 @@ exports.getQuestionsTagsByIds = function(ids, callback) {
 			   callback(tags);
 		   }
 		   else{
-			   callback([]);    // this is a temporary solution to the possibilty the callback isn't reached
+			   callback([]);    // this is a temporary solution to the possibility the callback isn't reached
 		   }
 	   });
    });

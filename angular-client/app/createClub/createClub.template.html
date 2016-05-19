@@ -23,12 +23,12 @@
       </div>
       <div class="row">
         <h4>Tags:</h4>
-        <div class="col-sm-6 form-group" ng-class="{ 'has-error' : clubForm.tags.$invalid && clubForm.tags.$touched }">
-          <input id="tags" name="tags" class="form-control" placeholder="please separate tags using commas" ng-model="crClCtrl.club.tags" required/>
+        <div class="col-sm-6 form-group"> <!--ng-class="{ 'has-error' : clubForm.tags.$invalid && clubForm.tags.$touched }"-->
+          <ng-tag-select tags="crClCtrl.club.tags"></ng-tag-select>
         </div>
-        <div class="col-sm-6 has-error" ng-show="clubForm.tags.$invalid && clubForm.tags.$touched">
+        <!--div class="col-sm-6 has-error" ng-show="clubForm.tags.$invalid && clubForm.tags.$touched">
           <span class="help-block">This is a required field.</span>
-        </div>
+        </div-->
       </div>
 
       <div class="row">

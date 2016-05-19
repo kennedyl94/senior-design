@@ -14,6 +14,11 @@
     "app/userSettings/userSettings.service.js",
     "app/userSettings/userSettings.routes.js",
 
+    "app/directives/tagSelect/tagSelect.module.js",
+    "app/directives/tagSelect/tagSelect.directive.js",
+    "app/directives/tagSelect/tagSelect.controller.js",
+    "app/directives/tagSelect/tagSelect.service.js",
+
     "app/createClub/createClub.module.js",
     "app/createClub/createClub.controller.js",
     "app/createClub/createClub.routes.js",
@@ -41,6 +46,10 @@
     "app/directives/fileUpload/fileUpload.module.js",
     "app/directives/fileUpload/fileUpload.service.js",
     "app/directives/fileUpload/fileUpload.directive.js",
+
+    "app/directives/editTagModal/editTagModal.module.js",
+    "app/directives/editTagModal/editTagModal.directive.js",
+    "app/directives/editTagModal/editTagModal.controller.js",
 
     "app/directives/navSidebar/navSidebar.module.js",
     "app/directives/navSidebar/navSidebar.directive.js",
@@ -105,6 +114,11 @@
     "app/tagSearch/tagSearch.controller.js",
     "app/tagSearch/tagSearch.routes.js",
     "app/tagSearch/tagSearch.service.js",
+
+    "app/tagSettings/tagSettings.module.js",
+    "app/tagSettings/tagSettings.controller.js",
+    "app/tagSettings/tagSettings.routes.js",
+    "app/tagSettings/tagSettings.service.js",
 
     "app/config/config.module.js"
   ],

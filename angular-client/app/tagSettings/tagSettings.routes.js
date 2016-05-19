@@ -1,17 +1,17 @@
 (function(){
   'use strict';
 
-  angular.module('createClub')
+  angular.module('tagSettings')
     .config(['$stateProvider',
       function($stateProvider) {
         $stateProvider
-          .state('root.createClub', {
-            url: 'admin/createClub',
+          .state('root.tagSettings', {
+            url: 'admin/tagSettings',
             views: {
               'content@': {
-                templateUrl: 'createClub/createClub.template.html',
-                controller: 'CreateClubController',
-                controllerAs: 'crClCtrl'
+                templateUrl: 'tagSettings/tagSettings.template.html',
+                controller: 'tagSettingsController',
+                controllerAs: 'tagSetCtrl'
               }
             },
             data: {

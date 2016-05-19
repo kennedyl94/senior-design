@@ -74,15 +74,8 @@ router.put('/modify/:orgId', function(req, res) {
 });
 
 function styleOrgToUpdate(orgToUpdate) {
-    if (orgToUpdate.tags.indexOf(',') != -1) {	//Tags separated by commas? If no, only one tag
-        orgToUpdate.tags = orgToUpdate.tags.split(',');
-        for (var i = 0; i < orgToUpdate.tags.length; i++) {
-            orgToUpdate.tags[i] = orgToUpdate.tags[i].trim();
-        }
-    } else {
-        if (typeof orgToUpdate.tags == 'string') {
-            orgToUpdate.tags = [orgToUpdate.tags];
-        }
+    for (var i = 0; i < orgToUpdate.tags.length; i++) {
+        orgToUpdate.tags[i] = {_id: orgToUpdate.tags[i]._id, text: orgToUpdate.tags[i].text};
     }
 
     if(orgToUpdate.links != null && orgToUpdate.links.length > 0) {

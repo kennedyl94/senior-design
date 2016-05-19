@@ -13,6 +13,7 @@
     };
 
     service.submit = function(ans, success) {
+      console.log(ans);
       $http({method: 'POST', url: config.domain + 'survey', data: ans})
         .then(function(data) {
           success(data.data);

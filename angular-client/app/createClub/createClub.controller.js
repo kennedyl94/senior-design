@@ -7,12 +7,13 @@
   function Controller(createClubService) {
 
     var vm = this;
+    vm.data = createClubService.data;
 
     vm.submitted = false;
     vm.club = {
       name: "",
       description: "",
-      tags: "",
+      tags: [],
       links: "",
       meetings: "",
       contact: {
@@ -26,22 +27,23 @@
       vm.submitted = false;
 
       createClubService.submitClub(vm.club, function() {
-          vm.club = {
+        console.log(vm.club.tags);
+        vm.club = {
+          name: "",
+          description: "",
+          tags: [],
+          links: "",
+          meetings: "",
+          contact: {
             name: "",
-            description: "",
-            tags: "",
-            links: "",
-            meetings: "",
-            contact: {
-              name: "",
-              email: "",
-              phone: ""
-            }
-          };
-          form.$setPristine();
-          form.$setUntouched();
-          vm.submitted = true;
-        });
+            email: "",
+            phone: ""
+          }
+        };
+        form.$setPristine();
+        form.$setUntouched();
+        vm.submitted = true;
+      });
     }
   }
 
