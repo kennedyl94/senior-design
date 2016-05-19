@@ -31,7 +31,7 @@ router.put('/', function (request, response) {
 
 router.post('/:id', function(request, response) {
     var tagId = request.params.id;
-    var tagEdit = {tag: request.body.tag.text};
+    var tagEdit = {text: request.body.tag.text};
     //console.log(tagEdit);
     _dataServices.editTag(tagId, tagEdit, function() {
         response.sendStatus(200);

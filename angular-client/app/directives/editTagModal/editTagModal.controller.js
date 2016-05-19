@@ -6,10 +6,11 @@
 
   function Controller($modalInstance, contents) {
     var vm = this;
+    vm.tag = contents.tag;
 
     vm.modifiedTag = {
       _id: vm.tag._id,
-      tag: vm.tag.text
+      text: vm.tag.text
     };
     vm.function = contents.function;
 
