@@ -30,8 +30,6 @@ router.post("/", function (req, res) {
 				org.links = [org.links];
 			}
 
-			org.tags = [org.tags];
-			console.log("one tag" + org.tags[0]);
 			if (org.links[0].indexOf("://") == -1) {
 				org.links[0] = "http://" + org.links[0];
 			}
