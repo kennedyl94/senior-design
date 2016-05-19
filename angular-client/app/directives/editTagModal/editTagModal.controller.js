@@ -8,7 +8,7 @@ function Controller($modalInstance, contents) {
 
   vm.modifiedTag = {
     _id: vm.tag._id,
-    tag: vm.tag.text
+    text: vm.tag.text
   };
   vm.function = contents.function;
 
