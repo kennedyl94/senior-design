@@ -11,11 +11,17 @@
     vm.address = "";
     vm.showEmailField = false;
 
+    vm.updateApprovals = function() {
+      approvalsService.updateApprovals();
+      vm.data = approvalsService.data;
+    };
+
     vm.approveChange = function(change) {
       var org = vm.mapChangeToOrg(change);
       approvalsService.updateOrg(org);
-      approvalsService.removeChange(change);
-      location.reload();
+      approvalsService.removeChange(change).then(function() {
+        vm.updateApprovals();
+      });
     };
 
     vm.mapChangeToOrg = function(change) {
@@ -34,8 +40,9 @@
     };
 
     vm.rejectChange = function(change) {
-      approvalsService.removeChange(change);
-      location.reload();
+      approvalsService.removeChange(change).then(function() {
+        vm.updateApprovals();
+      });
     };
 
     vm.showAdminEmail = function() {

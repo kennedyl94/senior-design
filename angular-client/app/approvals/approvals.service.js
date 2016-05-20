@@ -11,6 +11,10 @@
       changes: {}
     };
 
+    service.updateApprovals = function() {
+      init();
+    };
+
     service.updateOrg = function(org) {
       var deferred = $q.defer();
       var promise = $http({method: 'PUT', url: config.domain + 'Organizations/modifyOrgByName', data: {org: org}});
