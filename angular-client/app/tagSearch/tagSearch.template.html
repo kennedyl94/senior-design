@@ -1,5 +1,6 @@
 <h1 id="tagSearchPageTitle">Tag Search</h1>
 <div id="tagSearchDiv">
+  <p id="search-inst">Check all that apply to you</p>
   <form name="tagList">
     <div class="row">
       <div ng-repeat="tag in tsCtrl.tags">
@@ -11,7 +12,7 @@
     </div>
   </form>
   <div id="ts-button-div">
-    <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Clear</button>
+    <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Uncheck All</button>
   </div>
   <div id='ts-email-div' class="col-sm-12">
     <ng-email

@@ -343,9 +343,9 @@ font-size: 24px;
     height: 400px;
     background-color: $background-faded;
     border-radius: 3px;
-    
-    
-    
+
+
+
     #resetPassword-header {
         color: $background-red;
         font-family: $site-font;
@@ -424,14 +424,6 @@ padding: 5% 10% 10% 20%;
       width: 90% !important;
     }
   }
-  .modal-footer {
-    #save-btn {
-      float: left;
-    }
-    float: right;
-    #exit-btn {
-    }
-  }
 }
 
 /** USER SETTINGS **/
@@ -440,8 +432,8 @@ padding: 5% 10% 10% 20%;
 
   #new-user-btn {
     margin: 10px;
-    float: right;
   }
+
   .error {
     color:red;
   }

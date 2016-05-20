@@ -42,11 +42,6 @@
             location.reload()
           });
       });
-    //    $http(req)
-    //     .success(
-    //     }).error(function(err, status, headers, config) {
-    //       console.log('error: ' + err);
-    //     });
     };
 
     vm.add = function(){
