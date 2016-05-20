@@ -23,9 +23,6 @@
     // vm.data.num = surveySettingsService.num;
     vm.data.rules = surveySettingsService.rules;
     vm.del = function(_id){
-
-      console.log(_id);
-
       var req = {
         method: 'delete',
         url: config.domain+'surveySet',
@@ -45,7 +42,6 @@
     };
 
     vm.add = function(){
-      console.log(vm.question);
       if(vm.question.question == undefined || vm.question.question.length == 0
         || vm.question.category == undefined ||vm.question.category.length == 0
         || vm.question.tags == undefined || vm.question.tags.length == 0) {
@@ -59,16 +55,12 @@
         data: vm.question
       };
 
-      console.log(vm.question);
-
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        console.log(data);
         location.reload();
       });
     };
 
     vm.rule = function(){
-      console.log(vm.rule.category);
       if(vm.rule.num == undefined
         || vm.rule.category == undefined || vm.rule.category.length == 0) {
         return;
@@ -85,14 +77,11 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        console.log(data);
         location.reload();
       });
     };
 
     vm.delrule = function(rule) {
-      console.log(rule);
-
       var req = {
         method: 'delete',
         url: config.domain+'surveySet/delrule',
@@ -110,19 +99,9 @@
             location.reload()
           });
       });
-
-
-
-    //    $http(req)
-    //     .success(
-    //     }).error(function(err, status, headers, config) {
-    //       console.log('error: ' + err);
-    //     });
     };
 
     vm.questionNum = function(){
-      console.log(vm.num);
-
       var req = {
         method: 'post',
         url: config.domain+'surveySet/questionNum',
@@ -131,10 +110,8 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        console.log(data);
         location.reload();
       });
     };
-
   }
 })();

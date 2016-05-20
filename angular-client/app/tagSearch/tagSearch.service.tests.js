@@ -91,7 +91,6 @@ describe('tagSearchService', function() {
 
       var tempOrgs = [];
       tagSearchService.searchTags(testTags, function(res) {
-        console.log(res);
         res.forEach(function(result) {
           tempOrgs.push(result);
         });

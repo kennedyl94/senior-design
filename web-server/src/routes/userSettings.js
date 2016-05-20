@@ -10,7 +10,6 @@ var createHash = function(password){
 };
 
 router.get('/user/:user', function(request, response) {
-
     var currentUser = request.params.user;
     _dataServices.getUserByName(currentUser, function (usermap){
         if (usermap.Type == "SL"){
@@ -20,16 +19,12 @@ router.get('/user/:user', function(request, response) {
                 }, function(err) {
                     console.log(err);
                 });
-
         } else {
             response.send([usermap]);
         }
-
     }, function (err) {
         console.log(err)
-
         });
-
 });
 
 router.delete('/delete/:id', function(request, response) {
@@ -43,7 +38,6 @@ router.delete('/delete/:id', function(request, response) {
 });
 
 router.put('/addNew', function (request, response) {
-    // console.log("in add new in userSettings");
     var user = request.body.user;
     user.Password = createHash(user.Password);
     _dataServices.addUser(user,
@@ -68,19 +62,12 @@ router.get('/userType/user/:user', function(request, response) {
     var currentUser = request.params.user;
     _dataServices.getUserByName(currentUser, function (usermap) {
         response.send(usermap.Type);
-
     }, function (err) {
         console.log(err);
-
     });
 });
 router.post("/updatePass", function (req, res) {
-    // console.log(req.body.user);
-
     _dataServices.getUserByName(req.body.user, function (usermap){
-        // console.log(usermap);
-        // var pass  = createHash(req.body.old);
-        // console.log(pass);
         if(req.body.newPass == req.body.repeat) {
             if(bCrypt.compareSync(req.body.old,usermap.Password))
             {
@@ -91,23 +78,16 @@ router.post("/updatePass", function (req, res) {
                 }, function (err) {
                     res.send(500);
                     console.log(err)
-
                 })
-
             } else { //if old password doesn't match current
                 res.send(201)
             }
         } else { // if the new one and it repeated don't match
             res.send(202)
         }
-
-
     }, function (err) {
         console.log(err)
-
     });
-
-    
 });
 
 module.exports = router;

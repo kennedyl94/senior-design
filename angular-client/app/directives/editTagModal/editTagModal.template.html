@@ -1,9 +1,9 @@
 <div id="edit-tag-modal-div">
   <div class="modal-header" id="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="editTagModalCtrl.back()">×</button>
     <h2 class="modal-title">Edit Tag</h2>
   </div>
   <div class="modal-body">
-    <div class="row"><div class="modal-info-header"><h4>Edit Tag</h4></div></div>
     <!-- EDIT TAG INFO -->
     <div class="row">
       <div class="col-sm-3">Tag:</div>
@@ -12,6 +12,5 @@
   </div>
   <div class="modal-footer">
     <input id="save-btn" class="btn btn-default" type="button" value="Save" ng-click="editTagModalCtrl.function(editTagModalCtrl.modifiedTag)"/>
-    <input id="exit-btn" class="btn btn-default" type="button" value="Exit" ng-click="editTagModalCtrl.back()"/>
   </div>
 </div>

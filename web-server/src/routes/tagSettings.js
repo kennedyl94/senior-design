@@ -21,7 +21,6 @@ router.delete('/:id', function(request, response) {
 
 router.put('/', function (request, response) {
     var tag = {text: request.body.tag};
-    console.log(tag);
     _dataServices.addTag(tag, function() {
         response.sendStatus(200);
     }, function(error) {
@@ -32,7 +31,6 @@ router.put('/', function (request, response) {
 router.post('/:id', function(request, response) {
     var tagId = request.params.id;
     var tagEdit = {text: request.body.tag.text};
-    //console.log(tagEdit);
     _dataServices.editTag(tagId, tagEdit, function() {
         response.sendStatus(200);
     }, function(err) {

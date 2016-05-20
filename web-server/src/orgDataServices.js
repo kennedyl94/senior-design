@@ -151,7 +151,6 @@ exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
 };
 
 exports.modifyOrgByName = function(orgToUpdate, success, error) {
-	console.log("in modifyOrgByName in orgDataServices: " + orgToUpdate.name);
 	database.getModel(orgModelName, function(err, model){
 		model.findOneAndUpdate({name: orgToUpdate.name}, orgToUpdate, function(findErr) {
 			if(findErr) {

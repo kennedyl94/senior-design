@@ -27,7 +27,6 @@
       vm.submitted = false;
 
       createClubService.submitClub(vm.club, function() {
-        console.log(vm.club.tags);
         vm.club = {
           name: "",
           description: "",

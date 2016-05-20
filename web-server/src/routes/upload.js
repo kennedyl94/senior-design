@@ -87,7 +87,7 @@ router.post('/', uploader.single('file'), function(req, res){
             email: row[emailIndex],
             phone: row[phoneIndex]
           }
-        }
+        };
 
         var success =
         newOrg.name && newOrg.name.trim() != '' &&

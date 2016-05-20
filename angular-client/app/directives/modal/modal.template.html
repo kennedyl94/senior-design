@@ -1,5 +1,6 @@
 <div>
   <div class="modal-header" id="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="modalCtrl.back()">×</button>
     <h2 class="modal-title">{{modalCtrl.org.name}}</h2>
   </div>
   <div class="modal-body">
@@ -43,7 +44,6 @@
         <div class="row">
 
           <div class="col-sm-3 info">{{modalCtrl.org.contact.phone}}</div>
-          <button class="btn btn-primary" id="modal-back-btn" ng-click="modalCtrl.back()">Exit</button>
         </div>
       </div>
     </div>
