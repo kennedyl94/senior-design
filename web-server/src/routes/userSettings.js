@@ -73,17 +73,17 @@ router.post("/updatePass", function (req, res) {
             {
                 usermap.Password = createHash(req.body.newPass);
                 _dataServices.editUser(usermap,usermap._id,function () {
-                    res.send(200);
+                    res.sendStatus(200);
 
                 }, function (err) {
-                    res.send(500);
+                    res.sendStatus(500);
                     console.log(err)
                 })
             } else { //if old password doesn't match current
-                res.send(201)
+                res.sendStatus(201)
             }
         } else { // if the new one and it repeated don't match
-            res.send(202)
+            res.sendStatus(202)
         }
     }, function (err) {
         console.log(err)

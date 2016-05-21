@@ -32,7 +32,7 @@ router.delete('/', function(req, res) {
 
 router.post('/add', function(req, res){
     _surveyData.addQuestion(req.body, function(e){
-       res.send(200);
+       res.sendStatus(200);
     });
 });
 
