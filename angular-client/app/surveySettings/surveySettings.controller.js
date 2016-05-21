@@ -8,6 +8,7 @@
 
     var vm = this;
     vm.data = surveySettingsService.data;
+    vm.data.rules = surveySettingsService.rules;
 
     vm.question = {
         question: "",
@@ -20,8 +21,12 @@
         num:0
     };
 
-    // vm.data.num = surveySettingsService.num;
-    vm.data.rules = surveySettingsService.rules;
+    vm.updateSurveySettings = function() {
+      surveySettingsService.updateSurveySettings();
+      vm.data = surveySettingsService.data;
+      vm.data.rules = surveySettingsService.rules;
+    };
+
     vm.del = function(_id){
       var req = {
         method: 'delete',
@@ -36,7 +41,7 @@
         cancel: 'Exit'})
         .then(function() {
           surveySettingsService.submit(req, function (data, status, headers, config) {
-            location.reload()
+            vm.updateSurveySettings();
           });
       });
     };
@@ -56,7 +61,7 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        location.reload();
+        vm.updateSurveySettings();
       });
     };
 
@@ -77,7 +82,7 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        location.reload();
+        vm.updateSurveySettings();
       });
     };
 
@@ -96,7 +101,7 @@
         cancel: 'Exit'})
         .then(function() {
           surveySettingsService.submit(req, function (data, status, headers, config) {
-            location.reload()
+            vm.updateSurveySettings();
           });
       });
     };
@@ -110,7 +115,7 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        location.reload();
+        vm.updateSurveySettings();
       });
     };
   }
