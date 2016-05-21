@@ -7,19 +7,23 @@
   function Controller(userSettingsService, $modal, config, $cookies, $confirm) {
     var vm = this;
     vm.data = userSettingsService.data;
-    var editUserModal;
-    var addUserModal;
-
+    vm.showPasswordDiv = false;
+    vm.err = "";
     vm.update ={
       old:"",
       newPass:"",
       repeat:""
     };
 
-    vm.err = "";
+    var editUserModal;
+    var addUserModal;
 
     vm.isStudentLifeAdmin = function() {
       return $cookies.get('om_slAdmin');
+    };
+
+    vm.showChangePasswordDiv = function() {
+      vm.showPasswordDiv = true;
     };
 
     // MODAL CREATIONS
@@ -106,6 +110,7 @@
           vm.update.old = "";
           vm.update.newPass = "";
           vm.update.repeat = "";
+          vm.showPasswordDiv = false;
         } else if(code == 201){
           vm.err = "There was an error when changing your password: Incorrect Password";
         } else if(code == 202) {

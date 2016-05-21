@@ -14,8 +14,10 @@
       <div id="new-user-btn-div" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
         <input id="new-user-btn" type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
       </div>
-      <div id="change-password-div">
-          <h3>Reset Your Password</h3><br>
+      <div id="change-password-btn-div">
+        <input id="show-change-password-btn" type="button" class="btn btn-default" value="Change Password" ng-click="userSettingsCtrl.showChangePasswordDiv()" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
+      </div>
+      <div id="change-password-div" ng-show="userSettingsCtrl.showPasswordDiv || !userSettingsCtrl.isStudentLifeAdmin()">
           Old Password<br>
           <input type="password" ng-model="userSettingsCtrl.update.old"><br>
           New Password<br>
