@@ -62,6 +62,8 @@
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
         vm.updateSurveySettings();
+        vm.question.question = "";
+        vm.question.category = "";
       });
     };
 
@@ -83,6 +85,7 @@
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
         vm.updateSurveySettings();
+        vm.rule.category = "";
       });
     };
 

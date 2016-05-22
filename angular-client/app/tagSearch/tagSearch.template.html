@@ -11,9 +11,11 @@
       </div>
     </div>
   </form>
+  <br>
   <div id="ts-button-div">
     <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Uncheck All</button>
   </div>
+  <br>
   <div id='ts-email-div' class="col-sm-12">
     <ng-email
       orgs='tsCtrl.orgList'
@@ -21,6 +23,7 @@
     </ng-email>
   </div>
 </div>
+<br><br><br>
 <ng-organizations
   ng-show="tsCtrl.orgList.length > 0"
   orgs="tsCtrl.orgList"
