@@ -29,7 +29,8 @@ function proposeChangeEmail(org) {
     var builtString = "The following changes have been requested:\r\n\r\n";
     builtString = builtString.concat('Org Name:\r\n    ' + org.name + '\r\n');
     builtString = builtString.concat('Description:\r\n    ' + org.description + '\r\n');
-    builtString = builtString.concat('Tags:\r\n    ' + org.tags + '\r\n');
+    builtString = builtString.concat('Tags:\r\n');
+    builtString = buildTags(org, builtString);
     builtString = builtString.concat('Social Media Links:\r\n    ' + org.links + '\r\n');
     builtString = builtString.concat('Meeting Times:\r\n    ' + org.meetings + '\r\n');
     builtString = builtString.concat('Main Contact Name:\r\n    ' + org.contact.name + '\r\n');
@@ -57,6 +58,13 @@ function proposeChangeEmail(org) {
     });
 }
 
+function buildTags(org, builtString) {
+    var tags = org.tags;
+    for(var i = 0; i < tags.length; i++) {
+        builtString = builtString.concat('    ' + tags[i].text + '\r\n');
+    }
+    return builtString;
+}
 
 //'https://accounts.google.com/o/oauth2/token'
 function sendResults(address, orgs) {
