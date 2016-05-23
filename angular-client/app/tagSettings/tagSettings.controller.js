@@ -13,23 +13,23 @@
     vm.tagInput = "";
     vm.currentPage = 1;
     vm.itemsPerPage = 10;
-    //console.log(vm.data.tags);
+    //vm.totalItems = vm.data.tags.length;
+    //console.log(vm.data);
 
     vm.del = function(_id) {
-      console.log(_id);
-
+      //console.log(_id);
       tagSettingsService.delete(_id, function(data, status, headers, config) {
-        console.log(data);
+        //console.log(data);
         location.reload();
       });
     };
 
     vm.add = function() {
-      console.log(vm.tagInput);
+      //console.log(vm.tagInput);
 
       if(vm.tagInput != undefined && vm.tagInput.length != 0) {
         tagSettingsService.submit(vm.tagInput, function (data, status, headers, config) {
-          console.log(data);
+          //console.log(data);
           location.reload();
         });
       }
