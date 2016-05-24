@@ -3,7 +3,7 @@
   <p id="search-inst">Check all that apply to you</p>
   <form name="tagList">
     <div class="row">
-      <div ng-repeat="tag in tsCtrl.tags">
+      <div ng-repeat="tag in tsCtrl.data.tags">
         <div class="clearfix" ng-if="$index % 4 == 0"></div>
         <div class="col-sm-3">
           <input type="checkbox" name="tagCheck" ng-model="tag.checked" ng-click="tsCtrl.search(tagList)"> {{tag.text}}</input>
