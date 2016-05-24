@@ -19,6 +19,10 @@
         });
     };
 
+    service.update = function() {
+      init();
+    }
+
     function init() {
       //TODO -- Make initial call to get survey questions
       var promises = [];
