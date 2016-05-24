@@ -8,12 +8,15 @@
     var vm = this;
     vm.username = "";
     vm.password = "";
+    vm.badLog = false;
 
     vm.login = function() {
       loginService.login(vm.username, vm.password).then(function(response) {
+        console.log(response.code);
         if(response.code == 200) {
           $state.go('root.organizations', { redirect : true });
         } else {
+          vm.badLog = true;
           $state.go('root.login', {redirect: true});
         }
       });
