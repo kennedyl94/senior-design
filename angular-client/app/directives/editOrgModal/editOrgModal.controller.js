@@ -7,6 +7,7 @@
     var vm = this;
 
     vm.org = contents.org;
+
     vm.modifiedOrg = {
       _id: vm.org._id,
       name: vm.org.name,

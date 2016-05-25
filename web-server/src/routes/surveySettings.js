@@ -9,11 +9,11 @@ router.get('/', function (req, res) {
         res.send(questionMap);
         
         if(!Object.keys(questionMap).length || questionMap.legnth <= 0) {
-            console.log("should be adding");
+            //console.log("should be adding");
         }
         
     }, function(e){
-        console.log("get in get"+e);
+        if (e) {console.log("get in get"+e);}
     });
 });
 
@@ -26,6 +26,7 @@ router.delete('/', function(req, res) {
     _surveyData.deletequestion(req.body, function(){
         res.sendStatus(200);
     }, function(e){
+        if (e) {console.log('error deleting: '+e);}
         res.send(500);
     })
 });
@@ -48,7 +49,7 @@ router.post('/addrule', function(req, res){
             }
     }
 
-    if(index != -1) {
+    if (index != -1) {
         surveySet.rules.splice(index, 1);
         jsonfile.writeFileSync(surveyFile, surveySet);
     }
@@ -72,13 +73,13 @@ router.delete('/delrule', function (req, res) {
     var index = -1;
     var i =0;
     
-    for(i = 0; i < Object.keys(surveySet.rules).length; i++) {
+    for (i = 0; i < Object.keys(surveySet.rules).length; i++) {
         if(surveySet.rules[i].category === r.category) {
                 index = i;
             }
     }
 
-    if(index != -1) {
+    if (index != -1) {
         surveySet.rules.splice(index, 1);
         jsonfile.writeFileSync(surveyFile, surveySet);
         res.send(200);
@@ -89,7 +90,7 @@ router.delete('/delrule', function (req, res) {
     }
 });
 
-router.post('/questionNum', function(req, res){
+router.post('/questionNum', function(req, res) {
     var surveySet = jsonfile.readFileSync(surveyFile);
     surveySet.num = req.body.num;
 

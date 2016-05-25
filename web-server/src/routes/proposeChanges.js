@@ -10,7 +10,7 @@ router.get('/allChanges', function (req, res) {
     _dataServices.getAllChanges(function(changes) {
         res.send(changes);
     }, function(err) {
-        console.log(err);
+        if (err) {console.log(err);}
         res.sendStatus(404);
     });
 });
@@ -21,7 +21,7 @@ router.delete('/delete/:id', function(request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-            console.log(error);
+            if (error) {console.log(error);}
         });
 });
 

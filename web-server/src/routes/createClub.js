@@ -28,6 +28,7 @@ router.post("/", function (req, res) {
 
 
 	_dataServices.addStudentOrg(org, function(err) {
+		if (err) {console.log(err);}
 	});
 
 	res.sendStatus(200);

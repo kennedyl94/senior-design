@@ -13,7 +13,7 @@ _dataServices.getAllOrgs(null, function(orgsMap){
   },
   function(e)
   {
-	  console.log(e);
+	  if (e) {console.log(e);}
   }
 );
 

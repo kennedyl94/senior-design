@@ -17,14 +17,14 @@ router.get('/user/:user', function(request, response) {
                 function(users) {
                     response.send(users);
                 }, function(err) {
-                    console.log(err);
+                    if (err) {console.log(err);}
                 });
         } else {
             response.send([usermap]);
         }
     }, function (err) {
-        console.log(err)
-        });
+        if (err) {console.log(err)}
+    });
 });
 
 router.delete('/delete/:id', function(request, response) {
@@ -33,7 +33,7 @@ router.delete('/delete/:id', function(request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-           console.log(error);
+           if (error) {console.log(error);}
         });
 });
 
@@ -44,7 +44,7 @@ router.put('/addNew', function (request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-            console.log(error);
+            if (error) {console.log(error);}
         });
 });
 
@@ -55,7 +55,7 @@ router.put('/editExisting/:id', function (request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-           console.log(error);
+           if (error) {console.log(error);}
         });
 });
 router.get('/userType/user/:user', function(request, response) {
@@ -63,7 +63,7 @@ router.get('/userType/user/:user', function(request, response) {
     _dataServices.getUserByName(currentUser, function (usermap) {
         response.send(usermap.Type);
     }, function (err) {
-        console.log(err);
+        if (err) {console.log(err);}
     });
 });
 router.post("/updatePass", function (req, res) {
@@ -77,7 +77,7 @@ router.post("/updatePass", function (req, res) {
 
                 }, function (err) {
                     res.sendStatus(500);
-                    console.log(err)
+                    if (err) {console.log(err);}
                 })
             } else { //if old password doesn't match current
                 res.sendStatus(201)
@@ -86,7 +86,7 @@ router.post("/updatePass", function (req, res) {
             res.sendStatus(202)
         }
     }, function (err) {
-        console.log(err)
+        if (err) {console.log(err);}
     });
 });
 

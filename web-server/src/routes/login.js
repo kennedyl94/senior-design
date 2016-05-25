@@ -27,7 +27,7 @@ router.post('/', function(request, response) {
             };
             response.send({currentUser: user, code: 200});
         } else {
-            response.sendStatus(401);
+            response.send({code: 401});
         }
     })(request, response);
 });
