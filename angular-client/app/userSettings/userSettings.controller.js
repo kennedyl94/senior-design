@@ -7,6 +7,7 @@
   function Controller(userSettingsService, $modal, config, $cookies, $confirm) {
     var vm = this;
     vm.data = userSettingsService.data;
+    vm.showMassUpload = false;
     vm.showPasswordDiv = false;
     vm.err = "";
     vm.update ={
@@ -22,6 +23,10 @@
       return $cookies.get('om_slAdmin');
     };
 
+    vm.showUserMassUploadDiv = function() {
+        vm.showMassUpload = true;
+    };
+ 
     vm.showChangePasswordDiv = function() {
       vm.showPasswordDiv = true;
     };
