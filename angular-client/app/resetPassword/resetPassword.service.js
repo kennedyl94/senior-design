@@ -14,7 +14,6 @@
 
     service.checkValidToken = function(token, callback){
       $http({method: 'GET', url: config.domain + 'resetPassword/checkValidToken/'+token}).then(function(){}, function(data){
-        console.log(data);
         callback(data);
       });
     };

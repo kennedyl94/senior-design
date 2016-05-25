@@ -13,12 +13,15 @@
     };
 
     service.submit = function(ans, success) {
-      console.log(ans);
       $http({method: 'POST', url: config.domain + 'survey', data: ans})
         .then(function(data) {
           success(data.data);
         });
     };
+
+    service.update = function() {
+      init();
+    }
 
     function init() {
       //TODO -- Make initial call to get survey questions
@@ -26,7 +29,6 @@
       promises.push($http({method: 'GET', url: config.domain+'survey'}));
       $q.all(promises).then(function(data) {
         service.data.questions = data[0].data;
-        console.log(data[0].data);
       });
     }
 

@@ -23,7 +23,6 @@ router.delete('/:id', function(request, response) {
 
 router.put('/', function (request, response) {
     var tag = {text: request.body.tag};
-    console.log(tag);
     _dataServices.addTag(tag, function() {
         response.sendStatus(200);
     }, function(error) {

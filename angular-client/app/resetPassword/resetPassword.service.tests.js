@@ -49,5 +49,5 @@ describe('resetPasswordService', function() {
       resetPasswordService.sendNewPassword(fakeToken, fakePassword);
       httpBackend.flush();
     });
-  });*/
+  });
 });

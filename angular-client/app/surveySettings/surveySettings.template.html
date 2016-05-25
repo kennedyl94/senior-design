@@ -5,6 +5,7 @@
     <div class="col-lg-4">
       <!--add questions-->
       <h3 align="center">Add Question</h3>
+      <p class="inst">Add questions that answer the question:</p><p class="inst">"Are you interested in...?"</p><p class="inst">For example: "...Greek Organizations?"</p>
       <br>
       Question:
       <input type="text" class="form-control" id="question" ng-model="surveySettingsCtrl.question.question"> <br>
@@ -24,6 +25,7 @@
     <div class="col-lg-4">
       <!--add delete rules, based on question type make back end call to get data in a promise  will be stored in json file-->
       <h3 align="center">Add Rule</h3>
+      <p class="inst">How many minimum questions for a category would you like displayed in each survey?</p>
       <br>
       Category:
       <input class="form-control" type="text" id="cat" ng-model="surveySettingsCtrl.rule.category"> <br>
@@ -42,6 +44,7 @@
     <div class="col-lg-4">
       <!--num questions will be stored in json file-->
       <h3 align="center">Number of Questions</h3>
+      <p class="inst">How many questions do you want displayed in each survey?</p>
       <br>
       Maximum Number:
       <input class="form-control" id="numQuestions" ng-model="surveySettingsCtrl.data.num" type="number"> <br>

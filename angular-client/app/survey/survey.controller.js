@@ -7,6 +7,7 @@
   function Controller(surveyService, emailService, $http, config) {
 
     var vm = this;
+    surveyService.update();
     vm.data = surveyService.data;
     vm.orgs = {};
     vm.ans = {};

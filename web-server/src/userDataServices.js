@@ -128,18 +128,14 @@ exports.editUser = function(user, id, success, error) {
  */
 exports.authenticateUser = function(username, password, done) {
     database.getModel(modelName, function(err, model){
-        console.log("username: " + username);
         model.findOne({ 'Username' :  username },
             function(err, user) {
-                console.log(user);
                 if (err)
                     return done(err);
                 if (!user){
-                    console.log('User Not Found with username '+username);
                     return done(null, false, {message: 'No User Found'});
                 }
                 if (!isValidPassword(user, password)){
-                    console.log('Invalid Password');
                     return done(null, false, {message: 'Invalid Password'});
                 }
                 return done(null, user);
@@ -182,11 +178,10 @@ exports.checkValidToken = function(token, callback){
   database.getModel(modelName, function(err, model){
     model.findOne({resetPasswordToken: token}, function(err2, user){
       if(user){
-        console.log(user);
         if(Date.now() < user.resetPasswordExpiration){
           retval = true;
         }
-      };
+      }
       callback(err2, retval);
     });
   });

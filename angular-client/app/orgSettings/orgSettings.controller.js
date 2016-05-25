@@ -27,14 +27,10 @@
     });
 
     vm.modifyOrg = function(org) {
-      console.log(org);
       var isStudentOrgAdmin = $cookies.get('om_orgAdmin');
-      console.log("is org admin: " + isStudentOrgAdmin);
       if(isStudentOrgAdmin == 'true') {
-        console.log("propose change");
         vm.proposeChange(org);
       } else {
-        console.log("save change");
         orgSettingsService.saveModifiedOrg(org).then(function () {
           editOrgModal.close('ok');
           vm.updateOrgs();

@@ -23,11 +23,43 @@
         service.data.type = data[1].data;
       });
     }
+
+    service.updateUsers = function() {
+      init();
+    };
+
+    service.addUser = function(user) {
+      var deferred = $q.defer();
+      var promise = $http({method: 'PUT', url: config.domain + 'userSettings/addNew', data: {user: user}});
+      promise.then(function(data) {
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    };
+
+    service.modifyUser = function(user) {
+      var deferred = $q.defer();
+      var promise = $http({method: 'PUT', url: config.domain + 'userSettings/editExisting/' + user._id, data: {user: user}});
+      promise.then(function(data) {
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    };
+
+    service.deleteUser = function(user) {
+      var deferred = $q.defer();
+      var promise = $http({method: 'DELETE', url: config.domain + 'userSettings/delete/' + user._id});
+      promise.then(function(data) {
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
+
     service.submit = function(post, success){
       $http(post).then(success);
-    }
+    };
+
     service.updatePassword = function(old, newPass, repeat) {
-      // console.log(old);
       var promises = [];
       var currentUser = $cookies.get('currentUser');
 
@@ -47,16 +79,13 @@
 
       $q.all(promises).then(function(data) {
         var code = data[0].status;
-        // console.log(code);
         if(code == 200){
-          location.reload();
+
         } else {
-          service.data.err="There was an Error Changing your Password";
+          service.data.err="There was an error when changing your password";
         }
-
       })
-
-    }
+    };
 
     init();
 
