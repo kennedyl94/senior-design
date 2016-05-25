@@ -125,7 +125,6 @@ router.post('/', uploader.single('file'), function(req, res){
  * If the CSV is missing columns or is malformed, the server should return 422.
  */
 router.post('/UserFile', uploader.single('file'), function(req, res){
-            console.log('user upload');
     var parser = csvParse();
     var notSent = true;
     var output = [];

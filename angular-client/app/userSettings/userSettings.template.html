@@ -19,7 +19,7 @@
       </div>
       <div id="mass-user-upload-div" ng-show="userSettingsCtrl.showMassUpload && userSettingsCtrl.isStudentLifeAdmin()">
           <h4>Please select the .csv file to upload.</h4>
-          <input class="btn btn-default" ng-file-upload type="file" name="userFile">
+          <input class="btn btn-default" ng-file-upload type="file" name="userFile" ng-file-upload-callback="userSettingsCtrl.updateUsers()">
       </div>
       <div id="change-password-btn-div">
         <input id="show-change-password-btn" type="button" class="btn btn-default" value="Change Password" ng-click="userSettingsCtrl.showChangePasswordDiv()" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
