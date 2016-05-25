@@ -21,7 +21,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 col-sm-offset-5">
-        <pagination total-items="tagSetCtrl.totalItems" ng-model="tagSetCtrl.currentPage" class="pagination-sm" items-per-page="tagSetCtrl.itemsPerPage"></pagination>
+        <pagination total-items="tagSetCtrl.data.tags.length" ng-model="tagSetCtrl.currentPage" class="pagination-sm" items-per-page="tagSetCtrl.itemsPerPage"></pagination>
       </div>
     </div>
   </div>

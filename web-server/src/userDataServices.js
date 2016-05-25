@@ -133,11 +133,9 @@ exports.authenticateUser = function(username, password, done) {
                 if (err)
                     return done(err);
                 if (!user){
-                    console.log('User Not Found with username '+username);
                     return done(null, false, {message: 'No User Found'});
                 }
                 if (!isValidPassword(user, password)){
-                    console.log('Invalid Password');
                     return done(null, false, {message: 'Invalid Password'});
                 }
                 return done(null, user);
@@ -183,7 +181,7 @@ exports.checkValidToken = function(token, callback){
         if(Date.now() < user.resetPasswordExpiration){
           retval = true;
         }
-      };
+      }
       callback(err2, retval);
     });
   });

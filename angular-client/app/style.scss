@@ -424,14 +424,6 @@ padding: 5% 10% 10% 20%;
       width: 90% !important;
     }
   }
-  .modal-footer {
-    #save-btn {
-      float: left;
-    }
-    float: right;
-    #exit-btn {
-    }
-  }
 }
 
 /** USER SETTINGS **/
@@ -440,8 +432,12 @@ padding: 5% 10% 10% 20%;
 
   #new-user-btn {
     margin: 10px;
-    float: right;
   }
+
+  #show-change-password-btn {
+    margin: 10px;
+  }
+
   .error {
     color:red;
   }
@@ -449,26 +445,35 @@ padding: 5% 10% 10% 20%;
 
 /** SURVEY **/
 #survey-div {
-  text-align: left;
+  text-align: center;
   background-color: $background-faded;
-  margin-bottom: 100px;
 
   #survey-input-div {
     .row {
-      .col-sm-1,.col-sm-3 {
+      .col-sm-1,.col-sm-4 {
         padding-left: 0px !important;
         padding-right: 0px !important;
       }
     }
   }
 
+  #questions {
+    padding-bottom: 7% !important;
+  }
+
+  #survey-repeat-div {
+    text-align: left;
+  }
+
   #survey-submit-div {
     background-color: $background-faded;
-  }
-  #inst {
     text-align: center;
-    font-weight: bold;
   }
+}
+
+.inst {
+  text-align: center;
+  font-weight: bold;
 }
 
 /** SURVEY SETTINGS **/

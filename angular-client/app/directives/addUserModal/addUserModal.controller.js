@@ -1,9 +1,18 @@
 (function(){
   angular.module('addUserModal')
-    .controller('AddUserModalController', ['$scope','$modalInstance', 'addUserModalService', Controller]);
+    .controller('AddUserModalController', ['$scope','$modalInstance', 'addUserModalService', 'contents', Controller]);
 
-  function Controller($scope, $modalInstance, addUserModalService) {
+  function Controller($scope, $modalInstance, addUserModalService, contents) {
     var vm = this;
+    vm.aFunction = contents.addFunction;
+    vm.user = {
+      Username: "",
+      Password: "",
+      Email: "",
+      Type: "",
+      Orgs: []
+    };
+    vm.err = "";
 
     $scope.list_categories = {
       data: [{
@@ -28,22 +37,21 @@
       $modalInstance.close('ok');
     };
 
+    vm.getNewUser = function() {
+      vm.user.Username = vm.name;
+      vm.user.Password = vm.password;
+      vm.user.Email = vm.email;
+      vm.user.Type = $scope.list_category;
+      vm.user.Orgs = vm.orgs;
+      return vm.user;
+    };
 
-    vm.saveNewUser = function() {
+    vm.validUsernamePassword = function() {
       if (vm.name == "" || vm.password == "") {
-        alert("Please enter a valid username and password");
-      } else {
-        var user = {
-          Username: vm.name,
-          Password: vm.password,
-          Email: vm.email,
-          Type: $scope.list_category,
-          Orgs: vm.orgs
-        };
-        addUserModalService.saveNewUser(user).then(function () {
-        });
-        $modalInstance.close('ok');
+        //vm.err = "Please enter a valid username and password";
+        return false;
       }
+      return true;
     }
   }
 })();

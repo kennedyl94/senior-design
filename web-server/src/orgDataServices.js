@@ -151,7 +151,6 @@ exports.modifyOrg = function(orgId, orgToUpdate, success, error) {
 };
 
 exports.modifyOrgByName = function(orgToUpdate, success, error) {
-	console.log("in modifyOrgByName in orgDataServices: " + orgToUpdate.name);
 	database.getModel(orgModelName, function(err, model){
 		model.findOneAndUpdate({name: orgToUpdate.name}, orgToUpdate, function(findErr) {
 			if(findErr) {
@@ -238,6 +237,7 @@ exports.getAllTags = function(success, error) {		//Deprecated
  * error: A function to call if there is an error.
  */
 exports.searchByTags = function(tagList, success, error) {
+	//console.log(tagList);
 	database.getModel(orgModelName, function(err, model){
 		model.find({}, function(findErr, orgs) {
 			if (findErr) {
@@ -272,6 +272,7 @@ exports.searchByTags = function(tagList, success, error) {
 				tempOrgList.forEach(function(org) {
 					orgList.push(org.organization);
 				});
+				//console.log(orgList);
 				success(orgList);
 			}
 		});

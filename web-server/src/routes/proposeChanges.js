@@ -7,7 +7,6 @@ var jsonfile = require('jsonfile');
 var adminEmailFile =__dirname+"/../../adminEmailConfig.json";
 
 router.get('/allChanges', function (req, res) {
-    //console.log("in all changes on web server side");
     _dataServices.getAllChanges(function(changes) {
         res.send(changes);
     }, function(err) {

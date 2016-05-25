@@ -23,15 +23,6 @@
 
     init();
 
-    service.saveNewUser = function(user) {
-      var deferred = $q.defer();
-      var promise = $http({method: 'PUT', url: config.domain + 'userSettings/addNew', data: {user: user}});
-      promise.then(function(data) {
-        deferred.resolve(data.data);
-      });
-      return deferred.promise;
-    };
-
     return service;
   }
 })();

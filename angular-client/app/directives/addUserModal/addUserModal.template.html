@@ -5,7 +5,7 @@
   </div>
   <div class="modal-body">
     <div class="row"><div class="modal-info-header">
-      <h4>Username</h4>
+      <h4>Username*</h4>
       <input type="text" name="username" class="form-control" ng-model='addUserModalCtrl.name'/>
     </div></div>
     <div class="row"><div class="modal-info-header">
@@ -13,7 +13,7 @@
       <input type="text" name="email" class="form-control" ng-model='addUserModalCtrl.email'/>
     </div></div>
     <div class="row"><div class="modal-info-header">
-      <h4>Password</h4>
+      <h4>Password*</h4>
       <input type="password" name="password" class="form-control" ng-model='addUserModalCtrl.password'/>
     </div></div>
     <div class="row"><div class="modal-info-header">
@@ -32,7 +32,7 @@
   <div class="modal-footer">
     <div class="modal-contact-info">
       <div class="row">
-        <button class="btn btn-primary" id="admin-save-btn" ng-click="addUserModalCtrl.saveNewUser()">Save</button>
+        <button class="btn btn-primary" id="admin-save-btn" ng-disabled="!addUserModalCtrl.validUsernamePassword()" ng-click="addUserModalCtrl.aFunction(addUserModalCtrl.getNewUser())">Save</button>
       </div>
     </div>
   </div>

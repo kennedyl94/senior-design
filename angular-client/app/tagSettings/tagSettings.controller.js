@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('tagSettings')
-    .controller('tagSettingsController', ["tagSettingsService", '$http', '$modal', 'config', Controller]);
+    .controller('tagSettingsController', ['tagSettingsService', '$modal', Controller]);
 
-  function Controller(tagSettingsService, $http, $modal, config) {
+  function Controller(tagSettingsService, $modal) {
 
     var vm = this;
 
@@ -13,18 +13,18 @@
     vm.tagInput = "";
     vm.currentPage = 1;
     vm.itemsPerPage = 10;
-    //console.log(vm.data.tags);
 
     vm.del = function(_id) {
       tagSettingsService.delete(_id, function(data, status, headers, config) {
-        location.reload();
+        vm.updateTags();
       });
     };
 
     vm.add = function() {
       if(vm.tagInput != undefined && vm.tagInput.length != 0) {
         tagSettingsService.submit(vm.tagInput, function (data, status, headers, config) {
-          location.reload();
+          vm.tagInput = "";
+          vm.updateTags();
         });
       }
     };

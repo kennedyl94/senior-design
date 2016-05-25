@@ -31,6 +31,19 @@ exports.editTag = function(tagId, tagEdit, success, error) {
     });
 };
 
+exports.getTag = function(tagId, success, error) {
+    database.getModel(modelName, function(err, model) {
+        model.find({_id: tagId}).exec(function(findErr, tag) {
+            if (findErr) {
+                error(findErr);
+            } else {
+                //console.log(tag);
+                success(tag);
+            }
+        });
+    });
+};
+
 /*
  * gets all of the tags from the database
  * success: a function to call upon successful completion. it takes an object that contains the student orgs
@@ -38,11 +51,10 @@ exports.editTag = function(tagId, tagEdit, success, error) {
  */
 exports.getAllTags = function(success, error) {
     database.getModel(modelName, function(err, model) {
-        model.find({}).sort({}).lean().exec(function(findErr, tags) {
+        model.find({}).sort({text: 1}).lean().exec(function(findErr, tags) {
             if(findErr) {
                 error(findErr);
-            }
-            else {
+            } else {
                 success(tags);
             }
         });
@@ -60,8 +72,7 @@ exports.deleteTag = function(tagId, success, error) {
         model.find({ _id: tagId}).remove().exec(function(findErr) {
             if(findErr) {
                 error(new Error('Unable to delete item with id: ' + tagId));
-            }
-            else{
+            } else{
                 success();
             }
         });

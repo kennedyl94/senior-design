@@ -1,8 +1,9 @@
 <h1 id="tagSearchPageTitle">Tag Search</h1>
 <div id="tagSearchDiv">
+  <p id="search-inst">Check all that apply to you</p>
   <form name="tagList">
     <div class="row">
-      <div ng-repeat="tag in tsCtrl.tags">
+      <div ng-repeat="tag in tsCtrl.data.tags">
         <div class="clearfix" ng-if="$index % 4 == 0"></div>
         <div class="col-sm-3">
           <input type="checkbox" name="tagCheck" ng-model="tag.checked" ng-click="tsCtrl.search(tagList)"> {{tag.text}}</input>
@@ -10,9 +11,11 @@
       </div>
     </div>
   </form>
+  <br>
   <div id="ts-button-div">
-    <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Clear</button>
+    <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Uncheck All</button>
   </div>
+  <br>
   <div id='ts-email-div' class="col-sm-12">
     <ng-email
       orgs='tsCtrl.orgList'
@@ -20,6 +23,7 @@
     </ng-email>
   </div>
 </div>
+<br><br><br>
 <ng-organizations
   ng-show="tsCtrl.orgList.length > 0"
   orgs="tsCtrl.orgList"

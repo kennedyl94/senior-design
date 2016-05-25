@@ -8,6 +8,7 @@
 
     var vm = this;
     vm.data = surveySettingsService.data;
+    vm.data.rules = surveySettingsService.rules;
 
     vm.question = {
         question: "",
@@ -20,10 +21,13 @@
         num:0
     };
 
-    // vm.data.num = surveySettingsService.num;
-    vm.data.rules = surveySettingsService.rules;
-    vm.del = function(_id){
+    vm.updateSurveySettings = function() {
+      surveySettingsService.updateSurveySettings();
+      vm.data = surveySettingsService.data;
+      vm.data.rules = surveySettingsService.rules;
+    };
 
+    vm.del = function(_id){
       var req = {
         method: 'delete',
         url: config.domain+'surveySet',
@@ -37,14 +41,9 @@
         cancel: 'Exit'})
         .then(function() {
           surveySettingsService.submit(req, function (data, status, headers, config) {
-            location.reload()
+            vm.updateSurveySettings();
           });
       });
-    //    $http(req)
-    //     .success(
-    //     }).error(function(err, status, headers, config) {
-    //       console.log('error: ' + err);
-    //     });
     };
 
     vm.add = function(){
@@ -62,7 +61,9 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        location.reload();
+        vm.updateSurveySettings();
+        vm.question.question = "";
+        vm.question.category = "";
       });
     };
 
@@ -83,7 +84,8 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        location.reload();
+        vm.updateSurveySettings();
+        vm.rule.category = "";
       });
     };
 
@@ -102,17 +104,9 @@
         cancel: 'Exit'})
         .then(function() {
           surveySettingsService.submit(req, function (data, status, headers, config) {
-            location.reload()
+            vm.updateSurveySettings();
           });
       });
-
-
-
-    //    $http(req)
-    //     .success(
-    //     }).error(function(err, status, headers, config) {
-    //       console.log('error: ' + err);
-    //     });
     };
 
     vm.questionNum = function(){
@@ -124,9 +118,8 @@
       };
 
       surveySettingsService.submit(req, function (data, status, headers, config) {
-        location.reload();
+        vm.updateSurveySettings();
       });
     };
-
   }
 })();

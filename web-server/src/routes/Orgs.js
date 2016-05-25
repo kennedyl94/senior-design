@@ -7,11 +7,6 @@ router.get('/:sortType', function (req, res) {
   var sortType = req.params.sortType;
   _dataServices.getAllOrgs(sortType,
     function(orgs) {
-        // var i = 0;
-        // for (i; i < Object.keys(orgs).length; i++) {
-        //     orgs[Object.keys(orgs)[i]] = splitOnNewLine(orgs[Object.keys(orgs)[i]]);
-        // }
-        // console.log(orgs);
         res.send(orgs);
     }, function(err) {
        if (err) {console.log(err);}
@@ -47,7 +42,6 @@ router.delete('/delete/:orgId', function(req, res) {
 
 router.put('/modifyOrgByName', function(req, res) {
     var orgToUpdate = req.body.org;
-    //console.log("name of org to update: " + orgToUpdate.name);
     orgToUpdate = styleOrgToUpdate(orgToUpdate);
 
     _dataServices.modifyOrgByName(orgToUpdate,
