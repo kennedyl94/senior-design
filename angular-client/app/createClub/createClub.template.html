@@ -74,8 +74,8 @@
         </div>
         <div class="row">
           <h4>Phone Number:</h4>
-          <div class="col-sm-6 form-group" ng-class="{ 'has-error' : clubForm.phone.$invalid && clubForm.phone.$touched }">
-            <input id="phone" name="phone" class="form-control" type="tel" placeholder="(123) 456-7890" ng-model="crClCtrl.club.contact.phone" required/>
+          <div class="col-sm-6 form-group"> <!--ng-class="{ 'has-error' : clubForm.phone.$invalid && clubForm.phone.$touched }"-->
+            <input id="phone" name="phone" class="form-control" type="tel" placeholder="(123) 456-7890" ng-model="crClCtrl.club.contact.phone"/>
           </div>
           <div class="col-sm-6 has-error" ng-show="clubForm.phone.$invalid && clubForm.phone.$touched">
             <span class="help-block">This is a required field.</span>

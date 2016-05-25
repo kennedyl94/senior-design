@@ -58,7 +58,7 @@ exports.getOrgsForSpecificUser = function(username, success, error) {
  */
 exports.getAllUsers = function(success, error){
     database.getModel(modelName, function(err, model){
-        model.find({}, function(err, users) {
+        model.find({}).sort({Username: 1}).lean().exec(function(err, users) {
             var userMap = {};
             users.forEach(function(user) {
                 userMap[user._id] = user;
