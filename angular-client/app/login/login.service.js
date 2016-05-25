@@ -15,7 +15,6 @@
       var deferred = $q.defer();
       var promise = $http({method: 'POST', url: config.domain + 'login', data: {username: username, password:password}});
       promise.then(function(data) {
-        console.log(data.data.code);
         if(data.data.code == 200) {
           if(data.data.currentUser.Type == "SL") {
             $cookies.put('currentUser', data.data.currentUser.Username);

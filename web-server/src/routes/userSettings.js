@@ -18,7 +18,7 @@ router.get('/user/:user', function(request, response) {
                 function(users) {
                     response.send(users);
                 }, function(err) {
-                    console.log(err);
+                    if (err) {console.log(err);}
                 });
 
         } else {
@@ -26,9 +26,8 @@ router.get('/user/:user', function(request, response) {
         }
 
     }, function (err) {
-        console.log(err)
-
-        });
+        if (err) {console.log(err)}
+    });
 
 });
 
@@ -38,7 +37,7 @@ router.delete('/delete/:id', function(request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-           console.log(error);
+           if (error) {console.log(error);}
         });
 });
 
@@ -50,7 +49,7 @@ router.put('/addNew', function (request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-            console.log(error);
+            if (error) {console.log(error);}
         });
 });
 
@@ -61,7 +60,7 @@ router.put('/editExisting/:id', function (request, response) {
         function() {
             response.sendStatus(200);
         }, function(error) {
-           console.log(error);
+           if (error) {console.log(error);}
         });
 });
 router.get('/userType/user/:user', function(request, response) {
@@ -70,7 +69,7 @@ router.get('/userType/user/:user', function(request, response) {
         response.send(usermap.Type);
 
     }, function (err) {
-        console.log(err);
+        if (err) {console.log(err);}
 
     });
 });
@@ -90,7 +89,7 @@ router.post("/updatePass", function (req, res) {
 
                 }, function (err) {
                     res.send(500);
-                    console.log(err)
+                    if (err) {console.log(err);}
 
                 })
 
@@ -103,7 +102,7 @@ router.post("/updatePass", function (req, res) {
 
 
     }, function (err) {
-        console.log(err)
+        if (err) {console.log(err);}
 
     });
 

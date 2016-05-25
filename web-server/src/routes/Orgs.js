@@ -14,7 +14,7 @@ router.get('/:sortType', function (req, res) {
         // console.log(orgs);
         res.send(orgs);
     }, function(err) {
-       console.log(err);
+       if (err) {console.log(err);}
     });
 });
 
@@ -23,7 +23,6 @@ router.get('/user/:currentUser', function (req, res) {
     var userOrgs = {};
     _userDataServices.getOrgsForSpecificUser(currentUser,
         function(orgs) {
-            console.log("specific orgs");
             userOrgs = orgs;
             _dataServices.getOrgsInfoByName(userOrgs,
                 function (error, orgsWithInfo) {
@@ -31,7 +30,7 @@ router.get('/user/:currentUser', function (req, res) {
                 }
             );
         }, function(err) {
-            console.log(err);
+            if (err) {console.log(err);}
         }
     );
 });
@@ -42,20 +41,20 @@ router.delete('/delete/:orgId', function(req, res) {
     function() {
         res.sendStatus(200);
     }, function(error) {
-        console.log(error);
+        if (error) {console.log(error);}
   });
 });
 
 router.put('/modifyOrgByName', function(req, res) {
     var orgToUpdate = req.body.org;
-    console.log("name of org to update: " + orgToUpdate.name);
+    //console.log("name of org to update: " + orgToUpdate.name);
     orgToUpdate = styleOrgToUpdate(orgToUpdate);
 
     _dataServices.modifyOrgByName(orgToUpdate,
         function() {
             res.sendStatus(200);
         }, function(error) {
-            console.log(error);
+            if (error) {console.log(error);}
         });
 });
 
@@ -69,7 +68,7 @@ router.put('/modify/:orgId', function(req, res) {
     function() {
         res.sendStatus(200);
     }, function(error) {
-        console.log(error);
+        if (error) {console.log(error);}
     });
 });
 
@@ -106,7 +105,7 @@ router.put('/activation/:orgId', function(req, res) {
     _dataServices.activation(orgId, isActive, function() {
         res.sendStatus(200);
     }, function(error) {
-        console.log(error);
+        if (error) {console.log(error);}
     });
 });
 
@@ -115,7 +114,7 @@ router.put('/proposeChange', function(req, res) {
     _dataServices.proposeChange(change, function() {
         res.sendStatus(200);
     }, function(error) {
-        console.log(error);
+        if (error) {console.log(error);}
     });
 });
 

@@ -5,7 +5,6 @@ var  _dataServices = require('../orgDataServices.js');
 router.post("/", function (req, res) {
 	// console.log(req.body.club.meetings);
 	var org = req.body.club;
-	console.log(org.tags);
 	//for (var i = 0; i < org.tags.length; i++) {
 	//	org.tags[i] = {_id: org.tags[i]._id, text: org.tags[i].text};
 	//}
@@ -38,7 +37,7 @@ router.post("/", function (req, res) {
 
 
 	_dataServices.addStudentOrg(org, function(err) {
-		console.log(err);
+		if (err) {console.log(err);}
 	});
 
 	res.sendStatus(200);

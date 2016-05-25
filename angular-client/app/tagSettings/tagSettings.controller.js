@@ -16,20 +16,14 @@
     //console.log(vm.data.tags);
 
     vm.del = function(_id) {
-      console.log(_id);
-
       tagSettingsService.delete(_id, function(data, status, headers, config) {
-        console.log(data);
         location.reload();
       });
     };
 
     vm.add = function() {
-      console.log(vm.tagInput);
-
       if(vm.tagInput != undefined && vm.tagInput.length != 0) {
         tagSettingsService.submit(vm.tagInput, function (data, status, headers, config) {
-          console.log(data);
           location.reload();
         });
       }

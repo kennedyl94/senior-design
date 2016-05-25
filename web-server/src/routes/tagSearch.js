@@ -5,7 +5,9 @@ var  _orgServices = require('../orgDataServices.js'),
   
 router.get('/', function(req, res) {
 	_tagServices.getAllTags(function(tags){res.send(tags);},
-		function(err){console.log(err);});
+		function(err){
+			if (err) {console.log(err);}
+		});
 });
 
 router.post('/', function(req, res) {
@@ -22,7 +24,7 @@ router.post('/', function(req, res) {
 			res.send(orgs);
 		},
 		function(err) {
-			console.log(err);
+			if (err) {console.log(err);}
 		});
 })
 

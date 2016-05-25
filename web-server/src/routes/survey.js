@@ -17,7 +17,7 @@ var orgs;
   },
   function(e)
   {
-	  console.log(e);
+	  if (e) {console.log(e);}
   });
 function getQbyCat(i, rules, qret,num, res) {
     
@@ -127,7 +127,6 @@ function matchOrgs(ids, callback) {
 
 function getQuestionsTagsByIds(ids, callback) {
    _surveyData.getQuestionsTagsByIds(ids, function(tags){
-       console.log(tags);
        callback(tags);
    });
 }

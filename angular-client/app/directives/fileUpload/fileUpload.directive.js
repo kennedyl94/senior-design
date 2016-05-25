@@ -14,7 +14,7 @@
           var formData = new FormData();
           formData.append('file', element[0].files[0]);
           fileUploadService.uploadFile(config.domain + 'UploadFile', formData, function (callback) {
-            console.log("TEST: " + callback);
+            //console.log("TEST: " + callback);
           });
         });
 

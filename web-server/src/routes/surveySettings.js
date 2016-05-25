@@ -9,28 +9,23 @@ var express = require('express')
 
 
 router.get('/', function (req, res) {
-    console.log(__filename);
-    console.log(__dirname);
-
     _surveyData.getAllQuestions(null, function(questionMap) {
         res.send(questionMap);
         
         if(!Object.keys(questionMap).length || questionMap.legnth <= 0) {
-            console.log("should be adding");
+            //console.log("should be adding");
         }
         
     }, function(e){
-        console.log("get in get"+e);
+        if (e) {console.log("get in get"+e);}
     });
 });
 
 router.get('/num', function (req, res){
     var surveySet = jsonfile.readFileSync(surveyFile);
-    
-    console.log(surveySet.num);
     res.send({num: surveySet.num});
-    
-    
+
+
 });
 
 router.delete('/', function(req, res) {
@@ -38,7 +33,7 @@ router.delete('/', function(req, res) {
     _surveyData.deletequestion(req.body, function(){
         res.sendStatus(200);
     }, function(e){
-        console.log('error deleting: '+e);
+        if (e) {console.log('error deleting: '+e);}
         res.send(500);
     })
     
@@ -77,13 +72,12 @@ router.post('/addrule', function(req, res){
     }
     // console.log('index' + index);
 
-    if(index != -1) {
+    if (index != -1) {
         surveySet.rules.splice(index, 1);
         jsonfile.writeFileSync(surveyFile, surveySet);
         
-    } 
+    }
 
-    console.log(surveySet.rules);
     surveySet.rules.push({
         'category':req.body.category,
         'num':req.body.num
@@ -114,15 +108,14 @@ router.delete('/delrule', function (req, res) {
     var index = -1;
     var i =0;
     
-    for(i = 0; i < Object.keys(surveySet.rules).length; i++) {
+    for (i = 0; i < Object.keys(surveySet.rules).length; i++) {
         // console.log(surveySet.rules[i]);
         if(surveySet.rules[i].category === r.category) {
                 index = i;
             }
     }
-    console.log('index' + index);
 
-    if(index != -1) {
+    if (index != -1) {
         surveySet.rules.splice(index, 1);
         jsonfile.writeFileSync(surveyFile, surveySet);
         res.send(200);
@@ -133,10 +126,8 @@ router.delete('/delrule', function (req, res) {
     }
 });
 
-router.post('/questionNum', function(req, res){
-   var surveySet = jsonfile.readFileSync(surveyFile);
-   
-    console.log(req.body.num);
+router.post('/questionNum', function(req, res) {
+    var surveySet = jsonfile.readFileSync(surveyFile);
     surveySet.num = req.body.num;
     
     jsonfile.writeFileSync(surveyFile, surveySet)

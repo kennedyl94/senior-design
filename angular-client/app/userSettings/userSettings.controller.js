@@ -47,7 +47,6 @@
       })
     };
     vm.changePassword = function(){
-      console.log(vm.update.newPass);
       // userSettingsService.updatePassword(vm.update.old, vm.update.newPass, vm.update.repeat).then(function () {
         // vm.data.err=userSettingsService.data.err;
 
@@ -65,9 +64,7 @@
         }
       };
       userSettingsService.submit(req, function (data) {
-        console.log(data);
         var code = data.status;
-        console.log(code);
         if(code == 200){
           location.reload();
         } else if(code == 201){
