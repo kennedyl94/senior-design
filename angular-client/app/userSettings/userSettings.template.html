@@ -14,6 +14,13 @@
       <div id="new-user-btn-div" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
         <input id="new-user-btn" type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
       </div>
+      <div id="mass-user-upload-btn-div">
+          <input id="show-mass-user-upload-div-btn" type="button" class="btn btn-default" value="Mass User Upload" ng-click="userSettingsCtrl.showUserMassUploadDiv()" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
+      </div>
+      <div id="mass-user-upload-div" ng-show="userSettingsCtrl.showMassUpload && userSettingsCtrl.isStudentLifeAdmin()">
+          <h4>Please select the .csv file to upload.</h4>
+          <input class="btn btn-default" ng-file-upload type="file" name="userFile" ng-file-upload-callback="userSettingsCtrl.updateUsers()">
+      </div>
       <div id="change-password-btn-div">
         <input id="show-change-password-btn" type="button" class="btn btn-default" value="Change Password" ng-click="userSettingsCtrl.showChangePasswordDiv()" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
       </div>
