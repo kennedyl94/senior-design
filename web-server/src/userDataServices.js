@@ -35,6 +35,39 @@ exports.addUser = function(user, callback) {
 };
 
 /*
+ * adds multiple users, such as from a csv
+ * If a user already exists, it will update the orgs, email, and admin role for that user
+ * users: an array of users to add
+ * callback: a function that takes an error and an array of saved users
+ */
+exports.saveAllUsers = function(users, callback){
+    database.getModel(modelName, function(err, model){
+        var savedUsers = [];
+        var valid = true;
+        for(var i = 0; i < users.length; i++){
+          var currentUser = users[i];
+          vaild = valid &&currentUser.Username != undefined
+                     && currentUser.Password != undefined
+                     && currentUser.Email != undefined
+                     && currentUser.Type != undefined
+                     && currentUser.Orgs != undefined;
+        }
+        if(valid){
+          for(var i = 0; i < users.length; i++){
+              var newUser = tryUpdateThenSave(users[i]);
+                  if(newUser){
+                      savedUsers.push(newUser);
+                  }
+          }
+          callback(null, savedUsers);
+        }
+        else {
+          callback(new Error('Invalid user'), null);
+        }
+    });
+};
+
+/*
  * get all of the student orgs associated with a specific user
  * username: the username of the current logged in user
  * success: a function to call upon successful completion. it takes an object that contains the found user's orgs
@@ -212,3 +245,27 @@ exports.checkValidToken = function(token, callback){
      });
    });
  };
+
+function tryUpdateThenSave(user){
+    database.getModel(modelName, function(err, model){
+        model.findOneAndUpdate({Username: user.Username},
+       {$set: {
+               Email: user.Email,
+               Type: user.Type,
+               Orgs: user.Orgs
+           }}, {
+               new: true,
+               upsert: false
+           }, function(err, document){
+               if(document){
+                 return document;
+               }
+               else{
+               var newUser = new model(user);
+               newUser.save(function(err, savedUser) {
+                 return savedUser;
+               });
+           }
+       });
+    });
+};
