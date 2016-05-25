@@ -1,55 +1,57 @@
-<h1 align="center"> Survey Settings </h1>
+<div class="container">
+  <h1 align="center"> Survey Settings </h1>
 
-<div class="container" id="survey-settings-div">
-  <div class="row">
-    <div class="col-lg-4">
-      <!--add questions-->
-      <h3 align="center">Add Question</h3>
-      <p class="inst">Add questions that answer the question:</p><p class="inst">"Are you interested in...?"</p><p class="inst">For example: "...Greek Organizations?"</p>
-      <br>
-      Question:
-      <input type="text" class="form-control" id="question" ng-model="surveySettingsCtrl.question.question"> <br>
-      Tags:
-      <ng-tag-select tags="surveySettingsCtrl.question.tags"></ng-tag-select> <br>
-      Category:
-      <input type="text" class="form-control" id="category" ng-model="surveySettingsCtrl.question.category"> <br>
-      <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.add()">Add Question</button>
-      <br>
-      <!--delete questions need to make call to the back end and use a promise to get the data-->
-      <div ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
-        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.del([q._id])">Delete Question</button>
-        {{q.question}} ({{q.category}})
+  <div class="container" id="survey-settings-div">
+    <div class="row">
+      <div class="col-lg-4">
+        <!--add questions-->
+        <h3 align="center">Add Question</h3>
+        <p class="inst">Add questions that answer the question:</p><p class="inst">"Are you interested in...?"</p><p class="inst">For example: "...Greek Organizations?"</p>
+        <br>
+        Question:
+        <input type="text" class="form-control" id="question" ng-model="surveySettingsCtrl.question.question"> <br>
+        Tags:
+        <ng-tag-select tags="surveySettingsCtrl.question.tags"></ng-tag-select> <br>
+        Category:
+        <input type="text" class="form-control" id="category" ng-model="surveySettingsCtrl.question.category"> <br>
+        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.add()">Add Question</button>
+        <br>
+        <!--delete questions need to make call to the back end and use a promise to get the data-->
+        <div ng-repeat="q in surveySettingsCtrl.data.questions | toArray">
+          <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.del([q._id])">Delete Question</button>
+          {{q.question}} ({{q.category}})
+          <br>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <!--add delete rules, based on question type make back end call to get data in a promise  will be stored in json file-->
+        <h3 align="center">Add Rule</h3>
+        <p class="inst">How many minimum questions for a category would you like displayed in each survey?</p>
+        <br>
+        Category:
+        <input class="form-control" type="text" id="cat" ng-model="surveySettingsCtrl.rule.category"> <br>
+        Number of Questions:
+        <input class="form-control" id="numQs" ng-model="surveySettingsCtrl.rule.num" type="number"> <br>
+        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.rule()">Add Rule</button>
+        <br>
+        <!-- Need to display rules here -->
+        <br>
+        <div ng-repeat="r in surveySettingsCtrl.data.rules | toArray">
+          <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.delrule([r])">Delete Rule</button>
+          {{r.category}}
+          {{r.num}}
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <!--num questions will be stored in json file-->
+        <h3 align="center">Number of Questions</h3>
+        <p class="inst">How many questions do you want displayed in each survey?</p>
+        <br>
+        Maximum Number:
+        <input class="form-control" id="numQuestions" ng-model="surveySettingsCtrl.data.num" type="number"> <br>
+        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.questionNum()">Submit</button><br>
         <br>
       </div>
-    </div>
-    <div class="col-lg-4">
-      <!--add delete rules, based on question type make back end call to get data in a promise  will be stored in json file-->
-      <h3 align="center">Add Rule</h3>
-      <p class="inst">How many minimum questions for a category would you like displayed in each survey?</p>
-      <br>
-      Category:
-      <input class="form-control" type="text" id="cat" ng-model="surveySettingsCtrl.rule.category"> <br>
-      Number of Questions:
-      <input class="form-control" id="numQs" ng-model="surveySettingsCtrl.rule.num" type="number"> <br>
-      <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.rule()">Add Rule</button>
-      <br>
-      <!-- Need to display rules here -->
-      <br>
-      <div ng-repeat="r in surveySettingsCtrl.data.rules | toArray">
-        <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.delrule([r])">Delete Rule</button>
-        {{r.category}}
-        {{r.num}}
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <!--num questions will be stored in json file-->
-      <h3 align="center">Number of Questions</h3>
-      <p class="inst">How many questions do you want displayed in each survey?</p>
-      <br>
-      Maximum Number:
-      <input class="form-control" id="numQuestions" ng-model="surveySettingsCtrl.data.num" type="number"> <br>
-      <button class="btn btn-default" type="button" ng-click="surveySettingsCtrl.questionNum()">Submit</button><br>
-      <br>
     </div>
   </div>
 </div>
