@@ -60,7 +60,8 @@
       'tagSettings',
       'editTagModal',
       'ngTagSelect',
-      'email'
+      'email',
+      'successModal'
     ])
 
     .run(['$rootScope', '$location', '$cookies', function ($rootScope, $location, $cookies) {

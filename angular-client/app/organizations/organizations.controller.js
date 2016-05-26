@@ -7,6 +7,7 @@
   function Controller(organizationService) {
 
     var vm = this;
+    organizationService.update();
     vm.data = organizationService.data;
 
   }

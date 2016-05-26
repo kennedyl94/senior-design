@@ -2,12 +2,13 @@
   'use strict';
 
   angular.module('orgSettings')
-    .controller('OrgSettingsController', ['orgSettingsService', 'emailService', '$modal', '$confirm', '$scope', '$cookies', Controller]);
+    .controller('OrgSettingsController', ['orgSettingsService', 'emailService', '$modal', '$confirm', '$scope', '$cookies', '$timeout', Controller]);
 
-  function Controller(orgSettingsService, emailService, $modal, $confirm, $scope, $cookies) {
+  function Controller(orgSettingsService, emailService, $modal, $confirm, $scope, $cookies, $timeout) {
 
     var vm = this;
     var editOrgModal;
+    orgSettingsService.updateOrgs();
     vm.data = orgSettingsService.data;
     vm.proposedChange = {
       name: "",
@@ -33,6 +34,7 @@
       } else {
         orgSettingsService.saveModifiedOrg(org).then(function () {
           editOrgModal.close('ok');
+          vm.showSuccessModal('Success', 'The organization has been successfully edited!');
           vm.updateOrgs();
         });
       }
@@ -43,6 +45,7 @@
       orgSettingsService.submitProposedChange(changes).then(function() {
         emailService.proposeChange(changes);
         editOrgModal.close('ok');
+        vm.showSuccessModal('Success', 'Your change has been proposed to the Student Life department!');
         vm.updateOrgs();
       });
     };
@@ -143,5 +146,24 @@
         function: vm.activateOrg
       }
     };
+
+    vm.showSuccessModal = function(title, description) {
+      var successModal = $modal.open({
+        animation: true,
+        templateUrl: 'directives/successModal/successModal.template.html',
+        controller: 'SuccessModalController as successModalCtrl',
+        resolve: {
+          contents: function () {
+            return {
+              title: title,
+              description: description
+            };
+          }
+        }
+      });
+      $timeout(function() {
+        successModal.close();
+      }, 2000);
+    }
   }
 })();

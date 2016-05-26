@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('userSettings')
-    .controller('UserSettingsController', ['userSettingsService', '$modal', 'config', '$cookies', '$confirm', Controller]);
+    .controller('UserSettingsController', ['userSettingsService', '$modal', 'config', '$cookies', '$confirm', '$timeout', Controller]);
 
-  function Controller(userSettingsService, $modal, config, $cookies, $confirm) {
+  function Controller(userSettingsService, $modal, config, $cookies, $confirm, $timeout) {
     var vm = this;
     vm.data = userSettingsService.data;
     vm.showMassUpload = false;
@@ -26,7 +26,7 @@
     vm.showUserMassUploadDiv = function() {
         vm.showMassUpload = true;
     };
- 
+
     vm.showChangePasswordDiv = function() {
       vm.showPasswordDiv = true;
     };
@@ -67,6 +67,7 @@
     vm.modifyUser = function(user) {
       userSettingsService.modifyUser(user).then(function() {
         editUserModal.close('ok');
+        vm.showSuccessModal('Success', 'The user has been successfully edited!');
         vm.updateUsers();
       });
     };
@@ -74,6 +75,7 @@
     vm.addUser = function(user) {
       userSettingsService.addUser(user).then(function() {
         addUserModal.close('ok');
+        vm.showSuccessModal('Success', 'The new user has been successfully created!');
         vm.updateUsers();
       });
     };
@@ -87,7 +89,7 @@
           userSettingsService.deleteUser(user).then(function () {
             vm.updateUsers();
           });
-        });
+      });
     };
 
     vm.updateUsers = function() {
@@ -126,5 +128,23 @@
       })
     }
 
+    vm.showSuccessModal = function(title, description) {
+      var successModal = $modal.open({
+        animation: true,
+        templateUrl: 'directives/successModal/successModal.template.html',
+        controller: 'SuccessModalController as successModalCtrl',
+        resolve: {
+          contents: function () {
+            return {
+              title: title,
+              description: description
+            };
+          }
+        }
+      });
+      $timeout(function() {
+        successModal.close();
+      }, 2000);
+    }
   }
 })();

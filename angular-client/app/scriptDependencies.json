@@ -51,6 +51,10 @@
     "app/directives/editTagModal/editTagModal.directive.js",
     "app/directives/editTagModal/editTagModal.controller.js",
 
+    "app/directives/successModal/successModal.module.js",
+    "app/directives/successModal/successModal.directive.js",
+    "app/directives/successModal/successModal.controller.js",
+
     "app/directives/navSidebar/navSidebar.module.js",
     "app/directives/navSidebar/navSidebar.directive.js",
     "app/directives/navSidebar/navSidebar.controller.js",
