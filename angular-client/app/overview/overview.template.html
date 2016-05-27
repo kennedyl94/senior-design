@@ -32,10 +32,10 @@
   </div>
   <div id="overview-div-mid" class="row">
     <div class="col-sm-4" ng-repeat="button in rootCtrl.navButtons">
-      <div class="overview-div-inner">
+      <div class="overview-div-inner" ng-click="rootCtrl.navigate(button.link)">
         <div id="ov-title-div">{{button.title}}</div>
         <div id="ov-des-div">{{button.description}}</div>
-        <div id="ov-img-div" ng-click="rootCtrl.navigate(button.link)">
+        <div id="ov-img-div">
           <div class="logo" ng-include="button.imgUrl"></div>
         </div>
       </div>

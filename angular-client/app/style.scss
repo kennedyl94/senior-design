@@ -59,7 +59,7 @@ button {
 }
 
 #overview-div-mid {
-  height: 375px;
+  height: 400px;
   min-height: 375px;
   max-height: 500px;
   text-align: center !important;
@@ -75,6 +75,9 @@ button {
     .overview-div-inner {
       height: 350px !important;
       background-color: $background-faded;
+      &:hover, &:focus {
+        cursor: pointer;
+      }
 
       #ov-title-div {
         margin-top: 25px;
@@ -88,9 +91,7 @@ button {
 
       #ov-img-div {
         margin-top: 25px;
-        &:hover, &:focus {
-          cursor: pointer;
-        }
+        height: 200px !important;
         .logo {
           width: 100% !important;
           height: 100% !important;
