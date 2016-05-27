@@ -246,6 +246,27 @@ exports.checkValidToken = function(token, callback){
    });
  };
 
+/*
+ * Updates all SL admins to be in charge of newly addy organizations
+ * orgName: name of the organization added
+ * success: success callback
+ * error: error callback
+ */
+exports.addOrganizationToSLAdmin = function(orgName, success, error) {
+    database.getModel(modelName, function(err, model){
+        model.update({Type: 'SL'}, {$push: {Orgs: orgName}}, {multi: true}, function(findErr) {
+            if(findErr) {
+                console.log(findErr);
+                error(findErr);
+            }
+            else{
+                console.log('success');
+                success();
+            }
+        });
+    });
+};
+
 function tryUpdateThenSave(user){
     database.getModel(modelName, function(err, model){
         model.findOneAndUpdate({Username: user.Username},

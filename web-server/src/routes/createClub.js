@@ -1,6 +1,7 @@
 var express = require('express')
   , router = express.Router();
 var  _dataServices = require('../orgDataServices.js');
+var _userDataServices = require('../userDataServices.js');
 
 router.post("/", function (req, res) {
 	var org = req.body.club;
@@ -26,12 +27,12 @@ router.post("/", function (req, res) {
 		}
 	}
 
-
 	_dataServices.addStudentOrg(org, function(err) {
-		if (err) {console.log(err);}
+		if(err) {res.sendStatus(500)}
+		_userDataServices.addOrganizationToSLAdmin(org.name, function() {
+			res.sendStatus(200);
+		});
 	});
-
-	res.sendStatus(200);
 });
 
 module.exports = router;

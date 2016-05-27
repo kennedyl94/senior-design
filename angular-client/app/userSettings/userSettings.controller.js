@@ -6,6 +6,7 @@
 
   function Controller(userSettingsService, $modal, config, $cookies, $confirm, $timeout) {
     var vm = this;
+    userSettingsService.updateUsers();
     vm.data = userSettingsService.data;
     vm.showMassUpload = false;
     vm.showPasswordDiv = false;
