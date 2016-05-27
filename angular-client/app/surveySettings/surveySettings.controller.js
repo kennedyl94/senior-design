@@ -86,6 +86,7 @@
       surveySettingsService.submit(req, function (data, status, headers, config) {
         vm.updateSurveySettings();
         vm.rule.category = "";
+        vm.rule.num = '';
       });
     };
 

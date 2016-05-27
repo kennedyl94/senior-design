@@ -9,8 +9,8 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <body>
   <div class="container">
-    <h1 align="center">User Settings</h1>
-    <div id="user-settings-div">
+    <div id="user-settings-div" class="container">
+      <h1 align="center">User Settings</h1>
       <div id="new-user-btn-div" ng-show="userSettingsCtrl.isStudentLifeAdmin()">
         <input id="new-user-btn" type="button" class="btn btn-default" value="Add New User" ng-click="userSettingsCtrl.openAddUserModal()">
       </div>

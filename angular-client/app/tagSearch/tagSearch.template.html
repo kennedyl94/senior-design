@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 id="tagSearchPageTitle">Tag Search</h1>
-  <div id="tagSearchDiv">
+  <div id="tagSearchDiv" class="container">
+    <h1 id="tagSearchPageTitle">Tag Search</h1>
     <p id="search-inst">Check all that apply to you</p>
     <form name="tagList">
       <div class="row">
@@ -23,14 +23,14 @@
         submitted='tsCtrl.submitted'>
       </ng-email>
     </div>
+    <br><br><br>
+    <ng-organizations
+      ng-show="tsCtrl.orgList.length > 0"
+      orgs="tsCtrl.orgList"
+      total-items="tsCtrl.orgList.length"
+      items-per-page="10"
+      settings="false"
+      tags="true">
+    </ng-organizations>
   </div>
-  <br><br><br>
-  <ng-organizations
-    ng-show="tsCtrl.orgList.length > 0"
-    orgs="tsCtrl.orgList"
-    total-items="tsCtrl.orgList.length"
-    items-per-page="10"
-    settings="false"
-    tags="true">
-  </ng-organizations>
 </div>

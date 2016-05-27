@@ -37,7 +37,7 @@ button {
   right: 0;
   top: 0;
   height: 125%;
-  background: transparent url("/content/images/background.jpg");
+  background: transparent url("/content/images/background2.jpg");
   background-size: cover;
 }
 
@@ -215,14 +215,8 @@ button {
   margin-bottom: 15px;
 }
 
-#orgs-div {
-  /*text-align: center;*/
-  background-color: $background-faded;
-}
-
 #org-search-div {
   padding-top: 25px;
-  padding-left: 25px;
   float: left;
 }
 
@@ -247,6 +241,10 @@ button {
 
 .orgs-header:hover {
   color: red;
+}
+
+#organizations-div {
+  background-color: $background-faded;
 }
 
 /** LOGIN **/
@@ -393,7 +391,7 @@ padding: 5% 10% 10% 20%;
 
 #clubInfo {
   background-color: rgba(255,255,255,0.8);
-  padding: 3.5% !important;
+  padding: 0% 3.5% 3.5% 3.5%  !important;
 }
 
 /** MASS UPLOAD **/
@@ -427,11 +425,20 @@ padding: 5% 10% 10% 20%;
   }
 }
 
+/** ORG SETTINGS **/
+#org-settings-div {
+  background-color: $background-faded;
+}
+
 /** USER SETTINGS **/
 #user-settings-div {
   background-color: $background-faded;
 
   #new-user-btn {
+    margin: 10px;
+  }
+
+  #mass-user-upload-btn-div {
     margin: 10px;
   }
 
@@ -446,7 +453,6 @@ padding: 5% 10% 10% 20%;
 
 /** SURVEY **/
 #survey-div {
-  text-align: center;
   background-color: $background-faded;
 
   #survey-input-div {
@@ -467,7 +473,6 @@ padding: 5% 10% 10% 20%;
   }
 
   #survey-submit-div {
-    background-color: $background-faded;
     text-align: center;
   }
 }

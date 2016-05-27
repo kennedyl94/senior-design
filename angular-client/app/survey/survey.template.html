@@ -1,6 +1,6 @@
 <div class="container">
-  <h1 align="center">Survey</h1>
-  <div id="survey-div">
+  <div id="survey-div" class="container">
+    <h1 align="center">Survey</h1>
     <p class="inst">Check all that apply to you. Are you interested in...</p>
     <div id="questions">
       <div ng-repeat="question in surveyCtrl.data.questions | toArray">
@@ -26,14 +26,13 @@
         </ng-email>
       </div>
     </div>
+    <ng-organizations
+      ng-show="surveyCtrl.orgs.length > 0"
+      orgs="surveyCtrl.orgs"
+      total-items="surveyCtrl.orgs.length"
+      items-per-page="5"
+      settings="false"
+      tags="true">
+    </ng-organizations>
   </div>
-
-  <ng-organizations
-    ng-show="surveyCtrl.orgs.length > 0"
-    orgs="surveyCtrl.orgs"
-    total-items="surveyCtrl.orgs.length"
-    items-per-page="5"
-    settings="false"
-    tags="true">
-  </ng-organizations>
 </div>
