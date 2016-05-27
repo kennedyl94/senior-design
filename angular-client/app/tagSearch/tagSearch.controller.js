@@ -15,7 +15,7 @@
     vm.search = function() {
       vm.submitted = false;
       vm.orgList = [];
-      tagSearchService.searchTags(vm.tags, function(tempOrgList) {
+      tagSearchService.searchTags(vm.data.tags, function(tempOrgList) {
         vm.orgList = tempOrgList;
         vm.submitted = true;
       });

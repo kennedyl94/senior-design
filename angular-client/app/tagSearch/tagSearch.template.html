@@ -17,7 +17,7 @@
       <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Uncheck All</button>
     </div>
     <br>
-    <div id='ts-email-div' class="col-sm-12">
+    <div id='ts-email-div' class="col-sm-12" ng-show="tsCtrl.orgList.length > 0">
       <ng-email
         orgs='tsCtrl.orgList'
         submitted='tsCtrl.submitted'>

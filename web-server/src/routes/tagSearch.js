@@ -13,11 +13,12 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
 	var tags = req.body.tags;
 	var tagList = [];
-	tags.forEach(function(tag) {
-		if (tag.checked) {
-			tagList.push(tag.tag);
+	var i = 0;
+	for(i; i < tags.length; i++) {
+		if (tags[i].checked) {
+			tagList.push(tags[i]);
 		}
-	});
+	}
 
 	_orgServices.searchByTags(tagList,
 		function(orgs) {

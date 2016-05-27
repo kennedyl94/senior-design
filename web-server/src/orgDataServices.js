@@ -237,7 +237,6 @@ exports.getAllTags = function(success, error) {		//Deprecated
  * error: A function to call if there is an error.
  */
 exports.searchByTags = function(tagList, success, error) {
-	//console.log(tagList);
 	database.getModel(orgModelName, function(err, model){
 		model.find({}, function(findErr, orgs) {
 			if (findErr) {
@@ -253,11 +252,12 @@ exports.searchByTags = function(tagList, success, error) {
 					});
 					if (tempTags.indexOf('inactive') == -1) {
 						var rating = 0;
-						tagList.forEach(function(tag) {
-							if (tempTags.indexOf(tag.text) != -1) {
+						var i = 0;
+						for(i; i < tagList.length; i++) {
+							if (tempTags.indexOf(tagList[i].text) != -1) {
 								rating++;
 							}
-						});
+						}
 
 						if (rating > 0) {
 							tempOrgList.push({organization: org, priority: rating});
