@@ -256,11 +256,28 @@ exports.addOrganizationToSLAdmin = function(orgName, success, error) {
     database.getModel(modelName, function(err, model){
         model.update({Type: 'SL'}, {$push: {Orgs: orgName}}, {multi: true}, function(findErr) {
             if(findErr) {
-                console.log(findErr);
                 error(findErr);
             }
             else{
-                console.log('success');
+                success();
+            }
+        });
+    });
+};
+
+/*
+ * Updates all admins to remove an organization when its deleted
+ * orgName: name of the organization removed
+ * success: success callback
+ * error: error callback
+ */
+exports.removeOrganizationFromAdmins = function(orgName, success, error) {
+    database.getModel(modelName, function(err, model){
+        model.update({}, {$pull: {Orgs: orgName}}, {multi: true}, function(findErr) {
+            if(findErr) {
+                error(findErr);
+            }
+            else{
                 success();
             }
         });

@@ -32,12 +32,13 @@ router.get('/user/:currentUser', function (req, res) {
 
 router.delete('/delete/:orgId', function(req, res) {
     var orgId = req.params.orgId;
-    _dataServices.deleteOrg(orgId,
-    function() {
-        res.sendStatus(200);
-    }, function(error) {
-        if (error) {console.log(error);}
-  });
+    _dataServices.getOrgById(orgId, function(org) {
+        _userDataServices.removeOrganizationFromAdmins(org[0].name, function() {
+            _dataServices.deleteOrg(orgId, function() {
+                res.sendStatus(200);
+            });
+        });
+    });
 });
 
 router.put('/modifyOrgByName', function(req, res) {

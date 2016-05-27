@@ -119,12 +119,12 @@ exports.saveAllOrgs = function(orgs, callback){
  */
 exports.deleteOrg = function(orgId, success, error) {
 	database.getModel(orgModelName, function(err, model){
-		model.find({ _id: orgId}).remove().exec(function(findErr) {
+		model.find({ _id: orgId}).remove().exec(function(findErr, removed) {
 			if(findErr) {
 				error(new Error('Unable to delete item with id: ' + orgId));
 			}
 			else{
-				success();
+				success(removed);
 			}
 		});
 	});
@@ -314,6 +314,21 @@ exports.deleteChange = function(changeId, success, error) {
 			}
 			else{
 				success();
+			}
+		});
+	});
+};
+
+exports.getOrgById = function(id, callback) {
+	database.getModel(orgModelName, function(err, model){
+		model.find({
+			'_id': id
+		}).lean().exec(function(findErr, org){
+			if(findErr) {
+				callback(findErr);
+			}
+			else{
+				callback(org);
 			}
 		});
 	});
