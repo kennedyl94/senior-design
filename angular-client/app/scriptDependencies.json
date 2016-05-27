@@ -14,6 +14,11 @@
     "app/userSettings/userSettings.service.js",
     "app/userSettings/userSettings.routes.js",
 
+    "app/directives/tagSelect/tagSelect.module.js",
+    "app/directives/tagSelect/tagSelect.directive.js",
+    "app/directives/tagSelect/tagSelect.controller.js",
+    "app/directives/tagSelect/tagSelect.service.js",
+
     "app/createClub/createClub.module.js",
     "app/createClub/createClub.controller.js",
     "app/createClub/createClub.routes.js",
@@ -23,6 +28,11 @@
     "app/directives/editUserModal/editUserModal.directive.js",
     "app/directives/editUserModal/editUserModal.controller.js",
     "app/directives/editUserModal/editUserModal.service.js",
+
+    "app/directives/email/email.module.js",
+    "app/directives/email/email.directive.js",
+    "app/directives/email/email.controller.js",
+    "app/directives/email/email.service.js",
 
     "app/directives/addUserModal/addUserModal.module.js",
     "app/directives/addUserModal/addUserModal.directive.js",
@@ -36,6 +46,14 @@
     "app/directives/fileUpload/fileUpload.module.js",
     "app/directives/fileUpload/fileUpload.service.js",
     "app/directives/fileUpload/fileUpload.directive.js",
+
+    "app/directives/editTagModal/editTagModal.module.js",
+    "app/directives/editTagModal/editTagModal.directive.js",
+    "app/directives/editTagModal/editTagModal.controller.js",
+
+    "app/directives/successModal/successModal.module.js",
+    "app/directives/successModal/successModal.directive.js",
+    "app/directives/successModal/successModal.controller.js",
 
     "app/directives/navSidebar/navSidebar.module.js",
     "app/directives/navSidebar/navSidebar.directive.js",
@@ -69,16 +87,12 @@
     "app/navSidebar/navSidebar.controller.js",
 
     "app/navOrgSideBar/navOrgSidebar.module.js",
-    "app/navOrgSidebar/navOrgSidebar.controller.js",
+    "app/navOrgSideBar/navOrgSidebar.controller.js",
 
     "app/approvals/approvals.module.js",
     "app/approvals/approvals.controller.js",
     "app/approvals/approvals.routes.js",
-
-    "app/logout/logout.module.js",
-    "app/logout/logout.controller.js",
-    "app/logout/logout.routes.js",
-    "app/logout/logout.service.js",
+    "app/approvals/approvals.service.js",
 
     "app/orgSettings/orgSettings.module.js",
     "app/orgSettings/orgSettings.controller.js",
@@ -95,10 +109,20 @@
     "app/login/login.routes.js",
     "app/login/login.service.js",
 
+    "app/resetPassword/resetPassword.module.js",
+    "app/resetPassword/resetPassword.controller.js",
+    "app/resetPassword/resetPassword.routes.js",
+    "app/resetPassword/resetPassword.service.js",
+
     "app/tagSearch/tagSearch.module.js",
     "app/tagSearch/tagSearch.controller.js",
     "app/tagSearch/tagSearch.routes.js",
     "app/tagSearch/tagSearch.service.js",
+
+    "app/tagSettings/tagSettings.module.js",
+    "app/tagSettings/tagSettings.controller.js",
+    "app/tagSettings/tagSettings.routes.js",
+    "app/tagSettings/tagSettings.service.js",
 
     "app/config/config.module.js"
   ],

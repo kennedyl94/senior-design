@@ -1,40 +1,38 @@
-<h1 align="center">Survey</h1>
-<div id="survey-div">
-	<div id="survey-input-div" ng-repeat="question in surveyCtrl.data.questions | toArray">
-		<div class="row">
-			<div class="col-sm-1 col-sm-offset-4">
-				<input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
-               ng-false-value=false ng-true-value=true value=false>
-			</div>
-      <div class="col-sm-3">
-        {{question.question}}
-      </div>
-		</div>
-	</div>
-  <br/>
-  <form name="emailForm">
-    <div class="col-sm-12">
-      <div id="survey-submit-div" class="row">
-        <div class="col-sm-1 col-sm-offset-4">
-          <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
-        </div>
-        <div class="col-sm-3">
-          <input name="email" class="form-control" type="email" ng-model="surveyCtrl.address" placeholder="your.email@email.com" ng-show="surveyCtrl.submitted" required/>
-        </div>
-        <div class="col-sm-1">
-          <button id="test" class="btn btn-default" type="button" ng-disabled="emailForm.$invalid" ng-click="surveyCtrl.sendResults()" ng-show="surveyCtrl.submitted">Email Results</button>
-          <button id="pdf" class="btn btn-default" type="button" ng-click="surveyCtrl.downloadResults()" ng-show="surveyCtrl.submitted">Download Results</button>
+<div class="container">
+  <div id="survey-div" class="container">
+    <h1 align="center">Survey</h1>
+    <p class="inst">Check all that apply to you. Are you interested in...</p>
+    <div id="questions">
+      <div ng-repeat="question in surveyCtrl.data.questions | toArray">
+        <div class="clearfix" ng-if="$index % 3 == 0"></div>
+        <div id="survey-repeat-div" class="col-sm-4">
+          <input type="checkbox" ng-model="surveyCtrl.ans[question._id]" name={{"_"+question._id}} id={{question._id}}
+            ng-false-value=false ng-true-value=true value=false>
+            {{question.question}}
         </div>
       </div>
     </div>
-  </form>
+    <div id="survey-submit-div" class="col-sm-12">
+      <div class="row">
+        <div>
+          <button id="submit" class="btn btn-default" type="button" ng-click="surveyCtrl.submit()">Submit</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <ng-email
+          orgs='surveyCtrl.orgs'
+          submitted='surveyCtrl.submitted'>
+        </ng-email>
+      </div>
+    </div>
+    <ng-organizations
+      ng-show="surveyCtrl.orgs.length > 0"
+      orgs="surveyCtrl.orgs"
+      total-items="surveyCtrl.orgs.length"
+      items-per-page="5"
+      settings="false"
+      tags="true">
+    </ng-organizations>
+  </div>
 </div>
-</br>
-<ng-organizations
-  ng-show="surveyCtrl.orgs.length > 0"
-  orgs="surveyCtrl.orgs"
-  total-items="surveyCtrl.orgs.length"
-  items-per-page="5"
-  settings="false"
-  tags="true">
-</ng-organizations>

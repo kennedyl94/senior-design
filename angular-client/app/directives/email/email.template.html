@@ -1,0 +1,12 @@
+<form name="emailForm">
+  <div class="col-sm-8">
+    <div class="col-sm-5">
+      <input name="email" class="form-control" type="email" ng-model="emailCtrl.address" placeholder="your.email@email.com" ng-show="emailCtrl.submitted" required/>
+    </div>
+    <div>
+      <button id="test" class="btn btn-default" type="button" ng-disabled="emailForm.$invalid" ng-click="emailCtrl.sendResults()" ng-show="emailCtrl.submitted">Email Results</button>
+      <button id="pdf" class="btn btn-default" type="button" ng-click="emailCtrl.downloadResults()" ng-show="emailCtrl.submitted">Download Results</button>
+    </div>
+  </div>
+</form>
+

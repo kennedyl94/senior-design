@@ -22,7 +22,12 @@
             text: "Organization Settings",
             imgUrl: "content/images/svg/orgSettings.svg",
             link: "root.orgSettings"
-          }
+          },
+          {
+            text: "User Settings",
+            imgUrl: "content/images/svg/userSettings.svg",
+            link: "root.userSettings"
+          },
         ]
     };
   }

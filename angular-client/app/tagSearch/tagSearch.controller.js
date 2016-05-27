@@ -7,15 +7,27 @@
   function Controller(tagSearchService) {
 
     var vm = this;
-    vm.tags = tagSearchService.data.tags;
+    tagSearchService.update();
+    vm.data = tagSearchService.data;
     vm.orgList = [];
+    vm.submitted = false;
 
     vm.search = function() {
-      vm.showOrgs = false;
+      vm.submitted = false;
       vm.orgList = [];
-      tagSearchService.searchTags(vm.tags, function(tempOrgList) {
+      tagSearchService.searchTags(vm.data.tags, function(tempOrgList) {
         vm.orgList = tempOrgList;
+        vm.submitted = true;
       });
+    }
+
+    vm.clear = function() {
+      vm.submitted = false;
+      var i = 0;
+      for(i; i < vm.data.tags.length; i++) {
+        vm.data.tags[i].checked = false;
+      }
+      vm.orgList = [];
     }
   }
 })();

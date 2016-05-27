@@ -1,7 +1,11 @@
 $background-red: #D30025;
 $outline-grey: #FFBBBC;
 $background-faded: rgba(255,255,255,0.8);
-$site-font: "Helvetica Neue";
+$site-font: "sans-serif";
+
+body {
+  font-family: $site-font !important;
+}
 
 .pagination {
   background-color: $background-red !important;
@@ -33,7 +37,7 @@ button {
   right: 0;
   top: 0;
   height: 125%;
-  background: transparent url("/content/images/background.jpg");
+  background: transparent url("/content/images/background2.jpg");
   background-size: cover;
 }
 
@@ -55,9 +59,9 @@ button {
 }
 
 #overview-div-mid {
-  height: 300px;
-  max-height: 300px;
-  margin-top: 5px;
+  height: 400px;
+  min-height: 375px;
+  max-height: 500px;
   text-align: center !important;
   background-color: $background-faded;
   margin-right: 0px !important;
@@ -66,24 +70,39 @@ button {
 
   .col-sm-4 {
     text-align: center !important;
+    height: 375px !important;
 
-    #ov-des-div {
-      margin-top: 25px;
-    }
-
-    #ov-img-div {
-      margin-top: 25px;
+    .overview-div-inner {
+      height: 350px !important;
+      background-color: $background-faded;
       &:hover, &:focus {
         cursor: pointer;
       }
-      .logo {
-        width: 200px !important;
-        height: 200px !important;
-        text-align: center !important;
 
-        svg {
-          width: 300px;
-          height: 300px;
+      #ov-title-div {
+        margin-top: 25px;
+        font-size: 32px;
+      }
+
+      #ov-des-div {
+        margin-top: 10px;
+        font-size: 15px;
+      }
+
+      #ov-img-div {
+        margin-top: 25px;
+        height: 200px !important;
+        .logo {
+          width: 100% !important;
+          height: 100% !important;
+          text-align: center !important;
+
+          svg {
+            display: block !important;
+            margin: auto !important;
+            width: 100% !important;
+            height: 100% !important;
+          }
         }
       }
     }
@@ -105,6 +124,10 @@ button {
   font-size: 32px;
 }
 
+#nav-header-div {
+  width: 100% !important;
+}
+
 .navbar-default {
   background-color: $background-red;
   border-color: #c0392b;
@@ -118,6 +141,7 @@ button {
   .navbar-nav > {
     li > a {
       color: $outline-grey;
+      font-size: 17px;
       &:hover, &:focus {
         color: $outline-grey;
       }
@@ -191,14 +215,8 @@ button {
   margin-bottom: 15px;
 }
 
-#orgs-div {
-  /*text-align: center;*/
-  background-color: $background-faded;
-}
-
 #org-search-div {
   padding-top: 25px;
-  padding-left: 25px;
   float: left;
 }
 
@@ -225,6 +243,10 @@ button {
   color: red;
 }
 
+#organizations-div {
+  background-color: $background-faded;
+}
+
 /** LOGIN **/
 .top-buffer {
   margin-top: 20px;
@@ -239,7 +261,7 @@ button {
   bottom: 0;
   left: 0;
   width: 500px;
-  height: 250px;
+  height: 300px;
   background-color: $background-faded;
   border-radius: 3px;
 
@@ -251,7 +273,7 @@ button {
 }
 
 .login-label {
-  font-family: $site-font;
+  font-family: $site-font !important;
   font-size: 24px;
 }
 
@@ -280,6 +302,88 @@ button {
   }
 }
 
+/** resetPassword **/
+
+#resetPassword-div {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  height: 300px;
+  background-color: $background-faded;
+  border-radius: 3px;
+
+
+
+  #resetPassword-header {
+    color: $background-red;
+    font-family: $site-font;
+    font-size: 32px;
+  }
+}
+.resetPassword-label {
+font-family: $site-font;
+font-size: 24px;
+}
+
+#resetConfirm-div {
+    text-align: center;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 400px;
+    background-color: $background-faded;
+    border-radius: 3px;
+
+
+
+    #resetPassword-header {
+        color: $background-red;
+        font-family: $site-font;
+        font-size: 32px;
+    }
+}
+
+#resetPassword-div-inner {
+padding: 5% 10% 10% 20%;
+
+  #resetPassword-user-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+#resetPassword-password-div {
+    input {
+        width: 80%;
+        line-height: 24px;
+    }
+}
+
+  #resetPassword-email-div {
+    input {
+      width: 80%;
+      line-height: 24px;
+    }
+  }
+
+  #resetPassword-btn-div {
+    #login-btn {
+      width: 20%;
+      line-height: 135%;
+    }
+  }
+}
+
 /** CREATE CLUB **/
 #createClubPageTitle {
   text-align: center;
@@ -287,7 +391,7 @@ button {
 
 #clubInfo {
   background-color: rgba(255,255,255,0.8);
-  padding: 3.5% !important;
+  padding: 0% 3.5% 3.5% 3.5%  !important;
 }
 
 /** MASS UPLOAD **/
@@ -319,14 +423,11 @@ button {
       width: 90% !important;
     }
   }
-  .modal-footer {
-    #save-btn {
-      float: left;
-    }
-    float: right;
-    #exit-btn {
-    }
-  }
+}
+
+/** ORG SETTINGS **/
+#org-settings-div {
+  background-color: $background-faded;
 }
 
 /** USER SETTINGS **/
@@ -335,28 +436,50 @@ button {
 
   #new-user-btn {
     margin: 10px;
-    float: right;
+  }
+
+  #mass-user-upload-btn-div {
+    margin: 10px;
+  }
+
+  #show-change-password-btn {
+    margin: 10px;
+  }
+
+  .error {
+    color:red;
   }
 }
 
 /** SURVEY **/
 #survey-div {
-  text-align: center;
   background-color: $background-faded;
-  margin-bottom: 25px;
 
   #survey-input-div {
     .row {
-      .col-sm-1,.col-sm-3 {
+      .col-sm-1,.col-sm-4 {
         padding-left: 0px !important;
         padding-right: 0px !important;
       }
     }
   }
 
-  #survey-submit-div {
-    background-color: $background-faded;
+  #questions {
+    padding-bottom: 7% !important;
   }
+
+  #survey-repeat-div {
+    text-align: left;
+  }
+
+  #survey-submit-div {
+    text-align: center;
+  }
+}
+
+.inst {
+  text-align: center;
+  font-weight: bold;
 }
 
 /** SURVEY SETTINGS **/
@@ -368,5 +491,16 @@ button {
   }
 }
 
+/** TAG SETTINGS **/
+#tag-settings-div {
+  background-color: $background-faded;
 
+  input {
+    width: 60% !important;
+    display: inline-block;
+  }
 
+  #add-btn {
+    display: inline-block;
+  }
+}

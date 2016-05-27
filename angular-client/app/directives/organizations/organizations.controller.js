@@ -1,8 +1,8 @@
 (function(){
   angular.module('ngOrganizations')
-    .controller('ngOrgsController', ['$modal', '$sce', '$scope', '$filter', Controller]);
+    .controller('ngOrgsController', ['$modal', '$sce', '$scope', '$filter', '$cookies', Controller]);
 
-  function Controller($modal, $sce, $scope, $filter) {
+  function Controller($modal, $sce, $scope, $filter, $cookies) {
     var vm = this;
 
     /* PAGINATION MANAGEMENT */
@@ -19,7 +19,15 @@
     });
 
     vm.isActive = function(org) {
-      return org.tags.indexOf('inactive') == -1;
+      var tempTags = [];
+      for (var i = 0; i < org.tags.length; i++) {
+        tempTags.push(org.tags[i].text);
+      }
+      return tempTags.indexOf('inactive') == -1;
+    };
+
+    vm.isStudentLifeAdmin = function() {
+      return $cookies.get('om_slAdmin');
     };
 
     // Highlights organization description words that match vm.query
@@ -42,14 +50,6 @@
       {url: "content/images/msoe7.jpg", name: "Picture 7"}
     ];
 
-    vm.options = [
-      {id: "name", name: "Name"},
-      {id: "description", name: "Description"},
-      {id: "contact.name", name: "Contact"}
-    ];
-
-    vm.selectedOption = vm.options[0];
-
     // MODAL CREATIONS
     vm.openModal = function(org, images) {
       return $modal.open({
@@ -66,6 +66,17 @@
         }
       });
     };
+
+    vm.displayTags = function(org) {
+      var tagString = '';
+      if (org.tags != undefined && org.tags.length > 0) {
+        tagString += org.tags[0].text;
+        for (var i = 1; i < org.tags.length; i++) {
+          tagString += ', ' + org.tags[i].text;
+        }
+      }
+      return tagString;
+    }
   }
 
   angular.module('ngOrganizations').filter('startFrom', function () {
@@ -92,12 +103,15 @@
         var org = arr[i];
         var name = org.name.toLowerCase();
         var description = org.description.toLowerCase();
-        var tags = org.tags;
+        var tags = [];
+        for (var q = 0; q < org.tags.length; q++) {
+          tags.push(org.tags[q].text);
+        }
 
         if (query != 'inactive' && tags.indexOf('inactive') == -1) {
           var j = 0;
           for (j; j < tags.length; j++) {
-            if (tags[j].toLowerCase().indexOf(query || '') !== -1) {
+            if (query == '' || (tags.length > 0 && tags[j].toLowerCase().indexOf(query || '') !== -1)) {
               found = true;
               filtered.push(org);
               break;

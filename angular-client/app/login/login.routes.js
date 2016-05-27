@@ -15,7 +15,8 @@
               }
             },
             data: {
-                restricted: false
+                restricted: false,
+                logInRestricted: true
             }
           });
       }]);

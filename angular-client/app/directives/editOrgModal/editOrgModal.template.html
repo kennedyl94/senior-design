@@ -1,17 +1,16 @@
 <div id="edit-org-modal-div">
   <div class="modal-header" id="modal-header">
-    <h2 class="modal-title">Edit Organization</h2>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="editOrgModalCtrl.back()">×</button>
+    <h2 class="modal-title">{{editOrgModalCtrl.modifiedOrg.name}}</h2>
   </div>
   <div class="modal-body">
     <div class="row"><div class="modal-info-header"><h4>Organization Info</h4></div></div>
     <!-- EDIT ORG INFO -->
     <div class="row">
-      <div class="col-sm-3">Name:</div>
-      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.modifiedOrg.name"></div>
       <div class="col-sm-3">Description:</div>
       <div class="col-sm-9"><textarea style="resize:none" type="text" rows="5" ng-model="editOrgModalCtrl.modifiedOrg.description"></textarea></div>
       <div class="col-sm-3">Tags:</div>
-      <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.modifiedOrg.tags"></div>
+      <div class="col-sm-9"><ng-tag-select tags="editOrgModalCtrl.modifiedOrg.tags"></ng-tag-select></div>
       <div class="col-sm-3">Links:</div>
       <div class="col-sm-9"><input type="text" ng-model="editOrgModalCtrl.modifiedOrg.links"></div>
       <div class="col-sm-3">Meeting times:</div>
@@ -30,7 +29,6 @@
   </div>
   <div class="modal-footer">
     <input id="save-btn" class="btn btn-default" type="button" value="Save" ng-click="editOrgModalCtrl.function(editOrgModalCtrl.modifiedOrg)"/>
-    <input id="exit-btn" class="btn btn-default" type="button" value="Exit" ng-click="editOrgModalCtrl.back()"/>
   </div>
 </div>
 

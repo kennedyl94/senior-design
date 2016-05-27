@@ -27,7 +27,7 @@ exports.getQuestionsTagsByIds = function(ids, callback) {
 			   callback(tags);
 		   }
 		   else{
-			   callback([]);    // this is a temporary solution to the possibilty the callback isn't reached
+			   callback([]);    // this is a temporary solution to the possibility the callback isn't reached
 		   }
 	   });
    });
@@ -86,7 +86,7 @@ exports.getOrgsMatchingCategory = function(category, callback) {
  * success: a function to call upon successful completion. it takes an object that contains the survey questions
  * error: a function to call if there is an error. it takes an error object
  */
-exports.getAllQuestions = function(sortType, success, error){
+exports.getAllQuestions = function(sortType, success, error) {
 	database.getModel(modelName, function(err, model){	
 		var sort_order = {};
 		sort_order[sortType] = 1;
@@ -95,9 +95,10 @@ exports.getAllQuestions = function(sortType, success, error){
 				error(findErr);
 			}
 			else{
-				var questionsMap = {}; 
+				var questionsMap = [];
 				questions.forEach(function(question) {
-					questionsMap[question._id] = question;
+					//questionsMap[question._id] = question;
+					questionsMap.push(question);
 				});
 				success(questionsMap);
 			}
@@ -105,6 +106,18 @@ exports.getAllQuestions = function(sortType, success, error){
 	});
 };
 
+exports.modifyQuestion = function(question, success, error) {
+	console.log(question);
+	database.getModel(modelName, function(err, model) {
+		model.findOneAndUpdate({_id: question._id}, question, function(findErr) {
+			if (findErr) {
+				error(new Error('Unable to modify item with name:' + question.question));
+			} else {
+				success();
+			}
+		})
+	});
+};
 
 exports.deletequestion = function(questionId, success, error) {
 	database.getModel(modelName, function(err, model) {

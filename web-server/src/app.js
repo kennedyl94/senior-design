@@ -11,7 +11,7 @@ var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 }
-	
+
 /** Set Express Settings **/
 var app = express();
 
@@ -25,12 +25,15 @@ var survey = require("./routes/survey.js");
 var upload = require("./routes/upload.js");
 var tags = require('./routes/tagSearch.js');
 var email = require('./routes/email.js');
+var proposeChanges = require('./routes/proposeChanges.js');
 
 var test = require("./routes/test.js");
 var login = require("./routes/login.js");
 var logout = require("./routes/logout.js");
 var surveySet = require("./routes/surveySettings.js");
 var userSettings = require("./routes/userSettings.js");
+var resetPassword = require("./routes/resetPassword");
+var tagSettings = require('./routes/tagSettings.js');
 
 var router = express.Router();
 
@@ -48,6 +51,8 @@ app.use('/api/Organizations/', Orgs);
 
 app.use('/api/tagSearch/', tags);
 
+app.use('/api/tagSettings', tagSettings);
+
 app.use('/api/createClub', createClub);
 
 app.use('/api/survey', survey);
@@ -56,7 +61,11 @@ app.use('/api/surveySet', surveySet);
 
 app.use('/api/UploadFile', upload);
 
+app.use('/api/proposeChanges', proposeChanges);
+
 app.use('/api/email', email);
+
+app.use('/api/resetPassword', resetPassword, email);
 
 app.use('/api/test/', test);
 

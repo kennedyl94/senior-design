@@ -12,6 +12,10 @@
       orgs: {}
     };
 
+    service.update = function() {
+      init();
+    };
+
     function init() {
       var promises = [];
       promises.push($http({method: 'GET', url: config.domain + 'Organizations/name'}));

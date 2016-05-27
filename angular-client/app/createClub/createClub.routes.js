@@ -6,7 +6,7 @@
       function($stateProvider) {
         $stateProvider
           .state('root.createClub', {
-            url: 'createClub',
+            url: 'admin/createClub',
             views: {
               'content@': {
                 templateUrl: 'createClub/createClub.template.html',

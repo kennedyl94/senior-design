@@ -2,42 +2,150 @@
   'use strict';
 
   angular.module('userSettings')
-    .controller('UserSettingsController', ['userSettingsService', '$modal', '$window', Controller]);
+    .controller('UserSettingsController', ['userSettingsService', '$modal', 'config', '$cookies', '$confirm', '$timeout', Controller]);
 
-  function Controller(userSettingsService, $modal, $window) {
+  function Controller(userSettingsService, $modal, config, $cookies, $confirm, $timeout) {
     var vm = this;
+    userSettingsService.updateUsers();
     vm.data = userSettingsService.data;
+    vm.showMassUpload = false;
+    vm.showPasswordDiv = false;
+    vm.err = "";
+    vm.update ={
+      old:"",
+      newPass:"",
+      repeat:""
+    };
+
+    var editUserModal;
+    var addUserModal;
+
+    vm.isStudentLifeAdmin = function() {
+      return $cookies.get('om_slAdmin');
+    };
+
+    vm.showUserMassUploadDiv = function() {
+        vm.showMassUpload = true;
+    };
+
+    vm.showChangePasswordDiv = function() {
+      vm.showPasswordDiv = true;
+    };
 
     // MODAL CREATIONS
     vm.openEditUserModal = function (user) {
-      return $modal.open({
+      editUserModal = $modal.open({
         animation: true,
         templateUrl: 'directives/editUserModal/editUserModal.template.html',
         controller: 'EditUserModalController as editUserModalCtrl',
         resolve: {
           contents: function () {
             return {
-              user: user
+              user: user,
+              updateFunction: vm.modifyUser,
+              deleteFunction: vm.deleteUser
             };
           }
         }
       })
     };
 
-    // MODAL CREATIONS
-    vm.openAddUserModal = function () {
-      return $modal.open({
+    vm.openAddUserModal = function (user) {
+      addUserModal = $modal.open({
         animation: true,
         templateUrl: 'directives/addUserModal/addUserModal.template.html',
         controller: 'AddUserModalController as addUserModalCtrl',
         resolve: {
           contents: function () {
             return {
-
+              addFunction: vm.addUser
             };
           }
         }
       })
     };
+
+    vm.modifyUser = function(user) {
+      userSettingsService.modifyUser(user).then(function() {
+        editUserModal.close('ok');
+        vm.showSuccessModal('Success', 'The user has been successfully edited!');
+        vm.updateUsers();
+      });
+    };
+
+    vm.addUser = function(user) {
+      userSettingsService.addUser(user).then(function() {
+        addUserModal.close('ok');
+        vm.showSuccessModal('Success', 'The new user has been successfully created!');
+        vm.updateUsers();
+      });
+    };
+
+    vm.deleteUser = function(user) {
+      $confirm({text: 'Are you sure you want to delete: ' + user.Username + '?',
+        title: 'Delete User',
+        ok: "Delete",
+        cancel: 'Exit'})
+        .then(function() {
+          userSettingsService.deleteUser(user).then(function () {
+            vm.updateUsers();
+          });
+      });
+    };
+
+    vm.updateUsers = function() {
+      userSettingsService.updateUsers();
+      vm.data = userSettingsService.data;
+    };
+
+    vm.changePassword = function(){
+      var currentUser = $cookies.get('currentUser');
+      var req = {
+        method: 'post',
+        url: config.domain+'userSettings/updatePass',
+        headers: {},
+        data: {
+          user: currentUser,
+          old: vm.update.old,
+          newPass: vm.update.newPass,
+          repeat: vm.update.repeat
+        }
+      };
+
+      userSettingsService.submit(req, function (data) {
+        var code = data.status;
+        if(code == 200) {
+          vm.update.old = "";
+          vm.update.newPass = "";
+          vm.update.repeat = "";
+          vm.showPasswordDiv = false;
+        } else if(code == 201){
+          vm.err = "There was an error when changing your password: Incorrect Password";
+        } else if(code == 202) {
+          vm.err = "There was an error when changing your password: Passwords do not match";
+        } else {
+          vm.err = "There was an error when changing your password";
+        }
+      })
+    }
+
+    vm.showSuccessModal = function(title, description) {
+      var successModal = $modal.open({
+        animation: true,
+        templateUrl: 'directives/successModal/successModal.template.html',
+        controller: 'SuccessModalController as successModalCtrl',
+        resolve: {
+          contents: function () {
+            return {
+              title: title,
+              description: description
+            };
+          }
+        }
+      });
+      $timeout(function() {
+        successModal.close();
+      }, 2000);
+    }
   }
 })();

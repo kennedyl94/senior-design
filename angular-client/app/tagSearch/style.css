@@ -9,7 +9,7 @@
 
 .label {
   float: left;
-  text-align: left;
+  text-align: center;
 }
 .new-row {
   clear: left;
@@ -19,6 +19,15 @@
   background-color: rgba(255,255,255,0.8);
 }
 
+#ts-email-div {
+  padding-bottom: 1.5% !important
+}
+
 #ts-button-div {
   text-align: center;
+}
+
+#search-inst {
+  text-align: center;
+  font-weight: bold;
 }

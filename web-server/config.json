@@ -1,11 +1,14 @@
 {
+  "_domain": "http://orgmatcher.msoe.edu/#/",
+  "domain": "http://localhost:9000/#/",
 	"mongo": "mongodb://localhost:27017/StudentOrgMatcher",
 	"orgSchema": {
 		"name": "String",
 		"description": "String",
-		"tags": [
-			"String"
-		],
+		"tags": [{
+			"_id": "String",
+			"text": "String"
+		}],
 		"links":["String"],
 		"meetings":"String",
 		"contact":{
@@ -17,14 +20,36 @@
 	"userSchema" : {
 	  	"Username": "String",
 	  	"Password": "String",
+      "Email": "String",
+      "resetPasswordToken": "String",
+      "resetPasswordExpiration":"Date",
 	  	"Type": "String",
 	  	"Orgs": ["String"]
 	},
 	"surveyQuestionSchema": {
 		"question" : "String",
-		"tags": [
-			"String"
-		],
+		"tags": [{
+			"_id": "String",
+			"text": "String"
+		}],
 		"category": "String"
+	},
+	"proposeChangesSchema": {
+		"name": "String",
+		"description": "String",
+		"tags": [{
+			"_id": "String",
+			"text": "String"
+		}],
+		"links": "String",
+		"meetings": "String",
+		"contact": {
+			"name": "String",
+			"email": "String",
+			"phone": "String"
+		}
+	},
+	"tagSchema": {
+		"text": "String"
 	}
 }

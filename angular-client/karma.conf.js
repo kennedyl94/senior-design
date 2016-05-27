@@ -22,6 +22,7 @@ module.exports = function (config) {
 
       // All tests
       'app/**/*.tests.js'
+      // 'app/**/resetPassword.js'
     ],
 
     singleRun: true,

@@ -19,19 +19,19 @@
         });
     };
 
+    service.update = function() {
+      init();
+    };
+
     function init() {
       var promises = [];
       promises.push($http.get(config.domain + 'tagSearch'));
       $q.all(promises).then(function(data) {
-        var tempTags = data[0].data;
-        var index = tempTags.indexOf('inactive');
-        if (index != -1) {
-          tempTags.splice(index, 1);
+        var tags = data[0].data;
+        for(var i= tags.length - 1; i >= 0; i--) {
+          if( tags[i].text == "inactive") tags.splice(i,1);
         }
-
-        tempTags.forEach(function(tag) {
-          service.data.tags.push({text: tag, checked: false});
-        });
+        service.data.tags = tags;
       });
     }
 

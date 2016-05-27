@@ -1,13 +1,15 @@
 (function(){
   angular.module('editUserModal')
-    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', '$window', Controller]);
+    .controller('EditUserModalController', ['$scope', '$modalInstance', 'editUserModalService', 'contents', Controller]);
 
-  function Controller($scope, $modalInstance, editUserModalService, contents, $window) {
+  function Controller($scope, $modalInstance, editUserModalService, contents) {
     var vm = this;
 
     vm.user = contents.user;
     vm.username = vm.user.Username;
+    vm.email = vm.user.Email;
     vm.orgs = [];
+    vm.updateFunction = contents.updateFunction;
 
     $scope.list_categories = {
       data: [{
@@ -18,9 +20,6 @@
         name: 'Org'
       }]
     };
-    vm.user = contents.user;
-    vm.username = vm.user.Username;
-    vm.orgs = [];
 
     $scope.organizations = editUserModalService.data.orgs;
 
@@ -30,20 +29,12 @@
       $modalInstance.close('ok');
     };
 
-    vm.saveChanges = function() {
+    vm.getUser = function() {
       vm.user.Username = vm.username;
+      vm.user.Email = vm.email;
       vm.user.Type = $scope.list_category;
       vm.user.Orgs = vm.orgs;
-      editUserModalService.saveChanges(vm.user).then(function(response) {
-      });
-      $modalInstance.close('ok');
-    };
-
-    vm.deleteUser = function () {
-      //DIALOG -- ARE YOU SURE YOU WANT TO DELETE THIS ORG?
-      editUserModalService.deleteUser(vm.user).then(function () {
-      });
-      $window.location.reload();
+      return vm.user;
     };
   }
 })();

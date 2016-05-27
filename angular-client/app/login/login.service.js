@@ -34,6 +34,20 @@
       return deferred.promise;
     };
 
+    service.logout = function() {
+      var deferred = $q.defer();
+      var promise = $http({method: 'GET', url: config.domain + 'logout'});
+      promise.then(function(data) {
+        $cookies.put('om_loggedIn', 'false');
+        $cookies.remove("om_slAdmin");
+        $cookies.remove("om_orgAdmin");
+        service.isStudentLifeAdmin = false;
+        service.isOrgLeaderAdmin = false;
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    };
+
     return service;
   }
 })();

@@ -1,26 +1,36 @@
-<h1 id="tagSearchPageTitle">Tag Search</h1>
-<div id="tagSearchDiv">
-  <form name="tagList">
-    <div class="row">
-      <div ng-repeat="tag in tsCtrl.tags">
-        <div class="clearfix" ng-if="$index % 4 == 0"></div>
-        <div class="col-sm-3">
-          <input type="checkbox" name="tagCheck" ng-model="tag.checked"> {{tag.text}}</input>
+<div class="container">
+  <div id="tagSearchDiv" class="container">
+    <h1 id="tagSearchPageTitle">Tag Search</h1>
+    <p id="search-inst">Check all that apply to you</p>
+    <form name="tagList">
+      <div class="row">
+        <div ng-repeat="tag in tsCtrl.data.tags">
+          <div class="clearfix" ng-if="$index % 4 == 0"></div>
+          <div class="col-sm-3">
+            <input type="checkbox" name="tagCheck" ng-model="tag.checked" ng-click="tsCtrl.search(tagList)"> {{tag.text}}</input>
+          </div>
         </div>
       </div>
+    </form>
+    <br>
+    <div id="ts-button-div">
+      <button class="btn btn-default" type="button" ng-click="tsCtrl.clear()">Uncheck All</button>
     </div>
-  </form>
-  <div id="ts-button-div">
-    <button class="btn btn-default" type="button" ng-click="tsCtrl.search(tagList)">Search</button>
+    <br>
+    <div id='ts-email-div' class="col-sm-12" ng-show="tsCtrl.orgList.length > 0">
+      <ng-email
+        orgs='tsCtrl.orgList'
+        submitted='tsCtrl.submitted'>
+      </ng-email>
+    </div>
+    <br><br><br>
+    <ng-organizations
+      ng-show="tsCtrl.orgList.length > 0"
+      orgs="tsCtrl.orgList"
+      total-items="tsCtrl.orgList.length"
+      items-per-page="10"
+      settings="false"
+      tags="true">
+    </ng-organizations>
   </div>
 </div>
-</br>
-<ng-organizations
-  ng-show="tsCtrl.orgList.length > 0"
-  orgs="tsCtrl.orgList"
-  total-items="tsCtrl.orgList.length"
-  items-per-page="5"
-  settings="false"
-  tags="true">
-</ng-organizations>
-

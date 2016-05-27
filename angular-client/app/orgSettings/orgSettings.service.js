@@ -14,18 +14,25 @@
 
     service.deleteOrg = function(org) {
       var deferred = $q.defer();
-      var promise =
-        $http({method: 'DELETE', url: config.domain + 'Organizations/delete/' + org._id });
+      var promise = $http({method: 'DELETE', url: config.domain + 'Organizations/delete/' + org._id });
+        promise.then(function(data) {
+          deferred.resolve();
+        });
+      return deferred.promise;
+    };
+
+    service.saveModifiedOrg = function(org) {
+      var deferred = $q.defer();
+      var promise = $http({method: 'PUT', data: org, url: config.domain + 'Organizations/modify/' + org._id});
       promise.then(function(data) {
         deferred.resolve();
       });
       return deferred.promise;
     };
 
-    service.saveModifiedOrg = function(org) {
+    service.submitProposedChange = function(change) {
       var deferred = $q.defer();
-      var promise =
-        $http({method: 'PUT', data: org, url: config.domain + 'Organizations/modify/' + org._id});
+      var promise = $http({method: 'PUT', url: config.domain + 'Organizations/proposeChange', data: {change: change}});
       promise.then(function(data) {
         deferred.resolve();
       });
